@@ -20,18 +20,48 @@
  *
  */
 
-// [[Rcpp::depends(RcppEigen)]]
-#include <RcppEigen.h>
-#include <vector>
 
-//' Do something cool with your life
-//'
-//' @noRd
-//' @param m  matrix
-//' @return  returns also matrix
-// [[Rcpp::interfaces(r, cpp)]]
-// [[Rcpp::export(name=".hello.cpp")]]
-Eigen::VectorXd mrwr_(const Eigen::MatrixXd& m)
+
+#include <Rcpp.h>
+#include <map>
+
+
+using namespace Rcpp;
+
+//' @export hashmap
+template <typename T, typename V>
+class hashmap
 {
-  return m * m.transpose();
+public:
+    hashmap() : map_<T, V>() {}
+
+    void insert(Rcpp::CharacterVector key, double value)
+    {
+        std::string fname = Rcpp::as<std::string>(key);
+        map_.insert(std::pair<std::string, double>(fname, value));
+    }
+
+    double get(Rcpp::CharacterVector key)
+    {
+        std::string fname = Rcpp::as<std::string>(key);
+        return map_[fname];
+    }
+
+    std::string gets()
+    {
+        return "hallo";
+    }
+
+private:
+    std::map< T, V > map_;
+
+};
+
+RCPP_MODULE(hashmap_module) {
+    class_<hashmap>( "hashmap" )
+    .constructor<SEXP, SEXP>()
+    .method( "insert", &hashmap::insert )
+    .method( "gets", &hashmap::gets )
+    .method( "get", &hashmap::get )
+    ;
 }

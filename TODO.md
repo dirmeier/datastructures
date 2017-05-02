@@ -1,6 +1,9 @@
 ## TODOs
 
-* TODO
+* <strike>HashMap</strike>
+* <strike>Heap</strike>
+* <strike>DoublyLinkedist</strike>
+* ?
 
 ### Author
 

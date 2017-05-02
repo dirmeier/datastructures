@@ -28,14 +28,14 @@
 #'  f(matrix(rnorm(100), 10))
 f <- function(X)
 {
-    UseMethod("edgenet")
+    UseMethod("f")
 }
 
 #' @export
-#' @method edgenet matrix
+#' @method f matrix
 f.matrix <- function(X)
 {
-    return("welcome to R-bones\n")  
+    return("welcome to R-bones\n")
 }
 
 #' Do another thing
@@ -57,8 +57,8 @@ setGeneric(
   package="datastructures"
 )
 
-#' @rdname diffuse-methods
-#' @aliases diffuse,knockout.lmm.analysed-method
+#' @rdname g-methods
+#' @aliases g,matrix-method
 #' @import data.table
 #' @importFrom dplyr select filter
 setMethod(

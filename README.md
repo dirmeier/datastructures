@@ -9,11 +9,15 @@ Implementation of core datastructures for R.
 
 ## Introduction
 
-TODO
+This package implements some of the core datastructures from computer sience in `R`.
 
 ## Usage
 
-TODO
+Install the package using:
+
+```R
+  devtools::install_github("dirmeier/datastructures")
+```
 
 ## Author
 

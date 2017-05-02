@@ -1,0 +1,29 @@
+Package: datastructures
+Type: Package
+Title: datastructures
+Version: 0.99.0
+Date: 2017/05/02
+Authors@R: person("Simon", "Dirmeier",
+                    email = "Simon Dirmeier", role = c("aut", "cre"))
+Maintainer: Simon Dirmeier <datastructures>
+Description: Implementation of core datastructures for R.
+URL: https://github.com/dirmeier/datastructures
+BugReports: https://github.com/dirmeier/datastructures/issues
+biocViews:
+    Software
+License: GPL-3
+Encoding: UTF-8
+Suggests:
+    testthat,
+    knitr,
+    rmarkdown,
+    lintr
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
+SystemRequirements: C++11
+LinkingTo:
+    Rcpp,
+    RcppEigen
+Imports:
+    Rcpp
+NeedsCompilation: yes

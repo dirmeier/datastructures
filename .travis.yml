@@ -1,0 +1,54 @@
+language: r
+r: bioc-devel
+
+sudo: required
+dist: trusty
+
+cache: packages
+
+matrix:
+  include:
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+      env: COMPILER=g++-5
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.7
+          packages:
+            - clang-3.7
+      env: COMPILER=clang++-3.7
+
+env:
+  global:
+    - R_BUILD_ARGS="--no-build-vignettes --no-manual"
+    - R_CHECK_ARGS="--no-build-vignettes --no-manual --as-cran"
+    - LINTR_COMMENT_BOT=false
+
+r_packages:
+  - covr
+  - testthat
+  - lintr
+
+bioc_packages:
+  - BiocCheck
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install --only-upgrade autoconf
+  - sudo apt-get install --only-upgrade automake
+  - sudo apt-get install --only-upgrade autotools-dev
+  - sudo apt-get install autoconf-archive
+
+after_success:
+  - tar -C .. -xf $PKG_TARBALL
+  - Rscript -e 'covr::codecov()'
+  - Rscript -e 'lintr::lint_package()'
+  - R CMD BiocCheck $PKG_TARBALL

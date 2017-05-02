@@ -1,0 +1,17 @@
+---
+title: "datastructures"
+author: "Simon Dirmeier"
+date: "`r Sys.Date()`"
+output: rmarkdown::pdf_document
+vignette: >
+ %\VignetteIndexEntry{datastructures}
+ %\VignetteEngine{knitr::rmarkdown}
+ %\usepackage[utf8]{inputenc}
+---
+
+## Introduction
+
+TODO
+
+## Author
+

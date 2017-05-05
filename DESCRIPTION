@@ -22,7 +22,9 @@ Suggests:
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
 SystemRequirements: C++11
-LinkingTo: Rcpp
+LinkingTo: 
+    Rcpp,
+    BH
 Imports:
     Rcpp
 NeedsCompilation: yes

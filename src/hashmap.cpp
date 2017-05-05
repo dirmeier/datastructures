@@ -20,48 +20,36 @@
  *
  */
 
-
-
 #include <Rcpp.h>
-#include <map>
+
+#include <unordered_map>
+#include <boost/variant.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+
+typedef boost::variant<
+    boost::shared_ptr<std::unordered_map<std::string, int>>,
+    boost::shared_ptr<std::unordered_map<std::string, double>>
+> variants;
 
 
-using namespace Rcpp;
-
-//' @export hashmap
-template <typename T, typename V>
 class hashmap
 {
 public:
-    hashmap() : map_<T, V>() {}
-
-    void insert(Rcpp::CharacterVector key, double value)
+    hashmap(SEXP x, SEXP y)
     {
-        std::string fname = Rcpp::as<std::string>(key);
-        map_.insert(std::pair<std::string, double>(fname, value));
+        map_ = boost::make_shared<std::unordered_map<std::string, int>>(
+            "std::string, int", 1
+        );
     }
-
-    double get(Rcpp::CharacterVector key)
-    {
-        std::string fname = Rcpp::as<std::string>(key);
-        return map_[fname];
-    }
-
-    std::string gets()
-    {
-        return "hallo";
-    }
-
 private:
-    std::map< T, V > map_;
-
+    variants map_;
 };
 
 RCPP_MODULE(hashmap_module) {
-    class_<hashmap>( "hashmap" )
-    .constructor<SEXP, SEXP>()
-    .method( "insert", &hashmap::insert )
-    .method( "gets", &hashmap::gets )
-    .method( "get", &hashmap::get )
-    ;
+    using namespace Rcpp;
+    class_< hashmap >( "hashmap" )
+    .constructor<SEXP, SEXP>();
 }
+
+

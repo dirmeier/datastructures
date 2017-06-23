@@ -20,7 +20,7 @@ Suggests:
     rmarkdown,
     lintr
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 SystemRequirements: C++11
 LinkingTo: 
     Rcpp,
@@ -28,4 +28,4 @@ LinkingTo:
 Imports:
     Rcpp
 NeedsCompilation: yes
-RcppModules: hashmap_module
+

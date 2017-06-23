@@ -11,4 +11,3 @@ Implementation of core datastructures for R.
 Simon Dirmeier
 }
 \keyword{package}
-

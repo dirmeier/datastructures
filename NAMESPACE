@@ -3,7 +3,7 @@
 S3method(f,matrix)
 export(f)
 export(g)
-export(hashmap)
+import(Rcpp)
 import(data.table)
 importFrom(dplyr,filter)
 importFrom(dplyr,select)

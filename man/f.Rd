@@ -15,4 +15,3 @@ Do something
 \examples{
  f(matrix(rnorm(100), 10))
 }
-

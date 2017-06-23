@@ -21,48 +21,17 @@
 */
 
 #include <Rcpp.h>
-#include <unordered_map>
-
-template <typename T, typename U>
-class hashmap
-{
-public:
-    hashmap(): map_()
-    {}
-
-    size_t size()
-    {
-        return map_.size();
-    }
-
-    void insert(T t, U u)
-    {
-        map_.insert(std::pair<T, U>(t, u));
-    }
-
-    U get(T t)
-    {
-        return map_[t];
-    }
-
-private:
-    std::unordered_map<T, U> map_;
-};
-
-typedef hashmap<std::string, int>    hashmap_si;
-typedef hashmap<std::string, double> hashmap_sd;
+#include "hashmap.hpp"
 
 RCPP_MODULE(hashmap_module) {
-    using namespace Rcpp;
-    class_< hashmap_si >( "hashmap_si" )
+    Rcpp::class_< hashmap_si >( "hashmap_si" )
         .constructor()
         .method("size", &hashmap_si::size)
-        .method( "[<-", &hashmap_si::insert)
-        .method( "[",   &hashmap_si::get);
-
-    class_< hashmap_sd >( "hashmap_sd" )
+        .method( "[[<-", &hashmap_si::insert)
+        .method( "[[",   &hashmap_si::get);
+    Rcpp::class_< hashmap_sd >( "hashmap_sd" )
         .constructor()
         .method("size", &hashmap_sd::size)
-        .method( "[<-", &hashmap_sd::insert)
-        .method( "[",   &hashmap_sd::get);
+        .method( "[[<-", &hashmap_sd::insert)
+        .method( "[[",   &hashmap_sd::get);
 }

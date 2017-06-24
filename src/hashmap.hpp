@@ -23,6 +23,9 @@
 #ifndef DS_HASHMAP
 #define DS_HASHMAP
 
+#include <Rcpp.h>
+#include <vector>
+#include <string>
 #include <unordered_map>
 
 template <typename T, typename U>
@@ -37,15 +40,38 @@ public:
         return map_.size();
     }
 
-    void insert(T t, U u)
+    void insert(std::vector<T> t, std::vector<U> u)
     {
-        map_.insert(std::pair<T, U>(t, u));
+        if (t.size() != u.size())
+        {
+            Rcpp::stop("keys.size() != values.size()");
+        }
+        for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
+        {
+            map_.insert(std::pair<T, U>(t[i], u[i]));
+        }
     }
 
-    U get(T t)
+    std::vector<U> get(std::vector<T> t)
     {
-        return map_[t];
+        std::vector<U> values(t.size());
+        for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
+        {
+            T key = t[i];
+            if (map_.find(key) != map_.end())
+            {
+                values[i] =  map_[key];
+            }
+            else
+            {
+                std::stringstream ss;
+                ss << key;
+                Rcpp::stop(std::string("Could not find key: ").append(ss.str()));
+            }
+        }
+        return values;
     }
+
 
 private:
     std::unordered_map<T, U> map_;

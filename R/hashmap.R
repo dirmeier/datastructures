@@ -18,54 +18,39 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' Do something
+#' @title Hashmap class
 #'
-#' @export
+#' @exportClass hashmap
+#' @name hashmap-class
+#' @rdname hashmap-class
 #'
-#' @param X some object
+#' @description Implementation of a hashmap datastructure, i.e. an unordered collection
+#'  of key-value pairs. Inserting and accessing is amortized in \emph{O(1)}.
+#'  \code{hashmap} wraps a C++ \code{unordered_map} using Rcpp modules.
 #'
-#' @examples
-#'  f(matrix(rnorm(100), 10))
-f <- function(X)
-{
-    UseMethod("f")
-}
+#' @slot .map an Rcpp module wrapping an \code{unordered_map}
+setClass("hashmap",
+         slots = list(.map="ANY"))
 
-#' @export
-#' @method f matrix
-f.matrix <- function(X)
-{
-    return("welcome to R-bones\n")
-}
 
-#' Do another thing
-#'
-#' @description TODO
-#'
-#' @export
-#' @docType methods
-#' @rdname g-methods
-#'
-#' @param X  some object
-#' @param Y some other object
 setGeneric(
-  "g",
-  function(X, Y)
-  {
-    standardGeneric("g")
-  },
-  package="datastructures"
+    "insert",
+    function(obj, keys, values)
+    {
+        standardGeneric("insert")
+    },
+    package="datastructures"
 )
 
-#' @rdname g-methods
-#' @aliases g,matrix-method
+#' @rdname lmm-methods
+#' @aliases lmm,knockout.normalized.data-method
 #' @import data.table
-#' @importFrom dplyr select filter
 setMethod(
-  "g",
-  signature=signature(X="matrix"),
-  function(X, Y)
-  {
-    return("this yeoman-generator is awesome\n")
-  }
+    "insert",
+    signature = signature(obj="hashmap", keys="character", "character"),
+    function(obj, keys, values)
+    {
+
+    }
 )
+

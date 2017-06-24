@@ -5,8 +5,9 @@
 \alias{hashmap-class}
 \title{Hashmap class}
 \description{
-Implementation of a hashmap datastructure. Inserting and accesing
- is amortized \emph{O(1)}. The class wraps a C++ \code{unordered_map}.
+Implementation of a hashmap datastructure, i.e. an unordered collection
+ of key-value pairs. Inserting and accessing is amortized in \emph{O(1)}.
+ \code{hashmap} wraps a C++ \code{unordered_map} using Rcpp modules.
 }
 \section{Slots}{
 

@@ -29,6 +29,21 @@
 #'  \code{hashmap} wraps a C++ \code{unordered_map} using Rcpp modules.
 #'
 #' @slot .list  object that bundles all important map related objects
+#' @examples
+#'  # a hashmap with <character, double> pairs
+#'  hashmap <- new("hashmap", "character", "numeric")
+#'
+#'  # a hashmap with <character, integer> pairs
+#'  hashmap <- new("hashmap", "character", "integer")
+#'
+#'  # a hashmap with <double, double> pairs
+#'  hashmap <- new("hashmap", "numeric", "numeric")
+#'
+#'  # a hashmap with <integer, double> pairs
+#'  hashmap <- new("hashmap", "integer", "numeric")
+#'
+#'  # a hashmap with <integer, character> pairs
+#'  hashmap <- new("hashmap", "integer", "character")
 setClass(
     "hashmap",
      slots = list(.data = "list"),
@@ -40,13 +55,31 @@ setMethod(
     "initialize",
     "hashmap",
     function(.Object,
-             keys   = c("character", "numeric", "integer"),
-             values = c("character", "numeric", "integer"))
+             key.class   = c("character", "numeric", "integer"),
+             value.class = c("character", "numeric", "integer"))
     {
-        .Object@.data <- list(key.class   = match.arg(keys),
-                              value.class = match.arg(keys))
-        # init
+        .Object@.data <- list(key.class   = match.arg(key.class),
+                              value.class = match.arg(value.class))
 
+        if (key.class == "character")
+        {
+            if (value.class == "character")    map <- new(hashmap_ss)
+            else if (value.class == "integer") map <- new(hashmap_si)
+            else                               map <- new(hashmap_sd)
+        }
+        else if (key.class == "numeric")
+        {
+            if (value.class == "character")    map <- new(hashmap_ds)
+            else if (value.class == "integer") map <- new(hashmap_di)
+            else                               map <- new(hashmap_dd)
+        }
+        else
+        {
+            if (value.class == "character")    map <- new(hashmap_is)
+            else if (value.class == "integer") map <- new(hashmap_ii)
+            else                               map <- new(hashmap_id)
+        }
+        .Object@.data$map <- map
         .Object
     }
 )

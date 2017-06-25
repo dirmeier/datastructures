@@ -18,6 +18,7 @@ insert(obj, x, y)
 \item{y}{a scalar/vector of values}
 }
 \examples{
+ # insert to a hashmap
  hashmap <- new("hashmap", "character", "numeric")
  hashmap <- insert(hashmap, "test", 1.)
  hashmap <- insert(hashmap, paste0(1:10), 1:10)

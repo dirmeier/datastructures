@@ -42,7 +42,7 @@ setGeneric(
 #' @param y  a scalar/vector of values
 #'
 #' @examples
-#'  # insert to a hashmap
+#'  # insert to a hashmap with <character, double> pairs
 #'  hashmap <- new("hashmap", "character", "numeric")
 #'  hashmap <- insert(hashmap, "test", 1.)
 #'  hashmap <- insert(hashmap, paste0(1:10), 1:10)
@@ -57,7 +57,7 @@ setMethod(
         if (any(is.na(x))) stop("x cannot be NA")
         if (class(x) != kc) stop(paste("class(x) is not", kc))
         if (class(y) != vc) stop(paste("class(y) is not", vc))
-        obj@.map$insert(x, y)
+        obj@.data$map$insert(x, y)
         return(obj)
     }
 )

@@ -15,3 +15,19 @@ Implementation of a hashmap datastructure, i.e. an unordered collection
 \item{\code{.list}}{object that bundles all important map related objects}
 }}
 
+\examples{
+ # a hashmap with <character, double> pairs
+ hashmap <- new("hashmap", "character", "numeric")
+
+ # a hashmap with <character, integer> pairs
+ hashmap <- new("hashmap", "character", "integer")
+
+ # a hashmap with <double, double> pairs
+ hashmap <- new("hashmap", "numeric", "numeric")
+
+ # a hashmap with <integer, double> pairs
+ hashmap <- new("hashmap", "integer", "numeric")
+
+ # a hashmap with <integer, character> pairs
+ hashmap <- new("hashmap", "integer", "character")
+}

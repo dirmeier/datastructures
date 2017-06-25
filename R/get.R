@@ -18,46 +18,42 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @title Add elements to an object
+#' @title Get elements from an object
 #'
 #' @export
 #' @docType methods
-#' @rdname insert-methods
+#' @rdname get-methods
 #'
 setGeneric(
-    "insert",
-    function(obj, x, y)
+    "get",
+    function(obj, x)
     {
-        standardGeneric("insert")
+        standardGeneric("get")
     },
     package = "datastructures"
 )
 
-#' @title Add key-value pairs to a hashmap object
+#' @title Get values from a hashmap object
 #'
-#' @rdname insert-methods
+#' @rdname get-methods
 #'
 #' @param obj  the object you want to insert elements to
 #' @param x  a scalar/vector of keys
-#' @param y  a scalar/vector of values
 #'
 #' @examples
 #'  # insert to a hashmap with <character, double> pairs
-#'  hashmap <- new("hashmap", "character", "numeric")
-#'  hashmap <- insert(hashmap, "test", 1.)
-#'  hashmap <- insert(hashmap, paste0(1:10), 1:10)
+#'  hashmap <- new("hashmap", "character", "character")
+#'  hashmap <- insert(hashmap, paste0("k", 1:10), paste0("v", 1:10))
+#'  get(hashmap, paste0("k", c(3,5,7)))
 setMethod(
-    "insert",
-    signature = signature(obj = "hashmap", x = "ANY", y = "ANY"),
-    function(obj, x, y)
+    "get",
+    signature = signature(obj = "hashmap", x = "ANY"),
+    function(obj, x)
     {
         kc <- obj@.data$key.class
-        vc <- obj@.data$value.class
-        if (any(is.null(c(x, y)))) stop("x/y cannot be NULL")
+        if (any(is.null(x))) stop("x/y cannot be NULL")
         if (any(is.na(x))) stop("x cannot be NA")
         if (class(x) != kc) stop(paste("class(x) is not", kc))
-        if (class(y) != vc) stop(paste("class(y) is not", vc))
-        obj@.data$map$insert(x, y)
-        return(obj)
+        obj@.data$map$get(x)
     }
 )

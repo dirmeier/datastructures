@@ -12,6 +12,6 @@ Implementation of a hashmap datastructure, i.e. an unordered collection
 \section{Slots}{
 
 \describe{
-\item{\code{.map}}{an Rcpp module wrapping an \code{unordered_map}}
+\item{\code{.list}}{object that bundles all important map related objects}
 }}
 

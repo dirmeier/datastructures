@@ -22,16 +22,16 @@ Suggests:
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
 SystemRequirements: C++11
-LinkingTo: 
+LinkingTo:
     Rcpp,
     BH
 Imports:
-    Rcpp
+    Rcpp,
+    magrittr
 NeedsCompilation: yes
 Collate: 
     'datastructures-package.R'
     'get.R'
     'insert.R'
     'hashmap.R'
-    'show.R'
     'zzz.R'

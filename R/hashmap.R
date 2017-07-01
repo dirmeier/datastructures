@@ -17,8 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
+
 #' @include insert.R
 #' @include get.R
+
 
 #' @title Hashmap class
 #'
@@ -167,7 +169,14 @@ setMethod(
     }
 )
 
-#' @alias show,hashmap-method
+#' @export
+#' @method head hashmap
+head.hashmap <- function(x, ...)
+{
+    unlist(x@.data$map$head())
+}
+
+#' @noRd
 setMethod(
     "show",
     "hashmap",
@@ -175,6 +184,11 @@ setMethod(
     {
         cat(paste0("An object of class hashmap<",
                    object@.data$key.class, ",",
-                   object@.data$value.class, ">\n"))
+                   object@.data$value.class, ">\n\n"))
+        li <- head(hashmap)
+        for (l in names(li))
+        {
+            cat(paste0(l, " -> ", li[[l]], "\n"))
+        }
     }
 )

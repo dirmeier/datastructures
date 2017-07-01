@@ -40,7 +40,7 @@ public:
         return map_.size();
     }
 
-    void insert(std::vector<T> t, std::vector<U> u)
+    void insert(std::vector<T>& t, std::vector<U>& u)
     {
         if (t.size() != u.size())
         {
@@ -52,7 +52,30 @@ public:
         }
     }
 
-    std::vector<U> get(std::vector<T> t)
+    std::vector<T> keys()
+    {
+        std::vector<T> keys;
+        keys.reserve(map_.size());
+        for(const auto& pair : map_)
+        {
+            keys.push_back(pair.first);
+        }
+        return keys;
+    }
+
+    Rcpp::List head()
+    {
+        unsigned int i = 0;
+        std::unordered_map< T, U > heads;
+        for (const auto& pair : map_)
+        {
+            if (i++ == 5) break;
+            heads.insert(pair);
+        }
+        return Rcpp::wrap(heads);
+    }
+
+    std::vector<U> get(std::vector<T>& t)
     {
         std::vector<U> values(t.size());
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)

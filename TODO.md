@@ -1,8 +1,8 @@
 ## TODOs
 
 * <strike>HashMap</strike>
-* <strike>Heap</strike>
-* <strike>DoublyLinkedist</strike>
+* FibonacciHeap
+* BinaryHeap
 * ?
 
 ### Author

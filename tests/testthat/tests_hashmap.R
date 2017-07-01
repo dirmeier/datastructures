@@ -1,0 +1,51 @@
+# datastructures: Implementation of core datastructures for R.
+#
+# Copyright (C) Simon Dirmeier
+#
+# This file is part of datastructures.
+#
+# datastructures is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# datastructures is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with datastructures. If not, see <http://www.gnu.org/licenses/>.
+
+
+context("hashmap")
+
+hashmap <- new("hashmap", "numeric", "numeric")
+
+testthat::test_that("creates correct class", {
+    testthat::equal("Rcpp_hashmap_dd", class(hashmap@.data$map)[1])
+})
+
+testthat::test_that("creates correct class and throws with false values", {
+    testthat::equal("Rcpp_hashmap_dd", class(hashmap@.data$map)[1])
+})
+
+testthat::test_that("hashmap insert/get methods work", {
+    hashmap <- insert(hashmap, c(1, 2), c(4, 5))
+    testthat::expect_equal(get(hashmap, 1), 4)
+})
+
+testthat::test_that("hashmap insert/get methods work multiple values", {
+    hashmap <- insert(hashmap, c(1, 2), c(4, 5))
+    testthat::expect_equal(get(hashmap, c(1, 2)), c(4, 5))
+})
+
+testthat::test_that("hashmap operators work", {
+    hashmap[c(8, 9)] <- c(3, 4)
+    testthat::expect_equal(hashmap[8], 3)
+})
+
+testthat::test_that("hashmap operators work multiple valies", {
+    hashmap[c(8, 9)] <- c(3, 4)
+    testthat::expect_equal(hashmap[c(8, 9)], c(3, 4))
+})

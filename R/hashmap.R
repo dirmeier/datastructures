@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
+#' @include insert.R
+#' @include get.R
 
 #' @title Hashmap class
 #'
@@ -81,5 +83,98 @@ setMethod(
         }
         .Object@.data$map <- map
         .Object
+    }
+)
+
+#' @title Add key-value pairs to a hashmap object
+#'
+#' @rdname insert-methods
+#'
+#' @param obj  the object you want to insert elements to
+#' @param x  a scalar/vector of keys
+#' @param y  a scalar/vector of values
+#'
+#' @examples
+#'  # insert to a hashmap with <character, double> pairs
+#'  hashmap <- new("hashmap", "character", "integer")
+#'
+#'  hashmap <- insert(hashmap, "test", 1)
+#'
+#'  hashmap[paste0("k", 1:10)] <- 1:10
+#'
+setMethod(
+    "insert",
+    signature = signature(obj = "hashmap", x = "ANY", y = "ANY"),
+    function(obj, x, y)
+    {
+        kc <- obj@.data$key.class
+        vc <- obj@.data$value.class
+        if (any(is.null(c(x, y)))) stop("x/y cannot be NULL")
+        if (any(is.na(x))) stop("x cannot be NA")
+        if (class(x) != kc) stop(paste("class(x) is not", kc))
+        if (class(y) != vc) stop(paste("class(y) is not", vc))
+        obj@.data$map$insert(x, y)
+        return(obj)
+    }
+)
+
+#' @title Get values from a hashmap object
+#'
+#' @rdname get-methods
+#'
+#' @param obj  the object you want to insert elements to
+#' @param x  a scalar/vector of keys
+#'
+#' @examples
+#'  # insert to a hashmap with <character, double> pairs
+#'  hashmap <- new("hashmap", "character", "character")
+#'  hashmap <- insert(hashmap, paste0("k", 1:10), paste0("v", 1:10))
+#'
+#'  get(hashmap, paste0("k", c(3,5,7)))
+#'
+#'  hashmap[paste0("k", c(3,5,7))]
+#'
+setMethod(
+    "get",
+    signature = signature(obj = "hashmap", x = "ANY"),
+    function(obj, x)
+    {
+        kc <- obj@.data$key.class
+        if (any(is.null(x))) stop("x/y cannot be NULL")
+        if (any(is.na(x))) stop("x cannot be NA")
+        if (class(x) != kc) stop(paste("class(x) is not", kc))
+        obj@.data$map$get(x)
+    }
+)
+
+#' @noRd
+setMethod(
+    "[",
+    signature = signature(x="hashmap", i="ANY", j="missing", drop="missing"),
+    function(x, i, j="missing", ..., drop="missing")
+    {
+        get(x, i)
+    }
+)
+
+#' @noRd
+setMethod(
+    "[<-",
+    signature = signature(x="hashmap", i="ANY", j="missing", value="ANY"),
+    function(x, i, j="missing", ..., value)
+    {
+        insert(x, i, value)
+    }
+)
+
+#' @alias show,hashmap-method
+setMethod(
+    "show",
+    "hashmap",
+    function(object)
+    {
+        cat(paste0("An object of class hashmap<",
+                   object@.data$key.class, ",",
+                   object@.data$value.class, ">\n"))
     }
 )

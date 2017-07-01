@@ -32,32 +32,3 @@ setGeneric(
     },
     package = "datastructures"
 )
-
-#' @title Add key-value pairs to a hashmap object
-#'
-#' @rdname insert-methods
-#'
-#' @param obj  the object you want to insert elements to
-#' @param x  a scalar/vector of keys
-#' @param y  a scalar/vector of values
-#'
-#' @examples
-#'  # insert to a hashmap with <character, double> pairs
-#'  hashmap <- new("hashmap", "character", "integer")
-#'  hashmap <- insert(hashmap, "test", 1)
-#'  hashmap <- insert(hashmap, paste0("k", 1:10), 1:10)
-setMethod(
-    "insert",
-    signature = signature(obj = "hashmap", x = "ANY", y = "ANY"),
-    function(obj, x, y)
-    {
-        kc <- obj@.data$key.class
-        vc <- obj@.data$value.class
-        if (any(is.null(c(x, y)))) stop("x/y cannot be NULL")
-        if (any(is.na(x))) stop("x cannot be NA")
-        if (class(x) != kc) stop(paste("class(x) is not", kc))
-        if (class(y) != vc) stop(paste("class(y) is not", vc))
-        obj@.data$map$insert(x, y)
-        return(obj)
-    }
-)

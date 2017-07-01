@@ -23,11 +23,16 @@ context("hashmap")
 hashmap <- new("hashmap", "numeric", "numeric")
 
 testthat::test_that("creates correct class", {
-    testthat::equal("Rcpp_hashmap_dd", class(hashmap@.data$map)[1])
+    testthat::expect_equal("Rcpp_hashmap_dd", class(hashmap@.data$map)[1])
 })
 
-testthat::test_that("creates correct class and throws with false values", {
-    testthat::equal("Rcpp_hashmap_dd", class(hashmap@.data$map)[1])
+testthat::test_that("hashmap insert throws when inserting false values", {
+    testthat::expect_error(insert(hashmap, c("s", "s"), c(4, 5)))
+})
+
+testthat::test_that("hashmap get throws when getting false values", {
+    hashmap <- insert(hashmap, c(1, 2), c(4, 5))
+    testthat::expect_error(get(hashmap, "s"))
 })
 
 testthat::test_that("hashmap insert/get methods work", {

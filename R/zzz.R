@@ -22,4 +22,5 @@
 .onLoad <- function(libname, pkgname)
 {
     Rcpp::loadModule("hashmap_module", TRUE)
+    Rcpp::loadModule("fibonacci_heap_module", TRUE)
 }

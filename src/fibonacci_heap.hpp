@@ -84,12 +84,15 @@ public:
 
     U pop()
     {
-        return heap_.pop().value_;
+        U u = peek();
+        heap_.pop();
+        return u;
     }
 
-    U& peek()
+    U peek()
     {
-        return heap_.top().value_;
+        node<T, U> n = heap_.top();
+        return n.value_;
     }
 
 private:

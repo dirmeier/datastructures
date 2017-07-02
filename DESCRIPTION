@@ -27,9 +27,10 @@ LinkingTo:
     BH
 Imports:
     Rcpp,
-    magrittr
+    magrittr,
+    methods
 NeedsCompilation: yes
-Collate: 
+Collate:
     'datastructures-package.R'
     'get.R'
     'insert.R'

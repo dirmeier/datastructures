@@ -55,6 +55,7 @@ setClass(
 )
 
 #' @noRd
+#' @importFrom methods new
 setMethod(
     "initialize",
     "hashmap",
@@ -67,21 +68,21 @@ setMethod(
 
         if (key.class == "character")
         {
-            if (value.class == "character")    map <- new(hashmap_ss)
-            else if (value.class == "integer") map <- new(hashmap_si)
-            else                               map <- new(hashmap_sd)
+            if (value.class == "character")    map <- methods::new(hashmap_ss)
+            else if (value.class == "integer") map <- methods::new(hashmap_si)
+            else                               map <- methods::new(hashmap_sd)
         }
         else if (key.class == "numeric")
         {
-            if (value.class == "character")    map <- new(hashmap_ds)
-            else if (value.class == "integer") map <- new(hashmap_di)
-            else                               map <- new(hashmap_dd)
+            if (value.class == "character")    map <- methods::new(hashmap_ds)
+            else if (value.class == "integer") map <- methods::new(hashmap_di)
+            else                               map <- methods::new(hashmap_dd)
         }
         else
         {
-            if (value.class == "character")    map <- new(hashmap_is)
-            else if (value.class == "integer") map <- new(hashmap_ii)
-            else                               map <- new(hashmap_id)
+            if (value.class == "character")    map <- methods::new(hashmap_is)
+            else if (value.class == "integer") map <- methods::new(hashmap_ii)
+            else                               map <- methods::new(hashmap_id)
         }
         .Object@.data$map <- map
         .Object
@@ -109,12 +110,7 @@ setMethod(
     signature = signature(obj = "hashmap", x = "ANY", y = "ANY"),
     function(obj, x, y)
     {
-        kc <- obj@.data$key.class
-        vc <- obj@.data$value.class
-        if (any(is.null(c(x, y)))) stop("x/y cannot be NULL")
-        if (any(is.na(x))) stop("x cannot be NA")
-        if (class(x) != kc) stop(paste("class(x) is not", kc))
-        if (class(y) != vc) stop(paste("class(y) is not", vc))
+        .check.key.value.classes(obj, x, y)
         obj@.data$map$insert(x, y)
         return(obj)
     }
@@ -143,7 +139,7 @@ setMethod(
     {
         kc <- obj@.data$key.class
         if (any(is.null(x))) stop("x/y cannot be NULL")
-        if (any(is.na(x))) stop("x cannot be NA")
+        if (any(is.na(x)))   stop("x cannot be NA")
         if (class(x) != kc) stop(paste("class(x) is not", kc))
         obj@.data$map$get(x)
     }

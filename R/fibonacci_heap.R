@@ -56,6 +56,7 @@ setClass(
 )
 
 #' @noRd
+#' @importFrom methods new
 setMethod(
     "initialize",
     "fibonacci_heap",
@@ -68,21 +69,21 @@ setMethod(
 
         if (key.class == "character")
         {
-            if (value.class == "character")    heap <- new(fibonacci_heap_ss)
-            else if (value.class == "integer") heap <- new(fibonacci_heap_si)
-            else                               heap <- new(fibonacci_heap_sd)
+            if (value.class == "character")    heap <- methods::new(fibonacci_heap_ss)
+            else if (value.class == "integer") heap <- methods::new(fibonacci_heap_si)
+            else                               heap <- methods::new(fibonacci_heap_sd)
         }
         else if (key.class == "numeric")
         {
-            if (value.class == "character")    heap <- new(fibonacci_heap_ds)
-            else if (value.class == "integer") heap <- new(fibonacci_heap_di)
-            else                               heap <- new(fibonacci_heap_dd)
+            if (value.class == "character")    heap <- methods::new(fibonacci_heap_ds)
+            else if (value.class == "integer") heap <- methods::new(fibonacci_heap_di)
+            else                               heap <- methods::new(fibonacci_heap_dd)
         }
         else
         {
-            if (value.class == "character")    heap <- new(fibonacci_heap_is)
-            else if (value.class == "integer") heap <- new(fibonacci_heap_ii)
-            else                               heap <- new(fibonacci_heap_id)
+            if (value.class == "character")    heap <- methods::new(fibonacci_heap_is)
+            else if (value.class == "integer") heap <- methods::new(fibonacci_heap_ii)
+            else                               heap <- methods::new(fibonacci_heap_id)
         }
         .Object@.data$heap <- heap
         .Object
@@ -110,86 +111,72 @@ setMethod(
     signature = signature(obj = "fibonacci_heap", x = "ANY", y = "ANY"),
     function(obj, x, y)
     {
-        kc <- obj@.data$key.class
-        vc <- obj@.data$value.class
-        if (any(is.null(c(x, y)))) stop("x/y cannot be NULL")
-        if (any(is.na(x))) stop("x cannot be NA")
-        if (class(x) != kc) stop(paste("class(x) is not", kc))
-        if (class(y) != vc) stop(paste("class(y) is not", vc))
+        .check.key.value.classes(obj, x, y)
         obj@.data$heap$insert(x, y)
         return(obj)
     }
 )
 
-#' @title Get values from a hashmap object
+#' @title Pop (remove) the lowest priority node value from the heap
 #'
-#' @rdname get-methods
+#' @rdname pop-methods
 #'
-#' @param obj  the object you want to insert elements to
-#' @param x  a scalar/vector of keys
+#' @param obj  the object to pop
 #'
 #' @examples
-#'  # insert to a hashmap with <character, double> pairs
-#'  hashmap <- new("hashmap", "character", "character")
-#'  hashmap <- insert(hashmap, paste0("k", 1:10), paste0("v", 1:10))
+#'  fibonacci_heap <- new("fibonacci_heap", "character", "character")
+#'  fibonacci_heap <- insert(hashmap, paste0("k", 1:10), paste0("v", 1:10))
 #'
-#'  get(hashmap, paste0("k", c(3,5,7)))
-#'
-#'  hashmap[paste0("k", c(3,5,7))]
-#'
+#'  pop(hashmap)
 setMethod(
-    "get",
-    signature = signature(obj = "hashmap", x = "ANY"),
-    function(obj, x)
+    "pop",
+    signature = signature(obj = "fibonacci_heap"),
+    function(obj)
     {
-        kc <- obj@.data$key.class
-        if (any(is.null(x))) stop("x/y cannot be NULL")
-        if (any(is.na(x))) stop("x cannot be NA")
-        if (class(x) != kc) stop(paste("class(x) is not", kc))
-        obj@.data$map$get(x)
+        obj@.data$map$pop()
     }
 )
 
-#' @noRd
+#' @title Peek onto the lowest priority node value from the heap
+#'
+#' @rdname peek-methods
+#'
+#' @param obj  the object to peek into
+#'
+#' @examples
+#'  fibonacci_heap <- new("fibonacci_heap", "character", "character")
+#'  fibonacci_heap <- insert(hashmap, paste0("k", 1:10), paste0("v", 1:10))
+#'
+#'  peek(hashmap)
 setMethod(
-    "[",
-    signature = signature(x="hashmap", i="ANY", j="missing", drop="missing"),
-    function(x, i, j="missing", ..., drop="missing")
+    "peek",
+    signature = signature(obj = "fibonacci_heap"),
+    function(obj)
     {
-        get(x, i)
+        obj@.data$map$peek()
     }
 )
 
 #' @noRd
 setMethod(
     "[<-",
-    signature = signature(x="hashmap", i="ANY", j="missing", value="ANY"),
+    signature = signature(x="fibonacci_heap", i="ANY", j="missing", value="ANY"),
     function(x, i, j="missing", ..., value)
     {
         insert(x, i, value)
     }
 )
 
-#' @export
-#' @method head hashmap
-head.hashmap <- function(x, ...)
-{
-    unlist(x@.data$map$head())
-}
-
 #' @noRd
 setMethod(
     "show",
-    "hashmap",
+    "fibonacci_heap",
     function(object)
     {
-        cat(paste0("An object of class hashmap<",
+        cat(paste0("An object of class fibonacci_heap<",
                    object@.data$key.class, ",",
                    object@.data$value.class, ">\n\n"))
-        li <- head(hashmap)
-        for (l in names(li))
-        {
-            cat(paste0(l, " -> ", li[[l]], "\n"))
-        }
+        li <- peek(object)
+        cat(paste0("todo"))
     }
 )

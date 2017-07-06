@@ -188,3 +188,13 @@ setMethod(
         }
     }
 )
+
+#' @noRd
+setMethod(
+    "size",
+    "hashmap",
+    function(obj)
+    {
+        obj@.data$map$size()
+    }
+)

@@ -54,3 +54,9 @@ testthat::test_that("hashmap operators work multiple valies", {
     hashmap[c(8, 9)] <- c(3, 4)
     testthat::expect_equal(hashmap[c(8, 9)], c(3, 4))
 })
+
+testthat::test_that("hashmap has the correct size", {
+    hashmap <- new("hashmap", "numeric", "numeric")
+    hashmap[c(8, 9)] <- c(3, 4)
+    testthat::expect_equal(size(hashmap), 2)
+})

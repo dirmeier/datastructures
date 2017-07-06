@@ -19,6 +19,9 @@
 
 
 #' @include insert.R
+#' @include peek.R
+#' @include pop.R
+#' @include size.R
 
 
 #' @title Fibonacci heap class
@@ -50,7 +53,7 @@
 #'  # a fibonacci_heap with <integer, character> key-value nodes
 #'  fibonacci_heap <- new("fibonacci_heap", "integer", "character")
 setClass(
-    "hashmap",
+    "fibonacci_heap",
     slots = list(.data = "list"),
     prototype = prototype(.data = NULL)
 )
@@ -133,7 +136,7 @@ setMethod(
     signature = signature(obj = "fibonacci_heap"),
     function(obj)
     {
-        obj@.data$map$pop()
+        obj@.data$heap$pop()
     }
 )
 
@@ -153,7 +156,7 @@ setMethod(
     signature = signature(obj = "fibonacci_heap"),
     function(obj)
     {
-        obj@.data$map$peek()
+        obj@.data$heap$peek()
     }
 )
 
@@ -177,6 +180,17 @@ setMethod(
                    object@.data$key.class, ",",
                    object@.data$value.class, ">\n\n"))
         li <- peek(object)
-        cat(paste0("todo"))
+        li.names <- names(li)
+        cat(paste0(li.names[1], " -> ", li[[ li.names[1] ]], "\n"))
+    }
+)
+
+#' @noRd
+setMethod(
+    "size",
+    "fibonacci_heap",
+    function(obj)
+    {
+        obj@.data$heap$size()
     }
 )

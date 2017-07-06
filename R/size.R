@@ -18,17 +18,17 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @title Pop a single element from an object
+#' @title Get the size of an object
 #'
 #' @export
 #' @docType methods
-#' @rdname pop-methods
+#' @rdname size-methods
 #'
 setGeneric(
-    "pop",
+    "size",
     function(obj)
     {
-        standardGeneric("pop")
+        standardGeneric("size")
     },
     package = "datastructures"
 )

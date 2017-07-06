@@ -26,6 +26,7 @@
 #include <Rcpp.h>
 #include <vector>
 #include <string>
+#include <map>
 #include <boost/heap/fibonacci_heap.hpp>
 
 template <typename T, typename U>
@@ -82,17 +83,25 @@ public:
         return heap_.empty();
     }
 
-    U pop()
-    {
-        U u = peek();
-        heap_.pop();
-        return u;
-    }
-
-    U peek()
+    Rcpp::List pop()
     {
         node<T, U> n = heap_.top();
-        return n.value_;
+        heap_.pop();
+
+        std::map< T, U > heads;
+        heads.insert(std::pair<T, U>(n.key_, n.value_));
+
+        return Rcpp::wrap(heads);
+    }
+
+    Rcpp::List peek()
+    {
+        node<T, U> n = heap_.top();
+
+        std::map< T, U > heads;
+        heads.insert(std::pair<T, U>(n.key_, n.value_));
+
+        return Rcpp::wrap(heads);
     }
 
 private:

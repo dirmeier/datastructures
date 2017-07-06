@@ -20,52 +20,26 @@
  *
  */
 
-#ifndef DS_QUEUE
-#define DS_QUEUE
-
 #include <Rcpp.h>
-#include <queue>
-#include <string>
+#include "queue.hpp"
 
-
-template <typename T>
-class queue
-{
-public:
-    queue(): queue_()
-    {}
-
-    size_t size()
-    {
-        return queue_.size();
-    }
-
-    void insert(std::vector<T>& t)
-    {
-        for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
-        {
-            queue.push(t[i]);
-        }
-    }
-
-    T peek()
-    {
-        return queue_.front();
-    }
-
-    T pop()
-    {
-        T t = peek();
-        queue_.pop();
-        return t;
-    }
-
-private:
-    std::queue<T> queue_;
-};
-
-typedef queue<std::string> queue_s;
-typedef queue<double>      queue_d;
-typedef queue<int>         queue_i;
-
-#endif
+RCPP_MODULE(queue_module) {
+    Rcpp::class_< queue_d >("queue_d")
+        .constructor()
+        .method("peek",   &queue_d::peek)
+        .method("pop",    &queue_d::pop)
+        .method("size",   &queue_d::size)
+        .method("insert", &queue_d::insert);
+    Rcpp::class_< queue_s >( "queue_s" )
+        .constructor()
+        .method("peek",   &queue_s::peek)
+        .method("pop",    &queue_s::pop)
+        .method("size",   &queue_s::size)
+        .method("insert", &queue_s::insert);
+    Rcpp::class_< queue_i >( "queue_i" )
+        .constructor()
+        .method("peek",   &queue_i::peek)
+        .method("pop",    &queue_i::pop)
+        .method("size",   &queue_i::size)
+        .method("insert", &queue_i::insert);
+}

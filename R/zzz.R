@@ -23,4 +23,5 @@
 {
     Rcpp::loadModule("hashmap_module", TRUE)
     Rcpp::loadModule("fibonacci_heap_module", TRUE)
+    Rcpp::loadModule("queue_module", TRUE)
 }

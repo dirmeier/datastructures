@@ -21,7 +21,8 @@ vignette: >
   library(datastructures)
 ```
 
-## Fibonacci heap
+
+## Fibonacci heaps
 
 Fibonacci heaps are priority queue datastructures using the minimum heap property. Fibonacci heaps can be represented using collections of trees or linked lists consisting of *nodes* of elements. Every node is a pair of keys and values, where the key decides the ordering of the *node*. Fibonacci heaps have various applications, one of the most famous being in efficiently
 finding shortest paths using Dijkstra's algorithm. Fibonacci heaps can add values in amortized *O(1)* time and remove the minimum value in *O(log(n))* time makingthem a good choice in many
@@ -65,7 +66,7 @@ You can alternatively insert values like this:
 ```
 
 
-## Hashmap
+## Hashmaps
 
 Hashmaps also use hash functions to store key alue pairs, however without using any priority property. Given a key, the hash function computes a *bucket* where the value is stored making lookup, insertion and deletion possible in *O(1)* time. In the worst case these runtimes decrease to *O(n)* time, where $n$ is the number of entries in a bucket.
 
@@ -76,7 +77,6 @@ A hashmap can get created like this, this time we use <character, interger> pair
 ```
 
 Insterion to hashs works just like before, by calling the `insert` function or using a subset-operator:
-
 
 ```{r}
   keys    <- paste0("V", 1:5)
@@ -92,6 +92,7 @@ Values can then be accessed like this:
   get(hash, keys[1])
   hash[keys[1]]
 ```
+
 
 ## Queues and stacks
 

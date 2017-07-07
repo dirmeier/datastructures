@@ -20,12 +20,13 @@ Extracts a set of <key, value> pairs from an object using a
  set of keys.
 }
 \examples{
- # insert to a hashmap with <character, double> pairs
+\dontrun{
+ # insert to a hashmap with <character, character> pairs
  hashmap <- new("hashmap", "character", "character")
  hashmap <- insert(hashmap, paste0("k", 1:10), paste0("v", 1:10))
 
  get(hashmap, paste0("k", c(3,5,7)))
 
  hashmap[paste0("k", c(3,5,7))]
-
+}
 }

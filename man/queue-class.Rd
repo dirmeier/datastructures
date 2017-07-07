@@ -25,5 +25,4 @@ Implementation of a queue datastructure, i.e. a list
 
  # a queue with <integer> elements
  queue <- new("queue", "integer")
-
 }

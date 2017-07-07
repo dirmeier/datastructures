@@ -33,7 +33,7 @@ Peeks into an object, i.e. takes the first element and returns
                           paste0("k", 1:10),
                           paste0("v", 1:10))
 
- peek(hashmap)
+ peek(fibonacci_heap)
  queue <- new("queue", "character")
  queue <- insert(queue, paste0("k", 1:10))
 

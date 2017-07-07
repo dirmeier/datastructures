@@ -27,11 +27,9 @@ LinkingTo:
     BH
 Imports:
     Rcpp,
-    magrittr,
     methods
 NeedsCompilation: yes
 Collate: 
-    'RcppExports.R'
     'checks.R'
     'datastructures-package.R'
     'methods_size.R'

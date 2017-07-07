@@ -39,11 +39,14 @@
 #' @slot .data  object that bundles all important heap related objects
 #'
 #' @examples
-#'  # a fibonacci_heap with <character, double> key-value nodes
+#'  # a fibonacci_heap with <character, numeric> key-value nodes
 #'  fheap <- new("fibonacci_heap", "character", "numeric")
 #'
 #'  # a fibonacci_heap with <character, integer> key-value nodes
 #'  fheap <- new("fibonacci_heap", "character", "integer")
+#'
+#'  # a fibonacci_heap with <numeric, character> key-value nodes
+#'  fheap <- new("fibonacci_heap", "numeric", "character")
 setClass(
     "fibonacci_heap",
     slots = list(.data = "list"),
@@ -90,12 +93,12 @@ setMethod(
 #' @rdname insert-methods
 #'
 #' @examples
-#'  # insert to a fibonacci_heap with <character, double> nodes
-#'  fibonacci_heap <- new("fibonacci_heap", "numeric", "double")
+#'  # insert to a fibonacci_heap with <character, numeric> nodes
+#'  fibonacci_heap <- new("fibonacci_heap", "numeric", "character")
 #'
 #'  fibonacci_heap <- insert(fibonacci_heap, 1.0, "test")
 #'
-#'  fibonacci_heap[rnorm(5)] <- 1:5
+#'  fibonacci_heap[rnorm(5)] <- paste0("V", 1:5)
 #'
 setMethod(
     "insert",
@@ -118,7 +121,7 @@ setMethod(
 #'                           paste0("k", 1:10),
 #'                           paste0("v", 1:10))
 #'
-#'  pop(hashmap)
+#'  pop(fibonacci_heap)
 setMethod(
     "pop",
     signature = signature(obj = "fibonacci_heap"),
@@ -141,7 +144,7 @@ setMethod(
 #'                           paste0("k", 1:10),
 #'                           paste0("v", 1:10))
 #'
-#'  peek(hashmap)
+#'  peek(fibonacci_heap)
 setMethod(
     "peek",
     signature = signature(obj = "fibonacci_heap"),

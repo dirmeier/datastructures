@@ -40,14 +40,8 @@
 #'  # a hashmap with <character, integer> pairs
 #'  hashmap <- new("hashmap", "character", "integer")
 #'
-#'  # a hashmap with <double, double> pairs
+#'  # a hashmap with <numeric, numeric> pairs
 #'  hashmap <- new("hashmap", "numeric", "numeric")
-#'
-#'  # a hashmap with <integer, double> pairs
-#'  hashmap <- new("hashmap", "integer", "numeric")
-#'
-#'  # a hashmap with <integer, character> pairs
-#'  hashmap <- new("hashmap", "integer", "character")
 setClass(
     "hashmap",
      slots = list(.data = "list"),
@@ -95,7 +89,7 @@ setMethod(
 #' @examples
 #'  hashmap <- new("hashmap", "character", "integer")
 #'
-#'  hashmap <- insert(hashmap, "test", 1)
+#'  hashmap <- insert(hashmap, "test", 1L)
 #'
 #'  hashmap[paste0("k", 1:10)] <- 1:10
 #'
@@ -115,14 +109,15 @@ setMethod(
 #' @rdname get-methods
 #'
 #' @examples
-#'  # insert to a hashmap with <character, double> pairs
+#' \dontrun{
+#'  # insert to a hashmap with <character, character> pairs
 #'  hashmap <- new("hashmap", "character", "character")
 #'  hashmap <- insert(hashmap, paste0("k", 1:10), paste0("v", 1:10))
 #'
 #'  get(hashmap, paste0("k", c(3,5,7)))
 #'
 #'  hashmap[paste0("k", c(3,5,7))]
-#'
+#' }
 setMethod(
     "get",
     signature = signature(obj = "hashmap", x = "ANY"),

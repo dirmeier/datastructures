@@ -22,12 +22,6 @@ Implementation of a hashmap datastructure, i.e. an unordered collection
  # a hashmap with <character, integer> pairs
  hashmap <- new("hashmap", "character", "integer")
 
- # a hashmap with <double, double> pairs
+ # a hashmap with <numeric, numeric> pairs
  hashmap <- new("hashmap", "numeric", "numeric")
-
- # a hashmap with <integer, double> pairs
- hashmap <- new("hashmap", "integer", "numeric")
-
- # a hashmap with <integer, character> pairs
- hashmap <- new("hashmap", "integer", "character")
 }

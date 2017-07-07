@@ -36,16 +36,16 @@ Adds keys or <key, value> pairs to an object and returns the
  or pairs of <keys, values>.
 }
 \examples{
- # insert to a fibonacci_heap with <character, double> nodes
- fibonacci_heap <- new("fibonacci_heap", "numeric", "double")
+ # insert to a fibonacci_heap with <character, numeric> nodes
+ fibonacci_heap <- new("fibonacci_heap", "numeric", "character")
 
  fibonacci_heap <- insert(fibonacci_heap, 1.0, "test")
 
- fibonacci_heap[rnorm(5)] <- 1:5
+ fibonacci_heap[rnorm(5)] <- paste0("V", 1:5)
 
  hashmap <- new("hashmap", "character", "integer")
 
- hashmap <- insert(hashmap, "test", 1)
+ hashmap <- insert(hashmap, "test", 1L)
 
  hashmap[paste0("k", 1:10)] <- 1:10
 

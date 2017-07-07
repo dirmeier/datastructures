@@ -25,5 +25,4 @@ Implementation of a stack datastructure, i.e. a list
 
  # a stack with <integer> elements
  stack <- new("stack", "integer")
-
 }

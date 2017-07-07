@@ -45,7 +45,6 @@
 #'
 #'  # a queue with <integer> elements
 #'  queue <- new("queue", "integer")
-#'
 setClass(
     "queue",
     slots = list(.data = "list"),

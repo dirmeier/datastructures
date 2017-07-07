@@ -45,7 +45,6 @@
 #'
 #'  # a stack with <integer> elements
 #'  stack <- new("stack", "integer")
-#'
 setClass(
     "stack",
     slots = list(.data = "list"),

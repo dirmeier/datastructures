@@ -32,7 +32,7 @@ Remove and return the first element from an object.
                           paste0("k", 1:10),
                           paste0("v", 1:10))
 
- pop(hashmap)
+ pop(fibonacci_heap)
  queue <- new("queue", "character")
  queue <- insert(queue, paste0("k", 1:10))
 

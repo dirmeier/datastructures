@@ -38,22 +38,22 @@ testthat::test_that("stack pops first element", {
     stack <- new("stack", "numeric")
     r <- rnorm(5)
     stack <- insert(stack, r)
-    testthat::expect_equal(pop(queue), r[5], tolerance=0.001)
+    testthat::expect_equal(pop(stack), r[5], tolerance=0.001)
 })
 
-testthat::test_that("queue peeks first element", {
-    queue <- new("queue", "numeric")
+testthat::test_that("stack peeks first element", {
+    stack <- new("stack", "numeric")
     r <- rnorm(5)
-    queue <- insert(queue, r)
+    stack <- insert(stack, r)
     testthat::expect_equal(peek(stack), r[5], tolerance=0.001)
 })
 
-testthat::test_that("queue pop reduces size", {
-    queue <- new("queue", "numeric")
+testthat::test_that("stack pop reduces size", {
+    stack <- new("stack", "numeric")
     r <- rnorm(5)
-    queue <- insert(queue, r)
-    invisible(pop(queue))
-    testthat::expect_equal(size(queue), 5 - 1)
+    stack <- insert(stack, r)
+    invisible(pop(stack))
+    testthat::expect_equal(size(stack), 5 - 1)
 })
 
 

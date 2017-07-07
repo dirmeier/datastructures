@@ -40,6 +40,7 @@ Collate:
     'methods_insert.R'
     'ds_fibonacci_heap.R'
     'methods_get.R'
+    'methods_head.R'
     'ds_hashmap.R'
     'ds_queue.R'
     'ds_stack.R'

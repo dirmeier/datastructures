@@ -22,6 +22,10 @@ context("hashmap")
 
 hashmap <- new("hashmap", "numeric", "numeric")
 
+testthat::test_that("hashmap is s4", {
+    testthat::expect_s4_class(hashmap, "hashmap")
+})
+
 testthat::test_that("creates correct class", {
     testthat::expect_equal("Rcpp_hashmap_dd", class(hashmap@.data$map)[1])
 })

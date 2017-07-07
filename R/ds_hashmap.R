@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
-
+#' @include methods_head.R
 #' @include methods_insert.R
 #' @include methods_get.R
 #' @include methods_size.R
@@ -175,11 +175,15 @@ setMethod(
 )
 
 #' @export
-#' @method head hashmap
-head.hashmap <- function(x, ...)
-{
-    unlist(x@.data$map$head())
-}
+#' @rdname head-methods
+setMethod(
+    "head",
+    "hashmap",
+    function(obj)
+    {
+        unlist(x@.data$map$head())
+    }
+)
 
 #' @noRd
 setMethod(

@@ -34,6 +34,7 @@
 #'
 #' @slot .data  object that bundles all important map related objects
 #' @examples
+#' \dontrun{
 #'  # a hashmap with <character, double> pairs
 #'  hashmap <- new("hashmap", "character", "numeric")
 #'
@@ -42,6 +43,7 @@
 #'
 #'  # a hashmap with <numeric, numeric> pairs
 #'  hashmap <- new("hashmap", "numeric", "numeric")
+#'  }
 setClass(
     "hashmap",
      slots = list(.data = "list"),

@@ -13,7 +13,10 @@ get(obj, x)
 \arguments{
 \item{obj}{object to extract values from}
 
-\item{x}{the set of keys to match the avlues}
+\item{x}{the set of keys to match the values}
+}
+\value{
+returns extracted values from the object
 }
 \description{
 Extracts a set of <key, value> pairs from an object using a

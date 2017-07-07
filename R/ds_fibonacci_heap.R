@@ -31,22 +31,12 @@
 #' @rdname fibonacci_heap-class
 #'
 #' @description Implementation of a Fibonacci heap datastructure, i.e. a
-#'  priority datastructure with \code{push} in amortized \emph{O(1)} and \code{pop}
-#'  in \emph{O(log n)}. \code{fibonacci_heap} wraps a Boost \code{fibonacci_heap}
-#'  using Rcpp modules. The heap consists of nodes with keys and values where the key
-#'  determines the priority in the heap.
+#'  priority datastructure with \code{push} in amortized \emph{O(1)} and
+#'  \code{pop} in \emph{O(log n)}. \code{fibonacci_heap} wraps a Boost
+#'  \code{fibonacci_heap} using Rcpp modules. The heap consists of nodes with
+#'  keys and values where the key determines the priority in the heap.
 #'
 #' @slot .data  object that bundles all important heap related objects
-#'
-#' @examples
-#'  # a fibonacci_heap with <character, numeric> key-value nodes
-#'  fheap <- new("fibonacci_heap", "character", "numeric")
-#'
-#'  # a fibonacci_heap with <character, integer> key-value nodes
-#'  fheap <- new("fibonacci_heap", "character", "integer")
-#'
-#'  # a fibonacci_heap with <numeric, character> key-value nodes
-#'  fheap <- new("fibonacci_heap", "numeric", "character")
 setClass(
     "fibonacci_heap",
     slots = list(.data = "list"),
@@ -67,21 +57,30 @@ setMethod(
 
         if (key.class == "character")
         {
-            if (value.class == "character")    heap <- methods::new(fibonacci_heap_ss)
-            else if (value.class == "integer") heap <- methods::new(fibonacci_heap_si)
-            else                               heap <- methods::new(fibonacci_heap_sd)
+            if (value.class == "character")
+                heap <- methods::new(fibonacci_heap_ss)
+            else if (value.class == "integer")
+                heap <- methods::new(fibonacci_heap_si)
+            else
+                heap <- methods::new(fibonacci_heap_sd)
         }
         else if (key.class == "numeric")
         {
-            if (value.class == "character")    heap <- methods::new(fibonacci_heap_ds)
-            else if (value.class == "integer") heap <- methods::new(fibonacci_heap_di)
-            else                               heap <- methods::new(fibonacci_heap_dd)
+            if (value.class == "character")
+                heap <- methods::new(fibonacci_heap_ds)
+            else if (value.class == "integer")
+                heap <- methods::new(fibonacci_heap_di)
+            else
+                heap <- methods::new(fibonacci_heap_dd)
         }
         else
         {
-            if (value.class == "character")    heap <- methods::new(fibonacci_heap_is)
-            else if (value.class == "integer") heap <- methods::new(fibonacci_heap_ii)
-            else                               heap <- methods::new(fibonacci_heap_id)
+            if (value.class == "character")
+                heap <- methods::new(fibonacci_heap_is)
+            else if (value.class == "integer")
+                heap <- methods::new(fibonacci_heap_ii)
+            else
+                heap <- methods::new(fibonacci_heap_id)
         }
         .Object@.data$heap <- heap
         .Object

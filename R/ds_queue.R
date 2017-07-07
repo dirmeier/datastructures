@@ -36,15 +36,6 @@
 #'  constant \emph{O(1)}.
 #'
 #' @slot .data  object that bundles all important heap related objects
-#' @examples
-#'  # a queue with <character> elements
-#'  queue <- new("queue", "character")
-#'
-#'  # a queue with <numeric> elements
-#'  queue <- new("queue", "numeric")
-#'
-#'  # a queue with <integer> elements
-#'  queue <- new("queue", "integer")
 setClass(
     "queue",
     slots = list(.data = "list"),

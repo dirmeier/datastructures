@@ -28,7 +28,9 @@
 #' @rdname get-methods
 #'
 #' @param obj  object to extract values from
-#' @param x  the set of keys to match the avlues
+#' @param x  the set of keys to match the values
+#'
+#' @return  returns extracted values from the object
 setGeneric(
     "get",
     function(obj, x)

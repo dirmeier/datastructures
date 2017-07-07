@@ -4,9 +4,9 @@
 .git
 .gitattributes
 .idea
-^netreg.Rcheck$
-^netreg.Rproj$
-^netreg*tar.gz$
+^datastructures.Rcheck$
+^datastructures.Rproj$
+^datastructures*tar.gz$
 .build*timestamp
 ^VERSIONS.md$
 ^LICENSE$

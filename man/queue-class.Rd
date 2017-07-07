@@ -16,13 +16,3 @@ Implementation of a queue datastructure, i.e. a list
 \item{\code{.data}}{object that bundles all important heap related objects}
 }}
 
-\examples{
- # a queue with <character> elements
- queue <- new("queue", "character")
-
- # a queue with <numeric> elements
- queue <- new("queue", "numeric")
-
- # a queue with <integer> elements
- queue <- new("queue", "integer")
-}

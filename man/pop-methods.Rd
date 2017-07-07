@@ -21,7 +21,7 @@ pop(obj)
 \item{obj}{the object to pop an element from}
 }
 \value{
-returns the first element
+returns the first element from  \code{obj}
 }
 \description{
 Remove and return the first element from an object.

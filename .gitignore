@@ -1,7 +1,6 @@
 inst/doc/*
 build/
 src/test
-src/Makevars
 src/stamp-h1
 src/**/*.o
 src/**/*.a

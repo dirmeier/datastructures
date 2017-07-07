@@ -16,6 +16,7 @@ Implementation of a hashmap datastructure, i.e. an unordered collection
 }}
 
 \examples{
+\dontrun{
  # a hashmap with <character, double> pairs
  hashmap <- new("hashmap", "character", "numeric")
 
@@ -24,4 +25,5 @@ Implementation of a hashmap datastructure, i.e. an unordered collection
 
  # a hashmap with <numeric, numeric> pairs
  hashmap <- new("hashmap", "numeric", "numeric")
+ }
 }

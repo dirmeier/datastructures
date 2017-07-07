@@ -16,13 +16,3 @@ Implementation of a stack datastructure, i.e. a list
 \item{\code{.data}}{object that bundles all important heap related objects}
 }}
 
-\examples{
- # a stack with <character> elements
- stack <- new("stack", "character")
-
- # a stack with <numeric> elements
- stack <- new("stack", "numeric")
-
- # a stack with <integer> elements
- stack <- new("stack", "integer")
-}

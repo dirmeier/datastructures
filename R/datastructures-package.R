@@ -25,7 +25,7 @@
 #' @author Simon Dirmeier
 #' @name datastructures-package
 #'
-#' @useDynLib datastructures
+#' @useDynLib datastructures, .registration = TRUE
 #' @docType package
 #' @keywords package
 NULL

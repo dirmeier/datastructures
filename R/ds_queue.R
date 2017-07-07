@@ -119,7 +119,10 @@ setMethod(
     signature = signature(obj = "queue"),
     function(obj)
     {
-        obj@.data$list$pop()
+        if (obj@.data$list$size())
+            obj@.data$list$pop()
+        else
+            NULL
     }
 )
 
@@ -140,7 +143,10 @@ setMethod(
     signature = signature(obj = "queue"),
     function(obj)
     {
-        obj@.data$list$peek()
+        if (obj@.data$list$size())
+            obj@.data$list$peek()
+        else
+            NULL
     }
 )
 
@@ -153,7 +159,7 @@ setMethod(
         cat(paste0("An object of class queue<",
                    object@.data$key.class, ">\n\n"))
         li <- peek(object)
-        cat(paste0("First element -> ", li, "\n"))
+        cat(paste0("First element -> ", ifelse(is.null(li), "NULL", li), "\n"))
     }
 )
 

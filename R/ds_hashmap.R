@@ -181,7 +181,11 @@ setMethod(
     "hashmap",
     function(obj)
     {
-        unlist(x@.data$map$head())
+        if (obj@.data$map$size())
+            unlist(obj@.data$map$head())
+        else
+            NULL
+
     }
 )
 
@@ -197,7 +201,8 @@ setMethod(
         li <- head(hashmap)
         for (l in names(li))
         {
-            cat(paste0(l, " -> ", li[[l]], "\n"))
+            e <- li[[l]]
+            cat(paste0(l, " -> ",ifelse(is.null(e), "NULL", e), "\n"))
         }
     }
 )

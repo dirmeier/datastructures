@@ -21,7 +21,7 @@
 #' @noRd
 .check.key.value.classes <- function(obj, x, y)
 {
-    .check.key.classes(obj, x)
+    .check.key.class(obj, x)
     vc <- obj@.data$value.class
     if (any(is.null(c(x, y)))) stop("x/y cannot be NULL")
     if (class(y) != vc)        stop(paste("class(y) is not", vc))

@@ -132,7 +132,10 @@ setMethod(
     signature = signature(obj = "fibonacci_heap"),
     function(obj)
     {
-        obj@.data$heap$pop()
+        if (obj@.data$heap$size())
+            obj@.data$heap$pop()
+        else
+            NULL
     }
 )
 
@@ -152,7 +155,10 @@ setMethod(
     signature = signature(obj = "fibonacci_heap"),
     function(obj)
     {
-        obj@.data$heap$peek()
+        if (obj@.data$heap$size())
+            obj@.data$heap$peek()
+        else
+            NULL
     }
 )
 
@@ -184,8 +190,10 @@ setMethod(
                    object@.data$key.class, ",",
                    object@.data$value.class, ">\n\n"))
         li <- peek(object)
+        li <- ifelse(is.null(li), "NULL", li)
         li.names <- names(li)
-        cat(paste0(li.names[1], " -> ", li[[ li.names[1] ]], "\n"))
+        li.names <- ifelse(is.null(li.names), "NULL", li.names)
+        cat(paste0(li.names, " -> ", li , "\n"))
     }
 )
 

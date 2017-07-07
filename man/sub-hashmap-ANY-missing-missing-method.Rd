@@ -5,12 +5,13 @@
 \alias{[,hashmap,ANY,missing,missing-method}
 \title{Extract parts to an object}
 \usage{
-\S4method{[}{hashmap,ANY,missing,missing}(x, i, j = "missing", ...,
-  drop = "missing")
+\S4method{[}{hashmap,ANY,missing,missing}(x, i)
+}
+\arguments{
+\item{x}{a \code{hashmap}}
+
+\item{i}{a vector of keys}
 }
 \description{
 Access <key, value> pairs of a hashmap.
-
- @param x  a \code{hashmap}
- @param i  a vector of keys
 }

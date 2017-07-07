@@ -10,3 +10,12 @@ head(obj)
 
 \S4method{head}{hashmap}(obj)
 }
+\arguments{
+\item{obj}{the object to get the head from}
+}
+\value{
+returns a list of elements
+}
+\description{
+Extracts the first couple of entries from an object.
+}

@@ -20,10 +20,14 @@
 
 #' @title Get the first elements from an object
 #'
+#' @description Extracts the first couple of entries from an object.
+#'
 #' @export
 #' @docType methods
 #' @rdname head-methods
 #'
+#' @param obj  the object to get the head from
+#' @return  returns a list of elements
 setGeneric(
     "head",
     function(obj)

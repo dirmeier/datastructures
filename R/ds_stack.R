@@ -83,8 +83,6 @@ setMethod(
 #'
 #' @rdname insert-methods
 #'
-#' @param obj  the object you want to insert elements to
-#' @param x  a scalar/vector of keys
 #'
 #' @examples
 #'  # insert to a stack with <character> elements
@@ -106,9 +104,6 @@ setMethod(
 #'
 #' @rdname pop-methods
 #'
-#' @param obj  the object to pop
-#' @return  returns the first element from the stack
-#'
 #' @examples
 #'  stack <- new("stack", "character")
 #'  stack <- insert(stack, paste0("k", 1:10))
@@ -129,9 +124,6 @@ setMethod(
 #' @title Peek onto the first element of the stack
 #'
 #' @rdname peek-methods
-#'
-#' @param obj  the object to peek into
-#' @return  returns the first element from the stack
 #'
 #' @examples
 #'  stack <- new("stack", "character")

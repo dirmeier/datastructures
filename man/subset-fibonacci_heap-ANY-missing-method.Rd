@@ -5,14 +5,17 @@
 \alias{[<-,fibonacci_heap,ANY,missing-method}
 \title{Insert parts to an object}
 \usage{
-\S4method{[}{fibonacci_heap,ANY,missing}(x, i, j = "missing", ...) <- value
+\S4method{[}{fibonacci_heap,ANY,missing}(x, i) <- value
+}
+\arguments{
+\item{x}{a \code{fionacci_heap}}
+
+\item{i}{a vector of keys}
+
+\item{value}{a vector of values for the keys}
 }
 \description{
 Inserts <key, value> pairs to a Fibonacci heap. The keys are
  determine the ordering of the heap, while the value is the actual value to
  store.
-
- @param x  a \code{fionacci_heap}
- @param i  a vector of keys
- @param value  a vector of values for the keys
 }

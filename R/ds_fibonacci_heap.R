@@ -37,21 +37,13 @@
 #'  determines the priority in the heap.
 #'
 #' @slot .data  object that bundles all important heap related objects
+#'
 #' @examples
 #'  # a fibonacci_heap with <character, double> key-value nodes
-#'  fibonacci_heap <- new("fibonacci_heap", "character", "numeric")
+#'  fheap <- new("fibonacci_heap", "character", "numeric")
 #'
 #'  # a fibonacci_heap with <character, integer> key-value nodes
-#'  fibonacci_heap <- new("fibonacci_heap", "character", "integer")
-#'
-#'  # a fibonacci_heap with <double, double> key-value nodes
-#'  fibonacci_heap <- new("fibonacci_heap", "numeric", "numeric")
-#'
-#'  # a fibonacci_heap with <integer, double> key-value nodes
-#'  fibonacci_heap <- new("fibonacci_heap", "integer", "numeric")
-#'
-#'  # a fibonacci_heap with <integer, character> key-value nodes
-#'  fibonacci_heap <- new("fibonacci_heap", "integer", "character")
+#'  fheap <- new("fibonacci_heap", "character", "integer")
 setClass(
     "fibonacci_heap",
     slots = list(.data = "list"),
@@ -120,11 +112,11 @@ setMethod(
 #'
 #' @rdname pop-methods
 #'
-#' @param obj  the object to pop
-#'
 #' @examples
 #'  fibonacci_heap <- new("fibonacci_heap", "character", "character")
-#'  fibonacci_heap <- insert(fibonacci_heap, paste0("k", 1:10), paste0("v", 1:10))
+#'  fibonacci_heap <- insert(fibonacci_heap,
+#'                           paste0("k", 1:10),
+#'                           paste0("v", 1:10))
 #'
 #'  pop(hashmap)
 setMethod(
@@ -143,11 +135,11 @@ setMethod(
 #'
 #' @rdname peek-methods
 #'
-#' @param obj  the object to peek into
-#'
 #' @examples
 #'  fibonacci_heap <- new("fibonacci_heap", "character", "character")
-#'  fibonacci_heap <- insert(fibonacci_heap, paste0("k", 1:10), paste0("v", 1:10))
+#'  fibonacci_heap <- insert(fibonacci_heap,
+#'                           paste0("k", 1:10),
+#'                           paste0("v", 1:10))
 #'
 #'  peek(hashmap)
 setMethod(
@@ -168,19 +160,19 @@ setMethod(
 #'  determine the ordering of the heap, while the value is the actual value to
 #'  store.
 #'
-#'  @param x  a \code{fionacci_heap}
-#'  @param i  a vector of keys
-#'  @param value  a vector of values for the keys
+#' @param x  a \code{fionacci_heap}
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
 setMethod(
     "[<-",
-    signature = signature(x="fibonacci_heap", i="ANY", j="missing", value="ANY"),
-    function(x, i, j="missing", ..., value)
+    signature = signature(x="fibonacci_heap", i="ANY",
+                          j="missing", value="ANY"),
+    function(x, i, value)
     {
         insert(x, i, value)
     }
 )
 
-#' @noRd
 setMethod(
     "show",
     "fibonacci_heap",
@@ -197,7 +189,6 @@ setMethod(
     }
 )
 
-#' @export
 #' @rdname size-methods
 setMethod(
     "size",

@@ -3,13 +3,13 @@
 [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Build Status](https://travis-ci.org/dirmeier/datastructures.svg?branch=master)](https://travis-ci.org/dirmeier/datastructures)
 [![codecov](https://codecov.io/gh/dirmeier/datastructures/branch/master/graph/badge.svg)](https://codecov.io/gh/dirmeier/datastructures)
-[![Codacy Badge]()]()
 
 Implementation of core datastructures for R.
 
 ## Introduction
 
-This package implements some of the core datastructures from computer sience in `R`.
+This package implements some core datastructures such as hashmaps, heaps or
+queues using Rcpp modules in `R`.
 
 ## Usage
 

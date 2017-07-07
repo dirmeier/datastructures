@@ -26,19 +26,14 @@ insert(obj, x, y)
 \item{x}{the values/keys to insert into}
 
 \item{y}{values to be inserted which are required for some datastructures}
-
-\item{obj}{the object you want to insert elements to}
-
-\item{obj}{the object you want to insert elements to}
-
-\item{x}{a scalar/vector of keys}
-
-\item{obj}{the object you want to insert elements to}
-
-\item{x}{a scalar/vector of keys}
 }
 \value{
 returns \code{obj} with inserted values
+}
+\description{
+Adds keys or <key, value> pairs to an object and returns the
+ object. Depending on the datastructure used, either only keys are required
+ or pairs of <keys, values>.
 }
 \examples{
  # insert to a fibonacci_heap with <character, double> nodes
@@ -48,7 +43,6 @@ returns \code{obj} with inserted values
 
  fibonacci_heap[rnorm(5)] <- 1:5
 
- # insert to a hashmap with <character, double> pairs
  hashmap <- new("hashmap", "character", "integer")
 
  hashmap <- insert(hashmap, "test", 1)

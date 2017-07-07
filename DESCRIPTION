@@ -7,8 +7,8 @@ Authors@R: person("Simon", "Dirmeier",
                   email = "Simon Dirmeier", 
                   role = c("aut", "cre"))
 Maintainer: Simon Dirmeier <mail@simon-dirmeier.net>
-Description: Implementation of core datastructures, such as Hashmaps or heaps 
-    (Binary and Fibonacci) using Rcpp modules.
+Description: Implementation of core datastructures such as hashmaps, heaps,
+    or queues using Rcpp modules.
 URL: https://github.com/dirmeier/datastructures
 BugReports: https://github.com/dirmeier/datastructures/issues
 biocViews: Software

@@ -83,9 +83,6 @@ setMethod(
 #'
 #' @rdname insert-methods
 #'
-#' @param obj  the object you want to insert elements to
-#' @param x  a scalar/vector of keys
-#'
 #' @examples
 #'  # insert to a queue with <character> elements
 #'  queue <- new("queue", "character")
@@ -105,9 +102,6 @@ setMethod(
 #' @title Pop (remove) and return the from the queue
 #'
 #' @rdname pop-methods
-#'
-#' @param obj  the object to pop
-#' @return  returns the first element from the queue
 #'
 #' @examples
 #'  queue <- new("queue", "character")
@@ -130,9 +124,6 @@ setMethod(
 #'
 #' @rdname peek-methods
 #'
-#' @param obj  the object to peek into
-#' @return  returns the first element from the queue
-#'
 #' @examples
 #'  queue <- new("queue", "character")
 #'  queue <- insert(queue, paste0("k", 1:10))
@@ -150,7 +141,6 @@ setMethod(
     }
 )
 
-#' @noRd
 setMethod(
     "show",
     "queue",

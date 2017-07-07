@@ -26,3 +26,7 @@ size(obj)
 \value{
 returns the size of an object
 }
+\description{
+Computes the size of an object, i.e. the number of keys or
+ <key, value> pairs depending on the object.
+}

@@ -18,20 +18,19 @@ pop(obj)
 \S4method{pop}{stack}(obj)
 }
 \arguments{
-\item{obj}{the object to pop}
-
-\item{obj}{the object to pop}
-
-\item{obj}{the object to pop}
+\item{obj}{the object to pop an element from}
 }
 \value{
-returns the first element from the queue
-
-returns the first element from the stack
+returns the first element
+}
+\description{
+Remove and return the first element from an object.
 }
 \examples{
  fibonacci_heap <- new("fibonacci_heap", "character", "character")
- fibonacci_heap <- insert(fibonacci_heap, paste0("k", 1:10), paste0("v", 1:10))
+ fibonacci_heap <- insert(fibonacci_heap,
+                          paste0("k", 1:10),
+                          paste0("v", 1:10))
 
  pop(hashmap)
  queue <- new("queue", "character")

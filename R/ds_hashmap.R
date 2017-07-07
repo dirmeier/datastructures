@@ -54,7 +54,6 @@ setClass(
      prototype = prototype(.data = NULL)
 )
 
-#' @noRd
 #' @importFrom methods new
 setMethod(
     "initialize",
@@ -93,10 +92,7 @@ setMethod(
 #'
 #' @rdname insert-methods
 #'
-#' @param obj  the object you want to insert elements to
-#'
 #' @examples
-#'  # insert to a hashmap with <character, double> pairs
 #'  hashmap <- new("hashmap", "character", "integer")
 #'
 #'  hashmap <- insert(hashmap, "test", 1)
@@ -117,9 +113,6 @@ setMethod(
 #' @title Get values from a hashmap object
 #'
 #' @rdname get-methods
-#'
-#' @param obj  the object you want to insert elements to
-#' @param x  a scalar/vector of keys
 #'
 #' @examples
 #'  # insert to a hashmap with <character, double> pairs
@@ -147,12 +140,12 @@ setMethod(
 #'
 #' @description Access <key, value> pairs of a hashmap.
 #'
-#'  @param x  a \code{hashmap}
-#'  @param i  a vector of keys
+#' @param x  a \code{hashmap}
+#' @param i  a vector of keys
 setMethod(
     "[",
     signature = signature(x="hashmap", i="ANY", j="missing", drop="missing"),
-    function(x, i, j="missing", ..., drop="missing")
+    function(x, i)
     {
         get(x, i)
     }
@@ -162,19 +155,18 @@ setMethod(
 #'
 #' @description Inserts <key, value> pairs to a hashmap.
 #'
-#'  @param x  a \code{hashmap}
-#'  @param i  a vector of keys
-#'  @param value  a vector of values for the keys
+#' @param x  a \code{hashmap}
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
 setMethod(
     "[<-",
     signature = signature(x="hashmap", i="ANY", j="missing", value="ANY"),
-    function(x, i, j="missing", ..., value)
+    function(x, i, value)
     {
         insert(x, i, value)
     }
 )
 
-#' @export
 #' @rdname head-methods
 setMethod(
     "head",
@@ -189,7 +181,6 @@ setMethod(
     }
 )
 
-#' @noRd
 setMethod(
     "show",
     "hashmap",
@@ -198,7 +189,7 @@ setMethod(
         cat(paste0("An object of class hashmap<",
                    object@.data$key.class, ",",
                    object@.data$value.class, ">\n\n"))
-        li <- head(hashmap)
+        li <- head(object)
         for (l in names(li))
         {
             e <- li[[l]]
@@ -207,7 +198,6 @@ setMethod(
     }
 )
 
-#' @export
 #' @rdname size-methods
 setMethod(
     "size",

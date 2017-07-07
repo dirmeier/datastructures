@@ -11,9 +11,13 @@ get(obj, x)
 \S4method{get}{hashmap}(obj, x)
 }
 \arguments{
-\item{obj}{the object you want to insert elements to}
+\item{obj}{object to extract values from}
 
-\item{x}{a scalar/vector of keys}
+\item{x}{the set of keys to match the avlues}
+}
+\description{
+Extracts a set of <key, value> pairs from an object using a
+ set of keys.
 }
 \examples{
  # insert to a hashmap with <character, double> pairs

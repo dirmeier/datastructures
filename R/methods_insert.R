@@ -20,6 +20,10 @@
 
 #' @title Add elements to an object
 #'
+#' @description Adds keys or <key, value> pairs to an object and returns the
+#'  object. Depending on the datastructure used, either only keys are required
+#'  or pairs of <keys, values>.
+#'
 #' @export
 #' @docType methods
 #' @rdname insert-methods

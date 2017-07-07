@@ -19,17 +19,8 @@ Implementation of a Fibonacci heap datastructure, i.e. a
 
 \examples{
  # a fibonacci_heap with <character, double> key-value nodes
- fibonacci_heap <- new("fibonacci_heap", "character", "numeric")
+ fheap <- new("fibonacci_heap", "character", "numeric")
 
  # a fibonacci_heap with <character, integer> key-value nodes
- fibonacci_heap <- new("fibonacci_heap", "character", "integer")
-
- # a fibonacci_heap with <double, double> key-value nodes
- fibonacci_heap <- new("fibonacci_heap", "numeric", "numeric")
-
- # a fibonacci_heap with <integer, double> key-value nodes
- fibonacci_heap <- new("fibonacci_heap", "integer", "numeric")
-
- # a fibonacci_heap with <integer, character> key-value nodes
- fibonacci_heap <- new("fibonacci_heap", "integer", "character")
+ fheap <- new("fibonacci_heap", "character", "integer")
 }

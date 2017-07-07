@@ -5,12 +5,15 @@
 \alias{[<-,hashmap,ANY,missing-method}
 \title{Insert parts to an object}
 \usage{
-\S4method{[}{hashmap,ANY,missing}(x, i, j = "missing", ...) <- value
+\S4method{[}{hashmap,ANY,missing}(x, i) <- value
+}
+\arguments{
+\item{x}{a \code{hashmap}}
+
+\item{i}{a vector of keys}
+
+\item{value}{a vector of values for the keys}
 }
 \description{
 Inserts <key, value> pairs to a hashmap.
-
- @param x  a \code{hashmap}
- @param i  a vector of keys
- @param value  a vector of values for the keys
 }

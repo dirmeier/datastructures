@@ -20,10 +20,15 @@
 
 #' @title Get elements from an object
 #'
+#' @description Extracts a set of <key, value> pairs from an object using a
+#'  set of keys.
+#'
 #' @export
 #' @docType methods
 #' @rdname get-methods
 #'
+#' @param obj  object to extract values from
+#' @param x  the set of keys to match the avlues
 setGeneric(
     "get",
     function(obj, x)

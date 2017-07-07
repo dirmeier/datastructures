@@ -20,10 +20,15 @@
 
 #' @title Have a look at the first element from an object without removing it
 #'
+#' @description Peeks into an object, i.e. takes the first element and returns
+#'  it without removing it from the object,
+#'
 #' @export
 #' @docType methods
 #' @rdname peek-methods
 #'
+#' @param obj  the object to peek
+#' @return  returns the first element from \code{obj}
 setGeneric(
     "peek",
     function(obj)

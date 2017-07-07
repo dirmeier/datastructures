@@ -20,10 +20,14 @@
 
 #' @title Pop a single element from an object
 #'
+#' @description Remove and return the first element from an object.
+#'
 #' @export
 #' @docType methods
 #' @rdname pop-methods
 #'
+#' @param obj  the object to pop an element from
+#' @return  returns the first element
 setGeneric(
     "pop",
     function(obj)

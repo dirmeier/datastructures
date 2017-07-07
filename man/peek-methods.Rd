@@ -18,20 +18,20 @@ peek(obj)
 \S4method{peek}{stack}(obj)
 }
 \arguments{
-\item{obj}{the object to peek into}
-
-\item{obj}{the object to peek into}
-
-\item{obj}{the object to peek into}
+\item{obj}{the object to peek}
 }
 \value{
-returns the first element from the queue
-
-returns the first element from the stack
+returns the first element from \code{obj}
+}
+\description{
+Peeks into an object, i.e. takes the first element and returns
+ it without removing it from the object,
 }
 \examples{
  fibonacci_heap <- new("fibonacci_heap", "character", "character")
- fibonacci_heap <- insert(fibonacci_heap, paste0("k", 1:10), paste0("v", 1:10))
+ fibonacci_heap <- insert(fibonacci_heap,
+                          paste0("k", 1:10),
+                          paste0("v", 1:10))
 
  peek(hashmap)
  queue <- new("queue", "character")

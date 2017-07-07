@@ -18,10 +18,10 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include insert.R
-#' @include peek.R
-#' @include pop.R
-#' @include size.R
+#' @include methods_insert.R
+#' @include methods_peek.R
+#' @include methods_pop.R
+#' @include methods_size.R
 
 
 #' @title Fibonacci heap class
@@ -36,7 +36,7 @@
 #'  using Rcpp modules. The heap consists of nodes with keys and values where the key
 #'  determines the priority in the heap.
 #'
-#' @slot .list  object that bundles all important heap related objects
+#' @slot .data  object that bundles all important heap related objects
 #' @examples
 #'  # a fibonacci_heap with <character, double> key-value nodes
 #'  fibonacci_heap <- new("fibonacci_heap", "character", "numeric")
@@ -97,17 +97,13 @@ setMethod(
 #'
 #' @rdname insert-methods
 #'
-#' @param obj  the object you want to insert elements to
-#' @param x  a scalar/vector of keys
-#' @param y  a scalar/vector of values
-#'
 #' @examples
 #'  # insert to a fibonacci_heap with <character, double> nodes
-#'  hashmap <- new("fibonacci_heap", "numeric", "double")
+#'  fibonacci_heap <- new("fibonacci_heap", "numeric", "double")
 #'
-#'  hashmap <- insert(fibonacci_heap, 1.0, "test")
+#'  fibonacci_heap <- insert(fibonacci_heap, 1.0, "test")
 #'
-#'  hashmap[rnorm(5)] <- 1:5
+#'  fibonacci_heap[rnorm(5)] <- 1:5
 #'
 setMethod(
     "insert",
@@ -128,7 +124,7 @@ setMethod(
 #'
 #' @examples
 #'  fibonacci_heap <- new("fibonacci_heap", "character", "character")
-#'  fibonacci_heap <- insert(hashmap, paste0("k", 1:10), paste0("v", 1:10))
+#'  fibonacci_heap <- insert(fibonacci_heap, paste0("k", 1:10), paste0("v", 1:10))
 #'
 #'  pop(hashmap)
 setMethod(
@@ -148,7 +144,7 @@ setMethod(
 #'
 #' @examples
 #'  fibonacci_heap <- new("fibonacci_heap", "character", "character")
-#'  fibonacci_heap <- insert(hashmap, paste0("k", 1:10), paste0("v", 1:10))
+#'  fibonacci_heap <- insert(fibonacci_heap, paste0("k", 1:10), paste0("v", 1:10))
 #'
 #'  peek(hashmap)
 setMethod(
@@ -160,7 +156,15 @@ setMethod(
     }
 )
 
-#' @noRd
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to a Fibonacci heap. The keys are
+#'  determine the ordering of the heap, while the value is the actual value to
+#'  store.
+#'
+#'  @param x  a \code{fionacci_heap}
+#'  @param i  a vector of keys
+#'  @param value  a vector of values for the keys
 setMethod(
     "[<-",
     signature = signature(x="fibonacci_heap", i="ANY", j="missing", value="ANY"),
@@ -185,7 +189,8 @@ setMethod(
     }
 )
 
-#' @noRd
+#' @export
+#' @rdname size-methods
 setMethod(
     "size",
     "fibonacci_heap",

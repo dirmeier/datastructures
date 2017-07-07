@@ -21,52 +21,52 @@
  */
 
 
-#ifndef DS_QUEUE
-#define DS_QUEUE
+#ifndef DS_STACK
+#define DS_STACK
 
 #include <Rcpp.h>
-#include <queue>
+#include <stack>
 #include <string>
 
 
 template <typename T>
-class queue
+class stack
 {
 public:
-    queue(): queue_()
+    stack(): stack_()
     {}
 
     size_t size()
     {
-        return queue_.size();
+        return stack_.size();
     }
 
     void insert(std::vector<T>& t)
     {
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
         {
-            queue_.push(t[i]);
+            stack_.push(t[i]);
         }
     }
 
     T peek()
     {
-        return queue_.front();
+        return stack_.top();
     }
 
     T pop()
     {
         T t = peek();
-        queue_.pop();
+        stack_.pop();
         return t;
     }
 
 private:
-    std::queue<T> queue_;
+    std::stack<T> stack_;
 };
 
-typedef queue<std::string> queue_s;
-typedef queue<double>      queue_d;
-typedef queue<int>         queue_i;
+typedef stack<std::string> stack_s;
+typedef stack<double>      stack_d;
+typedef stack<int>         stack_i;
 
 #endif

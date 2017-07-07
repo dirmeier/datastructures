@@ -24,6 +24,11 @@
 #' @docType methods
 #' @rdname insert-methods
 #'
+#' @param obj  object to insert into
+#' @param x  the values/keys to insert into
+#' @param y  values to be inserted which are required for some datastructures
+#'
+#' @return  returns \code{obj} with inserted values
 setGeneric(
     "insert",
     function(obj, x, y)

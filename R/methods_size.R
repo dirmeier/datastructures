@@ -24,6 +24,8 @@
 #' @docType methods
 #' @rdname size-methods
 #'
+#' @param obj  the object to get the size from
+#' @return  returns the size of an object
 setGeneric(
     "size",
     function(obj)

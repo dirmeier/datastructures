@@ -18,9 +18,9 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include insert.R
-#' @include get.R
-
+#' @include methods_insert.R
+#' @include methods_get.R
+#' @include methods_size.R
 
 #' @title Hashmap class
 #'
@@ -32,7 +32,7 @@
 #'  of key-value pairs. Inserting and accessing is amortized in \emph{O(1)}.
 #'  \code{hashmap} wraps a C++ \code{unordered_map} using Rcpp modules.
 #'
-#' @slot .list  object that bundles all important map related objects
+#' @slot .data  object that bundles all important map related objects
 #' @examples
 #'  # a hashmap with <character, double> pairs
 #'  hashmap <- new("hashmap", "character", "numeric")
@@ -94,8 +94,6 @@ setMethod(
 #' @rdname insert-methods
 #'
 #' @param obj  the object you want to insert elements to
-#' @param x  a scalar/vector of keys
-#' @param y  a scalar/vector of values
 #'
 #' @examples
 #'  # insert to a hashmap with <character, double> pairs
@@ -145,7 +143,12 @@ setMethod(
     }
 )
 
-#' @noRd
+#' Extract parts to an object
+#'
+#' @description Access <key, value> pairs of a hashmap.
+#'
+#'  @param x  a \code{hashmap}
+#'  @param i  a vector of keys
 setMethod(
     "[",
     signature = signature(x="hashmap", i="ANY", j="missing", drop="missing"),
@@ -155,7 +158,13 @@ setMethod(
     }
 )
 
-#' @noRd
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to a hashmap.
+#'
+#'  @param x  a \code{hashmap}
+#'  @param i  a vector of keys
+#'  @param value  a vector of values for the keys
 setMethod(
     "[<-",
     signature = signature(x="hashmap", i="ANY", j="missing", value="ANY"),
@@ -189,7 +198,8 @@ setMethod(
     }
 )
 
-#' @noRd
+#' @export
+#' @rdname size-methods
 setMethod(
     "size",
     "hashmap",

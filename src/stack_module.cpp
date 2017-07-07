@@ -21,52 +21,26 @@
  */
 
 
-#ifndef DS_QUEUE
-#define DS_QUEUE
-
 #include <Rcpp.h>
-#include <queue>
-#include <string>
+#include "stack.hpp"
 
-
-template <typename T>
-class queue
-{
-public:
-    queue(): queue_()
-    {}
-
-    size_t size()
-    {
-        return queue_.size();
-    }
-
-    void insert(std::vector<T>& t)
-    {
-        for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
-        {
-            queue_.push(t[i]);
-        }
-    }
-
-    T peek()
-    {
-        return queue_.front();
-    }
-
-    T pop()
-    {
-        T t = peek();
-        queue_.pop();
-        return t;
-    }
-
-private:
-    std::queue<T> queue_;
-};
-
-typedef queue<std::string> queue_s;
-typedef queue<double>      queue_d;
-typedef queue<int>         queue_i;
-
-#endif
+RCPP_MODULE(stack_module) {
+    Rcpp::class_< stack_d >("stack_d")
+    .constructor()
+    .method("peek",   &stack_d::peek)
+    .method("pop",    &stack_d::pop)
+    .method("size",   &stack_d::size)
+    .method("insert", &stack_d::insert);
+    Rcpp::class_< stack_s >( "stack_s" )
+        .constructor()
+        .method("peek",   &stack_s::peek)
+        .method("pop",    &stack_s::pop)
+        .method("size",   &stack_s::size)
+        .method("insert", &stack_s::insert);
+    Rcpp::class_< stack_i >( "stack_i" )
+        .constructor()
+        .method("peek",   &stack_i::peek)
+        .method("pop",    &stack_i::pop)
+        .method("size",   &stack_i::size)
+        .method("insert", &stack_i::insert);
+}

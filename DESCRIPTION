@@ -1,21 +1,22 @@
 Package: datastructures
 Type: Package
-Title: Implementation of core datastructures
+Title: Implementation of Core Data Structures
 Version: 0.1.0
-Date: 2017-05-02
+Date: 2017-07-08
 Authors@R: person("Simon", "Dirmeier",
-                  email = "mail@simon-dirmeier.net",
+                  email = "simon.dirmeier@gmx.de",
                   role = c("aut", "cre"))
-Maintainer: Simon Dirmeier <mail@simon-dirmeier.net>
-Description: Implementation of  advanced datastructures such as hashmaps,
-    heaps, or queues . Advanced datastructures are essential
-    in many computer science and statistics problems such as for graph
-    algorithms or string analysis. datastructures use Boost and Rcpp modules
-    and wrap these as C++ objects for R usage.
+Maintainer: Simon Dirmeier <simon.dirmeier@gmx.de>
+Description: Implementation of advanced data structures such as hashmaps,
+    heaps, or queues. Advanced data structures are essential
+    in many computer science and statistics problems, for example graph
+    algorithms or string analysis. The package uses 'Boost' and 'STL' data
+    types and extends these to R with 'Rcpp' modules.
 URL: https://github.com/dirmeier/datastructures
 BugReports: https://github.com/dirmeier/datastructures/issues
 License: GPL-3
 Encoding: UTF-8
+Depends: R (>= 3.4)
 Suggests:
     testthat,
     knitr,
@@ -31,7 +32,7 @@ Imports:
     Rcpp,
     methods
 NeedsCompilation: yes
-Collate: 
+Collate:
     'checks.R'
     'datastructures-package.R'
     'ds_fibonacci_heap.R'

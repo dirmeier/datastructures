@@ -1,7 +1,9 @@
 ## TODOs
 
 * <strike>HashMap</strike>
-* FibonacciHeap
+* <strike>FibonacciHeap</strike>
+* <strike>Queue</strike>
+* <strike>Stack</strike>
 * BinaryHeap
 * ?
 

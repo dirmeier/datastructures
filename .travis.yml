@@ -4,8 +4,6 @@ cache: packages
 
 matrix:
   include:
-    - os: osx
-      r: devel
     - os: linux
       r: devel
     - os: osx
@@ -23,6 +21,8 @@ r_packages:
   - covr
   - testthat
   - lintr
+  - Rcpp
+  - BH
 
 bioc_packages:
   - BiocCheck

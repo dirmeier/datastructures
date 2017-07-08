@@ -18,15 +18,9 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include methods_insert.R
-#' @include methods_peek.R
-#' @include methods_pop.R
-#' @include methods_size.R
-
-
 #' @title Stack class
 #'
-#' @exportClass stack
+#' @export
 #' @name stack-class
 #' @rdname stack-class
 #'
@@ -50,7 +44,8 @@ setMethod(
     function(.Object,
              key.class   = c("character", "numeric", "integer"))
     {
-        .Object@.data <- list(key.class   = match.arg(key.class))
+        key.class   <- match.arg(key.class)
+        .Object@.data <- list(key.class   = key.class)
 
         if (key.class == "character")
         {
@@ -64,94 +59,8 @@ setMethod(
         {
             stack <- methods::new(stack_i)
         }
+
         .Object@.data$list <- stack
         .Object
-    }
-)
-
-#' @title Add an element to a stack object
-#'
-#' @rdname insert-methods
-#'
-#'
-#' @examples
-#'  # insert to a stack with <character> elements
-#'  stack <- new("stack", "character")
-#'
-#'  stack <- insert(stack, "test")
-setMethod(
-    "insert",
-    signature = signature(obj = "stack", x = "ANY", y = "missing"),
-    function(obj, x, y="missing")
-    {
-        .check.key.class(obj, x)
-        obj@.data$list$insert(x)
-        return(obj)
-    }
-)
-
-#' @title Pop (remove) and return the from the stack
-#'
-#' @rdname pop-methods
-#'
-#' @examples
-#'  stack <- new("stack", "character")
-#'  stack <- insert(stack, paste0("k", 1:10))
-#'
-#'  pop(stack)
-setMethod(
-    "pop",
-    signature = signature(obj = "stack"),
-    function(obj)
-    {
-        if (obj@.data$list$size())
-            obj@.data$list$pop()
-        else
-            NULL
-    }
-)
-
-#' @title Peek onto the first element of the stack
-#'
-#' @rdname peek-methods
-#'
-#' @examples
-#'  stack <- new("stack", "character")
-#'  stack <- insert(stack, paste0("k", 1:10))
-#'
-#'  peek(stack)
-setMethod(
-    "peek",
-    signature = signature(obj = "stack"),
-    function(obj)
-    {
-        if (obj@.data$list$size())
-            obj@.data$list$peek()
-        else
-            NULL
-    }
-)
-
-#' @noRd
-setMethod(
-    "show",
-    "stack",
-    function(object)
-    {
-        cat(paste0("An object of class stack<",
-                   object@.data$key.class, ">\n\n"))
-        li <- peek(object)
-        cat(paste0("First element -> ", ifelse(is.null(li), "NULL", li), "\n"))
-    }
-)
-
-#' @export
-#' @rdname size-methods
-setMethod(
-    "size",
-    "stack",
-    function(obj)
-    {
-        obj@.data$list$size()
     }
 )

@@ -15,15 +15,3 @@ Implementation of a hashmap datastructure, i.e. an unordered collection
 \item{\code{.data}}{object that bundles all important map related objects}
 }}
 
-\examples{
-\dontrun{
- # a hashmap with <character, double> pairs
- hashmap <- new("hashmap", "character", "numeric")
-
- # a hashmap with <character, integer> pairs
- hashmap <- new("hashmap", "character", "integer")
-
- # a hashmap with <numeric, numeric> pairs
- hashmap <- new("hashmap", "numeric", "numeric")
- }
-}

@@ -57,11 +57,11 @@ testthat::test_that("stack pop reduces size", {
 })
 
 
-testthat::test_that("queue peek does not reduce size", {
-    queue <- new("queue", "numeric")
+testthat::test_that("stack peek does not reduce size", {
+    stack <- new("stack", "numeric")
     r <- rnorm(5)
-    queue <- insert(queue, r)
-    invisible(peek(queue))
-    testthat::expect_equal(size(queue), 5)
+    stack <- insert(stack, r)
+    invisible(peek(stack))
+    testthat::expect_equal(size(stack), 5)
 })
 

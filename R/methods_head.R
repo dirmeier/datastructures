@@ -18,6 +18,7 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+
 #' @title Get the first elements from an object
 #'
 #' @description Extracts the first couple of entries from an object.
@@ -36,3 +37,17 @@ setGeneric(
     },
     package = "datastructures"
 )
+
+#' @rdname head-methods
+setMethod(
+    "head",
+    "hashmap",
+    function(obj)
+    {
+        if (obj@.data$map$size())
+            unlist(obj@.data$map$head())
+        else
+            NULL
+    }
+)
+

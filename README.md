@@ -14,11 +14,29 @@ queues using Rcpp modules in `R`.
 
 ## Usage
 
-Install the package using:
+Download the tarball of the latest release an install it using:
+
+```R
+  R CMD install <datastructures-x.y.z.tar.gz>
+```
+
+where `<datastructures-x.y.z.tar.gz>` is your downloaded tarball. If you insist 
+you cana lso use devtools, but I don;t recommend it:
 
 ```R
   devtools::install_github("dirmeier/datastructures")
 ```
+
+## Documentation
+
+Load the library using `library(datastructures)`. We provide a vignette for 
+the package that can be called using: `vignette("datastructure")`. If there 
+are any questions let met know.
+
+## Feature requests and contributing
+
+If you want to have another datastructure added, ay from `boost` or the `STL`,
+just open an issue. Alternatively it would be great if you provided a PR.
 
 ## Author
 

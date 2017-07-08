@@ -5,7 +5,11 @@
 \alias{datastructures-package}
 \title{datastructures}
 \description{
-Implementation of core datastructures for R.
+Implementation of  advanced datastructures such as hashmaps,
+heaps, or queues . Advanced datastructures are essential
+in many computer science and statistics problems such as for graph
+algorithms or string analysis. datastructures use Boost and Rcpp modules
+and wrap these as C++ objects for R usage.
 }
 \author{
 Simon Dirmeier

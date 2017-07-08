@@ -18,15 +18,9 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include methods_insert.R
-#' @include methods_peek.R
-#' @include methods_pop.R
-#' @include methods_size.R
-
-
 #' @title Queue class
 #'
-#' @exportClass queue
+#' @export
 #' @name queue-class
 #' @rdname queue-class
 #'
@@ -50,7 +44,8 @@ setMethod(
     function(.Object,
              key.class   = c("character", "numeric", "integer"))
     {
-        .Object@.data <- list(key.class   = match.arg(key.class))
+        key.class   <- match.arg(key.class)
+        .Object@.data <- list(key.class   = key.class)
 
         if (key.class == "character")
         {
@@ -64,92 +59,8 @@ setMethod(
         {
             queue <- methods::new(queue_i)
         }
+
         .Object@.data$list <- queue
         .Object
-    }
-)
-
-#' @title Add an element to a queue object
-#'
-#' @rdname insert-methods
-#'
-#' @examples
-#'  # insert to a queue with <character> elements
-#'  queue <- new("queue", "character")
-#'
-#'  queue <- insert(queue, "test")
-setMethod(
-    "insert",
-    signature = signature(obj = "queue", x = "ANY", y = "missing"),
-    function(obj, x, y="missing")
-    {
-        .check.key.class(obj, x)
-        obj@.data$list$insert(x)
-        return(obj)
-    }
-)
-
-#' @title Pop (remove) and return the from the queue
-#'
-#' @rdname pop-methods
-#'
-#' @examples
-#'  queue <- new("queue", "character")
-#'  queue <- insert(queue, paste0("k", 1:10))
-#'
-#'  pop(queue)
-setMethod(
-    "pop",
-    signature = signature(obj = "queue"),
-    function(obj)
-    {
-        if (obj@.data$list$size())
-            obj@.data$list$pop()
-        else
-            NULL
-    }
-)
-
-#' @title Peek onto the first element of the queue
-#'
-#' @rdname peek-methods
-#'
-#' @examples
-#'  queue <- new("queue", "character")
-#'  queue <- insert(queue, paste0("k", 1:10))
-#'
-#'  peek(queue)
-setMethod(
-    "peek",
-    signature = signature(obj = "queue"),
-    function(obj)
-    {
-        if (obj@.data$list$size())
-            obj@.data$list$peek()
-        else
-            NULL
-    }
-)
-
-setMethod(
-    "show",
-    "queue",
-    function(object)
-    {
-        cat(paste0("An object of class queue<",
-                   object@.data$key.class, ">\n\n"))
-        li <- peek(object)
-        cat(paste0("First element -> ", ifelse(is.null(li), "NULL", li), "\n"))
-    }
-)
-
-#' @export
-#' @rdname size-methods
-setMethod(
-    "size",
-    "queue",
-    function(obj)
-    {
-        obj@.data$list$size()
     }
 )

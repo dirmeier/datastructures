@@ -38,3 +38,42 @@ setGeneric(
     },
     package = "datastructures"
 )
+
+#' @rdname peek-methods
+setMethod(
+    "peek",
+    signature = signature(obj = "fibonacci_heap"),
+    function(obj)
+    {
+        if (obj@.data$heap$size())
+            obj@.data$heap$peek()
+        else
+            NULL
+    }
+)
+
+#' @rdname peek-methods
+setMethod(
+    "peek",
+    signature = signature(obj = "queue"),
+    function(obj)
+    {
+        if (obj@.data$list$size())
+            obj@.data$list$peek()
+        else
+            NULL
+    }
+)
+
+#' @rdname peek-methods
+setMethod(
+    "peek",
+    signature = signature(obj = "stack"),
+    function(obj)
+    {
+        if (obj@.data$list$size())
+            obj@.data$list$peek()
+        else
+            NULL
+    }
+)

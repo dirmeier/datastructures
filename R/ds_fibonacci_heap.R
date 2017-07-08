@@ -18,15 +18,9 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include methods_insert.R
-#' @include methods_peek.R
-#' @include methods_pop.R
-#' @include methods_size.R
-
-
 #' @title Fibonacci heap class
 #'
-#' @exportClass fibonacci_heap
+#' @export
 #' @name fibonacci_heap-class
 #' @rdname fibonacci_heap-class
 #'
@@ -37,13 +31,13 @@
 #'  keys and values where the key determines the priority in the heap.
 #'
 #' @slot .data  object that bundles all important heap related objects
-setClass(
+#'
+ setClass(
     "fibonacci_heap",
     slots = list(.data = "list"),
     prototype = prototype(.data = NULL)
 )
 
-#' @noRd
 #' @importFrom methods new
 setMethod(
     "initialize",
@@ -52,8 +46,10 @@ setMethod(
              key.class   = c("character", "numeric", "integer"),
              value.class = c("character", "numeric", "integer"))
     {
-        .Object@.data <- list(key.class   = match.arg(key.class),
-                              value.class = match.arg(value.class))
+        key.class   <- match.arg(key.class)
+        value.class <- match.arg(value.class)
+        .Object@.data <- list(key.class   = key.class,
+                              value.class = value.class)
 
         if (key.class == "character")
         {
@@ -82,121 +78,11 @@ setMethod(
             else
                 heap <- methods::new(fibonacci_heap_id)
         }
+
         .Object@.data$heap <- heap
         .Object
     }
 )
 
-#' @title Add a node to a Fibonacci heap object
-#'
-#' @rdname insert-methods
-#'
-#' @examples
-#'  # insert to a fibonacci_heap with <character, numeric> nodes
-#'  fibonacci_heap <- new("fibonacci_heap", "numeric", "character")
-#'
-#'  fibonacci_heap <- insert(fibonacci_heap, 1.0, "test")
-#'
-#'  fibonacci_heap[rnorm(5)] <- paste0("V", 1:5)
-#'
-setMethod(
-    "insert",
-    signature = signature(obj = "fibonacci_heap", x = "ANY", y = "ANY"),
-    function(obj, x, y)
-    {
-        .check.key.value.classes(obj, x, y)
-        obj@.data$heap$insert(x, y)
-        return(obj)
-    }
-)
 
-#' @title Pop (remove) the lowest priority node value from the heap
-#'
-#' @rdname pop-methods
-#'
-#' @examples
-#'  fibonacci_heap <- new("fibonacci_heap", "character", "character")
-#'  fibonacci_heap <- insert(fibonacci_heap,
-#'                           paste0("k", 1:10),
-#'                           paste0("v", 1:10))
-#'
-#'  pop(fibonacci_heap)
-setMethod(
-    "pop",
-    signature = signature(obj = "fibonacci_heap"),
-    function(obj)
-    {
-        if (obj@.data$heap$size())
-            obj@.data$heap$pop()
-        else
-            NULL
-    }
-)
 
-#' @title Peek onto the lowest priority node value from the heap
-#'
-#' @rdname peek-methods
-#'
-#' @examples
-#'  fibonacci_heap <- new("fibonacci_heap", "character", "character")
-#'  fibonacci_heap <- insert(fibonacci_heap,
-#'                           paste0("k", 1:10),
-#'                           paste0("v", 1:10))
-#'
-#'  peek(fibonacci_heap)
-setMethod(
-    "peek",
-    signature = signature(obj = "fibonacci_heap"),
-    function(obj)
-    {
-        if (obj@.data$heap$size())
-            obj@.data$heap$peek()
-        else
-            NULL
-    }
-)
-
-#' Insert parts to an object
-#'
-#' @description Inserts <key, value> pairs to a Fibonacci heap. The keys are
-#'  determine the ordering of the heap, while the value is the actual value to
-#'  store.
-#'
-#' @param x  a \code{fionacci_heap}
-#' @param i  a vector of keys
-#' @param value  a vector of values for the keys
-setMethod(
-    "[<-",
-    signature = signature(x="fibonacci_heap", i="ANY",
-                          j="missing", value="ANY"),
-    function(x, i, value)
-    {
-        insert(x, i, value)
-    }
-)
-
-setMethod(
-    "show",
-    "fibonacci_heap",
-    function(object)
-    {
-        cat(paste0("An object of class fibonacci_heap<",
-                   object@.data$key.class, ",",
-                   object@.data$value.class, ">\n\n"))
-        li <- peek(object)
-        li <- ifelse(is.null(li), "NULL", li)
-        li.names <- names(li)
-        li.names <- ifelse(is.null(li.names), "NULL", li.names)
-        cat(paste0(li.names, " -> ", li , "\n"))
-    }
-)
-
-#' @rdname size-methods
-setMethod(
-    "size",
-    "fibonacci_heap",
-    function(obj)
-    {
-        obj@.data$heap$size()
-    }
-)

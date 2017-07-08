@@ -24,7 +24,7 @@
 #'  object. Depending on the datastructure used, either only keys are required
 #'  or pairs of <keys, values>.
 #'
-#' @export
+#' @exportMethod insert
 #' @docType methods
 #' @rdname insert-methods
 #'
@@ -33,6 +33,7 @@
 #' @param y  values to be inserted which are required for some datastructures
 #'
 #' @return  returns \code{obj} with inserted values
+#'
 setGeneric(
     "insert",
     function(obj, x, y)
@@ -40,4 +41,90 @@ setGeneric(
         standardGeneric("insert")
     },
     package = "datastructures"
+)
+
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "fibonacci_heap", x = "ANY", y = "ANY"),
+    function(obj, x, y)
+    {
+        .check.key.value.classes(obj, x, y)
+        obj@.data$heap$insert(x, y)
+        return(obj)
+    }
+)
+
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to a Fibonacci heap. The keys are
+#'  determine the ordering of the heap, while the value is the actual value to
+#'  store.
+#'
+#' @param x  a \code{fionacci_heap}
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
+setMethod(
+    "[<-",
+    signature = signature(x="fibonacci_heap", i="ANY",
+                          j="missing", value="ANY"),
+    function(x, i, value)
+    {
+        insert(x, i, value)
+    }
+)
+
+
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "hashmap", x = "ANY", y = "ANY"),
+    function(obj, x, y)
+    {
+        .check.key.value.classes(obj, x, y)
+        obj@.data$map$insert(x, y)
+        return(obj)
+    }
+)
+
+
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to a hashmap.
+#'
+#' @param x  a \code{hashmap}
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
+setMethod(
+    "[<-",
+    signature = signature(x="hashmap", i="ANY", j="missing", value="ANY"),
+    function(x, i, value)
+    {
+        insert(x, i, value)
+    }
+)
+
+
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "queue", x = "ANY", y = "missing"),
+    function(obj, x, y="missing")
+    {
+        .check.key.class(obj, x)
+        obj@.data$list$insert(x)
+        return(obj)
+    }
+)
+
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "stack", x = "ANY", y = "missing"),
+    function(obj, x, y="missing")
+    {
+        .check.key.class(obj, x)
+        obj@.data$list$insert(x)
+        return(obj)
+    }
 )

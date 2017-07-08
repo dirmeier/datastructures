@@ -39,3 +39,35 @@ setGeneric(
     },
     package = "datastructures"
 )
+
+
+#' @rdname get-methods
+setMethod(
+    "get",
+    signature = signature(obj = "hashmap", x = "ANY"),
+    function(obj, x)
+    {
+        kc <- obj@.data$key.class
+        if (any(is.null(x))) stop("x/y cannot be NULL")
+        if (any(is.na(x)))   stop("x cannot be NA")
+        if (class(x) != kc) stop(paste("class(x) is not", kc))
+        obj@.data$map$get(x)
+    }
+)
+
+
+#' @title Extract elements from an object
+#'
+#' @description Access <key, value> pairs of a hashmap using a set of keys.
+#'
+#' @param x  a \code{hashmap}
+#' @param i  a vector of keys
+setMethod(
+    "[",
+    signature = signature(x="hashmap", i="ANY", j="missing", drop="missing"),
+    function(x, i)
+    {
+        get(x, i)
+    }
+)
+

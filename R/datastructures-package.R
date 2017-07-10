@@ -20,11 +20,11 @@
 
 #' datastructures
 #'
-#' Implementation of  advanced datastructures such as hashmaps,
-#' heaps, or queues . Advanced datastructures are essential
-#' in many computer science and statistics problems such as for graph
-#' algorithms or string analysis. datastructures use Boost and Rcpp modules
-#' and wrap these as C++ objects for R usage.
+#' Implementation of advanced data structures such as hashmaps,
+#' heaps, or queues. Advanced data structures are essential
+#' in many computer science and statistics problems, for example graph
+#' algorithms or string analysis. The package uses 'Boost' and 'STL' data
+#' types and extends these to R with 'Rcpp' modules.
 #'
 #' @author Simon Dirmeier
 #' @name datastructures-package

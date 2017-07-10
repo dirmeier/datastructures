@@ -12,7 +12,7 @@ Implementation of core data structures for R.
 Implementation of advanced data structures such as hashmaps, heaps, or queues. 
 Advanced data structures are essential in many computer science and statistics 
 problems, for example graph algorithms or string analysis. The package uses 
-'Boost' and 'STL' data types and extends these to R with 'Rcpp' modules.
+`Boost` and `STL` data types and extends these to `R` with `Rcpp` modules.
 
 ## Usage
 

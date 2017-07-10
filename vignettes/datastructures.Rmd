@@ -6,27 +6,22 @@ output:
     rmarkdown::html_document:
         theme: lumen
 vignette: >
-  %\VignetteIndexEntry{Ddatastructures tutorial}
+  %\VignetteIndexEntry{Datastructures tutorial}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ## Introduction
 
-`datastructures` implements various datastructures frequently used in computer science. Among these are for example *Fibonacci heaps*, *stacks*, *queues* or *hashmaps*.
-
-## Tutorial
-
-```{r, message=FALSE, warning=FALSE}
-  library(datastructures)
-```
+`datastructures` implements various data structures that frequently used in computer science. Among these are for example *Fibonacci heaps*, *stacks*, *queues* or *hashmaps*. Advanced data structures are essential
+in many computer science and statistics problems, for example graph algorithms 
+or string analysis. The package uses `Boost` and `STL` data types and extends 
+these to `R` with `Rcpp` modules.
 
 
 ## Fibonacci heaps
 
-Fibonacci heaps are priority queue datastructures using the minimum heap property. Fibonacci heaps can be represented using collections of trees or linked lists consisting of *nodes* of elements. Every node is a pair of keys and values, where the key decides the ordering of the *node*. Fibonacci heaps have various applications, one of the most famous being in efficiently
-finding shortest paths using Dijkstra's algorithm. Fibonacci heaps can add values in amortized *O(1)* time and remove the minimum value in *O(log(n))* time makingthem a good choice in many
-real world scenarios.
+Fibonacci heaps are priority queue datastructures using the minimum heap property. Fibonacci heaps can be represented using collections of trees or linked lists consisting of *nodes* of elements. Every node is a pair of keys and values, where the key decides the priority of the *node* in the heap. Fibonacci heaps have various applications, one of the most famous being in efficiently finding shortest paths using Dijkstra's algorithm. Fibonacci heaps can add values in amortized *O(1)* time and remove the minimum value in *O(log(n))* time making them a good choice in many real world scenarios.
 
 You can create a heap like this:
 
@@ -34,7 +29,7 @@ You can create a heap like this:
     fheap <- new("fibonacci_heap", "numeric", "character")
 ```
 
-This gives us a heap with `numeric` keys and `character` values. You can pick from either `integer`, `numeric` or `character` keys and values. So if we insert several key-value pairs, the pair with the *minumum* key would have the first *priority*. Let's insert some values and have a look:
+This gives us a heap with `numeric` keys and `character` values. You can pick from either `integer`, `numeric` or `character` keys and values. So if we insert several key-value pairs, the pair with the *minimum* key would have the highest *priority*. Let's insert some values and have a look:
 
 ```{r}
   keys   <- sample(seq(0, 1, by=.2))
@@ -50,8 +45,7 @@ Since Fibonacci heaps use the minimum heap property the first element in the hea
   size(fheap)
 ```
 
-That worked nicely. `peek` gives us the first element from the heap *without removing it*. If we want to have it removed we call the `pop` function. Of course this changes the priority 
-of the heapL
+That worked nicely. `peek` gives us the first element from the heap *without removing it*. If we want to have it removed we call the `pop` function. Of course this changes the priority of the heap:
 
 ```{r}
   pop(fheap)
@@ -68,15 +62,15 @@ You can alternatively insert values like this:
 
 ## Hashmaps
 
-Hashmaps also use hash functions to store key alue pairs, however without using any priority property. Given a key, the hash function computes a *bucket* where the value is stored making lookup, insertion and deletion possible in *O(1)* time. In the worst case these runtimes decrease to *O(n)* time, where $n$ is the number of entries in a bucket.
+Hashmaps use hash functions to store key alue pairs, however without using any priority property. Given a key, the hash function computes a *bucket* where the value is stored making lookup, insertion and deletion possible in *O(1)* time. In the worst case these runtimes decrease to *O(n)* time, where $n$ is the number of entries in a bucket.
 
-A hashmap can get created like this, this time we use <character, interger> pairs:
+A hashmap can get created like this, this time we use `character, interger` pairs:
 
 ```{r}
   hash <- new("hashmap", "character", "integer")
 ```
 
-Insterion to hashs works just like before, by calling the `insert` function or using a subset-operator:
+Insertion to hashs works just like before, by calling the `insert` function or using a subset-operator:
 
 ```{r}
   keys    <- paste0("V", 1:5)
@@ -96,7 +90,7 @@ Values can then be accessed like this:
 
 ## Queues and stacks
 
-Queues and stackes are two list datastructures using `std::deque` in the backend, i.e. insertion at the end and getting the first element can be done in constant time *O(1)*. Queues and stacks are for example used in *depths-first-search* and *breadth-first-search* making them a versatile datastructure. While queues use the *first-in-first-out* principle, stacks use the *last-in-first-out* principle. 
+Queues and stackes are two list datastructures using the `STL`'s `std::deque` in the backend, i.e. insertion at the end and getting the first element can be done in constant time *O(1)*. Queues and stacks are for example used in *depths-first-search* and *breadth-first-search* making them versatile datastructures. While queues use the *first-in-first-out* principle, stacks use the *last-in-first-out* principle. 
 
 The two datatypes use the exact same methods. You can instantiate a stack or a queue using:
 
@@ -124,7 +118,7 @@ This is fairly similar. The difference between the two becomes obvious when we a
 In both cases we inserted a vector of values raning from `0` to `1`. Also, in both cases the *first* value that got inserted was `0` and the *last* value was `1`. 
 If we now peek onto the datastructures the `queue` returns the *first* element that got inserted, while the stack returns the *last* element that was inserted. 
 
-Both datastructures also offer the other functions from before, for example
+Both datastructures also offer the other functions from before, for example:
 
 ```{r}
   size(qu)

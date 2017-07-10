@@ -11,13 +11,16 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r, eval=TRUE, include=FALSE}
+  library(datastructures)
+```
+
 ## Introduction
 
 `datastructures` implements various data structures that frequently used in computer science. Among these are for example *Fibonacci heaps*, *stacks*, *queues* or *hashmaps*. Advanced data structures are essential
 in many computer science and statistics problems, for example graph algorithms 
 or string analysis. The package uses `Boost` and `STL` data types and extends 
 these to `R` with `Rcpp` modules.
-
 
 ## Fibonacci heaps
 

@@ -21,25 +21,25 @@
  */
 
 #include <Rcpp.h>
-#include "dary_heap.hpp"
+#include "d_ary_heap.hpp"
 
 RCPP_MODULE(d_ary_heap_module) {
     Rcpp::class_< d_ary_heap_ss >( "d_ary_heap_ss" )
-    .constructor()
-    .method("peek",   &d_ary_heap_ss::peek)
-    .method("pop",    &d_ary_heap_ss::pop)
-    .method("size",   &d_ary_heap_ss::size)
-    .method("insert", &d_ary_heap_ss::insert)
-    .method("clear",  &d_ary_heap_ss::clear);
+        .constructor<int>()
+        .method("peek",   &d_ary_heap_ss::peek)
+        .method("pop",    &d_ary_heap_ss::pop)
+        .method("size",   &d_ary_heap_ss::size)
+        .method("insert", &d_ary_heap_ss::insert)
+        .method("clear",  &d_ary_heap_ss::clear);
     Rcpp::class_< d_ary_heap_sd >( "d_ary_heap_sd" )
-        .constructor()
+        .constructor<int>()
         .method("peek",   &d_ary_heap_sd::peek)
         .method("pop",    &d_ary_heap_sd::pop)
         .method("size",   &d_ary_heap_sd::size)
         .method("insert", &d_ary_heap_sd::insert)
         .method("clear",  &d_ary_heap_sd::clear);
     Rcpp::class_< d_ary_heap_si >( "d_ary_heap_si" )
-        .constructor()
+        .constructor<int>()
         .method("peek",   &d_ary_heap_si::peek)
         .method("pop",    &d_ary_heap_si::pop)
         .method("size",   &d_ary_heap_si::size)
@@ -47,21 +47,21 @@ RCPP_MODULE(d_ary_heap_module) {
         .method("clear",  &d_ary_heap_si::clear);
 
     Rcpp::class_< d_ary_heap_dd >( "d_ary_heap_dd" )
-        .constructor()
+        .constructor<int>()
         .method("peek",   &d_ary_heap_dd::peek)
         .method("pop",    &d_ary_heap_dd::pop)
         .method("size",   &d_ary_heap_dd::size)
         .method("insert", &d_ary_heap_dd::insert)
         .method("clear",  &d_ary_heap_dd::clear);
     Rcpp::class_< d_ary_heap_ds >( "d_ary_heap_ds" )
-        .constructor()
+        .constructor<int>()
         .method("peek",   &d_ary_heap_ds::peek)
         .method("pop",    &d_ary_heap_ds::pop)
         .method("size",   &d_ary_heap_ds::size)
         .method("insert", &d_ary_heap_ds::insert)
         .method("clear",  &d_ary_heap_ds::clear);
     Rcpp::class_< d_ary_heap_di >( "d_ary_heap_di" )
-        .constructor()
+        .constructor<int>()
         .method("peek",   &d_ary_heap_di::peek)
         .method("pop",    &d_ary_heap_di::pop)
         .method("size",   &d_ary_heap_di::size)
@@ -69,21 +69,21 @@ RCPP_MODULE(d_ary_heap_module) {
         .method("clear",  &d_ary_heap_di::clear);
 
     Rcpp::class_< d_ary_heap_id >( "d_ary_heap_id" )
-        .constructor()
+        .constructor<int>()
         .method("peek",   &d_ary_heap_id::peek)
         .method("pop",    &d_ary_heap_id::pop)
         .method("size",   &d_ary_heap_id::size)
         .method("insert", &d_ary_heap_id::insert)
         .method("clear",  &d_ary_heap_id::clear);
     Rcpp::class_< d_ary_heap_is >( "d_ary_heap_is" )
-        .constructor()
+        .constructor<int>()
         .method("peek",   &d_ary_heap_is::peek)
         .method("pop",    &d_ary_heap_is::pop)
         .method("size",   &d_ary_heap_is::size)
         .method("insert", &d_ary_heap_is::insert)
         .method("clear",  &d_ary_heap_is::clear);
     Rcpp::class_< d_ary_heap_ii >( "d_ary_heap_ii" )
-        .constructor()
+        .constructor<int>()
         .method("peek",   &d_ary_heap_ii::peek)
         .method("pop",    &d_ary_heap_ii::pop)
         .method("size",   &d_ary_heap_ii::size)

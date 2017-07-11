@@ -32,7 +32,9 @@ Imports:
     Rcpp,
     methods
 NeedsCompilation: yes
-Collate:
+Collate: 
+    'ds_heap.R'
+    'binomial_heap.R'
     'checks.R'
     'datastructures-package.R'
     'ds_fibonacci_heap.R'

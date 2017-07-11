@@ -18,21 +18,28 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @import Rcpp
-.onLoad <- function(libname, pkgname)
-{
-    Rcpp::loadModule("bimap_module", TRUE)
-    Rcpp::loadModule("hashmap_module", TRUE)
+#' @title Abstract heap class
+#'
+#' @name heap-class
+#' @rdname heap-class
+#'
+#' @description Abstract heap class that bundles
+#'
+#' @slot .heap  \code{C++} object representing a heap
+#' @slot .key.class  the class of the keys
+#' @slot .value.class  the class of the values
+#'
+setClass(
+    "heap",
+    contains="VIRTUAL",
+    slots = list(.heap        = "ANY",
+                 .key.class   = "character",
+                 .value.class = "character"),
+    prototype = prototype(.data        = NULL,
+                          .key.class   = NA_character_,
+                          .value.class = NA_character_)
+)
 
-    Rcpp::loadModule("binomial_heap_module", TRUE)
-    Rcpp::loadModule("d_ary_heap_module", TRUE)
-    Rcpp::loadModule("fibonacci_heap_module", TRUE)
 
-    Rcpp::loadModule("queue_module", TRUE)
-    Rcpp::loadModule("stack_module", TRUE)
-}
 
-.onUnload <- function(libpath)
-{
-    library.dynam.unload("datastructures", libpath)
-}
+

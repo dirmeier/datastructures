@@ -77,7 +77,8 @@ public:
 
     std::vector<U> get(std::vector<T>& t)
     {
-        std::vector<U> values(t.size());
+        std::vector<U> values;
+        values.reserve(t.size());
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
         {
             T key = t[i];

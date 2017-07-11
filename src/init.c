@@ -26,8 +26,13 @@
 #include <stdlib.h>
 #include <R_ext/Rdynload.h>
 
+extern SEXP _rcpp_module_boot_bishmap_module();
 extern SEXP _rcpp_module_boot_hashmap_module();
+
+extern SEXP _rcpp_module_boot_d_ary_heap_module();
+extern SEXP _rcpp_module_boot_binomial_heap_module();
 extern SEXP _rcpp_module_boot_fibonacci_heap_module();
+
 extern SEXP _rcpp_module_boot_queue_module();
 extern SEXP _rcpp_module_boot_stack_module();
 

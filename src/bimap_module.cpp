@@ -20,8 +20,10 @@
  *
  */
 
+
 #include <Rcpp.h>
 #include "bimap.hpp"
+
 
 RCPP_MODULE(bimap_module) {
     Rcpp::class_< bimap_ss >( "bimap_ss" )
@@ -44,7 +46,7 @@ RCPP_MODULE(bimap_module) {
         .method("get_right", &bimap_si::get_right);
     Rcpp::class_< bimap_sd >( "bimap_sd" )
         .constructor()
-        .method("lefts",     &bimap_sd::keys)
+        .method("lefts",     &bimap_sd::lefts)
         .method("rights",    &bimap_sd::rights)
         .method("head",      &bimap_sd::head)
         .method("size",      &bimap_sd::size)

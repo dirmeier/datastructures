@@ -20,8 +20,10 @@
 *
 */
 
+
 #ifndef DS_BIMAP
 #define DS_BIMAP
+
 
 #include <Rcpp.h>
 #include <vector>
@@ -34,6 +36,11 @@ template <typename T, typename U>
 class bimap
 {
 public:
+
+    typedef typename boost::bimap< T, U >::value_type position;
+    typedef typename boost::bimap<T, U>::right_map::const_iterator ri;
+    typedef typename boost::bimap<T, U>::left_map::const_iterator li;
+
     bimap(): map_()
     {}
 
@@ -50,34 +57,38 @@ public:
         }
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
         {
-            map_.insert(boost::bimap< T, U >::value_type(t[i], u[i]));
+            map_.insert(position(t[i], u[i]));
         }
     }
 
     std::vector<T> lefts()
     {
         std::vector<T> lefts;
-        keys.reserve(map_.size());
-        for(boost::bimap<T, U>::left_map::const_iterator left_iter = map_.left.begin(),
+        lefts.reserve(map_.size());
+
+        for(li left_iter = map_.left.begin(),
             iend = map_.left.end();
-            left_iter != iend; ++left_iter)
+            left_iter != iend;
+            ++left_iter)
         {
             lefts.push_back(left_iter->first);
         }
+
         return lefts;
     }
 
     std::vector<U> rights()
     {
-        std::vector<T> rights;
+        std::vector<U> rights;
         rights.reserve(map_.size());
-        for(boost::bimap<T, U>::right_map::const_iterator right_iter = map_.right.begin(),
-            iend = map_.right.end();
+
+        for(ri right_iter = map_.right.begin(), iend = map_.right.end();
             right_iter != iend;
             ++right_iter)
         {
             rights.push_back(right_iter->first);
         }
+
         return rights;
     }
 
@@ -85,7 +96,7 @@ public:
     {
         unsigned int i = 0;
         std::unordered_map< T, U > heads;
-        for (boost::bimap<T, U>::left_map::const_iterator left_iter = map_.left.begin(),
+        for (li left_iter = map_.left.begin(),
              iend = map_.left.end();
              left_iter != iend; ++left_iter)
         {

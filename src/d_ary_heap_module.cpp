@@ -21,7 +21,7 @@
  */
 
 #include <Rcpp.h>
-#include "d_ary_heap.hpp"
+#include "dary_heap.hpp"
 
 RCPP_MODULE(d_ary_heap_module) {
     Rcpp::class_< d_ary_heap_ss >( "d_ary_heap_ss" )

@@ -27,7 +27,7 @@
 #' @rdname head-methods
 #'
 #' @param obj  the object to get the head from
-#' @return  returns a list of elements
+#' @return  returns a list of elements from \code{obj}
 setGeneric(
     "head",
     function(obj)

@@ -37,11 +37,6 @@ NULL
 #' @slot .deque  \code{C++} object representing a deque
 #' @slot .key.class  the class of the keys
 #'
-#' @examples
-#' q <- methods::new("queue", "numeric")
-#' q <- methods::new("queue", "character")
-#' q <- methods::new("queue", "integer")
-#'
 setClass("queue", contains="deque")
 
 #' @noRd

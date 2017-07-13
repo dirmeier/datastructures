@@ -28,7 +28,7 @@
 #' @rdname size-methods
 #'
 #' @param obj  the object to get the size from
-#' @return  returns the size of an object
+#' @return  returns the size of \code{obj}
 #'
 setGeneric(
     "size",

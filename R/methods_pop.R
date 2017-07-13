@@ -27,7 +27,7 @@
 #' @rdname pop-methods
 #'
 #' @param obj  the object to pop an element from
-#' @return  returns the first element from  \code{obj}
+#' @return  returns the first element from \code{obj}
 setGeneric(
     "pop",
     function(obj)

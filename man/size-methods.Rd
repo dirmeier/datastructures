@@ -20,7 +20,7 @@ size(obj)
 \item{obj}{the object to get the size from}
 }
 \value{
-returns the size of an object
+returns the size of \code{obj}
 }
 \description{
 Computes the size of an object, i.e. the number of keys or

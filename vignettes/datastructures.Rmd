@@ -4,6 +4,9 @@ author: "Simon Dirmeier"
 date: "`r Sys.Date()`"
 output: 
     rmarkdown::html_document:
+        toc: true
+        toc_depth: 2
+        toc_float: true
         theme: lumen
 vignette: >
   %\VignetteIndexEntry{Datastructures tutorial}
@@ -17,13 +20,13 @@ vignette: >
 
 ## Introduction
 
-`datastructures` implements various data structures that frequently used in computer science. Among these are for example *Fibonacci heaps*, *stacks*, *queues* or *hashmaps*. Advanced data structures are essential
+`datastructures` implements various data structures that are frequently used in computer science. Among these are for example *Fibonacci heaps*, *stacks*, *queues* or *hashmaps*. Advanced data structures are essential
 in many computer science and statistics problems, for example graph algorithms or string analysis. The package uses `Boost` and `STL` data types and extends these to `R` with `Rcpp` modules.
 
 
 ## Fibonacci and binomial heaps
 
-Fibonacci and binomial heaps are priority queue datastructures using the minimum heap property. They can be represented using collections of trees or linked lists consisting of *nodes* of elements. Every node is a pair of keys and values, where the key decides the priority of the *node* in the heap. Fibonacci heaps have various applications, one of the most famous being in efficiently finding shortest paths using Dijkstra's algorithm. Fibonacci heaps can add values in amortized $\mathcal{O}(1)$ time and remove the minimum value in $\mathcal{O}(log \, n)$ time making them a good choice in many real world scenarios. Binomial heaps have in general slightly worse asymptotic bounds. However, removing the minimum element (`pop`) has an asymptotically tight bound of $\Theta(log \, n)$. The two classes have the exact same methods, so every method explained here is available for the other class, two.
+Fibonacci and binomial heaps are priority queue data structures using the minimum heap property. They can be represented using collections of trees or linked lists consisting of *nodes* of elements. Every node is a pair of keys and values, where the key decides the priority of the *node* in the heap. Fibonacci heaps have various applications, one of the most famous being in efficiently finding shortest paths using Dijkstra's algorithm. Fibonacci heaps can add values in amortized $\mathcal{O}(1)$ time and remove the minimum value in $\mathcal{O}(log \, n)$ time making them a good choice in many real world scenarios. Binomial heaps have in general slightly worse asymptotic bounds. However, removing the minimum element (`pop`) has an asymptotically tight bound of $\Theta(log \, n)$. The two classes have the exact same methods, so every method explained here is available for the other class, too.
 
 You can create a heap like this:
 
@@ -65,13 +68,17 @@ You can alternatively insert values like this:
 
 ## Hashmaps and bimaps
 
-Hashmaps and bimaps use hash functions to store key-value pairs. Given a key, the hash function computes a *bucket* where the value is stored making lookup, insertion and deletion on average possible in $\mathcal{O}(1)$ time. In the worst case these runtimes decrease to $\mathcal{O}(n)$ time, where $n$ is the number of entries in a bucket. The difference between the two classes is that hashmaps compute a mapping from keys to values (the hash function) $\, f: \mathcal{K} \rightarrow \mathcal{V} $ in **'one direction'**, while bimaps also compute a mapping $\, f: \mathcal{V} \rightarrow \mathcal{K} \,$ in the **'other direction'**.
+Hashmaps and bimaps use hash functions to store key-value pairs. Given a key, the hash function computes a *bucket* where the value is stored, making lookup, insertion and deletion on average possible in $\mathcal{O}(1)$ time. In the worst case these runtimes decrease to $\mathcal{O}(n)$ time, where $n$ is the number of entries in a bucket. The difference between the two classes is that hashmaps compute a mapping from keys to values (the hash function)
+$$ \, f: \mathcal{K} \rightarrow \mathcal{V} \, $$
+in **'one direction'**, while bimaps also compute a mapping 
+$$ \, f: \mathcal{V} \rightarrow \mathcal{K} \, $$
+in the **'other direction'**. So a bimap is essentially a combination of two hashmaps.
 
-Hashmaps and bimaps can get created like this, this time we use `character, interger` pairs:
+Hashmaps and bimaps can get created like this, this time we use `character, integer` pairs:
 
 ```{r}
   hash  <- new("hashmap", "character", "integer")
-  bimap <- new("bimap", "character", "integer")
+  bimap <- new("bimap",   "character", "integer")
 ```
 
 Insertion to maps works just like before, by calling the `insert` function:
@@ -101,7 +108,7 @@ In the example on the top we showed how both is possible by either providing `ke
 
 ## Queues and stacks
 
-Queues and stackes are two list datastructures using the `STL`'s `std::deque` in the backend, i.e. insertion at the end and getting the first element can be done in constant time *O(1)*. Queues and stacks are for example used in *depths-first-search* and *breadth-first-search* making them versatile datastructures. While queues use the *first-in-first-out* principle, stacks use the *last-in-first-out* principle. 
+Queues and stackes are two list datastructures using the `STL`'s `std::deque` in the backend, i.e. insertion at the end and getting the first element can be done in constant time $\mathcal{O}(1)$ . Queues and stacks are for example used in *depths-first-search* and *breadth-first-search* making them versatile datastructures. While queues use the *first-in-first-out* principle, stacks use the *last-in-first-out* principle. 
 
 The two datatypes use the exact same methods. You can instantiate a stack or a queue using:
 
@@ -140,4 +147,4 @@ Both datastructures also offer the other functions from before, for example:
 
 ## Author
 
-* Simon Dirmeier <a href="mailto:mail@simon-dirmeier.net">mail@simon-dirmeier.net</a>
+* Simon Dirmeier <a href="mailto:simon.dirmeier@gmx.de">simon.dirmeier@gmx.de</a>

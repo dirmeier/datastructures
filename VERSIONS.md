@@ -4,7 +4,7 @@
 
 * Adds binomial heap and bimap
 
-### v0.1.2
+### v0.1.1
 
 * Fixes typos in vignette
 

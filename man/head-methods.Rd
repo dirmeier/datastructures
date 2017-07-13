@@ -14,7 +14,7 @@ head(obj)
 \item{obj}{the object to get the head from}
 }
 \value{
-returns a list of elements
+returns a list of elements from \code{obj}
 }
 \description{
 Extracts the first couple of entries from an object.

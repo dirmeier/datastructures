@@ -43,7 +43,7 @@ NULL
 setClass("bimap", contains = "map")
 
 #' @noRd
-#' @importFrom methods new
+#' @importFrom methods new callNextMethod
 setMethod(
     "initialize",
     "bimap",
@@ -54,7 +54,7 @@ setMethod(
         .Object <- methods::callNextMethod(.Object,
                                            key.class   = key.class,
                                            value.class = value.class)
-        key.class <- .Object@.key.class
+        key.class   <- .Object@.key.class
         value.class <- .Object@.value.class
 
         if (key.class == "character")

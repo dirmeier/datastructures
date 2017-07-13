@@ -25,7 +25,7 @@ get(obj, x, which = c("values", "keys"))
 or \code{keys} if the keys should get returned}
 }
 \value{
-returns extracted keys or values from the object
+returns extracted keys or values from \code{obj}
 }
 \description{
 Extracts a set of <key, value> pairs. For \code{hashmaps}

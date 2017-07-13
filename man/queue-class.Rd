@@ -19,9 +19,3 @@ Implementation of a queue datastructure, i.e. a list
 \item{\code{.key.class}}{the class of the keys}
 }}
 
-\examples{
-q <- methods::new("queue", "numeric")
-q <- methods::new("queue", "character")
-q <- methods::new("queue", "integer")
-
-}

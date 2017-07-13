@@ -21,5 +21,5 @@ returns the first element from \code{obj}
 }
 \description{
 Peeks into an object, i.e. takes the first element and returns
- it without removing it from the object,
+ it without removing it from the object.
 }

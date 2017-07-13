@@ -2,7 +2,7 @@ Package: datastructures
 Type: Package
 Title: Implementation of Core Data Structures
 Version: 0.2.0
-Date: 2017-07-08
+Date: 2017-07-13
 Authors@R: person("Simon", "Dirmeier",
                   email = "simon.dirmeier@gmx.de",
                   role = c("aut", "cre"))
@@ -47,7 +47,6 @@ Collate:
     'methods_get.R'
     'methods_head.R'
     'methods_insert.R'
-    'methods_internal.R'
     'methods_keys.R'
     'methods_peek.R'
     'methods_pop.R'

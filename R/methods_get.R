@@ -38,7 +38,7 @@
 #' @param which  choose either \code{values} if the values should get returned
 #'  or \code{keys} if the keys should get returned
 #'
-#' @return  returns extracted keys or values from the object
+#' @return  returns extracted keys or values from \code{obj}
 #'
 setGeneric(
     "get",

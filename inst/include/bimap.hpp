@@ -26,7 +26,7 @@
 #include <Rcpp.h>
 #include <vector>
 #include <string>
-#include <unordered_map>
+#include <map>
 #include <boost/bimap.hpp>
 
 template <typename T, typename U>
@@ -90,7 +90,7 @@ public:
     Rcpp::List head()
     {
         unsigned int i = 0;
-        std::unordered_map< T, U > heads;
+        std::map< T, U > heads;
         for (li left_iter = map_.left.begin(),
              iend = map_.left.end();
              left_iter != iend; ++left_iter)

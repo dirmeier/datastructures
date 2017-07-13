@@ -17,7 +17,7 @@ keys(obj)
 \item{obj}{object to extract keys from}
 }
 \value{
-returns the extracted keys
+returns the extracted keys as vector
 }
 \description{
 Extracts the keys from a \code{map} object.

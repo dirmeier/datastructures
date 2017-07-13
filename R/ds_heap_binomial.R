@@ -30,8 +30,8 @@ NULL
 #'
 #' @description Implementation of a binomial heap datastructure, i.e. a
 #'  priority datastructure with \code{push} and \code{pop} in amortized
-#'  \emph{O(log n)}. \code{binomial_heap} wraps a Boost
-#'  \code{binomial_heap} using Rcpp modules. The heap consists of nodes with
+#'  \emph{O(log n)}. \code{binomial_heap} wraps a \code{boost::binomial_heap}
+#'  using Rcpp modules. The heap consists of nodes with
 #'  keys and values where the key determines the priority in the heap.
 #'  Also see the \code{\linkS4class{fibonacci_heap}} class.
 #'

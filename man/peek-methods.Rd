@@ -17,7 +17,7 @@ peek(obj)
 \item{obj}{the object to peek}
 }
 \value{
-returns the first element from \code{obj}
+returns the first element from \code{obj} as list
 }
 \description{
 Peeks into an object, i.e. takes the first element and returns

@@ -28,7 +28,7 @@
 #'
 #' @param obj  object to extract values from
 #'
-#' @return  returns the extracted values
+#' @return  returns the extracted values as vector
 #'
 setGeneric(
     "values",

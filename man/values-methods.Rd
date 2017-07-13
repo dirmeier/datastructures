@@ -17,7 +17,7 @@ values(obj)
 \item{obj}{object to extract values from}
 }
 \value{
-returns the extracted values
+returns the extracted values as vector
 }
 \description{
 Extracts the values from a \code{map} object.

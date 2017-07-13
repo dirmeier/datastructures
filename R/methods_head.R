@@ -27,7 +27,9 @@
 #' @rdname head-methods
 #'
 #' @param obj  the object to get the head from
+#'
 #' @return  returns a list of elements from \code{obj}
+#'
 setGeneric(
     "head",
     function(obj)
@@ -44,7 +46,7 @@ setMethod(
     function(obj)
     {
         if (obj@.map$size())
-            unlist(obj@.map$head())
+            obj@.map$head()
         else
             NULL
     }

@@ -71,3 +71,22 @@ testthat::test_that("bimap get keys works", {
     bimap <- insert(bimap, c(1, 2),  3:4)
     testthat::expect_equal(get(bimap, 3L, "keys"), 1)
 })
+
+testthat::test_that("bimap returns head", {
+    bimap <- new("bimap", "numeric", "integer")
+    bimap <- insert(bimap, c(1, 2),  3:4)
+    testthat::expect_true(head(bimap)[[1]] %in% 3:4)
+})
+
+testthat::test_that("bimap returns keys", {
+    bimap <- new("bimap", "numeric", "integer")
+    bimap <- insert(bimap, c(1, 2),  3:4)
+    testthat::expect_true(all(keys(bimap) %in% 1:2))
+})
+
+testthat::test_that("bimap returns values", {
+    bimap <- new("bimap", "numeric", "integer")
+    bimap <- insert(bimap, c(1, 2),  3:4)
+    testthat::expect_true(all(values(bimap) %in% 3:4))
+})
+

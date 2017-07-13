@@ -26,6 +26,7 @@
 #include <Rcpp.h>
 #include <vector>
 #include <string>
+#include <map>
 #include <unordered_map>
 
 template <typename T, typename U>
@@ -79,7 +80,7 @@ public:
     Rcpp::List head()
     {
         unsigned int i = 0;
-        std::unordered_map< T, U > heads;
+        std::map< T, U > heads;
         for (const auto& pair : map_)
         {
             if (i++ == 5) break;

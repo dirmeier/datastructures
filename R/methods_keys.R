@@ -28,7 +28,7 @@
 #'
 #' @param obj  object to extract keys from
 #'
-#' @return  returns the extracted keys
+#' @return  returns the extracted keys as vector
 #'
 setGeneric(
     "keys",

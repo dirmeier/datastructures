@@ -70,3 +70,23 @@ testthat::test_that("hashmap has the correct size", {
     hashmap[c(8, 9)] <- c(3, 4)
     testthat::expect_equal(size(hashmap), 2)
 })
+
+testthat::test_that("hashmap returns head", {
+    hashmap <- new("hashmap", "numeric", "integer")
+    hashmap <- insert(hashmap, c(1, 2),  3:4)
+    testthat::expect_true(all(head(hashmap)[[1]] %in% 3:4))
+})
+
+testthat::test_that("hashmap returns keys", {
+    hashmap <- new("hashmap", "numeric", "integer")
+    hashmap <- insert(hashmap, c(1, 2),  3:4)
+    testthat::expect_true(all(keys(hashmap) %in% 1:2))
+})
+
+testthat::test_that("hashmap returns values", {
+    hashmap <- new("hashmap", "numeric", "integer")
+    hashmap <- insert(hashmap, c(1, 2),  3:4)
+    testthat::expect_true(all(values(hashmap) %in% 3:4))
+})
+
+

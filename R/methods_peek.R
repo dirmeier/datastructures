@@ -29,7 +29,8 @@
 #'
 #' @param obj  the object to peek
 #'
-#' @return  returns the first element from \code{obj}
+#' @return  returns the first element from \code{obj} as list
+#'
 setGeneric(
     "peek",
     function(obj)

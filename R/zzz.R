@@ -25,7 +25,6 @@
     Rcpp::loadModule("hashmap_module", TRUE)
 
     Rcpp::loadModule("binomial_heap_module", TRUE)
-    Rcpp::loadModule("d_ary_heap_module", TRUE)
     Rcpp::loadModule("fibonacci_heap_module", TRUE)
 
     Rcpp::loadModule("queue_module", TRUE)

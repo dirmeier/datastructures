@@ -27,7 +27,7 @@ testthat::test_that("queue is s4", {
 })
 
 testthat::test_that("creates correct class", {
-    testthat::expect_equal(class(queue@.data$list)[1], "Rcpp_queue_d")
+    testthat::expect_equal(class(queue@.deque)[1], "Rcpp_queue_d")
 })
 
 testthat::test_that("queue insert throws when inserting false values", {

@@ -46,85 +46,72 @@ setGeneric(
 #' @rdname insert-methods
 setMethod(
     "insert",
-    signature = signature(obj = "fibonacci_heap", x = "ANY", y = "ANY"),
+    signature = signature(obj = "heap", x = "ANY", y = "ANY"),
     function(obj, x, y)
     {
         .check.key.value.classes(obj, x, y)
-        obj@.data$heap$insert(x, y)
-        return(obj)
+        obj@.heap$insert(x, y)
+
+        obj
     }
 )
 
 #' Insert parts to an object
 #'
-#' @description Inserts <key, value> pairs to a Fibonacci heap. The keys are
+#' @description Inserts <key, value> pairs to a heap. The keys are
 #'  determine the ordering of the heap, while the value is the actual value to
 #'  store.
 #'
-#' @param x  a \code{fionacci_heap}
+#' @param x  a \code{heap}
 #' @param i  a vector of keys
 #' @param value  a vector of values for the keys
 setMethod(
     "[<-",
-    signature = signature(x="fibonacci_heap", i="ANY",
-                          j="missing", value="ANY"),
+    signature = signature(x="heap", i="ANY", j="missing", value="ANY"),
     function(x, i, value)
     {
         insert(x, i, value)
     }
 )
 
-
 #' @rdname insert-methods
 setMethod(
     "insert",
-    signature = signature(obj = "hashmap", x = "ANY", y = "ANY"),
+    signature = signature(obj = "map", x = "ANY", y = "ANY"),
     function(obj, x, y)
     {
         .check.key.value.classes(obj, x, y)
-        obj@.data$map$insert(x, y)
-        return(obj)
+        obj@.map$insert(x, y)
+
+        obj
     }
 )
 
-
 #' Insert parts to an object
 #'
-#' @description Inserts <key, value> pairs to a hashmap.
+#' @description Inserts <key, value> pairs to a map.
 #'
-#' @param x  a \code{hashmap}
+#' @param x  a \code{map} object
 #' @param i  a vector of keys
 #' @param value  a vector of values for the keys
 setMethod(
     "[<-",
-    signature = signature(x="hashmap", i="ANY", j="missing", value="ANY"),
+    signature = signature(x="map", i="ANY", j="missing", value="ANY"),
     function(x, i, value)
     {
         insert(x, i, value)
     }
 )
 
-
 #' @rdname insert-methods
 setMethod(
     "insert",
-    signature = signature(obj = "queue", x = "ANY", y = "missing"),
-    function(obj, x, y="missing")
+    signature = signature(obj = "deque", x = "ANY", y = "missing"),
+    function(obj, x)
     {
         .check.key.class(obj, x)
-        obj@.data$list$insert(x)
-        return(obj)
-    }
-)
+        obj@.deque$insert(x)
 
-#' @rdname insert-methods
-setMethod(
-    "insert",
-    signature = signature(obj = "stack", x = "ANY", y = "missing"),
-    function(obj, x, y="missing")
-    {
-        .check.key.class(obj, x)
-        obj@.data$list$insert(x)
-        return(obj)
+        obj
     }
 )

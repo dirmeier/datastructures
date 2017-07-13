@@ -18,19 +18,8 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @noRd
-.check.key.value.classes <- function(obj, x, y)
-{
-    .check.key.class(obj, x)
-    vc <- obj@.value.class
-    if (any(is.null(c(x, y)))) stop("x/y cannot be NULL")
-    if (class(y) != vc)        stop(paste("class(y) is not", vc))
-}
+context("deque")
 
-#' @noRd
-.check.key.class <- function(obj, x, kc=obj@.key.class)
-{
-    if (any(is.null(x))) stop("x/y cannot be NULL")
-    if (any(is.na(x)))  stop("x cannot be NA")
-    if (class(x) != kc) stop(paste("class(x) is not", kc))
-}
+testthat::test_that("abstract class cannot get instantiated", {
+    testthat::expect_error(new("deque"))
+})

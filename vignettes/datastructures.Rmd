@@ -18,21 +18,21 @@ vignette: >
 ## Introduction
 
 `datastructures` implements various data structures that frequently used in computer science. Among these are for example *Fibonacci heaps*, *stacks*, *queues* or *hashmaps*. Advanced data structures are essential
-in many computer science and statistics problems, for example graph algorithms 
-or string analysis. The package uses `Boost` and `STL` data types and extends 
-these to `R` with `Rcpp` modules.
+in many computer science and statistics problems, for example graph algorithms or string analysis. The package uses `Boost` and `STL` data types and extends these to `R` with `Rcpp` modules.
 
-## Fibonacci heaps
 
-Fibonacci heaps are priority queue datastructures using the minimum heap property. Fibonacci heaps can be represented using collections of trees or linked lists consisting of *nodes* of elements. Every node is a pair of keys and values, where the key decides the priority of the *node* in the heap. Fibonacci heaps have various applications, one of the most famous being in efficiently finding shortest paths using Dijkstra's algorithm. Fibonacci heaps can add values in amortized *O(1)* time and remove the minimum value in *O(log(n))* time making them a good choice in many real world scenarios.
+## Fibonacci and binomial heaps
+
+Fibonacci and binomial heaps are priority queue datastructures using the minimum heap property. They can be represented using collections of trees or linked lists consisting of *nodes* of elements. Every node is a pair of keys and values, where the key decides the priority of the *node* in the heap. Fibonacci heaps have various applications, one of the most famous being in efficiently finding shortest paths using Dijkstra's algorithm. Fibonacci heaps can add values in amortized $\mathcal{O}(1)$ time and remove the minimum value in $\mathcal{O}(log \, n)$ time making them a good choice in many real world scenarios. Binomial heaps have in general slightly worse asymptotic bounds. However, removing the minimum element (`pop`) has an asymptotically tight bound of $\Theta(log \, n)$. The two classes have the exact same methods, so every method explained here is available for the other class, two.
 
 You can create a heap like this:
 
 ```{r}
-    fheap <- new("fibonacci_heap", "numeric", "character")
+  fheap <- new("fibonacci_heap", "numeric", "character")
+  bheap <- new("binomial_heap",  "numeric", "character")
 ```
 
-This gives us a heap with `numeric` keys and `character` values. You can pick from either `integer`, `numeric` or `character` keys and values. So if we insert several key-value pairs, the pair with the *minimum* key would have the highest *priority*. Let's insert some values and have a look:
+This gives us heaps with `numeric` keys and `character` values. You can pick from either `integer`, `numeric` or `character` keys and values. So if we insert several key-value pairs, the pair with the *minimum* key would have the highest *priority*. Let's insert some values and have a look:
 
 ```{r}
   keys   <- sample(seq(0, 1, by=.2))
@@ -41,7 +41,7 @@ This gives us a heap with `numeric` keys and `character` values. You can pick fr
   size(fheap)
 ```
 
-Since Fibonacci heaps use the minimum heap property the first element in the heap should be `0 -> V0` even though we inserted the pairs in a random fashion.
+Since Fibonacci and binomial heaps use the minimum heap property the first element in the heap should be `0 -> V0` even though we inserted the pairs in a random fashion.
 
 ```{r}
   peek(fheap)
@@ -63,33 +63,41 @@ You can alternatively insert values like this:
 ```
 
 
-## Hashmaps
+## Hashmaps and bimaps
 
-Hashmaps use hash functions to store key alue pairs, however without using any priority property. Given a key, the hash function computes a *bucket* where the value is stored making lookup, insertion and deletion possible in *O(1)* time. In the worst case these runtimes decrease to *O(n)* time, where $n$ is the number of entries in a bucket.
+Hashmaps and bimaps use hash functions to store key-value pairs. Given a key, the hash function computes a *bucket* where the value is stored making lookup, insertion and deletion on average possible in $\mathcal{O}(1)$ time. In the worst case these runtimes decrease to $\mathcal{O}(n)$ time, where $n$ is the number of entries in a bucket. The difference between the two classes is that hashmaps compute a mapping from keys to values (the hash function) $\, f: \mathcal{K} \rightarrow \mathcal{V} $ in **'one direction'**, while bimaps also compute a mapping $\, f: \mathcal{V} \rightarrow \mathcal{K} \,$ in the **'other direction'**.
 
-A hashmap can get created like this, this time we use `character, interger` pairs:
-
-```{r}
-  hash <- new("hashmap", "character", "integer")
-```
-
-Insertion to hashs works just like before, by calling the `insert` function or using a subset-operator:
+Hashmaps and bimaps can get created like this, this time we use `character, interger` pairs:
 
 ```{r}
-  keys    <- paste0("V", 1:5)
-  values  <- 1:5
-  hash    <- insert(hash, keys[1:4], values[1:4])
-  hash[keys[5]] <- values[5]
-  size(hash)
+  hash  <- new("hashmap", "character", "integer")
+  bimap <- new("bimap", "character", "integer")
 ```
 
-Values can then be accessed like this:
+Insertion to maps works just like before, by calling the `insert` function:
+
+```{r}
+  keys   <- paste0("V", 1:5)
+  values <- 1:5
+  hash   <- insert(hash, keys[1:4], values[1:4])
+  bimap  <- insert(bimap, keys[1:4], values[1:4])
+  hash[keys[5]]  <- values[5]
+  bimap[keys[5]] <- values[5]
+```
+
+Values (and keys in the case of bimaps) can then be accessed like this:
 
 ```{r}
   get(hash, keys[1])
   hash[keys[1]]
+  
+  get(bimap, keys[1], "values")
+  get(bimap, values[2], "keys")
+  get(bimap, keys[1])
 ```
 
+For hashmaps the subset-operator `[` is also supported for accessing elements. This does not make so much sense for bimaps, because here we have to choose whether we want to access keys or values. 
+In the example on the top we showed how both is possible by either providing `keys` or `values` as third argument to the `get` function. If you leave it out, then the third argument defaults to `values`.
 
 ## Queues and stacks
 
@@ -107,8 +115,8 @@ As before, you can pick either `numeric`, `integer` or `character` keys. Now, le
 ```{r}
   keys <- seq(0, 1, by=.2)
   print(keys)
-  insert(qu, keys)
-  insert(st, keys)
+  qu <- insert(qu, keys)
+  st <- insert(st, keys)
 ```
 
 This is fairly similar. The difference between the two becomes obvious when we access the data, i.e either call `peek` or `pop` functions:

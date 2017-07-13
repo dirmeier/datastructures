@@ -3,12 +3,12 @@
 \docType{methods}
 \name{head}
 \alias{head}
-\alias{head,hashmap-method}
+\alias{head,map-method}
 \title{Get the first elements from an object}
 \usage{
 head(obj)
 
-\S4method{head}{hashmap}(obj)
+\S4method{head}{map}(obj)
 }
 \arguments{
 \item{obj}{the object to get the head from}

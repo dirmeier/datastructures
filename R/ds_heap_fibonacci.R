@@ -18,6 +18,10 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+#' @include ds_heap.R
+NULL
+
+
 #' @title Fibonacci heap class
 #'
 #' @export
@@ -26,19 +30,19 @@
 #'
 #' @description Implementation of a Fibonacci heap datastructure, i.e. a
 #'  priority datastructure with \code{push} in amortized \emph{O(1)} and
-#'  \code{pop} in \emph{O(log n)}. \code{fibonacci_heap} wraps a Boost
-#'  \code{fibonacci_heap} using Rcpp modules. The heap consists of nodes with
-#'  keys and values where the key determines the priority in the heap.
+#'  \code{pop} in \emph{O(log n)}. \code{fibonacci_heap} wraps a
+#'  \code{boost::fibonacci_heap} using Rcpp modules. The heap consists of
+#'  nodes with keys and values where the key determines the priority in the
+#'  heap. Also see the \code{\linkS4class{binomial_heap}} class.
 #'
-#' @slot .data  object that bundles all important heap related objects
+#' @slot .heap  \code{C++} object representing a heap
+#' @slot .key.class  the class of the keys
+#' @slot .value.class  the class of the values
 #'
- setClass(
-    "fibonacci_heap",
-    slots = list(.data = "list"),
-    prototype = prototype(.data = NULL)
-)
+setClass("fibonacci_heap", contains = "heap")
 
-#' @importFrom methods new
+#' @noRd
+#' @importFrom methods new callNextMethod
 setMethod(
     "initialize",
     "fibonacci_heap",
@@ -46,10 +50,11 @@ setMethod(
              key.class   = c("character", "numeric", "integer"),
              value.class = c("character", "numeric", "integer"))
     {
-        key.class   <- match.arg(key.class)
-        value.class <- match.arg(value.class)
-        .Object@.data <- list(key.class   = key.class,
-                              value.class = value.class)
+        .Object <- methods::callNextMethod(.Object,
+                                           key.class   = key.class,
+                                           value.class = value.class)
+        key.class <- .Object@.key.class
+        value.class <- .Object@.value.class
 
         if (key.class == "character")
         {
@@ -79,7 +84,7 @@ setMethod(
                 heap <- methods::new(fibonacci_heap_id)
         }
 
-        .Object@.data$heap <- heap
+        .Object@.heap <- heap
         .Object
     }
 )

@@ -3,22 +3,37 @@
 \docType{methods}
 \name{get}
 \alias{get}
-\alias{get,hashmap-method}
+\alias{get,hashmap,ANY,missing-method}
+\alias{get,bimap,ANY,character-method}
+\alias{get,bimap,ANY,missing-method}
 \title{Get elements from an object}
 \usage{
-get(obj, x)
+get(obj, x, which = c("values", "keys"))
 
-\S4method{get}{hashmap}(obj, x)
+\S4method{get}{hashmap,ANY,missing}(obj, x)
+
+\S4method{get}{bimap,ANY,character}(obj, x, which = c("values", "keys"))
+
+\S4method{get}{bimap,ANY,missing}(obj, x)
 }
 \arguments{
 \item{obj}{object to extract values from}
 
 \item{x}{the set of keys to match the values}
+
+\item{which}{choose either \code{values} if the values should get returned
+or \code{keys} if the keys should get returned}
 }
 \value{
-returns extracted values from the object
+returns extracted keys or values from the object
 }
 \description{
-Extracts a set of <key, value> pairs from an object using a
- set of keys.
+Extracts a set of <key, value> pairs. For \code{hashmaps}
+ mappings from
+ \deqn{f: keys -> values,}
+ exist so argument \code{which} is per default \code{values} (since these
+ are going to be retrieved). For \code{bimaps} also
+ \deqn{f: values -> keys,}
+ mappings exist, such that \code{which} can also be \code{keys} if the keys
+ from the object should be retrieved.
 }

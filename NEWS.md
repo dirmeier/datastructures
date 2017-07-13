@@ -2,7 +2,7 @@
 
 ### v0.2.0
 
-* Adds binomial heap, bimap and d-ary heap
+* Adds binomial heap and bimap
 
 ### v0.1.2
 
@@ -14,7 +14,3 @@
 * Implementation of hashmap, fibonacci heaps, stacks and queue
 * Registration
 * Vignette
-
-### Author
-
-* Simon Dirmeier <a href="mailto:mail@simon-dirmeier.net">mail@simon-dirmeier.net</a>

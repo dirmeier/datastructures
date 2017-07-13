@@ -18,24 +18,31 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+#' @include ds_map.R
+NULL
+
+
 #' @title Hashmap class
 #'
 #' @export
 #' @name hashmap-class
 #' @rdname hashmap-class
 #'
-#' @description Implementation of a hashmap datastructure, i.e. an unordered collection
-#'  of key-value pairs. Inserting and accessing is amortized in \emph{O(1)}.
-#'  \code{hashmap} wraps a C++ \code{unordered_map} using Rcpp modules.
+#' @description Implementation of a hashmap datastructure, i.e. an unordered
+#' collection of key-value pairs:
+#' \deqn{f: keys -> values,}
+#' Inserting and accessing is amortized in \emph{O(1)}.
+#' \code{hashmap} wraps a C++ \code{unordered_map} using Rcpp modules.
+#' See \code{\linkS4class{bimap}} for mappings in both ways.
 #'
-#' @slot .data  object that bundles all important map related objects
-setClass(
-    "hashmap",
-     slots = list(.data = "list"),
-     prototype = prototype(.data = NULL)
-)
+#' @slot .map  \code{C++} object representing a mapping
+#' @slot .key.class  the class of the keys
+#' @slot .value.class  the class of the values
+#'
+setClass("hashmap", contains = "map")
 
-#' @importFrom methods new
+#' @noRd
+#' @importFrom methods new callNextMethod
 setMethod(
     "initialize",
     "hashmap",
@@ -43,10 +50,11 @@ setMethod(
              key.class   = c("character", "numeric", "integer"),
              value.class = c("character", "numeric", "integer"))
     {
-        key.class   <- match.arg(key.class)
-        value.class <- match.arg(value.class)
-        .Object@.data <- list(key.class   = key.class,
-                              value.class = value.class)
+        .Object <- methods::callNextMethod(.Object,
+                                           key.class   = key.class,
+                                           value.class = value.class)
+        key.class <- .Object@.key.class
+        value.class <- .Object@.value.class
 
         if (key.class == "character")
         {
@@ -67,7 +75,7 @@ setMethod(
             else                               map <- methods::new(hashmap_id)
         }
 
-        .Object@.data$map <- map
+        .Object@.map <- map
         .Object
     }
 )

@@ -18,8 +18,7 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-context("fibonacci")
-
+context("fibonacci heap")
 
 fheap <- new("fibonacci_heap", "numeric", "numeric")
 
@@ -28,7 +27,7 @@ testthat::test_that("fibonacci_heap is s4", {
 })
 
 testthat::test_that("creates correct class", {
-    testthat::expect_equal(class(fheap@.data$heap)[1], "Rcpp_fibonacci_heap_dd")
+    testthat::expect_equal(class(fheap@.heap)[1], "Rcpp_fibonacci_heap_dd")
 })
 
 testthat::test_that("fibonacci heap insert throws when inserting false values", {

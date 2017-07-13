@@ -18,19 +18,44 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @noRd
-.check.key.value.classes <- function(obj, x, y)
-{
-    .check.key.class(obj, x)
-    vc <- obj@.value.class
-    if (any(is.null(c(x, y)))) stop("x/y cannot be NULL")
-    if (class(y) != vc)        stop(paste("class(y) is not", vc))
-}
+#' @title Get keys from an object
+#'
+#' @description Extracts the keys from a \code{map} object.
+#'
+#' @export
+#' @docType methods
+#' @rdname keys-methods
+#'
+#' @param obj  object to extract keys from
+#'
+#' @return  returns the extracted keys
+#'
+setGeneric(
+    "keys",
+    function(obj)
+    {
+        standardGeneric("keys")
+    },
+    package = "datastructures"
+)
 
-#' @noRd
-.check.key.class <- function(obj, x, kc=obj@.key.class)
-{
-    if (any(is.null(x))) stop("x/y cannot be NULL")
-    if (any(is.na(x)))  stop("x cannot be NA")
-    if (class(x) != kc) stop(paste("class(x) is not", kc))
-}
+
+#' @rdname keys-methods
+setMethod(
+    "keys",
+    "hashmap",
+    function(obj)
+    {
+        obj@.map$keys()
+    }
+)
+
+#' @rdname keys-methods
+setMethod(
+    "keys",
+    "bimap",
+    function(obj)
+    {
+        obj@.map$lefts()
+    }
+)

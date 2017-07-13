@@ -16,7 +16,22 @@ Advanced data structures are essential in many computer science and statistics
 problems, for example graph algorithms or string analysis. The package uses 
 `Boost` and `STL` data types and extends these to `R` with `Rcpp` modules.
 
-## Usage
+As an introductory example, consider you want to compute shortest paths on a 
+graph and decide to use a Fibonacci heap for keeping the distances. Using
+`datastructures` you could save the distances to a single node as:
+
+```R
+  fh <- methods::new("fibonacci_heap", "character", "numeric")
+  node.labels <- paste0("n", 10:1)
+  node.distances <- seq(1, 0, length.out=length(node.labels))
+  fh <- insert(fh, node.labels, node.distances)
+  peek(fh)
+  
+  $n1
+  [1] 0
+```
+
+## Installation
 
 Download the tarball of the latest release an install it using:
 

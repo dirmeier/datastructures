@@ -18,21 +18,22 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @title Abstract heap class
+#' @title Map class
 #'
-#' @name heap-class
-#' @rdname heap-class
+#' @export
+#' @name map-class
+#' @rdname map-class
 #'
-#' @description Abstract heap class
+#' @description Abstract map class
 #'
-#' @slot .heap  \code{C++} object representing a heap
+#' @slot .map  \code{C++} object representing a mapping
 #' @slot .key.class  the class of the keys
 #' @slot .value.class  the class of the values
 #'
 setClass(
-    "heap",
+    "map",
     contains = "VIRTUAL",
-    slots = list(.heap        = "ANY",
+    slots = list(.map        = "ANY",
                  .key.class   = "character",
                  .value.class = "character"),
     prototype = prototype(.heap        = NULL,
@@ -41,19 +42,17 @@ setClass(
 )
 
 #' @noRd
-#' @importFrom methods new
+#' @importFrom methods new callNextMethod
 setMethod(
     "initialize",
-    "heap",
+    "map",
     function(.Object,
              key.class   = c("character", "numeric", "integer"),
              value.class = c("character", "numeric", "integer"))
     {
-        methods::callNextMethod(
-            .Object,
-            .key.class   = match.arg(key.class),
-            .value.class = match.arg(value.class))
+        methods::callNextMethod(.Object,
+                                .key.class   = match.arg(key.class),
+                                .value.class = match.arg(value.class))
     }
 )
-
 

@@ -20,17 +20,14 @@
 *
 */
 
-
 #ifndef DS_BIMAP
 #define DS_BIMAP
-
 
 #include <Rcpp.h>
 #include <vector>
 #include <string>
 #include <unordered_map>
 #include <boost/bimap.hpp>
-
 
 template <typename T, typename U>
 class bimap
@@ -65,7 +62,6 @@ public:
     {
         std::vector<T> lefts;
         lefts.reserve(map_.size());
-
         for(li left_iter = map_.left.begin(),
             iend = map_.left.end();
             left_iter != iend;
@@ -81,7 +77,6 @@ public:
     {
         std::vector<U> rights;
         rights.reserve(map_.size());
-
         for(ri right_iter = map_.right.begin(), iend = map_.right.end();
             right_iter != iend;
             ++right_iter)
@@ -103,13 +98,13 @@ public:
             if (i++ == 5) break;
             heads.insert(std::pair<T, U>(left_iter->first, left_iter->second));
         }
+
         return Rcpp::wrap(heads);
     }
 
     std::vector<U> get_right(std::vector<T>& t)
     {
-        std::vector<U> values;
-        values.reserve(t.size());
+        std::vector<U> values(t.size());
 
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
         {
@@ -131,8 +126,7 @@ public:
 
     std::vector<T> get_left(std::vector<U>& u)
     {
-        std::vector<T> values;
-        values.reserve(u.size());
+        std::vector<T> values(u.size());
 
         for (typename std::vector<U>::size_type i = 0; i < u.size(); ++i)
         {

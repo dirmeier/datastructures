@@ -27,7 +27,7 @@ testthat::test_that("stack is s4", {
 })
 
 testthat::test_that("creates correct class", {
-    testthat::expect_equal(class(stack@.data$list)[1], "Rcpp_stack_d")
+    testthat::expect_equal(class(stack@.deque)[1], "Rcpp_stack_d")
 })
 
 testthat::test_that("stack insert throws when inserting false values", {

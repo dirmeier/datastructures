@@ -37,14 +37,16 @@ setGeneric(
     package = "datastructures"
 )
 
+
+
 #' @rdname pop-methods
 setMethod(
     "pop",
-    signature = signature(obj = "queue"),
+    "deque",
     function(obj)
     {
-        if (obj@.data$list$size())
-            obj@.data$list$pop()
+        if (obj@.deque$size())
+            obj@.deque$pop()
         else
             NULL
     }
@@ -53,27 +55,12 @@ setMethod(
 #' @rdname pop-methods
 setMethod(
     "pop",
-    signature = signature(obj = "fibonacci_heap"),
+    "heap",
     function(obj)
     {
-        if (obj@.data$heap$size())
-            obj@.data$heap$pop()
+        if (obj@.heap$size())
+            obj@.heap$pop()
         else
             NULL
     }
 )
-
-
-#' @rdname pop-methods
-setMethod(
-    "pop",
-    signature = signature(obj = "stack"),
-    function(obj)
-    {
-        if (obj@.data$list$size())
-            obj@.data$list$pop()
-        else
-            NULL
-    }
-)
-

@@ -20,41 +20,47 @@
 
 context("hashmap")
 
-hashmap <- new("hashmap", "numeric", "numeric")
-
 testthat::test_that("hashmap is s4", {
+    hashmap <- new("hashmap", "numeric", "numeric")
     testthat::expect_s4_class(hashmap, "hashmap")
 })
 
 testthat::test_that("creates correct class", {
-    testthat::expect_equal("Rcpp_hashmap_dd", class(hashmap@.data$map)[1])
+    hashmap <- new("hashmap", "numeric", "numeric")
+    testthat::expect_equal("Rcpp_hashmap_dd", class(hashmap@.map)[1])
 })
 
 testthat::test_that("hashmap insert throws when inserting false values", {
+    hashmap <- new("hashmap", "numeric", "numeric")
     testthat::expect_error(insert(hashmap, c("s", "s"), c(4, 5)))
 })
 
 testthat::test_that("hashmap get throws when getting false values", {
+    hashmap <- new("hashmap", "numeric", "numeric")
     hashmap <- insert(hashmap, c(1, 2), c(4, 5))
     testthat::expect_error(get(hashmap, "s"))
 })
 
 testthat::test_that("hashmap insert/get methods work", {
+    hashmap <- new("hashmap", "numeric", "numeric")
     hashmap <- insert(hashmap, c(1, 2), c(4, 5))
     testthat::expect_equal(get(hashmap, 1), 4)
 })
 
 testthat::test_that("hashmap insert/get methods work multiple values", {
+    hashmap <- new("hashmap", "numeric", "numeric")
     hashmap <- insert(hashmap, c(1, 2), c(4, 5))
     testthat::expect_equal(get(hashmap, c(1, 2)), c(4, 5))
 })
 
 testthat::test_that("hashmap operators work", {
+    hashmap <- new("hashmap", "numeric", "numeric")
     hashmap[c(8, 9)] <- c(3, 4)
     testthat::expect_equal(hashmap[8], 3)
 })
 
-testthat::test_that("hashmap operators work multiple valies", {
+testthat::test_that("hashmap operators work multiple values", {
+    hashmap <- new("hashmap", "numeric", "numeric")
     hashmap[c(8, 9)] <- c(3, 4)
     testthat::expect_equal(hashmap[c(8, 9)], c(3, 4))
 })

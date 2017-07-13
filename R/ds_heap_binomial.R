@@ -19,6 +19,7 @@
 
 
 #' @include ds_heap.R
+NULL
 
 
 #' @title Binomial heap class
@@ -32,15 +33,16 @@
 #'  \emph{O(log n)}. \code{binomial_heap} wraps a Boost
 #'  \code{binomial_heap} using Rcpp modules. The heap consists of nodes with
 #'  keys and values where the key determines the priority in the heap.
+#'  Also see the \code{\linkS4class{fibonacci_heap}} class.
 #'
-#' @slot .data  object that bundles all important heap related objects
+#' @slot .heap  \code{C++} object representing a heap
+#' @slot .key.class  the class of the keys
+#' @slot .value.class  the class of the values
 #'
-setClass(
-    "binomial_heap",
-    contains  ="heap"
-)
+setClass("binomial_heap", contains = "heap")
 
-#' @importFrom methods new
+#' @noRd
+#' @importFrom methods new callNextMethod
 setMethod(
     "initialize",
     "binomial_heap",
@@ -48,11 +50,11 @@ setMethod(
              key.class   = c("character", "numeric", "integer"),
              value.class = c("character", "numeric", "integer"))
     {
-        callNextMethod(.Object, key.class, value.class)
-        key.class   <- match.arg(key.class)
-        value.class <- match.arg(value.class)
-        .Object@.data <- list(key.class   = key.class,
-                              value.class = value.class)
+        .Object <- methods::callNextMethod(.Object,
+                                           key.class   = key.class,
+                                           value.class = value.class)
+        key.class <- .Object@.key.class
+        value.class <- .Object@.value.class
 
         if (key.class == "character")
         {
@@ -82,7 +84,7 @@ setMethod(
                 heap <- methods::new(binomial_heap_id)
         }
 
-        .Object@.data$heap <- heap
+        .Object@.heap <- heap
         .Object
     }
 )

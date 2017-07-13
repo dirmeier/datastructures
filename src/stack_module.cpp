@@ -20,7 +20,6 @@
  *
  */
 
-
 #include <Rcpp.h>
 #include "stack.hpp"
 

@@ -20,10 +20,8 @@
  *
  */
 
-
 #include <Rcpp.h>
 #include "bimap.hpp"
-
 
 RCPP_MODULE(bimap_module) {
     Rcpp::class_< bimap_ss >( "bimap_ss" )

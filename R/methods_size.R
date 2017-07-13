@@ -18,12 +18,6 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include ds_fibonacci_heap.R
-#' @include ds_hashmap.R
-#' @include ds_stack.R
-#' @include ds_queue.R
-
-
 #' @title Get the size of an object
 #'
 #' @description Computes the size of an object, i.e. the number of keys or
@@ -48,39 +42,29 @@ setGeneric(
 #' @rdname size-methods
 setMethod(
     "size",
-    "fibonacci_heap",
+    "heap",
     function(obj)
     {
-        obj@.data$heap$size()
+        obj@.heap$size()
     }
 )
 
 #' @rdname size-methods
 setMethod(
     "size",
-    "hashmap",
+    "map",
     function(obj)
     {
-        obj@.data$map$size()
+        obj@.map$size()
     }
 )
 
 #' @rdname size-methods
 setMethod(
     "size",
-    "queue",
+    "deque",
     function(obj)
     {
-        obj@.data$list$size()
-    }
-)
-
-#' @rdname size-methods
-setMethod(
-    "size",
-    "stack",
-    function(obj)
-    {
-        obj@.data$list$size()
+        obj@.deque$size()
     }
 )

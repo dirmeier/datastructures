@@ -18,7 +18,6 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-
 #' @title Get the first elements from an object
 #'
 #' @description Extracts the first couple of entries from an object.
@@ -41,11 +40,11 @@ setGeneric(
 #' @rdname head-methods
 setMethod(
     "head",
-    "hashmap",
+    "map",
     function(obj)
     {
-        if (obj@.data$map$size())
-            unlist(obj@.data$map$head())
+        if (obj@.map$size())
+            unlist(obj@.map$head())
         else
             NULL
     }

@@ -60,7 +60,20 @@ public:
         {
             keys.push_back(pair.first);
         }
+
         return keys;
+    }
+
+    std::vector<U> values()
+    {
+        std::vector<U> values;
+        values.reserve(map_.size());
+        for(const auto& pair : map_)
+        {
+            values.push_back(pair.second);
+        }
+
+        return values;
     }
 
     Rcpp::List head()
@@ -72,13 +85,13 @@ public:
             if (i++ == 5) break;
             heads.insert(pair);
         }
+
         return Rcpp::wrap(heads);
     }
 
     std::vector<U> get(std::vector<T>& t)
     {
-        std::vector<U> values;
-        values.reserve(t.size());
+        std::vector<U> values(t.size());
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
         {
             T key = t[i];
@@ -93,6 +106,7 @@ public:
                 Rcpp::stop(std::string("Could not find key: ").append(ss.str()));
             }
         }
+
         return values;
     }
 

@@ -3,21 +3,18 @@
 \docType{methods}
 \name{insert}
 \alias{insert}
-\alias{insert,fibonacci_heap,ANY,ANY-method}
-\alias{insert,hashmap,ANY,ANY-method}
-\alias{insert,queue,ANY,missing-method}
-\alias{insert,stack,ANY,missing-method}
+\alias{insert,heap,ANY,ANY-method}
+\alias{insert,map,ANY,ANY-method}
+\alias{insert,deque,ANY,missing-method}
 \title{Add elements to an object}
 \usage{
 insert(obj, x, y)
 
-\S4method{insert}{fibonacci_heap,ANY,ANY}(obj, x, y)
+\S4method{insert}{heap,ANY,ANY}(obj, x, y)
 
-\S4method{insert}{hashmap,ANY,ANY}(obj, x, y)
+\S4method{insert}{map,ANY,ANY}(obj, x, y)
 
-\S4method{insert}{queue,ANY,missing}(obj, x, y = "missing")
-
-\S4method{insert}{stack,ANY,missing}(obj, x, y = "missing")
+\S4method{insert}{deque,ANY,missing}(obj, x)
 }
 \arguments{
 \item{obj}{object to insert into}

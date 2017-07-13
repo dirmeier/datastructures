@@ -29,7 +29,6 @@
 extern SEXP _rcpp_module_boot_bimap_module();
 extern SEXP _rcpp_module_boot_hashmap_module();
 
-extern SEXP _rcpp_module_boot_d_ary_heap_module();
 extern SEXP _rcpp_module_boot_binomial_heap_module();
 extern SEXP _rcpp_module_boot_fibonacci_heap_module();
 
@@ -46,8 +45,6 @@ static const R_CallMethodDef CallEntries[] = {
      (DL_FUNC) &_rcpp_module_boot_binomial_heap_module, 0},
     {"_rcpp_module_boot_fibonacci_heap_module",
      (DL_FUNC) &_rcpp_module_boot_fibonacci_heap_module, 0},
-    {"_rcpp_module_boot_d_ary_heap_module",
-     (DL_FUNC) &_rcpp_module_boot_d_ary_heap_module, 0},
 
     {"_rcpp_module_boot_queue_module",
      (DL_FUNC) &_rcpp_module_boot_queue_module, 0},

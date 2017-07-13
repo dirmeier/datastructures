@@ -18,6 +18,10 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+#' @include ds_deque.R
+NULL
+
+
 #' @title Queue class
 #'
 #' @export
@@ -27,25 +31,29 @@
 #' @description Implementation of a queue datastructure, i.e. a list
 #'  implementation with FIFO principle. \code{queue} uses a \code{std::deque}
 #'  as default container, so inserting, peeking and popping functions require
-#'  constant \emph{O(1)}.
+#'  constant \emph{O(1)}. See \code{\linkS4class{stack}} for a class using
+#'  the LIFO principle.
 #'
-#' @slot .data  object that bundles all important heap related objects
-setClass(
-    "queue",
-    slots = list(.data = "list"),
-    prototype = prototype(.data = NULL)
-)
+#' @slot .deque  \code{C++} object representing a deque
+#' @slot .key.class  the class of the keys
+#'
+#' @examples
+#' q <- methods::new("queue", "numeric")
+#' q <- methods::new("queue", "character")
+#' q <- methods::new("queue", "integer")
+#'
+setClass("queue", contains="deque")
 
 #' @noRd
-#' @importFrom methods new
+#' @importFrom methods new callNextMethod
 setMethod(
     "initialize",
     "queue",
     function(.Object,
              key.class   = c("character", "numeric", "integer"))
     {
-        key.class   <- match.arg(key.class)
-        .Object@.data <- list(key.class   = key.class)
+        .Object <- methods::callNextMethod(.Object, key.class   = key.class)
+        key.class <- .Object@.key.class
 
         if (key.class == "character")
         {
@@ -60,7 +68,7 @@ setMethod(
             queue <- methods::new(queue_i)
         }
 
-        .Object@.data$list <- queue
+        .Object@.deque <- queue
         .Object
     }
 )

@@ -42,11 +42,11 @@ setGeneric(
 #' @rdname peek-methods
 setMethod(
     "peek",
-    signature = signature(obj = "fibonacci_heap"),
+    "heap",
     function(obj)
     {
-        if (obj@.data$heap$size())
-            obj@.data$heap$peek()
+        if (obj@.heap$size())
+            obj@.heap$peek()
         else
             NULL
     }
@@ -55,24 +55,11 @@ setMethod(
 #' @rdname peek-methods
 setMethod(
     "peek",
-    signature = signature(obj = "queue"),
+    "deque",
     function(obj)
     {
-        if (obj@.data$list$size())
-            obj@.data$list$peek()
-        else
-            NULL
-    }
-)
-
-#' @rdname peek-methods
-setMethod(
-    "peek",
-    signature = signature(obj = "stack"),
-    function(obj)
-    {
-        if (obj@.data$list$size())
-            obj@.data$list$peek()
+        if (obj@.deque$size())
+            obj@.deque$peek()
         else
             NULL
     }

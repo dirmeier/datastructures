@@ -3,21 +3,18 @@
 \docType{methods}
 \name{size}
 \alias{size}
-\alias{size,fibonacci_heap-method}
-\alias{size,hashmap-method}
-\alias{size,queue-method}
-\alias{size,stack-method}
+\alias{size,heap-method}
+\alias{size,map-method}
+\alias{size,deque-method}
 \title{Get the size of an object}
 \usage{
 size(obj)
 
-\S4method{size}{fibonacci_heap}(obj)
+\S4method{size}{heap}(obj)
 
-\S4method{size}{hashmap}(obj)
+\S4method{size}{map}(obj)
 
-\S4method{size}{queue}(obj)
-
-\S4method{size}{stack}(obj)
+\S4method{size}{deque}(obj)
 }
 \arguments{
 \item{obj}{the object to get the size from}

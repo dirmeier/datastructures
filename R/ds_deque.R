@@ -18,49 +18,37 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @title Stack class
+#' @title Deque class
 #'
 #' @export
-#' @name stack-class
-#' @rdname stack-class
+#' @name deque-class
+#' @rdname deque-class
 #'
-#' @description Implementation of a stack datastructure, i.e. a list
-#'  implementation with LIFO principle. \code{stack} uses a \code{std::deque}
-#'  as default container, so inserting, peeking and popping functions require
-#'  constant \emph{O(1)}.
+#' @description Abstract deque class
 #'
-#' @slot .data  object that bundles all important heap related objects
+#' @slot .deque  \code{C++} object representing a deque
+#' @slot .key.class  the class of the keys
+#'
 setClass(
-    "stack",
-    slots = list(.data = "list"),
-    prototype = prototype(.data = NULL)
+    "deque",
+    contains = "VIRTUAL",
+    slots = list(.deque        = "ANY",
+                 .key.class   = "character"),
+    prototype = prototype(.heap        = NULL,
+                          .key.class   = NA_character_)
 )
 
 #' @noRd
-#' @importFrom methods new
+#' @importFrom methods new callNextMethod
 setMethod(
     "initialize",
-    "stack",
+    "deque",
     function(.Object,
              key.class   = c("character", "numeric", "integer"))
     {
-        key.class   <- match.arg(key.class)
-        .Object@.data <- list(key.class   = key.class)
-
-        if (key.class == "character")
-        {
-            stack <- methods::new(stack_s)
-        }
-        else if (key.class == "numeric")
-        {
-            stack <- methods::new(stack_d)
-        }
-        else
-        {
-            stack <- methods::new(stack_i)
-        }
-
-        .Object@.data$list <- stack
-        .Object
+        methods::callNextMethod(
+            .Object,
+            .key.class   = match.arg(key.class))
     }
 )
+

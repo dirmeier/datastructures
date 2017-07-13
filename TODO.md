@@ -4,7 +4,9 @@
 * <strike>FibonacciHeap</strike>
 * <strike>Queue</strike>
 * <strike>Stack</strike>
-* BinaryHeap
+* <strike>BinomialHeap</strike>
+* <strike>Bimap</strike>
+* d-ary heap
 * ?
 
 ### Author

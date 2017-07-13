@@ -124,7 +124,7 @@ The two datatypes use the exact same methods. You can instantiate a stack or a q
   st <- new("stack", "numeric")
 ```
 
-As before, you can pick either `numeric`, `integer` or `character` keys. Now, let's again insert some data
+As before, you can pick either `numeric`, `integer` or `character` keys. Now, let's again insert some data:
 
 ```{r}
   keys <- seq(0, 1, by=.2)
@@ -133,7 +133,7 @@ As before, you can pick either `numeric`, `integer` or `character` keys. Now, le
   st <- insert(st, keys)
 ```
 
-This is fairly similar. The difference between the two becomes obvious when we access the data, i.e either call `peek` or `pop` functions:
+This is fairly similar. The difference between the two becomes obvious when we access the data, i.e. either call `peek` or `pop` functions:
 
 ```{r}
   peek(qu)

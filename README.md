@@ -11,16 +11,22 @@ Implementation of core data structures for R.
 
 ## Introduction
 
-Implementation of advanced data structures such as hashmaps, heaps, or queues. 
+Implementation of advanced data structures such as hashmaps, heaps, or queues in `R`. 
 Advanced data structures are essential in many computer science and statistics 
 problems, for example graph algorithms or string analysis. The package uses 
 `Boost` and `STL` data types and extends these to `R` with `Rcpp` modules.
 
-As an introductory example, consider you want to compute shortest paths on a 
-graph and decide to use a Fibonacci heap for keeping the distances. Using
-`datastructures` you could save the distances to a single node as:
+So far `datastructures` has implementations for:
 
-```{r}
+* Fibonacci and binomial heaps,
+* queues and stacks,
+* hashmaps and bimaps.
+
+As an introductory example, consider you want to compute shortest paths on a 
+graph and decide to use a Fibonacci heap for keeping the distances. A Fibonacci heap is an efficient tree-like data structure
+that satisfies the *min-heap property*. We can use it to quickly get the node with the shortest distance in *O(log n)* time like this:
+
+```R
   fh <- methods::new("fibonacci_heap", "character", "numeric")
   node.labels    <- paste0("n", 10:1)
   node.distances <- seq(1, 0, length.out=length(node.labels))
@@ -35,7 +41,7 @@ graph and decide to use a Fibonacci heap for keeping the distances. Using
 
 Download the tarball of the latest release an install it using:
 
-```R
+```bash
   R CMD install <datastructures-x.y.z.tar.gz>
 ```
 

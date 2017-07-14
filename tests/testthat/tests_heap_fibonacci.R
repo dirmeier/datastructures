@@ -20,7 +20,6 @@
 
 context("fibonacci heap")
 
-
 testthat::test_that("fibonacci_heap is s4", {
     fibonacci_heap <- fibonacci_heap("integer", "numeric")
     testthat::expect_s4_class(fibonacci_heap, "fibonacci_heap")

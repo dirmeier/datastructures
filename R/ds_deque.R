@@ -18,6 +18,9 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+#' @include zzz.R
+
+
 #' @title Deque class
 #'
 #' @export

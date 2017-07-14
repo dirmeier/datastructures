@@ -18,6 +18,9 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+#' @include zzz.R
+
+
 #' @title Abstract heap class
 #'
 #' @name heap-class
@@ -55,5 +58,3 @@ setMethod(
             .value.class = match.arg(value.class))
     }
 )
-
-

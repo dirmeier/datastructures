@@ -18,82 +18,65 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-library(datastructures)
 context("hashmap")
 
+
 testthat::test_that("hashmap is s4", {
-    hashmap <- hashmap("integer", "character")
-    testthat::expect_s4_class(hashmap, "hashmap")
+    testthat::expect_silent(datastructures::hashmap("integer", "character"))
 })
 
 testthat::test_that("hashmap is s4", {
-    hashmap <- new("hashmap", "numeric", "numeric")
-    testthat::expect_s4_class(hashmap, "hashmap")
+    testthat::expect_silent(methods::new("hashmap", "numeric", "numeric"))
 })
 
 testthat::test_that("creates correct class", {
-    hashmap <- new("hashmap", "numeric", "numeric")
-    testthat::expect_equal("Rcpp_hashmap_dd", class(hashmap@.map)[1])
+    h <- methods::new("hashmap", "numeric", "numeric")
+    testthat::expect_equal("Rcpp_hashmap_dd", class(h@.map)[1])
 })
 
 testthat::test_that("hashmap insert throws when inserting false values", {
-    hashmap <- new("hashmap", "numeric", "numeric")
-    testthat::expect_error(insert(hashmap, c("s", "s"), c(4, 5)))
+    h <- new("hashmap", "numeric", "numeric")
+    testthat::expect_error(datastructures::insert(h, c("s", "s"), c(4, 5)))
 })
 
 testthat::test_that("hashmap get throws when getting false values", {
-    hashmap <- new("hashmap", "numeric", "numeric")
-    hashmap <- insert(hashmap, c(1, 2), c(4, 5))
-    testthat::expect_error(get(hashmap, "s"))
+    h <- new("hashmap", "numeric", "numeric")
+    h <- insert(h, c(1, 2), c(4, 5))
+    testthat::expect_error(datastructures::get(h, "s"))
 })
 
 testthat::test_that("hashmap insert/get methods work", {
-    hashmap <- new("hashmap", "numeric", "numeric")
-    hashmap <- insert(hashmap, c(1, 2), c(4, 5))
-    testthat::expect_equal(get(hashmap, 1), 4)
+    h <- methods::new("hashmap", "numeric", "numeric")
+    h <- datastructures::insert(h, c(1, 2), c(4, 5))
+    testthat::expect_equal(datastructures::get(h, 1), 4)
 })
 
 testthat::test_that("hashmap insert/get methods work multiple values", {
-    hashmap <- new("hashmap", "numeric", "numeric")
-    hashmap <- insert(hashmap, c(1, 2), c(4, 5))
-    testthat::expect_equal(get(hashmap, c(1, 2)), c(4, 5))
+    h <- new("hashmap", "numeric", "numeric")
+    h <- datastructures::insert(h, c(1, 2), c(4, 5))
+    testthat::expect_equal(datastructures::get(h, c(1, 2)), c(4, 5))
 })
 
-testthat::test_that("hashmap operators work", {
-    hashmap <- new("hashmap", "numeric", "numeric")
-    hashmap[c(8, 9)] <- c(3, 4)
-    testthat::expect_equal(hashmap[8], 3)
+testthat::test_that("hashmap size does not throw", {
+    h <- methods::new("hashmap", "numeric", "numeric")
+    h[c(8, 9)] <- c(3, 4)
+    testthat::expect_equal(datastructures::size(h), 2)
 })
 
-testthat::test_that("hashmap operators work multiple values", {
-    hashmap <- new("hashmap", "numeric", "numeric")
-    hashmap[c(8, 9)] <- c(3, 4)
-    testthat::expect_equal(hashmap[c(8, 9)], c(3, 4))
+testthat::test_that("hashmap head does not throw", {
+    h <- methods::new("hashmap", "numeric", "integer")
+    h <- datastructures::insert(h, c(1, 2),  3:4)
+    testthat::expect_silent(datastructures::head(h))
 })
 
-testthat::test_that("hashmap has the correct size", {
-    hashmap <- new("hashmap", "numeric", "numeric")
-    hashmap[c(8, 9)] <- c(3, 4)
-    testthat::expect_equal(size(hashmap), 2)
+testthat::test_that("hashmap keys does not throw", {
+    h <- methods::new("hashmap", "numeric", "integer")
+    h <- datastructures::insert(h, c(1, 2),  3:4)
+    testthat::expect_silent(datastructures::keys(h))
 })
 
-testthat::test_that("hashmap returns head", {
-    hashmap <- new("hashmap", "numeric", "integer")
-    hashmap <- insert(hashmap, c(1, 2),  3:4)
-    testthat::expect_silent(head(hashmap)[[1]])
+testthat::test_that("hashmap values does not throw", {
+    h <- methods::new("hashmap", "numeric", "integer")
+    h <- datastructures::insert(h, c(1, 2),  3:4)
+    testthat::expect_silent(datastructures::values(h))
 })
-
-testthat::test_that("hashmap returns keys", {
-    hashmap <- new("hashmap", "numeric", "integer")
-    hashmap <- insert(hashmap, c(1, 2),  3:4)
-    testthat::expect_true(keys(hashmap)[1] %in% 1:2)
-})
-
-testthat::test_that("hashmap returns values", {
-    hashmap <- new("hashmap", "numeric", "integer")
-    hashmap <- insert(hashmap, c(1, 2),  3:4)
-    testthat::expect_true(values(hashmap)[1] %in% 3:4)
-})
-
-
-

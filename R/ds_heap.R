@@ -52,9 +52,9 @@ setMethod(
              key.class   = c("character", "numeric", "integer"),
              value.class = c("character", "numeric", "integer"))
     {
-        methods::callNextMethod(
-            .Object,
-            .key.class   = match.arg(key.class),
-            .value.class = match.arg(value.class))
+        .Object@.key.class    <- match.arg(key.class)
+        .Object@.value.class <- match.arg(value.class)
+
+        .Object
     }
 )

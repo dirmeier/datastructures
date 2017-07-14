@@ -25,7 +25,6 @@ testthat::test_that("queue is s4", {
     testthat::expect_s4_class(q, "queue")
 })
 
-
 testthat::test_that("queue is s4", {
     q <- methods::new("queue", "integer")
     testthat::expect_s4_class(q, "queue")
@@ -43,7 +42,7 @@ testthat::test_that("queue insert throws when inserting false values", {
 
 testthat::test_that("queue pops first element", {
     q <- methods::new("queue", "numeric")
-    r <- q::rnorm(5)
+    r <- stats::rnorm(5)
     queue <- datastructures::insert(q, r)
     testthat::expect_equal(pop(q), r[1], tolerance=0.001)
 })

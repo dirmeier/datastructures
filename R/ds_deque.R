@@ -49,9 +49,9 @@ setMethod(
     function(.Object,
              key.class   = c("character", "numeric", "integer"))
     {
-        methods::callNextMethod(
-            .Object,
-            .key.class   = match.arg(key.class))
+        .Object@.key.class    <- match.arg(key.class)
+
+        .Object
     }
 )
 

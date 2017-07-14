@@ -88,7 +88,7 @@ setMethod(
 #' @importFrom methods new
 #'
 #' @description Instantiates a new \code{\linkS4class{hashmap}} object,
-#'  i.e. an unordered collection of key-value pairs with a mapping
+#'  i.e. an unordered collection of key-value pairs with mapping
 #'  \deqn{f: keys -> values.}
 #'
 #' @param key.class  the primitive class type of the keys

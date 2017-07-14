@@ -89,7 +89,7 @@ setMethod(
 #' @importFrom methods new
 #'
 #' @description Instantiates a new \code{\linkS4class{bimap}} object,
-#'  i.e. an unordered collection of key-value pairs with mappings from
+#'  i.e. an unordered collection of key-value pairs with mappings
 #'  \deqn{f: keys -> values,}
 #'  and
 #'  \deqn{f: values -> keys.}

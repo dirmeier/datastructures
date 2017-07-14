@@ -16,7 +16,3 @@ returns a new \code{queue} object
 Instantiates a new \code{\linkS4class{queue}} object,
  i.e. a list implementation with FIFO principle.
 }
-\examples{
-  a <- queue("integer")
-
-}

@@ -80,9 +80,6 @@ setMethod(
 #'
 #' @return returns a new \code{queue} object
 #'
-#' @examples
-#'   a <- queue("integer")
-#'
 queue <- function(key.class = c("character", "numeric", "integer"))
 {
     methods::new("queue", key.class)

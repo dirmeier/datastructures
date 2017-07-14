@@ -5,7 +5,7 @@
 \alias{bimap-class}
 \title{Bimap class}
 \description{
-Implementation of a bimap datastructure, i.e. an unordered
+Implementation of a bimap data structure, i.e. an unordered
 collection of key-value pairs. The notable difference to
 \code{\linkS4class{hashmap}} is that the mapping is not only
 \deqn{f: keys -> values,}

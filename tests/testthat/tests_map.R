@@ -18,6 +18,7 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+library(datastructures)
 context("map")
 
 testthat::test_that("abstract class cannot get instantiated", {

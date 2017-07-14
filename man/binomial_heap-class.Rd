@@ -5,7 +5,7 @@
 \alias{binomial_heap-class}
 \title{Binomial heap class}
 \description{
-Implementation of a binomial heap datastructure, i.e. a
+Implementation of a binomial heap data structure, i.e. a
  priority datastructure with \code{push} and \code{pop} in amortized
  \emph{O(log n)}. \code{binomial_heap} wraps a \code{boost::binomial_heap}
  using Rcpp modules. The heap consists of nodes with

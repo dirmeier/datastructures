@@ -28,11 +28,11 @@ NULL
 #' @name stack-class
 #' @rdname stack-class
 #'
-#' @description Implementation of a stack datastructure, i.e. a list
+#' @description Implementation of a stack data structure, i.e. a list
 #'  implementation with LIFO principle. \code{stack} uses a \code{std::deque}
 #'  as default container, so inserting, peeking and popping functions require
 #'  constant \emph{O(1)}. See \code{\linkS4class{queue}} for a class using
-#'  the FIFO principle
+#'  the FIFO principle.
 #'
 #' @slot .deque  \code{C++} object representing a deque
 #' @slot .key.class  the class of the keys

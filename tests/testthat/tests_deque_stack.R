@@ -18,8 +18,8 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+library(datastructures)
 context("stack")
-
 
 testthat::test_that("stack is s4", {
     stack <- stack("character")

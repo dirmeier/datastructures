@@ -28,7 +28,7 @@ NULL
 #' @name queue-class
 #' @rdname queue-class
 #'
-#' @description Implementation of a queue datastructure, i.e. a list
+#' @description Implementation of a queue data structure, i.e. a list
 #'  implementation with FIFO principle. \code{queue} uses a \code{std::deque}
 #'  as default container, so inserting, peeking and popping functions require
 #'  constant \emph{O(1)}. See \code{\linkS4class{stack}} for a class using

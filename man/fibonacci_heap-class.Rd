@@ -5,7 +5,7 @@
 \alias{fibonacci_heap-class}
 \title{Fibonacci heap class}
 \description{
-Implementation of a Fibonacci heap datastructure, i.e. a
+Implementation of a Fibonacci heap data structure, i.e. a
  priority datastructure with \code{push} in amortized \emph{O(1)} and
  \code{pop} in \emph{O(log n)}. \code{fibonacci_heap} wraps a
  \code{boost::fibonacci_heap} using Rcpp modules. The heap consists of

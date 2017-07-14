@@ -28,7 +28,7 @@ NULL
 #' @name hashmap-class
 #' @rdname hashmap-class
 #'
-#' @description Implementation of a hashmap datastructure, i.e. an unordered
+#' @description Implementation of a hashmap data structure, i.e. an unordered
 #' collection of key-value pairs:
 #' \deqn{f: keys -> values,}
 #' Inserting and accessing is amortized in \emph{O(1)}.

@@ -18,6 +18,7 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+library(datastructures)
 context("fibonacci heap")
 
 testthat::test_that("fibonacci_heap is s4", {

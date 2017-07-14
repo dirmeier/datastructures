@@ -18,8 +18,8 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+library(datastructures)
 context("binomial heap")
-
 
 testthat::test_that("binomial_heap is s4", {
     binomial_heap <- binomial_heap("character", "numeric")

@@ -18,8 +18,8 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+library(datastructures)
 context("queue")
-
 
 testthat::test_that("queue is s4", {
     queue <- queue("character")

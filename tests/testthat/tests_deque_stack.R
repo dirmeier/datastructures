@@ -20,44 +20,26 @@
 
 context("stack")
 
-testthat::test_that("stack is s4", {
-    s <- datastructures::stack("character")
-    testthat::expect_s4_class(s, "stack")
+test_that("creates correct class", {
+    s <- stack("numeric")
+    expect_equal(class(s@.deque)[1], "Rcpp_stack_d")
 })
 
-testthat::test_that("stack is s4", {
-    s <- methods::new("stack", "integer")
-    testthat::expect_s4_class(s, "stack")
+test_that("stack insert throws when inserting false values", {
+    s <- stack("numeric")
+    expect_error(insert(s, c("s", "s")))
 })
 
-testthat::test_that("creates correct class", {
-    s <- methods::new("stack", "numeric")
-    testthat::expect_equal(class(s@.deque)[1], "Rcpp_stack_d")
-})
-
-testthat::test_that("stack insert throws when inserting false values", {
-    s <- methods::new("stack", "numeric")
-    testthat::expect_error(datastructures::insert(s, c("s", "s")))
-})
-
-testthat::test_that("stack pops first element", {
-    s <- methods::new("stack", "numeric")
+test_that("stack pops first element", {
+    s <- stack("numeric")
     r <- stats::rnorm(5)
-    s <- datastructures::insert(s, r)
-    testthat::expect_equal(datastructures::pop(s), r[5], tolerance=0.001)
+    s <- insert(s, r)
+    expect_equal(pop(s), r[5], tolerance=0.1)
 })
 
-testthat::test_that("stack peeks first element", {
-    s <- methods::new("stack", "numeric")
+test_that("stack peeks first element", {
+    s <- stack("numeric")
     r <- stats::rnorm(5)
-    s <- datastructures::insert(s, r)
-    testthat::expect_equal(datastructures::peek(s), r[5], tolerance=0.001)
-})
-
-testthat::test_that("stack size does not throw", {
-    s <- methods::new("stack", "numeric")
-    r <- stats::rnorm(5)
-    s <- datastructures::insert(s, r)
-    invisible(datastructures::pop(s))
-    testthat::expect_silent(datastructures::size(s))
+    s <- insert(s, r)
+    expect_equal(peek(s), r[5], tolerance=0.1)
 })

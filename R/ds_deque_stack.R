@@ -39,34 +39,6 @@ NULL
 #'
 setClass("stack", contains="deque")
 
-#' @noRd
-#' @importFrom methods new callNextMethod
-setMethod(
-    "initialize",
-    "stack",
-    function(.Object,
-             key.class   = c("character", "numeric", "integer"))
-    {
-        .Object <- methods::callNextMethod(.Object, key.class   = key.class)
-        key.class <- .Object@.key.class
-
-        if (key.class == "character")
-        {
-            stack <- methods::new(stack_s)
-        }
-        else if (key.class == "numeric")
-        {
-            stack <- methods::new(stack_d)
-        }
-        else
-        {
-            stack <- methods::new(stack_i)
-        }
-
-        .Object@.deque <- stack
-        .Object
-    }
-)
 
 #' @title Create a new \code{stack}
 #'
@@ -82,6 +54,19 @@ setMethod(
 #'
 stack <- function(key.class = c("character", "numeric", "integer"))
 {
-    methods::new("stack", key.class)
-}
+    key.class <- match.arg(key.class)
+    if (key.class == "character")
+    {
+        stack <- methods::new(stack_s)
+    }
+    else if (key.class == "numeric")
+    {
+        stack <- methods::new(stack_d)
+    }
+    else
+    {
+        stack <- methods::new(stack_i)
+    }
 
+    methods::new("stack", .key.class=key.class, .deque=stack)
+}

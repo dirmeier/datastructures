@@ -27,7 +27,7 @@ graph and decide to use a Fibonacci heap for keeping the distances. A Fibonacci 
 that satisfies the *min-heap property*. We can use it to quickly get the node with the shortest distance in *O(log n)* time like this:
 
 ```R
-  fh <- methods::new("fibonacci_heap", "character", "numeric")
+  fh <- fibonacci_heap("character", "numeric")
   node.labels    <- paste0("n", 10:1)
   node.distances <- seq(1, 0, length.out=length(node.labels))
   fh <- insert(fh, node.labels, node.distances)

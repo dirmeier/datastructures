@@ -17,7 +17,7 @@
 ^README\.md$
 benchmark
 TODO.md
-VERSIONS.md
+^NEWS.md$
 .codecov.ym
 .yo-rc.json
 

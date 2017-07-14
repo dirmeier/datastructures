@@ -20,6 +20,6 @@
 
 context("deque")
 
-testthat::test_that("abstract class cannot get instantiated", {
-    testthat::expect_error(methods::new("deque"))
+test_that("abstract class cannot get instantiated", {
+    expect_error(methods::new("deque"))
 })

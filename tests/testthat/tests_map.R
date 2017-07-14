@@ -20,6 +20,6 @@
 
 context("map")
 
-testthat::test_that("abstract class cannot get instantiated", {
-    testthat::expect_error(methods::new("map"))
+test_that("abstract class cannot get instantiated", {
+    expect_error(methods::new("map"))
 })

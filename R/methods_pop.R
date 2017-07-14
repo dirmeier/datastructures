@@ -40,29 +40,37 @@ setGeneric(
 )
 
 
+#' @noRd
+.pop.deque <-  function(obj)
+{
+    if (obj@.deque$size())
+        obj@.deque$pop()
+    else
+        NULL
+}
+
 
 #' @rdname pop-methods
-setMethod(
-    "pop",
-    "deque",
-    function(obj)
-    {
-        if (obj@.deque$size())
-            obj@.deque$pop()
-        else
-            NULL
-    }
-)
+setMethod("pop", "stack", .pop.deque)
+
 
 #' @rdname pop-methods
-setMethod(
-    "pop",
-    "heap",
-    function(obj)
-    {
-        if (obj@.heap$size())
-            obj@.heap$pop()
-        else
-            NULL
-    }
-)
+setMethod("pop", "queue", .pop.deque)
+
+
+#' @noRd
+.pop.heap <- function(obj)
+{
+    if (obj@.heap$size())
+        obj@.heap$pop()
+    else
+        NULL
+}
+
+
+#' @rdname pop-methods
+setMethod("pop", "fibonacci_heap", .pop.heap)
+
+
+#' @rdname pop-methods
+setMethod("pop", "binomial_heap", .pop.heap)

@@ -39,16 +39,19 @@ setGeneric(
     package = "datastructures"
 )
 
-#' @rdname head-methods
-setMethod(
-    "head",
-    "map",
-    function(obj)
-    {
-        if (obj@.map$size())
-            obj@.map$head()
-        else
-            NULL
-    }
-)
+#' @noRd
+.head.map <- function(obj)
+{
+    if (obj@.map$size())
+        obj@.map$head()
+    else
+        NULL
+}
 
+
+#' @rdname head-methods
+setMethod("head", "bimap", .head.map)
+
+
+#' @rdname head-methods
+setMethod("head", "hashmap", .head.map)

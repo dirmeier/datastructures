@@ -3,15 +3,21 @@
 \docType{methods}
 \name{peek}
 \alias{peek}
-\alias{peek,heap-method}
-\alias{peek,deque-method}
+\alias{peek,fibonacci_heap-method}
+\alias{peek,binomial_heap-method}
+\alias{peek,stack-method}
+\alias{peek,queue-method}
 \title{Have a look at the first element from an object without removing it}
 \usage{
 peek(obj)
 
-\S4method{peek}{heap}(obj)
+\S4method{peek}{fibonacci_heap}(obj)
 
-\S4method{peek}{deque}(obj)
+\S4method{peek}{binomial_heap}(obj)
+
+\S4method{peek}{stack}(obj)
+
+\S4method{peek}{queue}(obj)
 }
 \arguments{
 \item{obj}{the object to peek}

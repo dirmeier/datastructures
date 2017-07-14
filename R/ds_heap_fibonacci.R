@@ -42,55 +42,6 @@ NULL
 setClass("fibonacci_heap", contains = "heap")
 
 
-#' @noRd
-#' @importFrom methods new callNextMethod
-setMethod(
-    "initialize",
-    "fibonacci_heap",
-    function(.Object,
-             key.class   = c("character", "numeric", "integer"),
-             value.class = c("character", "numeric", "integer"))
-    {
-        .Object <- methods::callNextMethod(.Object,
-                                           key.class   = key.class,
-                                           value.class = value.class)
-        key.class <- .Object@.key.class
-        value.class <- .Object@.value.class
-
-        if (key.class == "character")
-        {
-            if (value.class == "character")
-                heap <- methods::new(fibonacci_heap_ss)
-            else if (value.class == "integer")
-                heap <- methods::new(fibonacci_heap_si)
-            else
-                heap <- methods::new(fibonacci_heap_sd)
-        }
-        else if (key.class == "numeric")
-        {
-            if (value.class == "character")
-                heap <- methods::new(fibonacci_heap_ds)
-            else if (value.class == "integer")
-                heap <- methods::new(fibonacci_heap_di)
-            else
-                heap <- methods::new(fibonacci_heap_dd)
-        }
-        else
-        {
-            if (value.class == "character")
-                heap <- methods::new(fibonacci_heap_is)
-            else if (value.class == "integer")
-                heap <- methods::new(fibonacci_heap_ii)
-            else
-                heap <- methods::new(fibonacci_heap_id)
-        }
-
-        .Object@.heap <- heap
-        .Object
-    }
-)
-
-
 #' @title Create a new \code{fibonacci_heap}
 #'
 #' @export
@@ -108,5 +59,40 @@ fibonacci_heap <- function(
     key.class = c("character", "numeric", "integer"),
     value.class = c("character", "numeric", "integer"))
 {
-    methods::new("fibonacci_heap", key.class, value.class)
+
+    key.class   <- match.arg(key.class)
+    value.class <- match.arg(value.class)
+
+    if (key.class == "character")
+    {
+        if (value.class == "character")
+            heap <- methods::new(fibonacci_heap_ss)
+        else if (value.class == "integer")
+            heap <- methods::new(fibonacci_heap_si)
+        else
+            heap <- methods::new(fibonacci_heap_sd)
+    }
+    else if (key.class == "numeric")
+    {
+        if (value.class == "character")
+            heap <- methods::new(fibonacci_heap_ds)
+        else if (value.class == "integer")
+            heap <- methods::new(fibonacci_heap_di)
+        else
+            heap <- methods::new(fibonacci_heap_dd)
+    }
+    else
+    {
+        if (value.class == "character")
+            heap <- methods::new(fibonacci_heap_is)
+        else if (value.class == "integer")
+            heap <- methods::new(fibonacci_heap_ii)
+        else
+            heap <- methods::new(fibonacci_heap_id)
+    }
+
+    methods::new("fibonacci_heap",
+                 .key.class=key.class,
+                 .value.class=value.class,
+                 .heap=heap)
 }

@@ -39,34 +39,6 @@ NULL
 #'
 setClass("queue", contains="deque")
 
-#' @noRd
-#' @importFrom methods new callNextMethod
-setMethod(
-    "initialize",
-    "queue",
-    function(.Object,
-             key.class   = c("character", "numeric", "integer"))
-    {
-        .Object <- methods::callNextMethod(.Object, key.class   = key.class)
-        key.class <- .Object@.key.class
-
-        if (key.class == "character")
-        {
-            queue <- methods::new(queue_s)
-        }
-        else if (key.class == "numeric")
-        {
-            queue <- methods::new(queue_d)
-        }
-        else
-        {
-            queue <- methods::new(queue_i)
-        }
-
-        .Object@.deque <- queue
-        .Object
-    }
-)
 
 #' @title Create a new \code{queue}
 #'
@@ -82,5 +54,19 @@ setMethod(
 #'
 queue <- function(key.class = c("character", "numeric", "integer"))
 {
-    methods::new("queue", key.class)
+    key.class <- match.arg(key.class)
+    if (key.class == "character")
+    {
+        queue <- methods::new(queue_s)
+    }
+    else if (key.class == "numeric")
+    {
+        queue <- methods::new(queue_d)
+    }
+    else
+    {
+        queue <- methods::new(queue_i)
+    }
+
+    methods::new("queue", .key.class=key.class, .deque=queue)
 }

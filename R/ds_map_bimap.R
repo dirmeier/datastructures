@@ -43,46 +43,6 @@ NULL
 setClass("bimap", contains = "map")
 
 
-#' @noRd
-#' @importFrom methods new callNextMethod
-setMethod(
-    "initialize",
-    "bimap",
-    function(.Object,
-             key.class   = c("character", "numeric", "integer"),
-             value.class = c("character", "numeric", "integer"))
-    {
-        .Object <- methods::callNextMethod(.Object,
-                                           key.class   = key.class,
-                                           value.class = value.class)
-        key.class   <- .Object@.key.class
-        value.class <- .Object@.value.class
-
-        if (key.class == "character")
-        {
-            if (value.class == "character")    map <- methods::new(bimap_ss)
-            else if (value.class == "integer") map <- methods::new(bimap_si)
-            else                               map <- methods::new(bimap_sd)
-        }
-        else if (key.class == "numeric")
-        {
-            if (value.class == "character")    map <- methods::new(bimap_ds)
-            else if (value.class == "integer") map <- methods::new(bimap_di)
-            else                               map <- methods::new(bimap_dd)
-        }
-        else
-        {
-            if (value.class == "character")    map <- methods::new(bimap_is)
-            else if (value.class == "integer") map <- methods::new(bimap_ii)
-            else                               map <- methods::new(bimap_id)
-        }
-
-        .Object@.map <- map
-        .Object
-    }
-)
-
-
 #' @title Create a new \code{bimap}
 #'
 #' @export
@@ -103,5 +63,30 @@ bimap <- function(
     key.class = c("character", "numeric", "integer"),
     value.class = c("character", "numeric", "integer"))
 {
-    methods::new("bimap", key.class, value.class)
+    key.class   <- match.arg(key.class)
+    value.class <- match.arg(value.class)
+
+    if (key.class == "character")
+    {
+        if (value.class == "character")    map <- methods::new(bimap_ss)
+        else if (value.class == "integer") map <- methods::new(bimap_si)
+        else                               map <- methods::new(bimap_sd)
+    }
+    else if (key.class == "numeric")
+    {
+        if (value.class == "character")    map <- methods::new(bimap_ds)
+        else if (value.class == "integer") map <- methods::new(bimap_di)
+        else                               map <- methods::new(bimap_dd)
+    }
+    else
+    {
+        if (value.class == "character")    map <- methods::new(bimap_is)
+        else if (value.class == "integer") map <- methods::new(bimap_ii)
+        else                               map <- methods::new(bimap_id)
+    }
+
+    methods::new("bimap",
+                 .key.class=key.class,
+                 .value.class=value.class,
+                 .map=map)
 }

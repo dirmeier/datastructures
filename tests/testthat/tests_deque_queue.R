@@ -20,50 +20,26 @@
 
 context("queue")
 
-testthat::test_that("queue is s4", {
-    q <- datastructures::queue("character")
-    testthat::expect_s4_class(q, "queue")
+test_that("creates correct class", {
+    q <- queue("numeric")
+    expect_equal(class(q@.deque)[1], "Rcpp_queue_d")
 })
 
-testthat::test_that("queue is s4", {
-    q <- methods::new("queue", "integer")
-    testthat::expect_s4_class(q, "queue")
+test_that("queue insert throws when inserting false values", {
+    q <- queue("numeric")
+    expect_error(insert(q, c("s", "s")))
 })
 
-testthat::test_that("creates correct class", {
-    q <- methods::new("queue", "numeric")
-    testthat::expect_equal(class(q@.deque)[1], "Rcpp_queue_d")
-})
-
-testthat::test_that("queue insert throws when inserting false values", {
-    q <- methods::new("queue", "numeric")
-    testthat::expect_error(datastructures::insert(q, c("s", "s")))
-})
-
-testthat::test_that("queue pops first element", {
-    q <- methods::new("queue", "numeric")
+test_that("queue pops first element", {
+    q <- queue("numeric")
     r <- stats::rnorm(5)
-    queue <- datastructures::insert(q, r)
-    testthat::expect_equal(pop(q), r[1], tolerance=0.001)
+    queue <- insert(q, r)
+    expect_equal(pop(q), r[1], tolerance=0.1)
 })
 
-testthat::test_that("queue peeks first element", {
-    q <- methods::new("queue", "numeric")
+test_that("queue peeks first element", {
+    q <- queue("numeric")
     r <- stats::rnorm(5)
-    q <- datastructures::insert(q, r)
-    testthat::expect_equal(peek(q), r[1], tolerance=0.001)
-})
-
-testthat::test_that("queue pop does not throw", {
-    q <- methods::new("queue", "numeric")
-    r <- stats::rnorm(5)
-    q <- datastructures::insert(q, r)
-    testthat::expect_silent(pop(q))
-})
-
-testthat::test_that("queue peek does not throw", {
-    q <- methods::new("queue", "numeric")
-    r <- stats::rnorm(5)
-    q <- datastructures::insert(q, r)
-    testthat::expect_silent(peek(q))
+    q <- insert(q, r)
+    expect_equal(peek(q), r[1], tolerance=0.1)
 })

@@ -20,52 +20,27 @@
 
 context("binomial heap")
 
-testthat::test_that("binomial_heap is s4", {
-    binomial_heap <- datastructures::binomial_heap("character", "numeric")
-    testthat::expect_s4_class(binomial_heap, "binomial_heap")
+test_that("creates correct class", {
+    bheap <- binomial_heap("numeric", "numeric")
+    expect_equal(class(bheap@.heap)[1], "Rcpp_binomial_heap_dd")
 })
 
-testthat::test_that("binomial_heap is s4", {
-    bheap <- methods::new("binomial_heap", "numeric", "character")
-    testthat::expect_s4_class(bheap, "binomial_heap")
+test_that("binomial heap insert throws when inserting false values", {
+    bheap <- binomial_heap("numeric", "numeric")
+    expect_error(insert(bheap, c("s", "s"), c(4, 5)))
 })
 
-testthat::test_that("creates correct class", {
-    bheap <- methods::new("binomial_heap", "numeric", "numeric")
-    testthat::expect_equal(class(bheap@.heap)[1], "Rcpp_binomial_heap_dd")
-})
-
-testthat::test_that("binomial heap insert throws when inserting false values", {
-    bheap <- methods::new("binomial_heap", "numeric", "numeric")
-    testthat::expect_error(datastructures::insert(bheap, c("s", "s"), c(4, 5)))
-})
-
-testthat::test_that("binomial heap peek shows correct value", {
-    bheap <- methods::new("binomial_heap", "numeric", "numeric")
+test_that("binomial heap peek shows correct value", {
+    bheap <- binomial_heap("numeric", "numeric")
     r <- stats::rnorm(5)
-    bheap <- datastructures::insert(bheap, r, r)
-    testthat::expect_equal(unlist(unname(datastructures::peek(bheap))),
-                           min(r), tolerance=0.01)
+    bheap <- insert(bheap, r, r)
+    expect_equal(unlist(unname(peek(bheap))), min(r), tolerance=0.01)
 })
 
-testthat::test_that("binomial size does not throw", {
-    bheap <- methods::new("binomial_heap", "numeric", "numeric")
-    r <- stats::rnorm(5)
-    bheap <- datastructures::insert(bheap, r, r)
-    testthat::expect_silent(datastructures::size(bheap))
+test_that("binomial size is correct", {
+    bheap <- binomial_heap("character", "integer")
+    r <- paste0("k", 1:5)
+    bheap <- insert(bheap, r, 1:5)
+    expect_equal(size(bheap), 5)
 })
 
-testthat::test_that("binomial heap pop does not throw", {
-    bheap <- methods::new("binomial_heap", "numeric", "numeric")
-    r <- stats::rnorm(5)
-    bheap <- datastructures::insert(bheap, r, r)
-    testthat::expect_silent(datastructures::pop(bheap))
-})
-
-testthat::test_that("binomial heap does not throw", {
-    bheap <- methods::new("binomial_heap", "numeric", "numeric")
-    r     <- stats::rnorm(5)
-    bheap <- datastructures::insert(bheap, r, r)
-    invisible(datastructures::pop(bheap))
-    testthat::expect_silent(datastructures::size(bheap))
-})

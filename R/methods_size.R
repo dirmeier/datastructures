@@ -39,32 +39,47 @@ setGeneric(
     package = "datastructures"
 )
 
-#' @rdname size-methods
-setMethod(
-    "size",
-    "heap",
-    function(obj)
-    {
-        obj@.heap$size()
-    }
-)
+
+#' @noRd
+.size.heap <-  function(obj)
+{
+    obj@.heap$size()
+}
+
 
 #' @rdname size-methods
-setMethod(
-    "size",
-    "map",
-    function(obj)
-    {
-        obj@.map$size()
-    }
-)
+setMethod("size", "fibonacci_heap", .size.heap)
+
 
 #' @rdname size-methods
-setMethod(
-    "size",
-    "deque",
-    function(obj)
-    {
-        obj@.deque$size()
-    }
-)
+setMethod("size", "binomial_heap", .size.heap)
+
+
+#' @noRd
+.size.map <- function(obj)
+{
+    obj@.map$size()
+}
+
+
+#' @rdname size-methods
+setMethod("size", "hashmap", .size.map)
+
+
+#' @rdname size-methods
+setMethod("size", "bimap", .size.map)
+
+
+#' @noRd
+.size.deque <-  function(obj)
+{
+    obj@.deque$size()
+}
+
+
+#' @rdname size-methods
+setMethod("size", "queue", .size.deque)
+
+
+#' @rdname size-methods
+setMethod("size", "stack", .size.deque)

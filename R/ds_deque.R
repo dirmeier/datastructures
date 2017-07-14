@@ -18,9 +18,6 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include zzz.R
-
-
 #' @title Deque class
 #'
 #' @export
@@ -37,21 +34,6 @@ setClass(
     contains = "VIRTUAL",
     slots = list(.deque        = "ANY",
                  .key.class   = "character"),
-    prototype = prototype(.heap        = NULL,
+    prototype = prototype(.deque       = NULL,
                           .key.class   = NA_character_)
 )
-
-#' @noRd
-#' @importFrom methods new callNextMethod
-setMethod(
-    "initialize",
-    "deque",
-    function(.Object,
-             key.class   = c("character", "numeric", "integer"))
-    {
-        .Object@.key.class    <- match.arg(key.class)
-
-        .Object
-    }
-)
-

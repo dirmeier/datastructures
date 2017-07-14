@@ -18,9 +18,6 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include zzz.R
-
-
 #' @title Abstract heap class
 #'
 #' @name heap-class
@@ -41,20 +38,4 @@ setClass(
     prototype = prototype(.heap        = NULL,
                           .key.class   = NA_character_,
                           .value.class = NA_character_)
-)
-
-#' @noRd
-#' @importFrom methods new
-setMethod(
-    "initialize",
-    "heap",
-    function(.Object,
-             key.class   = c("character", "numeric", "integer"),
-             value.class = c("character", "numeric", "integer"))
-    {
-        .Object@.key.class    <- match.arg(key.class)
-        .Object@.value.class <- match.arg(value.class)
-
-        .Object
-    }
 )

@@ -40,28 +40,38 @@ setGeneric(
     package = "datastructures"
 )
 
-#' @rdname peek-methods
-setMethod(
-    "peek",
-    "heap",
-    function(obj)
-    {
-        if (obj@.heap$size())
-            obj@.heap$peek()
-        else
-            NULL
-    }
-)
+
+#' @noRd
+.peek.heap <- function(obj)
+{
+    if (obj@.heap$size())
+        obj@.heap$peek()
+    else
+        NULL
+}
+
 
 #' @rdname peek-methods
-setMethod(
-    "peek",
-    "deque",
-    function(obj)
-    {
-        if (obj@.deque$size())
-            obj@.deque$peek()
-        else
-            NULL
-    }
-)
+setMethod("peek", "fibonacci_heap", .peek.heap)
+
+
+#' @rdname peek-methods
+setMethod("peek", "binomial_heap", .peek.heap)
+
+
+#' @noRd
+.peek.deque <- function(obj)
+{
+    if (obj@.deque$size())
+        obj@.deque$peek()
+    else
+        NULL
+}
+
+
+#' @rdname peek-methods
+setMethod("peek", "stack", .peek.deque)
+
+
+#' @rdname peek-methods
+setMethod("peek", "queue", .peek.deque)

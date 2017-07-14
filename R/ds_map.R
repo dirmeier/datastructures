@@ -18,9 +18,6 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include zzz.R
-
-
 #' @title Map class
 #'
 #' @export
@@ -39,24 +36,7 @@ setClass(
     slots = list(.map        = "ANY",
                  .key.class   = "character",
                  .value.class = "character"),
-    prototype = prototype(.heap        = NULL,
+    prototype = prototype(.map         = NULL,
                           .key.class   = NA_character_,
                           .value.class = NA_character_)
 )
-
-#' @noRd
-#' @importFrom methods new callNextMethod
-setMethod(
-    "initialize",
-    "map",
-    function(.Object,
-             key.class   = c("character", "numeric", "integer"),
-             value.class = c("character", "numeric", "integer"))
-    {
-        .Object@.key.class    <- match.arg(key.class)
-        .Object@.value.class <- match.arg(value.class)
-
-        .Object
-    }
-)
-

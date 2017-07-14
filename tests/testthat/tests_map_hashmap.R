@@ -20,63 +20,24 @@
 
 context("hashmap")
 
-
-testthat::test_that("hashmap is s4", {
-    testthat::expect_silent(datastructures::hashmap("integer", "character"))
+test_that("creates correct class", {
+    h <- hashmap("numeric", "numeric")
+    expect_equal("Rcpp_hashmap_dd", class(h@.map)[1])
 })
 
-testthat::test_that("hashmap is s4", {
-    testthat::expect_silent(methods::new("hashmap", "numeric", "numeric"))
+test_that("hashmap insert throws when inserting false values", {
+    h <- hashmap("numeric", "numeric")
+    expect_error(insert(h, c("s", "s"), c(4, 5)))
 })
 
-testthat::test_that("creates correct class", {
-    h <- methods::new("hashmap", "numeric", "numeric")
-    testthat::expect_equal("Rcpp_hashmap_dd", class(h@.map)[1])
-})
-
-testthat::test_that("hashmap insert throws when inserting false values", {
-    h <- new("hashmap", "numeric", "numeric")
-    testthat::expect_error(datastructures::insert(h, c("s", "s"), c(4, 5)))
-})
-
-testthat::test_that("hashmap get throws when getting false values", {
-    h <- new("hashmap", "numeric", "numeric")
+test_that("hashmap get throws when getting false values", {
+    h <- hashmap("numeric", "numeric")
     h <- insert(h, c(1, 2), c(4, 5))
-    testthat::expect_error(datastructures::get(h, "s"))
+    expect_error(get(h, "s"))
 })
 
-testthat::test_that("hashmap insert/get methods work", {
-    h <- methods::new("hashmap", "numeric", "numeric")
-    h <- datastructures::insert(h, c(1, 2), c(4, 5))
-    testthat::expect_equal(datastructures::get(h, 1), 4)
-})
-
-testthat::test_that("hashmap insert/get methods work multiple values", {
-    h <- new("hashmap", "numeric", "numeric")
-    h <- datastructures::insert(h, c(1, 2), c(4, 5))
-    testthat::expect_equal(datastructures::get(h, c(1, 2)), c(4, 5))
-})
-
-testthat::test_that("hashmap size does not throw", {
-    h <- methods::new("hashmap", "numeric", "numeric")
-    h[c(8, 9)] <- c(3, 4)
-    testthat::expect_equal(datastructures::size(h), 2)
-})
-
-testthat::test_that("hashmap head does not throw", {
-    h <- methods::new("hashmap", "numeric", "integer")
-    h <- datastructures::insert(h, c(1, 2),  3:4)
-    testthat::expect_silent(datastructures::head(h))
-})
-
-testthat::test_that("hashmap keys does not throw", {
-    h <- methods::new("hashmap", "numeric", "integer")
-    h <- datastructures::insert(h, c(1, 2),  3:4)
-    testthat::expect_silent(datastructures::keys(h))
-})
-
-testthat::test_that("hashmap values does not throw", {
-    h <- methods::new("hashmap", "numeric", "integer")
-    h <- datastructures::insert(h, c(1, 2),  3:4)
-    testthat::expect_silent(datastructures::values(h))
+test_that("hashmap insert/get methods work", {
+    h <- hashmap("numeric", "numeric")
+    h <- insert(h, c(1, 2), c(4, 5))
+    expect_equal(get(h, 1), 4)
 })

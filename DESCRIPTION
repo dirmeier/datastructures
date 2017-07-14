@@ -16,7 +16,9 @@ URL: https://github.com/dirmeier/datastructures
 BugReports: https://github.com/dirmeier/datastructures/issues
 License: GPL-3
 Encoding: UTF-8
-Depends: R (>= 3.4)
+Depends: 
+    R (>= 3.4),
+    Rcpp
 Suggests:
     testthat,
     knitr,
@@ -29,13 +31,11 @@ LinkingTo:
     Rcpp,
     BH
 Imports:
-    Rcpp,
     methods
 NeedsCompilation: yes
 Collate: 
     'checks.R'
     'datastructures-package.R'
-    'zzz.R'
     'ds_deque.R'
     'ds_deque_queue.R'
     'ds_deque_stack.R'
@@ -54,3 +54,4 @@ Collate:
     'methods_show.R'
     'methods_size.R'
     'methods_values.R'
+    'zzz.R'

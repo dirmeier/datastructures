@@ -41,47 +41,6 @@ NULL
 #'
 setClass("hashmap", contains = "map")
 
-
-#' @noRd
-#' @importFrom methods new callNextMethod
-setMethod(
-    "initialize",
-    "hashmap",
-    function(.Object,
-             key.class   = c("character", "numeric", "integer"),
-             value.class = c("character", "numeric", "integer"))
-    {
-        .Object <- methods::callNextMethod(.Object,
-                                           key.class   = key.class,
-                                           value.class = value.class)
-        key.class   <- .Object@.key.class
-        value.class <- .Object@.value.class
-
-        if (key.class == "character")
-        {
-            if (value.class == "character")    map <- methods::new(hashmap_ss)
-            else if (value.class == "integer") map <- methods::new(hashmap_si)
-            else                               map <- methods::new(hashmap_sd)
-        }
-        else if (key.class == "numeric")
-        {
-            if (value.class == "character")    map <- methods::new(hashmap_ds)
-            else if (value.class == "integer") map <- methods::new(hashmap_di)
-            else                               map <- methods::new(hashmap_dd)
-        }
-        else
-        {
-            if (value.class == "character")    map <- methods::new(hashmap_is)
-            else if (value.class == "integer") map <- methods::new(hashmap_ii)
-            else                               map <- methods::new(hashmap_id)
-        }
-
-        .Object@.map <- map
-        .Object
-    }
-)
-
-
 #' @title Create a new \code{hashmap}
 #'
 #' @export
@@ -100,5 +59,30 @@ hashmap <- function(
     key.class = c("character", "numeric", "integer"),
     value.class = c("character", "numeric", "integer"))
 {
-    methods::new("hashmap", key.class, value.class)
+    key.class   <- match.arg(key.class)
+    value.class <- match.arg(value.class)
+
+    if (key.class == "character")
+    {
+        if (value.class == "character")    map <- methods::new(hashmap_ss)
+        else if (value.class == "integer") map <- methods::new(hashmap_si)
+        else                               map <- methods::new(hashmap_sd)
+    }
+    else if (key.class == "numeric")
+    {
+        if (value.class == "character")    map <- methods::new(hashmap_ds)
+        else if (value.class == "integer") map <- methods::new(hashmap_di)
+        else                               map <- methods::new(hashmap_dd)
+    }
+    else
+    {
+        if (value.class == "character")    map <- methods::new(hashmap_is)
+        else if (value.class == "integer") map <- methods::new(hashmap_ii)
+        else                               map <- methods::new(hashmap_id)
+    }
+
+    methods::new("hashmap",
+                 .key.class=key.class,
+                 .value.class=value.class,
+                 .map=map)
 }

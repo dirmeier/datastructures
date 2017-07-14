@@ -18,54 +18,53 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-library(datastructures)
 context("queue")
 
 testthat::test_that("queue is s4", {
-    queue <- queue("character")
-    testthat::expect_s4_class(queue, "queue")
+    q <- datastructures::queue("character")
+    testthat::expect_s4_class(q, "queue")
 })
 
 
 testthat::test_that("queue is s4", {
-    queue <- new("queue", "integer")
-    testthat::expect_s4_class(queue, "queue")
+    q <- methods::new("queue", "integer")
+    testthat::expect_s4_class(q, "queue")
 })
 
 testthat::test_that("creates correct class", {
-    queue <- new("queue", "numeric")
-    testthat::expect_equal(class(queue@.deque)[1], "Rcpp_queue_d")
+    q <- methods::new("queue", "numeric")
+    testthat::expect_equal(class(q@.deque)[1], "Rcpp_queue_d")
 })
 
 testthat::test_that("queue insert throws when inserting false values", {
-    queue <- new("queue", "numeric")
-    testthat::expect_error(insert(queue, c("s", "s")))
+    q <- methods::new("queue", "numeric")
+    testthat::expect_error(datastructures::insert(q, c("s", "s")))
 })
 
 testthat::test_that("queue pops first element", {
-    queue <- new("queue", "numeric")
-    r <- rnorm(5)
-    queue <- insert(queue, r)
-    testthat::expect_equal(pop(queue), r[1], tolerance=0.001)
+    q <- methods::new("queue", "numeric")
+    r <- q::rnorm(5)
+    queue <- datastructures::insert(q, r)
+    testthat::expect_equal(pop(q), r[1], tolerance=0.001)
 })
 
 testthat::test_that("queue peeks first element", {
-    queue <- new("queue", "numeric")
-    r <- rnorm(5)
-    queue <- insert(queue, r)
-    testthat::expect_equal(peek(queue), r[1], tolerance=0.001)
+    q <- methods::new("queue", "numeric")
+    r <- stats::rnorm(5)
+    q <- datastructures::insert(q, r)
+    testthat::expect_equal(peek(q), r[1], tolerance=0.001)
 })
 
 testthat::test_that("queue pop does not throw", {
-    queue <- new("queue", "numeric")
-    r <- rnorm(5)
-    queue <- insert(queue, r)
-    testthat::expect_silent(pop(queue))
+    q <- methods::new("queue", "numeric")
+    r <- stats::rnorm(5)
+    q <- datastructures::insert(q, r)
+    testthat::expect_silent(pop(q))
 })
 
 testthat::test_that("queue peek does not throw", {
-    queue <- new("queue", "numeric")
-    r <- rnorm(5)
-    queue <- insert(queue, r)
-    testthat::expect_silent(peek(queue))
+    q <- methods::new("queue", "numeric")
+    r <- stats::rnorm(5)
+    q <- datastructures::insert(q, r)
+    testthat::expect_silent(peek(q))
 })

@@ -22,54 +22,55 @@ library(datastructures)
 context("fibonacci heap")
 
 testthat::test_that("fibonacci_heap is s4", {
-    fibonacci_heap <- fibonacci_heap("integer", "numeric")
+    fibonacci_heap <- datastructures::fibonacci_heap("integer", "numeric")
     testthat::expect_s4_class(fibonacci_heap, "fibonacci_heap")
 })
 
 
 testthat::test_that("fibonacci_heap is s4", {
-    fheap <- new("fibonacci_heap", "numeric", "numeric")
+    fheap <- methods::new("fibonacci_heap", "numeric", "numeric")
     testthat::expect_s4_class(fheap, "fibonacci_heap")
 })
 
 testthat::test_that("creates correct class", {
-    fheap <- new("fibonacci_heap", "numeric", "numeric")
+    fheap <- methods::new("fibonacci_heap", "numeric", "numeric")
     testthat::expect_equal(class(fheap@.heap)[1], "Rcpp_fibonacci_heap_dd")
 })
 
 testthat::test_that("fibonacci heap peek shows correct value", {
-    fheap <- new("fibonacci_heap", "numeric", "numeric")
-    r <- rnorm(5)
-    fheap <- insert(fheap, r, r)
-    testthat::expect_equal(unlist(unname(peek(fheap))), min(r), tolerance=0.01)
+    fheap <- methods::new("fibonacci_heap", "numeric", "numeric")
+    r <- stats::rnorm(5)
+    fheap <- datastructures::insert(fheap, r, r)
+    testthat::expect_equal(unlist(unname(datastructures::peek(fheap))),
+                           min(r), tolerance=0.01)
 })
 
 testthat::test_that("fibonacci heap size is correct", {
-    fheap <- new("fibonacci_heap", "numeric", "numeric")
-    r <- rnorm(5)
-    fheap <- insert(fheap, r, r)
-    testthat::expect_equal(size(fheap), 5)
+    fheap <- methods::new("fibonacci_heap", "numeric", "numeric")
+    r <- stats::rnorm(5)
+    fheap <- datastructures::insert(fheap, r, r)
+    testthat::expect_equal(datastructures::size(fheap), 5)
 })
 
 testthat::test_that("fibonacci heap peek dows not throw", {
-    fheap <- new("fibonacci_heap", "numeric", "numeric")
-    r <- rnorm(5)
-    fheap <- insert(fheap, r, r)
+    fheap <- methods::new("fibonacci_heap", "numeric", "numeric")
+    r <- stats::rnorm(5)
+    fheap <- datastructures::insert(fheap, r, r)
     peek(fheap)
-    testthat::expect_silent(size(fheap))
+    testthat::expect_silent(datastructures::size(fheap))
 })
 
 testthat::test_that("fibonacci heap pop does not throw", {
-    fheap <- new("fibonacci_heap", "numeric", "numeric")
-    r <- rnorm(5)
-    fheap <- insert(fheap, r, r)
-    testthat::expect_silent(pop(fheap))
+    fheap <- methods::new("fibonacci_heap", "numeric", "numeric")
+    r <- stats::rnorm(5)
+    fheap <- datastructures::insert(fheap, r, r)
+    testthat::expect_silent(datastructures::pop(fheap))
 })
 
 testthat::test_that("fibonacci heap size does not throw", {
-    fheap <- new("fibonacci_heap", "numeric", "numeric")
-    r <- rnorm(5)
-    fheap <- insert(fheap, r, r)
-    invisible(pop(fheap))
-    testthat::expect_silent(size(fheap))
+    fheap <- methods::new("fibonacci_heap", "numeric", "numeric")
+    r <- stats::rnorm(5)
+    fheap <- datastructures::insert(fheap, r, r)
+    invisible(datastructures::pop(fheap))
+    testthat::expect_silent(datastructures::size(fheap))
 })

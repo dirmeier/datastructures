@@ -18,9 +18,8 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-library(datastructures)
 context("heap")
 
 testthat::test_that("abstract class cannot get instantiated", {
-    testthat::expect_error(new("heap"))
+    testthat::expect_error(methods::new("heap"))
 })

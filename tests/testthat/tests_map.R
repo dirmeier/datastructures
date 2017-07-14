@@ -22,5 +22,5 @@ library(datastructures)
 context("map")
 
 testthat::test_that("abstract class cannot get instantiated", {
-    testthat::expect_error(new("map"))
+    testthat::expect_error(methods::new("map"))
 })

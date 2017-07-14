@@ -18,47 +18,46 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-library(datastructures)
 context("stack")
 
 testthat::test_that("stack is s4", {
-    stack <- stack("character")
-    testthat::expect_s4_class(stack, "stack")
+    s <- datastructures::stack("character")
+    testthat::expect_s4_class(s, "stack")
 })
 
 testthat::test_that("stack is s4", {
-    stack <- new("stack", "integer")
-    testthat::expect_s4_class(stack, "stack")
+    s <- methods::new("stack", "integer")
+    testthat::expect_s4_class(s, "stack")
 })
 
 testthat::test_that("creates correct class", {
-    stack <- new("stack", "numeric")
-    testthat::expect_equal(class(stack@.deque)[1], "Rcpp_stack_d")
+    s <- methods::new("stack", "numeric")
+    testthat::expect_equal(class(s@.deque)[1], "Rcpp_stack_d")
 })
 
 testthat::test_that("stack insert throws when inserting false values", {
-    stack <- new("stack", "numeric")
-    testthat::expect_error(insert(stack, c("s", "s")))
+    s <- methods::new("stack", "numeric")
+    testthat::expect_error(datastructures::insert(s, c("s", "s")))
 })
 
 testthat::test_that("stack pops first element", {
-    stack <- new("stack", "numeric")
-    r <- rnorm(5)
-    stack <- insert(stack, r)
-    testthat::expect_equal(pop(stack), r[5], tolerance=0.001)
+    s <- methods::new("stack", "numeric")
+    r <- stats::rnorm(5)
+    s <- datastructures::insert(s, r)
+    testthat::expect_equal(datastructures::pop(s), r[5], tolerance=0.001)
 })
 
 testthat::test_that("stack peeks first element", {
-    stack <- new("stack", "numeric")
-    r <- rnorm(5)
-    stack <- insert(stack, r)
-    testthat::expect_equal(peek(stack), r[5], tolerance=0.001)
+    s <- methods::new("stack", "numeric")
+    r <- stats::rnorm(5)
+    s <- datastructures::insert(s, r)
+    testthat::expect_equal(datastructures::peek(s), r[5], tolerance=0.001)
 })
 
 testthat::test_that("stack size does not throw", {
-    stack <- new("stack", "numeric")
-    r <- rnorm(5)
-    stack <- insert(stack, r)
-    invisible(pop(stack))
-    testthat::expect_silent(size(stack))
+    s <- methods::new("stack", "numeric")
+    r <- stats::rnorm(5)
+    s <- datastructures::insert(s, r)
+    invisible(datastructures::pop(s))
+    testthat::expect_silent(datastructures::size(s))
 })

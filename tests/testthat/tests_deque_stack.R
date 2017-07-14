@@ -55,20 +55,10 @@ testthat::test_that("stack peeks first element", {
     testthat::expect_equal(peek(stack), r[5], tolerance=0.001)
 })
 
-testthat::test_that("stack pop reduces size", {
+testthat::test_that("stack size does not throw", {
     stack <- new("stack", "numeric")
     r <- rnorm(5)
     stack <- insert(stack, r)
     invisible(pop(stack))
-    testthat::expect_equal(size(stack), 5 - 1)
+    testthat::expect_silent(size(stack))
 })
-
-
-testthat::test_that("stack peek does not reduce size", {
-    stack <- new("stack", "numeric")
-    r <- rnorm(5)
-    stack <- insert(stack, r)
-    invisible(peek(stack))
-    testthat::expect_equal(size(stack), 5)
-})
-

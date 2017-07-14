@@ -41,6 +41,7 @@ NULL
 #'
 setClass("fibonacci_heap", contains = "heap")
 
+
 #' @noRd
 #' @importFrom methods new callNextMethod
 setMethod(
@@ -90,4 +91,22 @@ setMethod(
 )
 
 
-
+#' @title Create a new \code{fibonacci_heap}
+#'
+#' @export
+#' @importFrom methods new
+#'
+#' @description Instantiates a new \code{\linkS4class{fibonacci_heap}} object,
+#'  i.e. a tree-like data structure satisfying the \emph{min-heap} property.
+#'
+#' @param key.class  the primitive class type of the keys
+#' @param value.class  the primitive class type of the values
+#'
+#' @return returns a new \code{fibonacci_heap} object
+#'
+fibonacci_heap <- function(
+    key.class = c("character", "numeric", "integer"),
+    value.class = c("character", "numeric", "integer"))
+{
+    methods::new("fibonacci_heap", key.class, value.class)
+}

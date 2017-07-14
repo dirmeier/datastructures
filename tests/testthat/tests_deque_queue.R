@@ -20,17 +20,25 @@
 
 context("queue")
 
-queue <- new("queue", "numeric")
 
 testthat::test_that("queue is s4", {
+    queue <- queue("character")
+    testthat::expect_s4_class(queue, "queue")
+})
+
+
+testthat::test_that("queue is s4", {
+    queue <- new("queue", "integer")
     testthat::expect_s4_class(queue, "queue")
 })
 
 testthat::test_that("creates correct class", {
+    queue <- new("queue", "numeric")
     testthat::expect_equal(class(queue@.deque)[1], "Rcpp_queue_d")
 })
 
 testthat::test_that("queue insert throws when inserting false values", {
+    queue <- new("queue", "numeric")
     testthat::expect_error(insert(queue, c("s", "s")))
 })
 
@@ -64,4 +72,3 @@ testthat::test_that("queue peek does not reduce size", {
     invisible(peek(queue))
     testthat::expect_equal(size(queue), 5)
 })
-

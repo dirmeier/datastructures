@@ -41,6 +41,7 @@ NULL
 #'
 setClass("hashmap", contains = "map")
 
+
 #' @noRd
 #' @importFrom methods new callNextMethod
 setMethod(
@@ -79,3 +80,25 @@ setMethod(
         .Object
     }
 )
+
+
+#' @title Create a new \code{hashmap}
+#'
+#' @export
+#' @importFrom methods new
+#'
+#' @description Instantiates a new \code{\linkS4class{hashmap}} object,
+#'  i.e. an unordered collection of key-value pairs with a mapping
+#'  \deqn{f: keys -> values.}
+#'
+#' @param key.class  the primitive class type of the keys
+#' @param value.class  the primitive class type of the values
+#'
+#' @return returns a new \code{hashmap} object
+#'
+hashmap <- function(
+    key.class = c("character", "numeric", "integer"),
+    value.class = c("character", "numeric", "integer"))
+{
+    methods::new("hashmap", key.class, value.class)
+}

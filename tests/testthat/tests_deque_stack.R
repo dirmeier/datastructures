@@ -20,17 +20,24 @@
 
 context("stack")
 
-stack <- new("stack", "numeric")
 
 testthat::test_that("stack is s4", {
+    stack <- stack("character")
+    testthat::expect_s4_class(stack, "stack")
+})
+
+testthat::test_that("stack is s4", {
+    stack <- new("stack", "integer")
     testthat::expect_s4_class(stack, "stack")
 })
 
 testthat::test_that("creates correct class", {
+    stack <- new("stack", "numeric")
     testthat::expect_equal(class(stack@.deque)[1], "Rcpp_stack_d")
 })
 
 testthat::test_that("stack insert throws when inserting false values", {
+    stack <- new("stack", "numeric")
     testthat::expect_error(insert(stack, c("s", "s")))
 })
 

@@ -31,8 +31,8 @@ Fibonacci and binomial heaps are priority queue data structures using the minimu
 You can create a heap like this:
 
 ```{r}
-  fheap <- new("fibonacci_heap", "numeric", "character")
-  bheap <- new("binomial_heap",  "numeric", "character")
+  fheap <- fibonacci_heap("numeric", "character")
+  bheap <- binomial_heap("numeric", "character")
 ```
 
 This gives us heaps with `numeric` keys and `character` values. You can pick from either `integer`, `numeric` or `character` keys and values. So if we insert several key-value pairs, the pair with the *minimum* key would have the highest *priority*. Let's insert some values and have a look:
@@ -77,8 +77,8 @@ in the **'other direction'**. So a bimap is essentially a combination of two has
 Hashmaps and bimaps can get created like this, this time we use `<character, integer>` pairs:
 
 ```{r}
-  hash  <- new("hashmap", "character", "integer")
-  bimap <- new("bimap",   "character", "integer")
+  hash  <- hashmap("character", "integer")
+  bimap <- bimap("character", "integer")
 ```
 
 Insertion to maps works just like before, by calling the `insert` function:
@@ -120,8 +120,8 @@ Queues and stackes are two list datastructures using the `STL`'s `std::deque` in
 The two datatypes use the exact same methods. You can instantiate a stack or a queue using:
 
 ```{r}
-  qu <- new("queue", "numeric")
-  st <- new("stack", "numeric")
+  qu <- queue("numeric")
+  st <- stack("numeric")
 ```
 
 As before, you can pick either `numeric`, `integer` or `character` keys. Now, let's again insert some data:

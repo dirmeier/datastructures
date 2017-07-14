@@ -42,6 +42,7 @@ NULL
 #'
 setClass("bimap", contains = "map")
 
+
 #' @noRd
 #' @importFrom methods new callNextMethod
 setMethod(
@@ -80,3 +81,27 @@ setMethod(
         .Object
     }
 )
+
+
+#' @title Create a new \code{bimap}
+#'
+#' @export
+#' @importFrom methods new
+#'
+#' @description Instantiates a new \code{\linkS4class{bimap}} object,
+#'  i.e. an unordered collection of key-value pairs with mappings from
+#'  \deqn{f: keys -> values,}
+#'  and
+#'  \deqn{f: values -> keys.}
+#'
+#' @param key.class  the primitive class type of the keys
+#' @param value.class  the primitive class type of the values
+#'
+#' @return returns a new \code{bimap} object
+#'
+bimap <- function(
+    key.class = c("character", "numeric", "integer"),
+    value.class = c("character", "numeric", "integer"))
+{
+    methods::new("bimap", key.class, value.class)
+}

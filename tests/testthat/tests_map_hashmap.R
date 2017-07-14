@@ -21,6 +21,11 @@
 context("hashmap")
 
 testthat::test_that("hashmap is s4", {
+    hashmap <- hashmap("integer", "character")
+    testthat::expect_s4_class(hashmap, "hashmap")
+})
+
+testthat::test_that("hashmap is s4", {
     hashmap <- new("hashmap", "numeric", "numeric")
     testthat::expect_s4_class(hashmap, "hashmap")
 })
@@ -74,19 +79,20 @@ testthat::test_that("hashmap has the correct size", {
 testthat::test_that("hashmap returns head", {
     hashmap <- new("hashmap", "numeric", "integer")
     hashmap <- insert(hashmap, c(1, 2),  3:4)
-    testthat::expect_true(all(head(hashmap)[[1]] %in% 3:4))
+    testthat::expect_true(head(hashmap)[[1]] %in% 3:4)
 })
 
 testthat::test_that("hashmap returns keys", {
     hashmap <- new("hashmap", "numeric", "integer")
     hashmap <- insert(hashmap, c(1, 2),  3:4)
-    testthat::expect_true(all(keys(hashmap) %in% 1:2))
+    testthat::expect_true(keys(hashmap)[1] %in% 1:2)
 })
 
 testthat::test_that("hashmap returns values", {
     hashmap <- new("hashmap", "numeric", "integer")
     hashmap <- insert(hashmap, c(1, 2),  3:4)
-    testthat::expect_true(all(values(hashmap) %in% 3:4))
+    testthat::expect_true(values(hashmap)[1] %in% 3:4)
 })
+
 
 

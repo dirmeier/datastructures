@@ -67,3 +67,23 @@ setMethod(
         .Object
     }
 )
+
+#' @title Create a new \code{queue}
+#'
+#' @export
+#' @importFrom methods new
+#'
+#' @description Instantiates a new \code{\linkS4class{queue}} object,
+#'  i.e. a list implementation with FIFO principle.
+#'
+#' @param key.class  the primitive class type of the keys
+#'
+#' @return returns a new \code{queue} object
+#'
+#' @examples
+#'   a <- queue("integer")
+#'
+queue <- function(key.class = c("character", "numeric", "integer"))
+{
+    methods::new("queue", key.class)
+}

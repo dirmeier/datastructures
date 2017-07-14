@@ -20,17 +20,25 @@
 
 context("fibonacci heap")
 
-fheap <- new("fibonacci_heap", "numeric", "numeric")
 
 testthat::test_that("fibonacci_heap is s4", {
+    fibonacci_heap <- fibonacci_heap("integer", "numeric")
+    testthat::expect_s4_class(fibonacci_heap, "fibonacci_heap")
+})
+
+
+testthat::test_that("fibonacci_heap is s4", {
+    fheap <- new("fibonacci_heap", "numeric", "numeric")
     testthat::expect_s4_class(fheap, "fibonacci_heap")
 })
 
 testthat::test_that("creates correct class", {
+    fheap <- new("fibonacci_heap", "numeric", "numeric")
     testthat::expect_equal(class(fheap@.heap)[1], "Rcpp_fibonacci_heap_dd")
 })
 
 testthat::test_that("fibonacci heap insert throws when inserting false values", {
+    fheap <- new("fibonacci_heap", "numeric", "numeric")
     testthat::expect_error(insert(fheap, c("s", "s"), c(4, 5)))
 })
 
@@ -49,6 +57,7 @@ testthat::test_that("fibonacci heap size is correct", {
 })
 
 testthat::test_that("fibonacci heap size does not change upon peeking", {
+    fheap <- new("fibonacci_heap", "numeric", "numeric")
     r <- rnorm(5)
     fheap <- insert(fheap, r, r)
     peek(fheap)

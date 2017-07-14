@@ -67,3 +67,21 @@ setMethod(
         .Object
     }
 )
+
+#' @title Create a new \code{stack}
+#'
+#' @export
+#' @importFrom methods new
+#'
+#' @description Instantiates a new \code{\linkS4class{stack}} object,
+#'  i.e. a list implementation with LIFO principle.
+#'
+#' @param key.class  the primitive class type of the keys
+#'
+#' @return returns a new \code{stack} object
+#'
+stack <- function(key.class = c("character", "numeric", "integer"))
+{
+    methods::new("stack", key.class)
+}
+

@@ -23,6 +23,11 @@ context("bimap")
 bimap <- new("bimap", "numeric", "numeric")
 
 testthat::test_that("bimap is s4", {
+    bimap <- bimap("integer", "integer")
+    testthat::expect_s4_class(bimap, "bimap")
+})
+
+testthat::test_that("bimap is s4", {
     testthat::expect_s4_class(bimap, "bimap")
 })
 
@@ -81,12 +86,12 @@ testthat::test_that("bimap returns head", {
 testthat::test_that("bimap returns keys", {
     bimap <- new("bimap", "numeric", "integer")
     bimap <- insert(bimap, c(1, 2),  3:4)
-    testthat::expect_true(all(keys(bimap) %in% 1:2))
+    testthat::expect_true(keys(bimap)[1] %in% 1:2)
 })
 
 testthat::test_that("bimap returns values", {
     bimap <- new("bimap", "numeric", "integer")
     bimap <- insert(bimap, c(1, 2),  3:4)
-    testthat::expect_true(all(values(bimap) %in% 3:4))
+    testthat::expect_true(values(bimap)[1] %in% 3:4)
 })
 

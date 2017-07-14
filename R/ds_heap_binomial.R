@@ -41,6 +41,7 @@ NULL
 #'
 setClass("binomial_heap", contains = "heap")
 
+
 #' @noRd
 #' @importFrom methods new callNextMethod
 setMethod(
@@ -90,4 +91,22 @@ setMethod(
 )
 
 
-
+#' @title Create a new \code{binomial_heap}
+#'
+#' @export
+#' @importFrom methods new
+#'
+#' @description Instantiates a new \code{\linkS4class{binomial_heap}} object,
+#'  i.e. a tree-like data structure satisfying the \emph{min-heap} property.
+#'
+#' @param key.class  the primitive class type of the keys
+#' @param value.class  the primitive class type of the values
+#'
+#' @return returns a new \code{binomial_heap} object
+#'
+binomial_heap <- function(
+    key.class = c("character", "numeric", "integer"),
+    value.class = c("character", "numeric", "integer"))
+{
+    methods::new("binomial_heap", key.class, value.class)
+}

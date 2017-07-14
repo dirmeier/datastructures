@@ -11,9 +11,9 @@ Implementation of core data structures for R.
 
 ## Introduction
 
-Implementation of advanced data structures such as hashmaps, heaps, or queues in `R`. 
-Advanced data structures are essential in many computer science and statistics 
-problems, for example graph algorithms or string analysis. The package uses 
+Implementation of advanced data structures such as hashmaps, heaps, or queues in `R`.
+Advanced data structures are essential in many computer science and statistics
+problems, for example graph algorithms or string analysis. The package uses
 `Boost` and `STL` data types and extends these to `R` with `Rcpp` modules.
 
 So far `datastructures` has implementations for:
@@ -66,4 +66,4 @@ just open up a new issue. Alternatively it would be great if you provided a PR.
 
 ## Author
 
-* Simon Dirmeier <a href="mailto:mail@simon-dirmeier.net">mail@simon-dirmeier.net</a>
+* Simon Dirmeier <a href="mailto:simon.dirmeier@gmx.de">simon.dirmeier@gmx.de</a>

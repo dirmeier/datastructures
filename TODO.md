@@ -1,10 +1,10 @@
 ## TODOs
 
 * <strike>HashMap</strike>
-* <strike>FibonacciHeap</strike>
+* <strike>Fibonacci heap</strike>
 * <strike>Queue</strike>
 * <strike>Stack</strike>
-* <strike>BinomialHeap</strike>
+* <strike>Binomial heap</strike>
 * <strike>Bimap</strike>
 * d-ary heap
 * ?

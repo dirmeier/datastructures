@@ -17,8 +17,7 @@ BugReports: https://github.com/dirmeier/datastructures/issues
 License: GPL-3
 Encoding: UTF-8
 Depends: 
-    R (>= 3.4),
-    Rcpp
+    R (>= 3.4)
 Suggests:
     testthat,
     knitr,
@@ -27,11 +26,12 @@ Suggests:
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
 SystemRequirements: C++11
+Imports:
+    Rcpp,
+    methods
 LinkingTo:
     Rcpp,
     BH
-Imports:
-    methods
 NeedsCompilation: yes
 Collate: 
     'checks.R'

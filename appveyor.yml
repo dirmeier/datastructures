@@ -29,15 +29,16 @@ environment:
 
   - R_VERSION: patched
 
-  - R_VERSION: oldrel
-    RTOOLS_VERSION: 33
-    CRAN: http://cran.rstudio.com
-
 matrix:
   fast_finish: true
 
 build_script:
   - travis-tool.sh install_deps
+  - travis-tool.sh install_r lintr
+  - travis-tool.sh install_r devtools
+  - travis-tool.sh install_r testthat
+  - travis-tool.sh install_r knitr
+  - travis-tool.sh install_r rmarkdown
 
 test_script:
   - travis-tool.sh run_tests

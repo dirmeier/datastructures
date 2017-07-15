@@ -39,15 +39,21 @@ that satisfies the *min-heap property*. We can use it to quickly get the node wi
 
 ## Installation
 
-Download the tarball of the latest release an install it using:
+Get the package from *CRAN* using:
+
+```R
+  install.packages("datastructures")
+```
+
+You can also download the tarball of the latest release and install with:
 
 ```bash
   R CMD install <datastructures-x.y.z.tar.gz>
 ```
 
-where `<datastructures-x.y.z.tar.gz>` is your downloaded tarball.
-
-If you want to you can also use devtools, but I don't recommend it:
+where `<datastructures-x.y.z.tar.gz>` is your downloaded tarball. If you want 
+to you can also use devtools, but I don't recommend it since it might give unstable
+versions:
 
 ```R
   devtools::install_github("dirmeier/datastructures")

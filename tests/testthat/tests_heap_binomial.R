@@ -20,27 +20,23 @@
 
 context("binomial heap")
 
+bheap <- binomial_heap("numeric", "numeric")
+r <- stats::rnorm(5)
+bheap <- insert(bheap, r, r)
+
 test_that("creates correct class", {
-    bheap <- binomial_heap("numeric", "numeric")
     expect_equal(class(bheap@.heap)[1], "Rcpp_binomial_heap_dd")
 })
 
 test_that("binomial heap insert throws when inserting false values", {
-    bheap <- binomial_heap("numeric", "numeric")
     expect_error(insert(bheap, c("s", "s"), c(4, 5)))
 })
 
 test_that("binomial heap peek shows correct value", {
-    bheap <- binomial_heap("numeric", "numeric")
-    r <- stats::rnorm(5)
-    bheap <- insert(bheap, r, r)
     expect_equal(unlist(unname(peek(bheap))), min(r), tolerance=0.01)
 })
 
 test_that("binomial size is correct", {
-    bheap <- binomial_heap("character", "integer")
-    r <- paste0("k", 1:5)
-    bheap <- insert(bheap, r, 1:5)
     expect_equal(size(bheap), 5)
 })
 

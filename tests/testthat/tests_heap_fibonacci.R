@@ -20,30 +20,22 @@
 
 context("fibonacci heap")
 
+fh <- fibonacci_heap("numeric", "numeric")
+r <- stats::rnorm(5)
+fh <- insert(fh, r, r)
+
 test_that("creates correct class", {
-    fh <- fibonacci_heap("numeric", "numeric")
     expect_equal(class(fh@.heap)[1], "Rcpp_fibonacci_heap_dd")
 })
 
+test_that("fibonacci heap insert throws when inserting false values", {
+    expect_error(insert(fh, c("s", "s"), c(4, 5)))
+})
+
 test_that("fibonacci heap peek shows correct value", {
-    fh <- fibonacci_heap("numeric", "numeric")
-    r <- stats::rnorm(5)
-    fheap <- insert(fh, r, r)
-    expect_equal(unlist(unname(peek(fh))),
-                           min(r), tolerance=0.01)
+    expect_equal(unlist(unname(peek(fh))), min(r), tolerance=0.01)
 })
 
 test_that("fibonacci heap size is correct", {
-    fh <- fibonacci_heap("numeric", "numeric")
-    r <- stats::rnorm(5)
-    fh <- insert(fh, r, r)
     expect_equal(size(fh), 5)
 })
-
-test_that("fibonacci heap peek yields correct value", {
-    fh <- fibonacci_heap("integer", "character")
-    r <- 1:5
-    fh <- insert(fh, 1:5, paste0("k", 1:5))
-    expect_equal(unname(unlist(peek(fh))), "k1", tolerance=0.1)
-})
-

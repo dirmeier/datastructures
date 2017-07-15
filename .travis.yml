@@ -21,6 +21,7 @@ env:
 
 r_packages:
   - covr
+  - rmarkdown
   - testthat
   - lintr
   - Rcpp

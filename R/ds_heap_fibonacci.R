@@ -20,6 +20,9 @@
 
 #' @include ds_heap.R
 #' @include methods_insert.R
+#' @include methods_peek.R
+#' @include methods_pop.R
+#' @include methods_size.R
 NULL
 
 
@@ -121,3 +124,17 @@ setMethod(
     signature = signature(obj = "fibonacci_heap", x = "vector", y = "ANY"),
     function(obj, x, y) .insert.heap(obj, x, y)
 )
+
+#' @rdname peek-methods
+setMethod("peek", "fibonacci_heap", .peek.heap)
+
+
+#' @rdname pop-methods
+setMethod("pop", "fibonacci_heap", .pop.heap)
+
+
+setMethod("show", "fibonacci_heap", .show.heap)
+
+
+#' @rdname size-methods
+setMethod("size", "fibonacci_heap", .size.heap)

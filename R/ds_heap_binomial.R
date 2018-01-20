@@ -20,6 +20,9 @@
 
 #' @include ds_heap.R
 #' @include methods_insert.R
+#' @include methods_peek.R
+#' @include methods_pop.R
+#' @include methods_size.R
 NULL
 
 
@@ -120,3 +123,18 @@ setMethod(
     signature = signature(x="binomial_heap", i="vector", j="missing", value="ANY"),
     function(x, i, value) .insert.heap(x, i, value)
 )
+
+
+#' @rdname peek-methods
+setMethod("peek", "binomial_heap", .peek.heap)
+
+
+#' @rdname pop-methods
+setMethod("pop", "binomial_heap", .pop.heap)
+
+
+setMethod("show", "binomial_heap", .show.heap)
+
+
+#' @rdname size-methods
+setMethod("size", "binomial_heap", .size.heap)

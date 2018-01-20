@@ -31,6 +31,7 @@
     Rcpp::loadModule("stack_module", TRUE)
 }
 
+
 .onUnload <- function(libpath)
 {
     library.dynam.unload("datastructures", libpath)

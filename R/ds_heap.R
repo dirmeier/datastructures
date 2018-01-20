@@ -52,3 +52,43 @@ setClass(
     obj
 }
 
+
+#' @noRd
+.peek.heap <- function(obj)
+{
+    if (obj@.heap$size())
+        obj@.heap$peek()
+    else
+        NULL
+}
+
+
+#' @noRd
+.pop.heap <- function(obj)
+{
+    if (obj@.heap$size())
+        obj@.heap$pop()
+    else
+        NULL
+}
+
+
+#' @noRd
+.show.heap <-   function(object)
+{
+    cat(paste0("An object of class ", class(object)[1], "<",
+               object@.key.class, ",",
+               object@.value.class, ">\n\n"))
+    li <- peek(object)
+    li.names <- names(li)
+    li <- ifelse(is.null(li), "NULL", li)
+    li.names <- ifelse(is.null(li.names), "NULL", li.names)
+    cat(paste0(li.names, " -> ", li , "\n"))
+}
+
+
+#' @noRd
+.size.heap <-  function(obj)
+{
+    obj@.heap$size()
+}

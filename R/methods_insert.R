@@ -44,60 +44,6 @@ setGeneric(
 )
 
 
-#' @noRd
-.insert.map <- function(obj, x, y)
-{
-    .check.key.value.classes(obj, x, y)
-    obj@.map$insert(x, y)
-
-    obj
-}
-
-
-#' @rdname insert-methods
-setMethod(
-    "insert",
-    signature = signature(obj = "bimap", x = "ANY", y = "ANY"),
-    function(obj, x, y) .insert.map(obj, x, y)
-
-)
-
-
-#' @rdname insert-methods
-setMethod(
-    "insert",
-    signature = signature(obj = "hashmap", x = "ANY", y = "ANY"),
-    function(obj, x, y) .insert.map(obj, x, y)
-
-)
-
-#' Insert parts to an object
-#'
-#' @description Inserts <key, value> pairs to a bimap.
-#'
-#' @param x  a \code{map} object
-#' @param i  a vector of keys
-#' @param value  a vector of values for the keys
-setMethod(
-    "[<-",
-    signature = signature(x="bimap", i="ANY", j="missing", value="ANY"),
-    function(x, i, value) .insert.map(x, i, value)
-)
-
-
-#' Insert parts to an object
-#'
-#' @description Inserts <key, value> pairs to a hashmap.
-#'
-#' @param x  a \code{map} object
-#' @param i  a vector of keys
-#' @param value  a vector of values for the keys
-setMethod(
-    "[<-",
-    signature = signature(x="hashmap", i="ANY", j="missing", value="ANY"),
-    function(x, i, value) .insert.map(x, i, value)
-)
-
 
 #' @noRd
 .insert.deque <- function(obj, x)

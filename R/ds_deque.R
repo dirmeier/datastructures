@@ -37,3 +37,40 @@ setClass(
     prototype = prototype(.deque       = NULL,
                           .key.class   = NA_character_)
 )
+
+
+#' @noRd
+.peek.deque <- function(obj)
+{
+    if (obj@.deque$size())
+        obj@.deque$peek()
+    else
+        NULL
+}
+
+
+#' @noRd
+.pop.deque <-  function(obj)
+{
+    if (obj@.deque$size())
+        obj@.deque$pop()
+    else
+        NULL
+}
+
+
+#' @noRd
+.show.deque <- function(object)
+{
+    cat(paste0("An object of class ", class(object)[1], "<",
+               object@.key.class, ">\n\n"))
+    li <- peek(object)
+    cat(paste0("First element -> ", ifelse(is.null(li), "NULL", li), "\n"))
+}
+
+
+#' @noRd
+.size.deque <-  function(obj)
+{
+    obj@.deque$size()
+}

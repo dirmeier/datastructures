@@ -19,6 +19,9 @@
 
 
 #' @include ds_deque.R
+#' @include methods_peek.R
+#' @include methods_pop.R
+#' @include methods_size.R
 NULL
 
 
@@ -70,3 +73,18 @@ queue <- function(key.class = c("character", "numeric", "integer"))
 
     methods::new("queue", .key.class=key.class, .deque=queue)
 }
+
+
+#' @rdname peek-methods
+setMethod("peek", "queue", .peek.deque)
+
+
+#' @rdname pop-methods
+setMethod("pop", "queue", .pop.deque)
+
+
+setMethod("show", "queue", .show.deque)
+
+
+#' @rdname size-methods
+setMethod("size", "queue", .size.deque)

@@ -19,7 +19,14 @@
 
 
 #' @include ds_map.R
+#' @include methods_insert.R
+#' @include methods_get.R
+#' @include methods_head.R
+#' @include methods_keys.R
+#' @include methods_values.R
+#' @include methods_size.R
 NULL
+
 
 #' @title Bimap class
 #'
@@ -90,3 +97,88 @@ bimap <- function(
                  .value.class=value.class,
                  .map=map)
 }
+
+
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to a bimap.
+#'
+#' @param x  a \code{map} object
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
+setMethod(
+    "[<-",
+    signature = signature(x="bimap", i="vector", j="missing", value="vector"),
+    function(x, i, value) .insert.map(x, i, value)
+)
+
+
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "bimap", x = "vector", y = "vector"),
+    function(obj, x, y) .insert.map(obj, x, y)
+)
+
+
+#' @rdname get-methods
+setMethod(
+    "get",
+    signature = signature(obj = "bimap", x = "ANY", which = "character"),
+    function(obj, x, which=c("values", "keys"))
+    {
+        which <- match.arg(which)
+        kc <- ifelse(which == "values", obj@.key.class, obj@.value.class)
+        .check.key.class(obj, x, kc=kc)
+
+        if (which == "keys")
+            obj@.map$get_left(x)
+        else
+            obj@.map$get_right(x)
+    }
+)
+
+
+#' @rdname get-methods
+setMethod(
+    "get",
+    signature = signature(obj = "bimap", x = "ANY", which = "missing"),
+    function(obj, x)
+    {
+        .check.key.class(obj, x)
+        obj@.map$get_right(x)
+    }
+)
+
+
+#' @rdname head-methods
+setMethod("head", "bimap", .head.map)
+
+
+#' @rdname keys-methods
+setMethod(
+    "keys",
+    "bimap",
+    function(obj)
+    {
+        obj@.map$lefts()
+    }
+)
+
+
+setMethod("show", "bimap", .show.map)
+
+
+#' @rdname size-methods
+setMethod("size", "bimap", .size.map)
+
+
+#' @rdname values-methods
+setMethod(
+    "values",
+    "bimap",
+    function(obj)
+    {
+        obj@.map$rights()
+    }
+)

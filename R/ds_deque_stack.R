@@ -19,6 +19,9 @@
 
 
 #' @include ds_deque.R
+#' @include methods_peek.R
+#' @include methods_pop.R
+#' @include methods_size.R
 NULL
 
 
@@ -70,3 +73,18 @@ stack <- function(key.class = c("character", "numeric", "integer"))
 
     methods::new("stack", .key.class=key.class, .deque=stack)
 }
+
+
+#' @rdname peek-methods
+setMethod("peek", "stack", .peek.deque)
+
+
+#' @rdname pop-methods
+setMethod("pop", "stack", .pop.deque)
+
+
+setMethod("show", "stack", .show.deque)
+
+
+#' @rdname size-methods
+setMethod("size", "stack", .size.deque)

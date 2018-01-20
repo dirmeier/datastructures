@@ -38,23 +38,3 @@ setGeneric(
     },
     package = "datastructures"
 )
-
-#' @rdname values-methods
-setMethod(
-    "values",
-    "hashmap",
-    function(obj)
-    {
-        obj@.map$values()
-    }
-)
-
-#' @rdname values-methods
-setMethod(
-    "values",
-    "bimap",
-    function(obj)
-    {
-        obj@.map$rights()
-    }
-)

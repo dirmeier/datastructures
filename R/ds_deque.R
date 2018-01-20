@@ -32,7 +32,8 @@ setClass("deque",
 {
     if (obj@.deque$size())
         obj@.deque$peek()
-    else NULL
+    else
+      NULL
 }
 
 
@@ -41,7 +42,8 @@ setClass("deque",
 {
     if (obj@.deque$size())
         obj@.deque$pop()
-    else NULL
+    else
+      NULL
 }
 
 

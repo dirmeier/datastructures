@@ -24,6 +24,9 @@
 #'
 setGeneric(
     "head",
-    function(obj) standardGeneric("head"),
+    function(obj)
+    {
+        standardGeneric("head")
+    },
     package = "datastructures"
 )

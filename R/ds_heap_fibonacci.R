@@ -121,9 +121,8 @@ setMethod(
 #' @rdname insert-methods
 setMethod(
     "insert",
-    signature = signature(obj = "hashmap", x = "vector", y = "matrix"),
-    function(obj, x, y) insert.heap(obj, x,
-                                    lapply(seq(nrow(y)), function(i) y[i, ] ))
+    signature = signature(obj = "fibonacci_heap", x = "vector", y = "matrix"),
+    function(obj, x, y) .insert.heap(obj, x, lapply(seq(nrow(y)), function(i) y[i, ] ))
 )
 
 
@@ -172,7 +171,7 @@ setMethod(
     "[<-",
     signature = signature(x="fibonacci_heap", i="vector", j="missing", value="matrix"),
     function(x, i, value) .insert.heap(x, i,
-                                      lapply(seq(nrow(value)), function(i) value[i, ] )))
+                                      lapply(seq(nrow(value)), function(i) value[i, ] ))
 )
 
 

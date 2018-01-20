@@ -43,7 +43,7 @@ public:
         return map_.size();
     }
 
-    void insert(std::vector<T>& t,  std::vector< std::vector<U> >& u)
+    void insert(std::vector<T>& t, std::vector< std::vector<U> >& u)
     {
         if (t.size() != u.size())
         {

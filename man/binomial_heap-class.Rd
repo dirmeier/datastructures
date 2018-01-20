@@ -10,7 +10,7 @@ Implementation of a binomial heap data structure, i.e. a
  \emph{O(log n)}. \code{binomial_heap} wraps a \code{boost::binomial_heap}
  using Rcpp modules. The heap consists of nodes with
  keys and values where the key determines the priority in the heap.
- Also see the \code{\linkS4class{fibonacci_heap}} class.
+ Also see the \code{\linkS4class{binomial_heap}} class.
 }
 \section{Slots}{
 

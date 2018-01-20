@@ -57,7 +57,7 @@ stack <- function(key.class = c("character", "numeric", "integer")) {
     } else {
         stack <- methods::new(stack_i)
     }
-    
+
     methods::new("stack", .key.class = key.class, .deque = stack)
 }
 
@@ -78,15 +78,27 @@ setMethod("size", "stack", .size.deque)
 
 
 #' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "stack", x = "vector", y = "missing"), 
-    function(obj, x) .insert.deque(obj, list(x)))
+setMethod(
+    "insert",
+    signature = signature(obj = "stack", x = "vector", y = "missing"),
+    function(obj, x) .insert.deque(obj, list(x))
+)
+
 
 #' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "stack", x = "list", y = "missing"), 
-    function(obj, x) .insert.deque(obj, x))
+setMethod(
+    "insert",
+    signature = signature(obj = "stack", x = "list", y = "missing"),
+    function(obj, x) .insert.deque(obj, x)
+)
+
 
 #' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "stack", x = "matrix", y = "missing"), 
-    function(obj, x) {
+setMethod(
+    "insert",
+    signature = signature(obj = "stack", x = "matrix", y = "missing"),
+    function(obj, x)
+    {
         .insert.deque(obj, lapply(seq(nrow(x)), function(i) x[i, ]))
-    })
+    }
+)

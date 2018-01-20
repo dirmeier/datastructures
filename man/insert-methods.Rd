@@ -11,12 +11,15 @@
 \alias{insert,stack,vector,missing-method}
 \alias{insert,stack,list,missing-method}
 \alias{insert,stack,matrix,missing-method}
-\alias{insert,binomial_heap,vector,ANY-method}
-\alias{insert,fibonacci_heap,vector,ANY-method}
+\alias{insert,binomial_heap,vector,vector-method}
+\alias{insert,binomial_heap,vector,list-method}
+\alias{insert,binomial_heap,vector,matrix-method}
+\alias{insert,fibonacci_heap,vector,vector-method}
+\alias{insert,fibonacci_heap,vector,list-method}
+\alias{insert,fibonacci_heap,vector,matrix-method}
 \alias{insert,bimap,vector,vector-method}
 \alias{insert,hashmap,vector,vector-method}
 \alias{insert,hashmap,vector,list-method}
-\alias{insert,hashmap,vector,matrix-method}
 \title{Add elements to an object}
 \usage{
 insert(obj, x, y)
@@ -33,17 +36,23 @@ insert(obj, x, y)
 
 \S4method{insert}{stack,matrix,missing}(obj, x)
 
-\S4method{insert}{binomial_heap,vector,ANY}(obj, x, y)
+\S4method{insert}{binomial_heap,vector,vector}(obj, x, y)
 
-\S4method{insert}{fibonacci_heap,vector,ANY}(obj, x, y)
+\S4method{insert}{binomial_heap,vector,list}(obj, x, y)
+
+\S4method{insert}{binomial_heap,vector,matrix}(obj, x, y)
+
+\S4method{insert}{fibonacci_heap,vector,vector}(obj, x, y)
+
+\S4method{insert}{fibonacci_heap,vector,list}(obj, x, y)
+
+\S4method{insert}{fibonacci_heap,vector,matrix}(obj, x, y)
 
 \S4method{insert}{bimap,vector,vector}(obj, x, y)
 
 \S4method{insert}{hashmap,vector,vector}(obj, x, y)
 
 \S4method{insert}{hashmap,vector,list}(obj, x, y)
-
-\S4method{insert}{hashmap,vector,matrix}(obj, x, y)
 }
 \arguments{
 \item{obj}{object to insert into}

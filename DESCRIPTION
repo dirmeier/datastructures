@@ -33,7 +33,7 @@ LinkingTo:
     Rcpp,
     BH
 NeedsCompilation: yes
-Collate:
+Collate: 
     'checks.R'
     'datastructures-package.R'
     'ds_deque.R'

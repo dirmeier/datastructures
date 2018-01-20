@@ -25,6 +25,9 @@
 #'
 setGeneric(
     "peek",
-    function(obj) standardGeneric("peek"),
+    function(obj)
+    {
+        standardGeneric("peek")
+    },
     package = "datastructures"
 )

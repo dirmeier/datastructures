@@ -69,8 +69,10 @@ setClass("heap",
                object@.value.class, ">\n\n"))
     li       <- peek(object)
     li.names <- names(li)
-    if (is.null(li) li <- "NULL"
-    if (is.null(li.names) li.names <- "NULL"
+    if (is.null(li) )
+        li <- "NULL"
+    if (is.null(li.names))
+        li.names <- "NULL"
     cat(paste0(li.names, " -> ", li, "\n"))
 }
 

@@ -1,13 +1,21 @@
-# datastructures: Implementation of core datastructures for R.  Copyright (C)
-# Simon Dirmeier This file is part of datastructures.  datastructures is free
-# software: you can redistribute it and/or modify it under the terms of the GNU
-# General Public License as published by the Free Software Foundation, either
-# version 3 of the License, or (at your option) any later version.
-# datastructures is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License along with
-# datastructures. If not, see <http://www.gnu.org/licenses/>.
+# datastructures: Implementation of core datastructures for R.
+#
+# Copyright (C) Simon Dirmeier
+#
+# This file is part of datastructures.
+#
+# datastructures is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# datastructures is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
 #' @include ds_map.R
@@ -53,52 +61,55 @@ setClass("hashmap", contains = "map")
 #'
 #' @return returns a new \code{hashmap} object
 #'
-hashmap <- function(key.class = c("character", "numeric", "integer"), value.class = c("character", 
-    "numeric", "integer")) {
-    key.class <- match.arg(key.class)
+hashmap <- function(
+    key.class = c("character", "numeric", "integer"),
+    value.class = c("character", "numeric", "integer"))
+{
+    key.class   <- match.arg(key.class)
     value.class <- match.arg(value.class)
-    
-    if (key.class == "character") {
-        if (value.class == "character") 
-            map <- methods::new(hashmap_ss) else if (value.class == "integer") 
-            map <- methods::new(hashmap_si) else map <- methods::new(hashmap_sd)
-    } else if (key.class == "numeric") {
-        if (value.class == "character") 
-            map <- methods::new(hashmap_ds) else if (value.class == "integer") 
-            map <- methods::new(hashmap_di) else map <- methods::new(hashmap_dd)
-    } else {
-        if (value.class == "character") 
-            map <- methods::new(hashmap_is) else if (value.class == "integer") 
-            map <- methods::new(hashmap_ii) else map <- methods::new(hashmap_id)
+
+    if (key.class == "character")
+    {
+        if (value.class == "character")    map <- methods::new(hashmap_ss)
+        else if (value.class == "integer") map <- methods::new(hashmap_si)
+        else                               map <- methods::new(hashmap_sd)
     }
-    
-    methods::new("hashmap", .key.class = key.class, .value.class = value.class, .map = map)
+    else if (key.class == "numeric")
+    {
+        if (value.class == "character")    map <- methods::new(hashmap_ds)
+        else if (value.class == "integer") map <- methods::new(hashmap_di)
+        else                               map <- methods::new(hashmap_dd)
+    }
+    else
+    {
+        if (value.class == "character")    map <- methods::new(hashmap_is)
+        else if (value.class == "integer") map <- methods::new(hashmap_ii)
+        else                               map <- methods::new(hashmap_id)
+    }
+
+    methods::new("hashmap",
+                 .key.class=key.class,
+                 .value.class=value.class,
+                 .map=map)
 }
 
 
 #' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "hashmap", x = "vector", y = "vector"), 
-    function(obj, x, y) .insert.hashmap(obj, x, as.list(y)))
+setMethod(
+    "insert",
+    signature = signature(obj = "hashmap", x = "vector", y = "vector"),
+    function(obj, x, y) .insert.hashmap(obj, x, as.list(y))
+)
+
 
 #' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "hashmap", x = "vector", y = "list"), 
-    function(obj, x, y) .insert.hashmap(obj, x, y))
-
-#' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "hashmap", x = "vector", y = "matrix"), 
-    function(obj, x, y) .insert.hashmap(obj, x, lapply(seq(nrow(y)), function(i) y[i, 
-        ])))
+setMethod(
+    "insert",
+    signature = signature(obj = "hashmap", x = "vector", y = "list"),
+    function(obj, x, y) .insert.hashmap(obj, x, y)
+)
 
 
-#' Insert parts to an object
-#'
-#' @description Inserts <key, value> pairs to a hashmap.
-#'
-#' @param x  a \code{map} object
-#' @param i  a vector of keys
-#' @param value  a vector of values for the keys
-setMethod("[<-", signature = signature(x = "hashmap", i = "vector", j = "missing", 
-    value = "vector"), function(x, i, value) .insert.hashmap(x, i, as.list(value)))
 
 
 #' Insert parts to an object
@@ -108,8 +119,11 @@ setMethod("[<-", signature = signature(x = "hashmap", i = "vector", j = "missing
 #' @param x  a \code{map} object
 #' @param i  a vector of keys
 #' @param value  a vector of values for the keys
-setMethod("[<-", signature = signature(x = "hashmap", i = "vector", j = "missing", 
-    value = "list"), function(x, i, value) .insert.hashmap(x, i, value))
+setMethod(
+    "[<-",
+    signature = signature(x="hashmap", i="vector", j="missing", value="vector"),
+    function(x, i, value) .insert.hashmap(x, i, as.list(value))
+)
 
 
 #' Insert parts to an object
@@ -119,17 +133,40 @@ setMethod("[<-", signature = signature(x = "hashmap", i = "vector", j = "missing
 #' @param x  a \code{map} object
 #' @param i  a vector of keys
 #' @param value  a vector of values for the keys
-setMethod("[<-", signature = signature(x = "hashmap", i = "vector", j = "missing", 
-    value = "matrix"), function(x, i, value) .insert.hashmap(x, i, lapply(seq(nrow(value)), 
-    function(i) value[i, ])))
+setMethod(
+    "[<-",
+    signature = signature(x="hashmap", i="vector", j="missing", value="list"),
+    function(x, i, value) .insert.hashmap(x, i, value)
+)
+
+
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to a hashmap.
+#'
+#' @param x  a \code{map} object
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
+setMethod(
+    "[<-",
+    signature = signature(x="hashmap", i="vector", j="missing", value="matrix"),
+    function(x, i, value)
+    {
+      .insert.hashmap(x, i, lapply(seq(nrow(value)), function(i) value[i, ] ))
+    }
+)
 
 
 #' @rdname get-methods
-setMethod("get", signature = signature(obj = "hashmap", x = "vector", which = "missing"), 
-    function(obj, x) {
+setMethod(
+    "get",
+    signature = signature(obj = "hashmap", x = "vector", which="missing"),
+    function(obj, x)
+    {
         .check.key.class(obj, x)
         obj@.map$get(x)
-    })
+    }
+)
 
 
 #' @title Extract elements from an object
@@ -138,8 +175,11 @@ setMethod("get", signature = signature(obj = "hashmap", x = "vector", which = "m
 #'
 #' @param x  a \code{hashmap}
 #' @param i  a vector of keys
-setMethod("[", signature = signature(x = "hashmap", i = "vector", j = "missing", 
-    drop = "missing"), function(x, i) get(x, i))
+setMethod(
+    "[",
+    signature = signature(x="hashmap", i="vector", j="missing", drop="missing"),
+    function(x, i) get(x, i)
+)
 
 
 #' @rdname head-methods
@@ -147,7 +187,11 @@ setMethod("head", "hashmap", .head.map)
 
 
 #' @rdname keys-methods
-setMethod("keys", "hashmap", function(obj) obj@.map$keys())
+setMethod(
+    "keys",
+    "hashmap",
+    function(obj) obj@.map$keys()
+)
 
 
 setMethod("show", "hashmap", .show.map)
@@ -158,13 +202,18 @@ setMethod("size", "hashmap", .size.map)
 
 
 #' @rdname values-methods
-setMethod("values", "hashmap", function(obj) obj@.map$values())
+setMethod(
+    "values",
+    "hashmap",
+    function(obj) obj@.map$values()
+)
 
 #' @noRd
-.insert.hashmap <- function(obj, x, y) {
+.insert.hashmap <- function(obj, x, y)
+{
     stopifnot(length(x) == length(y))
     .check.key.value.classes(obj, x, y)
     obj@.map$insert(x, y)
-    
+
     obj
 }

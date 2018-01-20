@@ -58,26 +58,43 @@ setClass("bimap", contains = "map")
 #'
 #' @return returns a new \code{bimap} object
 #'
-bimap <- function(key.class = c("character", "numeric", "integer"), value.class = c("character", 
-    "numeric", "integer")) {
-    key.class <- match.arg(key.class)
+bimap <- function(key.class = c("character", "numeric", "integer"),
+                  value.class = c("character", "numeric", "integer"))
+{
+    key.class   <- match.arg(key.class)
     value.class <- match.arg(value.class)
-    
+
     if (key.class == "character") {
-        if (value.class == "character") 
-            map <- methods::new(bimap_ss) else if (value.class == "integer") 
-            map <- methods::new(bimap_si) else map <- methods::new(bimap_sd)
-    } else if (key.class == "numeric") {
-        if (value.class == "character") 
-            map <- methods::new(bimap_ds) else if (value.class == "integer") 
-            map <- methods::new(bimap_di) else map <- methods::new(bimap_dd)
-    } else {
-        if (value.class == "character") 
-            map <- methods::new(bimap_is) else if (value.class == "integer") 
-            map <- methods::new(bimap_ii) else map <- methods::new(bimap_id)
+        if (value.class == "character")
+            map <- methods::new(bimap_ss)
+        else if (value.class == "integer")
+            map <- methods::new(bimap_si)
+        else
+         map <- methods::new(bimap_sd)
     }
-    
-    methods::new("bimap", .key.class = key.class, .value.class = value.class, .map = map)
+    else if (key.class == "numeric")
+    {
+        if (value.class == "character")
+            map <- methods::new(bimap_ds)
+        else if (value.class == "integer")
+            map <- methods::new(bimap_di)
+        else
+            map <- methods::new(bimap_dd)
+    }
+    else
+    {
+        if (value.class == "character")
+            map <- methods::new(bimap_is)
+        else if (value.class == "integer")
+            map <- methods::new(bimap_ii)
+        else
+        map <- methods::new(bimap_id)
+    }
+
+    methods::new("bimap",
+                 .key.class = key.class,
+                 .value.class = value.class,
+                 .map = map)
 }
 
 
@@ -88,33 +105,46 @@ bimap <- function(key.class = c("character", "numeric", "integer"), value.class 
 #' @param x  a \code{map} object
 #' @param i  a vector of keys
 #' @param value  a vector of values for the keys
-setMethod("[<-", signature = signature(x = "bimap", i = "vector", j = "missing", 
-    value = "vector"), function(x, i, value) .insert.bimap(x, i, value))
+setMethod(
+    "[<-",
+    signature = signature(x = "bimap", i = "vector", j = "missing", value = "vector"),
+    function(x, i, value) .insert.bimap(x, i, value)
+)
 
 
 #' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "bimap", x = "vector", y = "vector"), 
-    function(obj, x, y) .bimap.map(obj, x, y))
+setMethod(
+    "insert",
+    signature = signature(obj = "bimap", x = "vector", y = "vector"),
+    function(obj, x, y) .bimap.map(obj, x, y)
+)
 
 
 #' @rdname get-methods
-setMethod("get", signature = signature(obj = "bimap", x = "ANY", which = "character"), 
-    function(obj, x, which = c("values", "keys")) {
+setMethod(
+    "get",
+    signature = signature(obj = "bimap", x = "ANY", which = "character"),
+    function(obj, x, which = c("values", "keys"))
+    {
         which <- match.arg(which)
         kc <- ifelse(which == "values", obj@.key.class, obj@.value.class)
         .check.key.class(obj, x, kc = kc)
-        
-        if (which == "keys") 
+
+        if (which == "keys")
             obj@.map$get_left(x) else obj@.map$get_right(x)
-    })
+    }
+)
 
 
 #' @rdname get-methods
-setMethod("get", signature = signature(obj = "bimap", x = "ANY", which = "missing"), 
+setMethod(
+    "get",
+    signature = signature(obj = "bimap", x = "ANY", which = "missing"),
     function(obj, x) {
         .check.key.class(obj, x)
         obj@.map$get_right(x)
-    })
+    }
+)
 
 
 #' @rdname head-methods
@@ -122,7 +152,8 @@ setMethod("head", "bimap", .head.map)
 
 
 #' @rdname keys-methods
-setMethod("keys", "bimap", function(obj) {
+setMethod("keys", "bimap", function(obj)
+{
     obj@.map$lefts()
 })
 
@@ -135,14 +166,16 @@ setMethod("size", "bimap", .size.map)
 
 
 #' @rdname values-methods
-setMethod("values", "bimap", function(obj) {
+setMethod("values", "bimap", function(obj)
+{
     obj@.map$rights()
 })
 
 #' @noRd
-.insert.bimap <- function(obj, x, y) {
+.insert.bimap <- function(obj, x, y)
+{
     .check.key.value.classes(obj, x, y)
     obj@.map$insert(x, y)
-    
+
     obj
 }

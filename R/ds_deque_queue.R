@@ -48,7 +48,8 @@ setClass("queue", contains = "deque")
 #'
 #' @return returns a new \code{queue} object
 #'
-queue <- function(key.class = c("character", "numeric", "integer")) {
+queue <- function(key.class = c("character", "numeric", "integer"))
+{
     key.class <- match.arg(key.class)
     if (key.class == "character") {
         queue <- methods::new(queue_s)
@@ -57,7 +58,7 @@ queue <- function(key.class = c("character", "numeric", "integer")) {
     } else {
         queue <- methods::new(queue_i)
     }
-    
+
     methods::new("queue", .key.class = key.class, .deque = queue)
 }
 
@@ -78,15 +79,15 @@ setMethod("size", "queue", .size.deque)
 
 
 #' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "queue", x = "vector", y = "missing"), 
+setMethod("insert", signature = signature(obj = "queue", x = "vector", y = "missing"),
     function(obj, x) .insert.deque(obj, list(x)))
 
 #' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "queue", x = "list", y = "missing"), 
+setMethod("insert", signature = signature(obj = "queue", x = "list", y = "missing"),
     function(obj, x) .insert.deque(obj, x))
 
 #' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "queue", x = "matrix", y = "missing"), 
+setMethod("insert", signature = signature(obj = "queue", x = "matrix", y = "missing"),
     function(obj, x) {
         .insert.deque(obj, lapply(seq(nrow(x)), function(i) x[i, ]))
     })

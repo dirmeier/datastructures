@@ -24,6 +24,9 @@
 #'
 setGeneric(
     "pop",
-    function(obj) standardGeneric("pop"),
+    function(obj)
+    {
+        standardGeneric("pop")
+    },
     package = "datastructures"
 )

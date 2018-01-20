@@ -43,7 +43,7 @@ public:
         return map_.size();
     }
 
-    void insert_many(std::vector<T>& t, std::vector<U>& u)
+    void insert(std::vector<T>& t,  std::vector< std::vector<U> >& u)
     {
         if (t.size() != u.size())
         {
@@ -51,29 +51,7 @@ public:
         }
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
         {
-            std::vector<U> x;
-            x.push_back(u[i]);
-            map_.insert(std::pair<T, std::vector<U>>(t[i], x));
-        }
-    }
-
-    void insert_vectorial(T t, std::vector<U>& u)
-    {
-        map_.insert(std::pair<T, std::vector<U>>(t, u));
-    }
-
-    void insert_many_vectorials(std::vector<T>& t, Rcpp::NumericMatrix& u)
-    {
-        if (t.size() != u.nrow())
-        {
-            Rcpp::stop("keys.size() != values.size()");
-        }
-        for (unsigned int i = 0; i < t.size(); ++i)
-        {
-            std::vector<U> x(u.ncol());
-            for (typename std::vector<U>::size_type j = 0; j < x.size(); ++j)
-                x[j] = u(i, j);
-            map_.insert(std::pair<T, std::vector<U>>(t[i], x));
+            map_.insert(std::pair<T, std::vector<U>>(t[i], u[i]));
         }
     }
 

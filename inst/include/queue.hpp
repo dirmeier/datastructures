@@ -41,28 +41,26 @@ public:
         return queue_.size();
     }
 
-    void insert(std::vector<T>& t)
+    void insert(std::vector< std::vector<T> >& t)
     {
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
-        {
-            queue_.push(t[i]);
-        }
+          queue_.push(t[i]);
     }
 
-    T peek()
+    std::vector<T> peek()
     {
         return queue_.front();
     }
 
-    T pop()
+    std::vector<T> pop()
     {
-        T t = peek();
+        std::vector<T> t = peek();
         queue_.pop();
         return t;
     }
 
 private:
-    std::queue<T> queue_;
+    std::queue< std::vector<T> > queue_;
 };
 
 typedef queue<std::string> queue_s;

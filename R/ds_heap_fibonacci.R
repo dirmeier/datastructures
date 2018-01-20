@@ -60,7 +60,7 @@ setClass("fibonacci_heap", contains = "heap")
 #' @return returns a new \code{fibonacci_heap} object
 #'
 fibonacci_heap <- function(
-    key.class = c("character", "numeric", "integer"),
+    key.class   = c("character", "numeric", "integer"),
     value.class = c("character", "numeric", "integer"))
 {
 
@@ -102,6 +102,31 @@ fibonacci_heap <- function(
 }
 
 
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "fibonacci_heap", x = "vector", y = "vector"),
+    function(obj, x, y) .insert.heap(obj, x, as.list(y))
+)
+
+
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "fibonacci_heap", x = "vector", y = "list"),
+    function(obj, x, y) .insert.heap(obj, x, as.list(y))
+)
+
+
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "hashmap", x = "vector", y = "matrix"),
+    function(obj, x, y) insert.heap(obj, x,
+                                    lapply(seq(nrow(y)), function(i) y[i, ] ))
+)
+
+
 #' Insert parts to an object
 #'
 #' @description Inserts <key, value> pairs to a Fibonacci heap. The keys are
@@ -113,17 +138,43 @@ fibonacci_heap <- function(
 #' @param value  a vector of values for the keys
 setMethod(
     "[<-",
-    signature = signature(x="fibonacci_heap", i="vector", j="missing", value="ANY"),
+    signature = signature(x="fibonacci_heap", i="vector", j="missing", value="vector"),
+    function(x, i, value) .insert.heap(x, i, as.list(value))
+)
+
+
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to a Fibonacci heap. The keys are
+#'  determine the ordering of the heap, while the value is the actual value to
+#'  store.
+#'
+#' @param x  a \code{heap}
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
+setMethod(
+    "[<-",
+    signature = signature(x="fibonacci_heap", i="vector", j="missing", value="list"),
     function(x, i, value) .insert.heap(x, i, value)
 )
 
 
-#' @rdname insert-methods
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to a Fibonacci heap. The keys are
+#'  determine the ordering of the heap, while the value is the actual value to
+#'  store.
+#'
+#' @param x  a \code{heap}
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
 setMethod(
-    "insert",
-    signature = signature(obj = "fibonacci_heap", x = "vector", y = "ANY"),
-    function(obj, x, y) .insert.heap(obj, x, y)
+    "[<-",
+    signature = signature(x="fibonacci_heap", i="vector", j="missing", value="matrix"),
+    function(x, i, value) .insert.heap(x, i,
+                                      lapply(seq(nrow(value)), function(i) value[i, ] )))
 )
+
 
 #' @rdname peek-methods
 setMethod("peek", "fibonacci_heap", .peek.heap)

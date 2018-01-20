@@ -41,28 +41,26 @@ public:
         return stack_.size();
     }
 
-    void insert(std::vector<T>& t)
+    void insert(std::vector< std::vector<T> >& t)
     {
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
-        {
             stack_.push(t[i]);
-        }
     }
 
-    T peek()
+    std::vector<T> peek()
     {
         return stack_.top();
     }
 
-    T pop()
+    std::vector<T> pop()
     {
-        T t = peek();
+        std::vector<T> t = peek();
         stack_.pop();
         return t;
     }
 
 private:
-    std::stack<T> stack_;
+    std::stack< std::vector<T> > stack_;
 };
 
 typedef stack<std::string> stack_s;

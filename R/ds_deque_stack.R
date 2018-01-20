@@ -1,27 +1,20 @@
-# datastructures: Implementation of core datastructures for R.
-#
-# Copyright (C) Simon Dirmeier
-#
-# This file is part of datastructures.
-#
-# datastructures is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# datastructures is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with datastructures. If not, see <http://www.gnu.org/licenses/>.
+# datastructures: Implementation of core datastructures for R.  Copyright (C)
+# Simon Dirmeier This file is part of datastructures.  datastructures is free
+# software: you can redistribute it and/or modify it under the terms of the GNU
+# General Public License as published by the Free Software Foundation, either
+# version 3 of the License, or (at your option) any later version.
+# datastructures is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License along with
+# datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
 #' @include ds_deque.R
 #' @include methods_peek.R
 #' @include methods_pop.R
 #' @include methods_size.R
+#' @include methods_insert.R
 NULL
 
 
@@ -40,7 +33,7 @@ NULL
 #' @slot .deque  \code{C++} object representing a deque
 #' @slot .key.class  the class of the keys
 #'
-setClass("stack", contains="deque")
+setClass("stack", contains = "deque")
 
 
 #' @title Create a new \code{stack}
@@ -55,23 +48,17 @@ setClass("stack", contains="deque")
 #'
 #' @return returns a new \code{stack} object
 #'
-stack <- function(key.class = c("character", "numeric", "integer"))
-{
+stack <- function(key.class = c("character", "numeric", "integer")) {
     key.class <- match.arg(key.class)
-    if (key.class == "character")
-    {
+    if (key.class == "character") {
         stack <- methods::new(stack_s)
-    }
-    else if (key.class == "numeric")
-    {
+    } else if (key.class == "numeric") {
         stack <- methods::new(stack_d)
-    }
-    else
-    {
+    } else {
         stack <- methods::new(stack_i)
     }
-
-    methods::new("stack", .key.class=key.class, .deque=stack)
+    
+    methods::new("stack", .key.class = key.class, .deque = stack)
 }
 
 
@@ -88,3 +75,18 @@ setMethod("show", "stack", .show.deque)
 
 #' @rdname size-methods
 setMethod("size", "stack", .size.deque)
+
+
+#' @rdname insert-methods
+setMethod("insert", signature = signature(obj = "stack", x = "vector", y = "missing"), 
+    function(obj, x) .insert.deque(obj, list(x)))
+
+#' @rdname insert-methods
+setMethod("insert", signature = signature(obj = "stack", x = "list", y = "missing"), 
+    function(obj, x) .insert.deque(obj, x))
+
+#' @rdname insert-methods
+setMethod("insert", signature = signature(obj = "stack", x = "matrix", y = "missing"), 
+    function(obj, x) {
+        .insert.deque(obj, lapply(seq(nrow(x)), function(i) x[i, ]))
+    })

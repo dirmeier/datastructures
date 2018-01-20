@@ -6,7 +6,7 @@
 \alias{get}
 \alias{get,bimap,ANY,character-method}
 \alias{get,bimap,ANY,missing-method}
-\alias{get,hashmap,ANY,missing-method}
+\alias{get,hashmap,vector,missing-method}
 \title{Get elements from an object}
 \usage{
 get(obj, x, which = c("values", "keys"))
@@ -15,7 +15,7 @@ get(obj, x, which = c("values", "keys"))
 
 \S4method{get}{bimap,ANY,missing}(obj, x)
 
-\S4method{get}{hashmap,ANY,missing}(obj, x)
+\S4method{get}{hashmap,vector,missing}(obj, x)
 }
 \arguments{
 \item{obj}{object to extract values from}

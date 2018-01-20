@@ -45,64 +45,6 @@ setGeneric(
 
 
 #' @noRd
-.insert.heap <- function(obj, x, y)
-{
-    .check.key.value.classes(obj, x, y)
-    obj@.heap$insert(x, y)
-
-    obj
-}
-
-
-#' @rdname insert-methods
-setMethod(
-    "insert",
-    signature = signature(obj = "fibonacci_heap", x = "ANY", y = "ANY"),
-    function(obj, x, y) .insert.heap(obj, x, y)
-)
-
-
-#' @rdname insert-methods
-setMethod(
-    "insert",
-    signature = signature(obj = "binomial_heap", x = "ANY", y = "ANY"),
-    function(obj, x, y) .insert.heap(obj, x, y)
-)
-
-
-#' Insert parts to an object
-#'
-#' @description Inserts <key, value> pairs to a Fibonacci heap. The keys are
-#'  determine the ordering of the heap, while the value is the actual value to
-#'  store.
-#'
-#' @param x  a \code{heap}
-#' @param i  a vector of keys
-#' @param value  a vector of values for the keys
-setMethod(
-    "[<-",
-    signature = signature(x="fibonacci_heap", i="ANY", j="missing", value="ANY"),
-    function(x, i, value) .insert.heap(x, i, value)
-)
-
-
-#' Insert parts to an object
-#'
-#' @description Inserts <key, value> pairs to a binomial heap. The keys are
-#'  determine the ordering of the heap, while the value is the actual value to
-#'  store.
-#'
-#' @param x  a \code{heap}
-#' @param i  a vector of keys
-#' @param value  a vector of values for the keys
-setMethod(
-    "[<-",
-    signature = signature(x="binomial_heap", i="ANY", j="missing", value="ANY"),
-    function(x, i, value) .insert.heap(x, i, value)
-)
-
-
-#' @noRd
 .insert.map <- function(obj, x, y)
 {
     .check.key.value.classes(obj, x, y)

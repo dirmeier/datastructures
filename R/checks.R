@@ -24,7 +24,14 @@
     .check.key.class(obj, x)
     vc <- obj@.value.class
     if (any(is.null(c(x, y)))) stop("x/y cannot be NULL")
-    if (class(y) != vc)        stop(paste("class(y) is not", vc))
+    if (is.matrix(y))
+    {
+        if (class(y[1, ]) != vc) stop(paste("class(y) is not", vc))
+    }
+    else
+    {
+        if (class(y) != vc) stop(paste("class(y) is not", vc))
+    }
 }
 
 #' @noRd

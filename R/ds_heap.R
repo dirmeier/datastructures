@@ -39,3 +39,16 @@ setClass(
                           .key.class   = NA_character_,
                           .value.class = NA_character_)
 )
+
+
+#' @noRd
+.insert.heap <- function(obj, x, y)
+{
+    .check.key.value.classes(obj, x, y)
+    if (length(x) == 1)    { obj@.heap$insert_vectorial(x, y) }
+    else if (is.vector(y)) { obj@.heap$insert_many(x, y) }
+    else                   { obj@.heap$insert_many_vectorials(x, y)  }
+
+    obj
+}
+

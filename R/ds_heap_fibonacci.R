@@ -19,6 +19,7 @@
 
 
 #' @include ds_heap.R
+#' @include methods_insert.R
 NULL
 
 
@@ -96,3 +97,27 @@ fibonacci_heap <- function(
                  .value.class=value.class,
                  .heap=heap)
 }
+
+
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to a Fibonacci heap. The keys are
+#'  determine the ordering of the heap, while the value is the actual value to
+#'  store.
+#'
+#' @param x  a \code{heap}
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
+setMethod(
+    "[<-",
+    signature = signature(x="fibonacci_heap", i="vector", j="missing", value="ANY"),
+    function(x, i, value) .insert.heap(x, i, value)
+)
+
+
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "fibonacci_heap", x = "vector", y = "ANY"),
+    function(obj, x, y) .insert.heap(obj, x, y)
+)

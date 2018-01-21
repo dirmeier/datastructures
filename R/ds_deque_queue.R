@@ -48,21 +48,6 @@ setClass("queue", contains = "deque")
 #'
 #' @return returns a new \code{queue} object
 #'
-#' @examples
-#'  q <- queue("numeric")
-#'  q <- insert(q, rnorm(10))
-#'  q <- insert(q, 2)
-#'  q <- insert(q, as.list(rnorm(5)))
-#'  peek(q)
-#'  size(q)
-#'
-#'  q <- queue("character")
-#'  q <- insert(q, letters)
-#'  q <- insert(q, "hello")
-#'  q <- insert(q, as.list(letters))
-#'  pop(q)
-#'  size(q)
-#'
 queue <- function(key.class = c("character", "numeric", "integer"))
 {
     key.class <- match.arg(key.class)

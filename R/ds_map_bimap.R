@@ -58,16 +58,6 @@ setClass("bimap", contains = "map")
 #'
 #' @return returns a new \code{bimap} object
 #'
-#' @examples
-#' b <- bimap("integer", "integer")
-#' b[1:10] <- 21:30
-#' b <- insert(b, 11L, 31L)
-#' keys(b)
-#' values(b)
-#' get(b, 1L)
-#' get(b, 11L, "values") == get(b, 21L, "keys")
-#' head(b)
-#'
 bimap <- function(key.class = c("character", "numeric", "integer"),
                   value.class = c("character", "numeric", "integer"))
 {

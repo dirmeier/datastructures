@@ -48,21 +48,6 @@ setClass("stack", contains = "deque")
 #'
 #' @return returns a new \code{stack} object
 #'
-#' @examples
-#'  s <- stack("numeric")
-#'  s <- insert(s, rnorm(10))
-#'  s <- insert(s, 2)
-#'  s <- insert(s, as.list(rnorm(5)))
-#'  peek(s)
-#'  size(s)
-#'
-#'  s <- stack("character")
-#'  s <- insert(s, letters)
-#'  s <- insert(s, "hello")
-#'  s <- insert(s, as.list(letters))
-#'  pop(s)
-#'  size(s)
-#'
 stack <- function(key.class = c("character", "numeric", "integer")) {
     key.class <- match.arg(key.class)
     if (key.class == "character") {

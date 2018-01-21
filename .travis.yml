@@ -7,8 +7,6 @@ matrix:
     - os: linux
       r: devel
     - os: osx
-      r: devel
-    - os: osx
       r: release
     - os: linux
       r: release

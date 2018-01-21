@@ -20,28 +20,35 @@
 
 context("bimap")
 
+
 b <- bimap("numeric", "numeric")
 b <- insert(b, c(1, 2), c(4, 5))
+
 
 test_that("creates correct class", {
     expect_equal("Rcpp_bimap_dd", class(b@.map)[1])
 })
 
+
 test_that("bimap insert throws when inserting false values", {
     expect_error(insert(b, c("s", "s"), c(4, 5)))
 })
+
 
 test_that("bimap get throws when getting false values", {
     expect_error(get(b, "s"))
 })
 
+
 test_that("bimap insert/get methods work", {
     expect_equal(get(b, 1), 4)
 })
 
+
 test_that("bimap insert/get methods work with which argument", {
     expect_equal(get(b, 1, "values"), 4)
 })
+
 
 test_that("bimap insert/get methods work with which argument", {
     expect_equal(get(b, 4, "keys"), 1)

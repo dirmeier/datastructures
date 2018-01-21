@@ -39,3 +39,66 @@ test_that("fibonacci heap peek shows correct value", {
 test_that("fibonacci heap size is correct", {
     expect_equal(size(fh), 5)
 })
+
+
+test_that("fibonacci heap pop first element multiple elements in matrix", {
+    bheap <- fibonacci_heap("numeric", "numeric")
+    r <- seq(0, 1, by=.1)
+    m <- matrix(rnorm(length(r) * 2), length(r))
+    bheap <- insert(bheap, r, m)
+    expect_equal(unname(unlist(pop(bheap))), m[1, ])
+})
+
+
+test_that("fibonacci heap peek first element multiple elements in matrix", {
+    bheap <- fibonacci_heap("numeric", "numeric")
+    r <- seq(0, 1, by=.1)
+    m <- matrix(rnorm(length(r) * 2), length(r))
+    bheap <- insert(bheap, r, m)
+    expect_equal(unname(unlist(peek(bheap))), m[1, ])
+})
+
+
+test_that("fibonacci heap pop first element multiple elements in list", {
+    bheap <- fibonacci_heap("character", "numeric")
+    r <- letters[1:2]
+    m <- list(1, 2)
+    bheap <- insert(bheap, r, m)
+    expect_equal(unname(unlist(pop(bheap))), m [[1]])
+})
+
+
+test_that("fibonacci heap peek first element multiple elements in list", {
+    bheap <- fibonacci_heap("character", "numeric")
+    r <- letters[1:2]
+    m <- list(1, 2)
+    bheap <- insert(bheap, r, m)
+    expect_equal(unname(unlist(peek(bheap))), m[[1]])
+})
+
+
+test_that("fibonacci heap peek first element multiple elements vector", {
+    bheap <- fibonacci_heap("character", "numeric")
+    r <- letters[1:2]
+    m <- rnorm(2)
+    bheap <- insert(bheap, r, m)
+    expect_equal(unname(unlist(peek(bheap))), m[1])
+})
+
+
+test_that("fibonacci heap peek first element multiple elements vector", {
+    bheap <- fibonacci_heap("character", "numeric")
+    r <- letters[1:2]
+    m <- rnorm(2)
+    bheap <- insert(bheap, r, m)
+    expect_equal(unname(unlist(peek(bheap))), m[1])
+})
+
+
+test_that("fibo heap peek first element multiple elements as list", {
+    bheap <- fibonacci_heap("character", "numeric")
+    r <- letters[1:2]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    expect_equal(unname(unlist(peek(bheap))), m[[1]])
+})

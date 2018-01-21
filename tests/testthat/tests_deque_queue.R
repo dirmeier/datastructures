@@ -20,26 +20,69 @@
 
 context("queue")
 
+
 test_that("creates correct class", {
     q <- queue("numeric")
     expect_equal(class(q@.deque)[1], "Rcpp_queue_d")
 })
+
 
 test_that("queue insert throws when inserting false values", {
     q <- queue("numeric")
     expect_error(insert(q, c("s", "s")))
 })
 
-test_that("queue pops first element", {
+
+test_that("queue pops first element as list", {
     q <- queue("numeric")
     r <- as.list(stats::rnorm(5))
     queue <- insert(q, r)
     expect_equal(pop(q), r[[1]], tolerance=0.1)
 })
 
-test_that("queue peeks first element", {
+
+test_that("queue peeks first element as list", {
     q <- queue("numeric")
     r <- as.list(stats::rnorm(5))
     q <- insert(q, r)
     expect_equal(peek(q), r[[1]], tolerance=0.1)
 })
+
+
+test_that("queue peeks first element vectorial", {
+    q <- queue("numeric")
+    r <- stats::rnorm(5)
+    q <- insert(q, r)
+    expect_equal(peek(q), r, tolerance=0.1)
+})
+
+test_that("queue pops first element vectorial", {
+    q <- queue("numeric")
+    r <- stats::rnorm(5)
+    q <- insert(q, r)
+    expect_equal(pop(q), r, tolerance=0.1)
+})
+
+
+test_that("queue peeks first element multiple elements in list", {
+    q <- queue("numeric")
+    r <- stats::rnorm(5)
+    q <- insert(q, list(r, 1))
+    expect_equal(peek(q), r, tolerance=0.1)
+})
+
+test_that("queue pop first element multiple elements in list", {
+    q <- queue("numeric")
+    r <- stats::rnorm(5)
+    q <- insert(q, list(r, 1))
+    expect_equal(pop(q), r, tolerance=0.1)
+})
+
+
+test_that("queue pop first element multiple elements in matrix", {
+    q <- queue("numeric")
+    r <- matrix(stats::rnorm(6), 2)
+    q <- insert(q, r)
+    expect_equal(pop(q), r[1, ], tolerance=0.1)
+})
+

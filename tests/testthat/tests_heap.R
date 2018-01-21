@@ -20,6 +20,7 @@
 
 context("heap")
 
+
 test_that("abstract class cannot get instantiated", {
     expect_error(methods::new("heap"))
 })

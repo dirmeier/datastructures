@@ -1,5 +1,10 @@
 ## Versions
 
+#### v0.2.1
+
+* Adds vectorial values for `hashmap`, `fibonacci_heap`, `binomial_heap`, `stack` and `queue`
+* Adds more unit tests
+
 ### v0.2.0
 
 * Adds `binomial_heap` and `bimap`

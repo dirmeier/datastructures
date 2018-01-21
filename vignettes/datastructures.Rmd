@@ -180,4 +180,4 @@ For a `queue` `pop` and `peek` return the *first* element that got inserted, whi
 
 ## Author
 
-* Simon Dirmeier <a href="mailto:simon.dirmeier@gmx.de">simon.dirmeier@gmx.de</a>
+* Simon Dirmeier <a href="mailto:simon.dirmeier@web.de">simon.dirmeier@web.de</a>

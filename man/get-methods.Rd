@@ -4,16 +4,16 @@
 \docType{methods}
 \name{get}
 \alias{get}
-\alias{get,bimap,ANY,character-method}
-\alias{get,bimap,ANY,missing-method}
+\alias{get,bimap,vector,character-method}
+\alias{get,bimap,vector,missing-method}
 \alias{get,hashmap,vector,missing-method}
 \title{Get elements from an object}
 \usage{
 get(obj, x, which = c("values", "keys"))
 
-\S4method{get}{bimap,ANY,character}(obj, x, which = c("values", "keys"))
+\S4method{get}{bimap,vector,character}(obj, x, which = c("values", "keys"))
 
-\S4method{get}{bimap,ANY,missing}(obj, x)
+\S4method{get}{bimap,vector,missing}(obj, x)
 
 \S4method{get}{hashmap,vector,missing}(obj, x)
 }

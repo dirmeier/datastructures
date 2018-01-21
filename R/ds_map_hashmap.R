@@ -160,20 +160,6 @@ setMethod(
 )
 
 
-#' Insert parts to an object
-#'
-#' @description Inserts <key, value> pairs to a hashmap.
-#'
-#' @param x  a \code{map} object
-#' @param i  a vector of keys
-#' @param value  a vector of values for the keys
-setMethod(
-    "[<-",
-    signature = signature(x="hashmap", i="vector", j="missing", value="matrix"),
-    function(x, i, value) .insert.hashmap(x, i, value)
-)
-
-
 #' @rdname get-methods
 setMethod(
     "get",

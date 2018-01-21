@@ -20,6 +20,7 @@
 \alias{insert,bimap,vector,vector-method}
 \alias{insert,hashmap,vector,vector-method}
 \alias{insert,hashmap,vector,list-method}
+\alias{insert,hashmap,vector,matrix-method}
 \title{Add elements to an object}
 \usage{
 insert(obj, x, y)
@@ -53,6 +54,8 @@ insert(obj, x, y)
 \S4method{insert}{hashmap,vector,vector}(obj, x, y)
 
 \S4method{insert}{hashmap,vector,list}(obj, x, y)
+
+\S4method{insert}{hashmap,vector,matrix}(obj, x, y)
 }
 \arguments{
 \item{obj}{object to insert into}

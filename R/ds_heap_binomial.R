@@ -51,6 +51,22 @@ setClass("binomial_heap", contains = "heap")
 #'
 #' @return returns a new \code{binomial_heap} object
 #'
+#' @examples
+#' b <- binomial_heap("numeric", "numeric")
+#' b[1] <- rnorm(5)
+#' b <- insert(b, c(2, 3), matrix(rnorm(10), 2))
+#' b <- insert(b, c(4, 5), list(rnorm(2), 4))
+#' b[c(-1, 7)] <- rnorm(2)
+#' pop(b)
+#' size(b)
+#' peek(b)
+#'
+#' b <- binomial_heap("character", "numeric")
+#' b[letters] <- rnorm(26)
+#' pop(b)
+#' b["?"] <- 2
+#' peek(b)
+#'
 binomial_heap <- function(
     key.class = c("character", "numeric", "integer"),
     value.class = c("character", "numeric", "integer"))

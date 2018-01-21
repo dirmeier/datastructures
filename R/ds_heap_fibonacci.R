@@ -59,6 +59,22 @@ setClass("fibonacci_heap", contains = "heap")
 #'
 #' @return returns a new \code{fibonacci_heap} object
 #'
+#' @examples
+#' f <- fibonacci_heap("numeric", "numeric")
+#' f[1] <- rnorm(5)
+#' f <- insert(f, c(2, 3), matrix(rnorm(10), 2))
+#' f <- insert(f, c(4, 5), list(rnorm(2), 4))
+#' f[c(-1, 7)] <- rnorm(2)
+#' pop(f)
+#' size(f)
+#' peek(f)
+#'
+#' f <- fibonacci_heap("integer", "integer")
+#' f[1:10] <- seq(10)
+#' pop(f)
+#' f[0L] <- 2L
+#' peek(f)
+#'
 fibonacci_heap <- function(
     key.class   = c("character", "numeric", "integer"),
     value.class = c("character", "numeric", "integer"))

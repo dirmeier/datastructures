@@ -16,3 +16,19 @@ returns a new \code{queue} object
 Instantiates a new \code{\linkS4class{queue}} object,
  i.e. a list implementation with FIFO principle.
 }
+\examples{
+ q <- queue("numeric")
+ q <- insert(q, rnorm(10))
+ q <- insert(q, 2)
+ q <- insert(q, as.list(rnorm(5)))
+ peek(q)
+ size(q)
+
+ q <- queue("character")
+ q <- insert(q, letters)
+ q <- insert(q, "hello")
+ q <- insert(q, as.list(letters))
+ pop(q)
+ size(q)
+
+}

@@ -32,14 +32,14 @@ test_that("stack insert throws when inserting false values", {
 
 test_that("stack pops first element", {
     s <- stack("numeric")
-    r <- stats::rnorm(5)
+    r <- as.list(stats::rnorm(5))
     s <- insert(s, r)
-    expect_equal(pop(s), r[5], tolerance=0.1)
+    expect_equal(pop(s), r[[5]], tolerance=0.1)
 })
 
 test_that("stack peeks first element", {
     s <- stack("numeric")
-    r <- stats::rnorm(5)
+    r <- as.list(stats::rnorm(5))
     s <- insert(s, r)
-    expect_equal(peek(s), r[5], tolerance=0.1)
+    expect_equal(peek(s), r[[5]], tolerance=0.1)
 })

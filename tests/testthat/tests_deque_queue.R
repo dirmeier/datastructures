@@ -32,14 +32,14 @@ test_that("queue insert throws when inserting false values", {
 
 test_that("queue pops first element", {
     q <- queue("numeric")
-    r <- stats::rnorm(5)
+    r <- as.list(stats::rnorm(5))
     queue <- insert(q, r)
-    expect_equal(pop(q), r[1], tolerance=0.1)
+    expect_equal(pop(q), r[[1]], tolerance=0.1)
 })
 
 test_that("queue peeks first element", {
     q <- queue("numeric")
-    r <- stats::rnorm(5)
+    r <- as.list(stats::rnorm(5))
     q <- insert(q, r)
-    expect_equal(peek(q), r[1], tolerance=0.1)
+    expect_equal(peek(q), r[[1]], tolerance=0.1)
 })

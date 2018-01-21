@@ -36,5 +36,5 @@ test_that("hashmap get throws when getting false values", {
 })
 
 test_that("hashmap insert/get methods work", {
-    expect_equal(get(h, 1), 4)
+    expect_equal(get(h, 1)[[1]], 4)
 })

@@ -34,6 +34,13 @@ setClass("heap",
 #' @noRd
 .insert.heap <- function(obj, x, y)
 {
+    if (is.matrix(y))
+        y <- lapply(seq(nrow(y)), function(i) y[i, ] )
+    else if (length(x) == 1 && is.vector(y))
+        y <- list(y)
+    else if (length(x) == length(y) && is.vector(y))
+        y <- as.list(y)
+
     .check.key.value.classes(obj, x, y)
     obj@.heap$insert(x, y)
 

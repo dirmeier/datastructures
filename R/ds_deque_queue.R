@@ -79,15 +79,24 @@ setMethod("size", "queue", .size.deque)
 
 
 #' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "queue", x = "vector", y = "missing"),
-    function(obj, x) .insert.deque(obj, list(x)))
+setMethod(
+    "insert",
+    signature = signature(obj = "queue", x = "vector", y = "missing"),
+    function(obj, x) .insert.deque(obj, list(x))
+)
+
 
 #' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "queue", x = "list", y = "missing"),
-    function(obj, x) .insert.deque(obj, x))
+setMethod(
+    "insert",
+    signature = signature(obj = "queue", x = "list", y = "missing"),
+    function(obj, x) .insert.deque(obj, x)
+)
+
 
 #' @rdname insert-methods
-setMethod("insert", signature = signature(obj = "queue", x = "matrix", y = "missing"),
-    function(obj, x) {
-        .insert.deque(obj, lapply(seq(nrow(x)), function(i) x[i, ]))
-    })
+setMethod(
+    "insert",
+    signature = signature(obj = "queue", x = "matrix", y = "missing"),
+    function(obj, x) .insert.deque(obj, lapply(seq(nrow(x)), function(i) x[i, ]))
+)

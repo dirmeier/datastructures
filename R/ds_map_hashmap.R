@@ -98,7 +98,7 @@ hashmap <- function(
 setMethod(
     "insert",
     signature = signature(obj = "hashmap", x = "vector", y = "vector"),
-    function(obj, x, y) .insert.hashmap(obj, x, as.list(y))
+    function(obj, x, y) .insert.hashmap(obj, x, y)
 )
 
 
@@ -110,6 +110,12 @@ setMethod(
 )
 
 
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "hashmap", x = "vector", y = "matrix"),
+    function(obj, x, y) .insert.hashmap(obj, x, y)
+)
 
 
 #' Insert parts to an object
@@ -122,7 +128,7 @@ setMethod(
 setMethod(
     "[<-",
     signature = signature(x="hashmap", i="vector", j="missing", value="vector"),
-    function(x, i, value) .insert.hashmap(x, i, as.list(value))
+    function(x, i, value) .insert.hashmap(x, i, value)
 )
 
 
@@ -150,10 +156,21 @@ setMethod(
 setMethod(
     "[<-",
     signature = signature(x="hashmap", i="vector", j="missing", value="matrix"),
-    function(x, i, value)
-    {
-      .insert.hashmap(x, i, lapply(seq(nrow(value)), function(i) value[i, ] ))
-    }
+    function(x, i, value) .insert.hashmap(x, i, value)
+)
+
+
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to a hashmap.
+#'
+#' @param x  a \code{map} object
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
+setMethod(
+    "[<-",
+    signature = signature(x="hashmap", i="vector", j="missing", value="matrix"),
+    function(x, i, value) .insert.hashmap(x, i, value)
 )
 
 
@@ -211,7 +228,13 @@ setMethod(
 #' @noRd
 .insert.hashmap <- function(obj, x, y)
 {
-    stopifnot(length(x) == length(y))
+    if (is.matrix(y))
+        y <- lapply(seq(nrow(y)), function(i) y[i, ] )
+    else if (length(x) == 1 && is.vector(y))
+        y <- list(y)
+    else if (length(x) == length(y) && is.vector(y))
+        y <- as.list(y)
+
     .check.key.value.classes(obj, x, y)
     obj@.map$insert(x, y)
 

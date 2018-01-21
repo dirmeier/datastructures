@@ -11,16 +11,14 @@
 
 
 #' @noRd
-.check.key.value.classes <- function(obj, x, y) {
+.check.key.value.classes <- function(obj, x, y)
+{
     .check.key.class(obj, x)
     vc <- obj@.value.class
     if (any(is.null(c(x, y)))) stop("x/y cannot be NULL")
-    if (is.list(y))
-    {
-        if (any(lapply(y, class) != vc)) stop(paste("class(y) is not", kc))
-    }
-    else
-    {
+    if (is.list(y)) {
+        if (any(lapply(y, class) != vc)) stop(paste("class(y) is not", vc))
+    } else {
         if (class(y) != vc) stop(paste("class(y) is not", vc))
     }
 }
@@ -33,12 +31,9 @@
         stop("x/y cannot be NULL")
     if (any(is.na(x)))
         stop("x cannot be NA")
-    if (is.list(x))
-    {
+    if (is.list(x)) {
         if (any(lapply(x, class) != kc)) stop(paste("class(x) is not", kc))
-    }
-    else
-    {
+    } else {
         if (class(x) != kc) stop(paste("class(x) is not", kc))
     }
 }

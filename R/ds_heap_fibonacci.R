@@ -106,7 +106,7 @@ fibonacci_heap <- function(
 setMethod(
     "insert",
     signature = signature(obj = "fibonacci_heap", x = "vector", y = "vector"),
-    function(obj, x, y) .insert.heap(obj, x, as.list(y))
+    function(obj, x, y) .insert.heap(obj, x, y)
 )
 
 
@@ -114,7 +114,7 @@ setMethod(
 setMethod(
     "insert",
     signature = signature(obj = "fibonacci_heap", x = "vector", y = "list"),
-    function(obj, x, y) .insert.heap(obj, x, as.list(y))
+    function(obj, x, y) .insert.heap(obj, x, y)
 )
 
 
@@ -122,7 +122,7 @@ setMethod(
 setMethod(
     "insert",
     signature = signature(obj = "fibonacci_heap", x = "vector", y = "matrix"),
-    function(obj, x, y) .insert.heap(obj, x, lapply(seq(nrow(y)), function(i) y[i, ] ))
+    function(obj, x, y) .insert.heap(obj, x, y)
 )
 
 
@@ -138,7 +138,7 @@ setMethod(
 setMethod(
     "[<-",
     signature = signature(x="fibonacci_heap", i="vector", j="missing", value="vector"),
-    function(x, i, value) .insert.heap(x, i, as.list(value))
+    function(x, i, value) .insert.heap(x, i, value)
 )
 
 
@@ -170,8 +170,7 @@ setMethod(
 setMethod(
     "[<-",
     signature = signature(x="fibonacci_heap", i="vector", j="missing", value="matrix"),
-    function(x, i, value) .insert.heap(x, i,
-                                      lapply(seq(nrow(value)), function(i) value[i, ] ))
+    function(x, i, value) .insert.heap(x, i, value)
 )
 
 

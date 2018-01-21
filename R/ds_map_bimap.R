@@ -116,14 +116,14 @@ setMethod(
 setMethod(
     "insert",
     signature = signature(obj = "bimap", x = "vector", y = "vector"),
-    function(obj, x, y) .bimap.map(obj, x, y)
+    function(obj, x, y) .insert.bimap(obj, x, y)
 )
 
 
 #' @rdname get-methods
 setMethod(
     "get",
-    signature = signature(obj = "bimap", x = "ANY", which = "character"),
+    signature = signature(obj = "bimap", x = "vector", which = "character"),
     function(obj, x, which = c("values", "keys"))
     {
         which <- match.arg(which)
@@ -139,7 +139,7 @@ setMethod(
 #' @rdname get-methods
 setMethod(
     "get",
-    signature = signature(obj = "bimap", x = "ANY", which = "missing"),
+    signature = signature(obj = "bimap", x = "vector", which = "missing"),
     function(obj, x) {
         .check.key.class(obj, x)
         obj@.map$get_right(x)
@@ -170,6 +170,7 @@ setMethod("values", "bimap", function(obj)
 {
     obj@.map$rights()
 })
+
 
 #' @noRd
 .insert.bimap <- function(obj, x, y)

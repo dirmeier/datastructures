@@ -19,20 +19,3 @@ returns a new \code{fibonacci_heap} object
 Instantiates a new \code{\linkS4class{fibonacci_heap}} object,
  i.e. a tree-like data structure satisfying the \emph{min-heap} property.
 }
-\examples{
-f <- fibonacci_heap("numeric", "numeric")
-f[1] <- rnorm(5)
-f <- insert(f, c(2, 3), matrix(rnorm(10), 2))
-f <- insert(f, c(4, 5), list(rnorm(2), 4))
-f[c(-1, 7)] <- rnorm(2)
-pop(f)
-size(f)
-peek(f)
-
-f <- fibonacci_heap("integer", "integer")
-f[1:10] <- seq(10)
-pop(f)
-f[0L] <- 2L
-peek(f)
-
-}

@@ -16,19 +16,3 @@ returns a new \code{stack} object
 Instantiates a new \code{\linkS4class{stack}} object,
  i.e. a list implementation with LIFO principle.
 }
-\examples{
- s <- stack("numeric")
- s <- insert(s, rnorm(10))
- s <- insert(s, 2)
- s <- insert(s, as.list(rnorm(5)))
- peek(s)
- size(s)
-
- s <- stack("character")
- s <- insert(s, letters)
- s <- insert(s, "hello")
- s <- insert(s, as.list(letters))
- pop(s)
- size(s)
-
-}

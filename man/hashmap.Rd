@@ -20,16 +20,3 @@ Instantiates a new \code{\linkS4class{hashmap}} object,
  i.e. an unordered collection of key-value pairs with mapping
  \deqn{f: keys -> values.}
 }
-\examples{
-h <- hashmap("integer", "numeric")
-h[1L] <- rnorm(1)
-h <- insert(h, 11L, rbeta(5, 1, 1))
-h <- insert(h, 4:5, matrix(rbeta(10, 1, 1), 2))
-h <- insert(h, 6:7, list(1, rnorm(2)))
-keys(h)
-values(h)
-h[c(1L, 11L)]
-get(h, c(6L, 4L))
-head(h)
-
-}

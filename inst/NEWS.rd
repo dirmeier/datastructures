@@ -5,7 +5,7 @@
 \section{Version 0.2.1}{
   \itemize{
     \item Adds vectorial values for \code{hashmap}, \code{fibonacci_heap}, \code{binomial_heap}, \code{stack} and \code{queue}
-    \item Adds more unit tests
+    \item Adds more unit tests and examples
   }
 }
 

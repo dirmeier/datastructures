@@ -2,7 +2,7 @@ Package: datastructures
 Type: Package
 Title: Implementation of Core Data Structures
 Version: 0.2.1
-Date: 2017-07-13
+Date: 2018-01-21
 Authors@R: person("Simon", "Dirmeier",
                   email = "simon.dirmeier@web.de",
                   role = c("aut", "cre"))
@@ -33,7 +33,7 @@ LinkingTo:
     Rcpp,
     BH
 NeedsCompilation: yes
-Collate: 
+Collate:
     'checks.R'
     'datastructures-package.R'
     'ds_deque.R'

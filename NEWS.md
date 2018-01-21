@@ -3,7 +3,7 @@
 #### v0.2.1
 
 * Adds vectorial values for `hashmap`, `fibonacci_heap`, `binomial_heap`, `stack` and `queue`
-* Adds more unit tests
+* Adds more unit tests and examples
 
 ### v0.2.0
 

@@ -156,18 +156,17 @@ public:
         fibonacci_node<T, U> n = heap_.top();
         heap_.pop();
 
+        std::map<T, std::vector<U>> heads;
+        heads.insert(std::pair<T, std::vector<U> >(n.key_, n.value_));
+
         auto iterpair = key_to_id_.equal_range(n.key_);
         for (auto it = iterpair.first; it != iterpair.second; ++it)
         {
             if (it->second == n.id_)
             {
                 key_to_id_.erase(it);
-                id_to_handles_.erase(n.id_);
             }
         }
-
-        std::map<T, std::vector<U>> heads;
-        heads.insert(std::pair<T, std::vector<U> >(n.key_, n.value_));
 
         return Rcpp::wrap(heads);
     }

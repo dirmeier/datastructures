@@ -33,7 +33,7 @@ LinkingTo:
     Rcpp,
     BH
 NeedsCompilation: yes
-Collate:
+Collate: 
     'checks.R'
     'datastructures-package.R'
     'ds_deque.R'
@@ -45,6 +45,8 @@ Collate:
     'ds_deque_stack.R'
     'ds_heap.R'
     'ds_heap_binomial.R'
+    'methods_decrease.R'
+    'methods_handle.R'
     'ds_heap_fibonacci.R'
     'ds_map.R'
     'methods_values.R'

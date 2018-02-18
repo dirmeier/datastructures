@@ -23,6 +23,8 @@
 #' @include methods_peek.R
 #' @include methods_pop.R
 #' @include methods_size.R
+#' @include methods_handle.R
+#' @include methods_decrease.R
 NULL
 
 
@@ -187,3 +189,19 @@ setMethod("show", "fibonacci_heap", .show.heap)
 
 #' @rdname size-methods
 setMethod("size", "fibonacci_heap", .size.heap)
+
+
+#' @rdname handle-methods
+setMethod(
+    "handle",
+    signature = signature(obj="fibonacci_heap", key="vector"),
+    function(obj, key) .handle(obj, key)
+)
+
+
+#' @rdname decrease_key-methods
+setMethod(
+    "decrease_key",
+    signature = signature(obj="fibonacci_heap", from="vector", to="vector", handle="integer"),
+    function(obj, from, to, handle=NA_integer) .decrease_key(obj, from, to, handle)
+)

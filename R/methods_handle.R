@@ -18,29 +18,29 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @title Decreases the key of a node in a heap
+#' @title Get the handles and values for nodes of a specific key in a heap.
 #'
-#' @description Decreases the key of a node in a heap and updates the complete
-#'  heap. The key is decreases \code{from} a value \code{to} a value by that moving the
-#'  node's position in the heap. If a node cannot uniquely be identified using
-#'  the \code{to} key, a \code{\link{handle}} needs to be given in addition.
+#' @description Returns a list of handles and values for node elements that have
+#'  a specific key. That means for a given key, the reference to the node
+#'  (the handle) as well as the value of the node are returned. If one key fits
+#'  fits multiple nodes, all of the values and handles are returned. This is
+#'  needed in order to uniquely identify a node if, for example,
+#'  \code{decrease_key} on a specific node is going to be called.
 #'
 #' @export
 #' @docType methods
-#' @rdname decrease_key-methods
+#' @rdname handle-methods
 #'
 #' @param obj  a heap object
-#' @param from  a key in the heap for which the node should be decreased
-#' @param to  the new value of the heap
-#' @param handle  the handle of the specific node that is decreases
+#' @param key  a key in the heap
 #'
 #' @return  returns extracted handles and values from \code{obj}
 #'
 setGeneric(
-    "decrease_key",
-    function(obj, from, to, handle)
+    "handle",
+    function(obj, key)
     {
-        standardGeneric("decrease_key")
+        standardGeneric("handle")
     },
     package = "datastructures"
 )

@@ -97,3 +97,17 @@ setClass("heap",
 {
     obj@.heap$size()
 }
+
+
+#' @noRd
+.handle <- function(x, key)
+{
+    obj@.heap$handles()
+}
+
+
+#' @noRd
+.decrease_key <- function(obj, from, to, handle)
+{
+  obj@.heap$decrease_key()
+}

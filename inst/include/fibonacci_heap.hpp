@@ -20,6 +20,7 @@
  *
  */
 
+
 #ifndef DS_FIBHEAP
 #define DS_FIBHEAP
 
@@ -77,43 +78,47 @@ public:
 
     Rcpp::List handles(T from)
     {
-        std::map<T, std::pair<ul, std::vector<U>>> ret;
-        if (key_to_id_.find(from) != key_to_id_.end())
-        {
-            auto iterpair = key_to_id_.equal_range(from);
-            for (auto it = iterpair.first; it != iterpair.second; ++it)
-            {
-                ul id = it->second;
-                auto val = std::pair<ul, std::vector<U>>(
-                                id, (*id_to_handles_[id]).value_);
-                ret.insert(std::pair<T, std::pair<ul, std::vector<U> > >(from, val));
-            }
-        }
+        std::map<ul, std::vector<U>> ret;
+        // if (key_to_id_.find(from) != key_to_id_.end())
+        // {
+        //     auto iterpair = key_to_id_.equal_range(from);
+        //     for (auto it = iterpair.first; it != iterpair.second; ++it)
+        //     {
+        //         ul id = it->second;
+        //         ret.insert(std::pair<ul, std::vector<U>>(
+        //           id, (*id_to_handles_[id]).value_));
+        //     }
+        // }
 
-        return Rcpp::wrap(ret);
+        //return Rcpp::wrap(ret);
+        return Rcpp::wrap("s");
     }
 
     Rcpp::List decrease_key(T from, T to, unsigned long id)
     {
-        std::map< T, std::pair<unsigned long, std::vector<U>> > ret;
         if (to >= from)
         {
             Rcpp::stop(std::string("'to' key is not smaller than 'from'"));
         }
         if (key_to_id_.find(from) == key_to_id_.end())
         {
-            Rcpp::stop(std::string("'to' key not found"));
+            Rcpp::stop(std::string("'from' key not found"));
         }
-        if(id_to_handles_[id].count() == 1)
-        {
-            ret = decrease_key_(to, from, key_to_id_[from]);
-        }
-        else
+        if(id_to_handles_.find(id) == id_to_handles_.end())
         {
           Rcpp::stop(std::string("'id' key not found."));
         }
 
-        return Rcpp::wrap(ret);
+        bool has_id = false;
+        auto iterpair = key_to_id_.equal_range(from);
+        for (auto it = iterpair.first; it != iterpair.second; ++it)
+        {
+            if (it->second == id) has_id  = true;
+        }
+        if (!has_id) Rcpp::stop(std::string("'from' does not fit  value 'id'"));
+
+        // return Rcpp::wrap(decrease_key_(to, from, id));
+        return Rcpp::wrap("s");
     }
 
     void clear()
@@ -153,15 +158,15 @@ public:
     }
 
 private:
-    std::map<T, std::pair<ul, std::vector<U>>> decrease_key_(T to, T from, ul id)
+    std::map<ul, std::vector<U>> decrease_key_(T to, T from, ul id)
     {
         drop_from_map_(from, id);
         decrease_(to, id);
         key_to_id_.insert(std::pair<T, ul>(to, id));
 
-        std::map<T, std::pair<ul, std::vector<U>>> ret;
-        auto val = std::pair<ul, std::vector<U>>(id, (*id_to_handles_[id]).value_);
-        ret.insert(std::pair<T, std::pair<ul, std::vector<U> > >(to, val));
+        std::map<ul, std::vector<U>> ret;
+        ret.insert(std::pair<ul, std::vector<U>>(
+          id, (*id_to_handles_[id]).value_));
 
         return ret;
     }

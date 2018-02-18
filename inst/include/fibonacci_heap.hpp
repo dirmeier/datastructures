@@ -30,8 +30,10 @@
 #include <map>
 #include <unordered_map>
 #include <boost/heap/fibonacci_heap.hpp>
+#include "util.hpp"
 
-using ul = unsigned long;
+using ul = std::string;
+
 
 template <typename T, typename U>
 struct fibonacci_node
@@ -39,7 +41,7 @@ struct fibonacci_node
     typename boost::heap::fibonacci_heap<fibonacci_node<T, U>>::handle_type handle;
     T key_;
     std::vector<U> value_;
-    unsigned long id_;
+    ul id_;
 
     fibonacci_node(T key, std::vector<U> value, ul id) :
         key_(key), value_(value), id_(id)
@@ -67,34 +69,33 @@ public:
         }
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
         {
+            std::string uuid = uuid_();
             typename boost::heap::fibonacci_heap< fibonacci_node<T, U> >::handle_type h = heap_.push(fibonacci_node<T, U>(t[i], u[i], id_));
             (*h).handle = h;
 
             id_to_handles_.insert(std::pair<ul, typename boost::heap::fibonacci_heap<fibonacci_node<T, U>>::handle_type>(id_, h));
             key_to_id_.insert(std::pair<T, ul>(t[i], id_));
-            id_++;
         }
     }
 
     Rcpp::List handles(T from)
     {
         std::map<ul, std::vector<U>> ret;
-        // if (key_to_id_.find(from) != key_to_id_.end())
-        // {
-        //     auto iterpair = key_to_id_.equal_range(from);
-        //     for (auto it = iterpair.first; it != iterpair.second; ++it)
-        //     {
-        //         ul id = it->second;
-        //         ret.insert(std::pair<ul, std::vector<U>>(
-        //           id, (*id_to_handles_[id]).value_));
-        //     }
-        // }
+        if (key_to_id_.find(from) != key_to_id_.end())
+        {
+            auto iterpair = key_to_id_.equal_range(from);
+            for (auto it = iterpair.first; it != iterpair.second; ++it)
+            {
+                ul id = it->second;
+                ret.insert(std::pair<ul, std::vector<U>>(
+                  id, (*id_to_handles_[id]).value_));
+            }
+        }
 
-        //return Rcpp::wrap(ret);
-        return Rcpp::wrap("s");
+        return Rcpp::wrap(ret);
     }
 
-    Rcpp::List decrease_key(T from, T to, unsigned long id)
+    Rcpp::List decrease_key(T from, T to, ul id)
     {
         if (to >= from)
         {
@@ -117,8 +118,7 @@ public:
         }
         if (!has_id) Rcpp::stop(std::string("'from' does not fit  value 'id'"));
 
-        // return Rcpp::wrap(decrease_key_(to, from, id));
-        return Rcpp::wrap("s");
+        return Rcpp::wrap(decrease_key_(to, from, id));
     }
 
     void clear()
@@ -171,7 +171,7 @@ private:
         return ret;
     }
 
-    void drop_from_map_(T from, unsigned long id)
+    void drop_from_map_(T from, ul id)
     {
         auto iterpair = key_to_id_.equal_range(from);
         for (auto it = iterpair.first; it != iterpair.second; ++it)
@@ -184,7 +184,7 @@ private:
         }
     }
 
-    void decrease_(T to, unsigned long id)
+    void decrease_(T to, ul id)
     {
       (*id_to_handles_[id]).key_ = to;
       heap_.decrease(id_to_handles_[id]);

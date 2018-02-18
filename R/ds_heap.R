@@ -84,7 +84,7 @@ setClass("heap",
                object@.value.class, ">\n\n"))
     li       <- peek(object)
     li.names <- names(li)
-    if (is.null(li) )
+    if (is.null(li))
         li <- "NULL"
     if (is.null(li.names))
         li.names <- "NULL"
@@ -100,14 +100,14 @@ setClass("heap",
 
 
 #' @noRd
-.handle <- function(x, key)
+.handle <- function(obj, key)
 {
-    obj@.heap$handles()
+    obj@.heap$handles(key)
 }
 
 
 #' @noRd
 .decrease_key <- function(obj, from, to, handle)
 {
-  obj@.heap$decrease_key()
+  obj@.heap$decrease_key(from, to, handle)
 }

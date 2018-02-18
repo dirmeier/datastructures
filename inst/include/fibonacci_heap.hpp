@@ -24,6 +24,7 @@
 #ifndef DS_FIBHEAP
 #define DS_FIBHEAP
 
+
 #include <Rcpp.h>
 #include <vector>
 #include <string>
@@ -184,12 +185,12 @@ public:
 private:
     void decrease_key_(T to, T from, ul id)
     {
-        drop_from_map_(from, id);
+        drop_from_key_map_(from, id);
         decrease_(to, id);
         key_to_id_.insert(std::pair<T, ul>(to, id));
     }
 
-    void drop_from_map_(T from, ul id)
+    void drop_from_key_map_(T from, ul id)
     {
         auto iterpair = key_to_id_.equal_range(from);
         for (auto it = iterpair.first; it != iterpair.second; ++it)

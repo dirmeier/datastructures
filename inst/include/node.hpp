@@ -30,18 +30,17 @@ struct node
 {
     T key_;
     std::vector<U> value_;
+    unsigned long id_;
 
-    node(T key, std::vector<U> value) : key_(key), value_(value)
+    node(){}
+
+    node(T key, std::vector<U> value) : key_(key), value_(value), id_(0L)
+    {}
+
+    node(T key, std::vector<U> value, unsigned long id) :
+        key_(key), value_(value), id_(id)
     {}
 };
 
-template <typename T, typename U>
-struct compare_node
-{
-    bool operator()(const node<T, U>& lhs, const node<T, U>& rhs) const
-    {
-        return lhs.key_ > rhs.key_;
-    }
-};
 
 #endif

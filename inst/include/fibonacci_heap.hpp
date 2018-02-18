@@ -27,15 +27,35 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <unordered_map>
 #include <boost/heap/fibonacci_heap.hpp>
 
-#include <node.hpp>
+using ul = unsigned long;
+
+template <typename T, typename U>
+struct fibonacci_node
+{
+    typename boost::heap::fibonacci_heap<fibonacci_node<T, U>>::handle_type handle;
+    T key_;
+    std::vector<U> value_;
+    unsigned long id_;
+
+    fibonacci_node(T key, std::vector<U> value, ul id) :
+        key_(key), value_(value), id_(id)
+    {}
+
+      bool operator<( const fibonacci_node<T, U>& rhs) const
+      {
+          return key_ > rhs.key_;
+      }
+};
+
 
 template <typename T, typename U>
 class fibonacci_heap
 {
 public:
-    fibonacci_heap(): heap_()
+    fibonacci_heap(): id_(0), heap_(), key_to_id_(), id_to_handles_()
     {}
 
     void insert(std::vector<T>& t, std::vector< std::vector<U> >& u)
@@ -46,8 +66,54 @@ public:
         }
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
         {
-            heap_.push(node<T, U>(t[i], u[i]));
+            typename boost::heap::fibonacci_heap< fibonacci_node<T, U> >::handle_type h = heap_.push(fibonacci_node<T, U>(t[i], u[i], id_));
+            (*h).handle = h;
+
+            id_to_handles_.insert(std::pair<ul, typename boost::heap::fibonacci_heap<fibonacci_node<T, U>>::handle_type>(id_, h));
+            key_to_id_.insert(std::pair<T, ul>(t[i], id_));
+            id_++;
         }
+    }
+
+    Rcpp::List handles(T from)
+    {
+        std::map<T, std::pair<ul, std::vector<U>>> ret;
+        if (key_to_id_.find(from) != key_to_id_.end())
+        {
+            auto iterpair = key_to_id_.equal_range(from);
+            for (auto it = iterpair.first; it != iterpair.second; ++it)
+            {
+                ul id = it->second;
+                auto val = std::pair<ul, std::vector<U>>(
+                                id, (*id_to_handles_[id]).value_);
+                ret.insert(std::pair<T, std::pair<ul, std::vector<U> > >(from, val));
+            }
+        }
+
+        return Rcpp::wrap(ret);
+    }
+
+    Rcpp::List decrease_key(T from, T to, unsigned long id)
+    {
+        std::map< T, std::pair<unsigned long, std::vector<U>> > ret;
+        if (to >= from)
+        {
+            Rcpp::stop(std::string("'to' key is not smaller than 'from'"));
+        }
+        if (key_to_id_.find(from) == key_to_id_.end())
+        {
+            Rcpp::stop(std::string("'to' key not found"));
+        }
+        if(id_to_handles_[id].count() == 1)
+        {
+            ret = decrease_key_(to, from, key_to_id_[from]);
+        }
+        else
+        {
+          Rcpp::stop(std::string("'id' key not found."));
+        }
+
+        return Rcpp::wrap(ret);
     }
 
     void clear()
@@ -67,10 +133,10 @@ public:
 
     Rcpp::List pop()
     {
-        node<T, U> n = heap_.top();
+        fibonacci_node<T, U> n = heap_.top();
         heap_.pop();
 
-        std::map< T, std::vector<U> > heads;
+        std::map<T, std::vector<U>> heads;
         heads.insert(std::pair<T, std::vector<U> >(n.key_, n.value_));
 
         return Rcpp::wrap(heads);
@@ -78,16 +144,51 @@ public:
 
     Rcpp::List peek()
     {
-        node<T, U> n = heap_.top();
+        fibonacci_node<T, U> n = heap_.top();
 
         std::map< T, std::vector<U> > heads;
-        heads.insert(std::pair<T, std::vector<U> >(n.key_, n.value_));
+        heads.insert(std::pair< T, std::vector<U> >(n.key_, n.value_));
 
         return Rcpp::wrap(heads);
     }
 
 private:
-    boost::heap::fibonacci_heap< node<T, U >, boost::heap::compare<compare_node<T, U> > > heap_;
+    std::map<T, std::pair<ul, std::vector<U>>> decrease_key_(T to, T from, ul id)
+    {
+        drop_from_map_(from, id);
+        decrease_(to, id);
+        key_to_id_.insert(std::pair<T, ul>(to, id));
+
+        std::map<T, std::pair<ul, std::vector<U>>> ret;
+        auto val = std::pair<ul, std::vector<U>>(id, (*id_to_handles_[id]).value_);
+        ret.insert(std::pair<T, std::pair<ul, std::vector<U> > >(to, val));
+
+        return ret;
+    }
+
+    void drop_from_map_(T from, unsigned long id)
+    {
+        auto iterpair = key_to_id_.equal_range(from);
+        for (auto it = iterpair.first; it != iterpair.second; ++it)
+        {
+            if (it->second == id)
+            {
+                key_to_id_.erase(it);
+                break;
+            }
+        }
+    }
+
+    void decrease_(T to, unsigned long id)
+    {
+      (*id_to_handles_[id]).key_ = to;
+      heap_.decrease(id_to_handles_[id]);
+    }
+
+    ul id_;
+    boost::heap::fibonacci_heap< fibonacci_node<T, U> > heap_;
+    std::unordered_multimap<T, ul> key_to_id_;
+    std::unordered_map<ul, typename boost::heap::fibonacci_heap< fibonacci_node<T, U> >::handle_type> id_to_handles_;
 };
 
 typedef fibonacci_heap<std::string, std::string> fibonacci_heap_ss;

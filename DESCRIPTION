@@ -28,12 +28,13 @@ RoxygenNote: 6.0.1
 SystemRequirements: C++11
 Imports:
     Rcpp,
-    methods
+    methods,
+    purrr
 LinkingTo:
     Rcpp,
     BH
 NeedsCompilation: yes
-Collate: 
+Collate:
     'checks.R'
     'datastructures-package.R'
     'ds_deque.R'

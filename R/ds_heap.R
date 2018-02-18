@@ -100,14 +100,43 @@ setClass("heap",
 
 
 #' @noRd
+#' @importFrom purrr map
 .handle <- function(obj, key)
 {
-    obj@.heap$handles(key)
+    .check.key.class(obj, key)
+    ret <- obj@.heap$handles(key)
+    purrr::map(names(ret), .f = function(x) list(handle=x, value=ret[[x]]) )
 }
 
 
 #' @noRd
 .decrease_key <- function(obj, from, to, handle)
 {
-  obj@.heap$decrease_key(from, to, handle)
+    .check.key.class(obj, from)
+    .check.key.class(obj, to)
+    if (is.null(handle))
+    {
+      handlex <- vector(mode="character", length=length(from))
+      for (i in seq(from))
+      {
+        handle.ids <- obj@.heap$handles(from[i])
+        if (length(handle.ids) == 1) { handlex[i] <- names(handle.ids)[1] }
+        else if (length(handle.ids) == 0)
+        {
+          warning(paste0("Zero handles found for '", from[i], "'."))
+        }
+        else
+        {
+          stop(paste0(
+            "Multiple handles found for '", from[i], "'. ",
+            "Please specify handles implicitely."))
+        }
+      }
+    }
+    else
+    {
+      handlex <- handle
+    }
+
+    obj@.heap$decrease_key(from, to, handlex)
 }

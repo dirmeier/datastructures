@@ -3,13 +3,16 @@
 \docType{methods}
 \name{decrease_key}
 \alias{decrease_key}
-\alias{decrease_key,fibonacci_heap,vector,vector,integer-method}
+\alias{decrease_key,fibonacci_heap,vector,vector,character-method}
+\alias{decrease_key,fibonacci_heap,vector,vector,missing-method}
 \title{Decreases the key of a node in a heap}
 \usage{
 decrease_key(obj, from, to, handle)
 
-\S4method{decrease_key}{fibonacci_heap,vector,vector,integer}(obj, from, to,
-  handle = NA_integer)
+\S4method{decrease_key}{fibonacci_heap,vector,vector,character}(obj, from, to,
+  handle)
+
+\S4method{decrease_key}{fibonacci_heap,vector,vector,missing}(obj, from, to)
 }
 \arguments{
 \item{obj}{a heap object}

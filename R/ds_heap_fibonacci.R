@@ -202,13 +202,16 @@ setMethod(
 #' @rdname decrease_key-methods
 setMethod(
     "decrease_key",
-    signature = signature(obj="fibonacci_heap", from="vector", to="vector", handle="character"),
+    signature = signature(obj="fibonacci_heap",
+                          from="vector", to="vector", handle="character"),
     function(obj, from, to, handle) .decrease_key(obj, from, to, handle)
 )
+
 
 #' @rdname decrease_key-methods
 setMethod(
     "decrease_key",
-    signature = signature(obj="fibonacci_heap", from="vector", to="vector", handle="missing"),
+    signature = signature(obj="fibonacci_heap",
+                          from="vector", to="vector", handle="missing"),
     function(obj, from, to) .decrease_key(obj, from, to, NULL)
 )

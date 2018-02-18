@@ -30,7 +30,7 @@
 #include <string>
 #include <map>
 #include <unordered_map>
-#include <boost/heap/fibonacci_heap.hpp>
+#include <boost/heap/binomial_heap.hpp>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
@@ -42,7 +42,7 @@ using ul = std::string;
 template <typename T, typename U>
 struct binomial_node
 {
-    typename boost::heap::binomial_heap<fibonacci_node<T, U>>::handle_type handle;
+    typename boost::heap::binomial_heap<binomial_node<T, U>>::handle_type handle;
     T key_;
     std::vector<U> value_;
     ul id_;
@@ -59,7 +59,7 @@ struct binomial_node
 
 
 template <typename T, typename U>
-using Heap = boost::heap::binomial_heap<fibonacci_node<T, U>>;
+using Heap = boost::heap::binomial_heap<binomial_node<T, U>>;
 
 
 template <typename T, typename U>
@@ -154,7 +154,7 @@ public:
 
     Rcpp::List pop()
     {
-        node<T, U> n = heap_.top();
+        binomial_node<T, U> n = heap_.top();
         heap_.pop();
 
         std::map< T, std::vector<U> > heads;
@@ -165,7 +165,7 @@ public:
 
     Rcpp::List peek()
     {
-        node<T, U> n = heap_.top();
+        binomial_node<T, U> n = heap_.top();
 
         std::map< T, std::vector<U> > heads;
         heads.insert(std::pair<T, std::vector<U>>(n.key_, n.value_));

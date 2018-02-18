@@ -106,10 +106,78 @@ test_that("binomial heap peek first element multiple elements vector", {
 })
 
 
-test_that("fibo heap peek first element multiple elements as list", {
+test_that("binomial heap peek first element multiple elements as list", {
     bheap <- binomial_heap("character", "numeric")
     r <- letters[1:2]
     m <- as.list(rnorm(2))
     bheap <- insert(bheap, r, m)
     expect_equal(unname(unlist(peek(bheap))), m[[1]])
+})
+
+
+
+
+test_that("binomial warns for non key element at decrease", {
+    bheap <- binomial_heap("character", "numeric")
+    r <- letters[c(1, 1)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    expect_warning(decrease_key(heap, letters[3]))
+})
+
+
+test_that("binomial stops for double key element at decrease", {
+    bheap <- binomial_heap("character", "numeric")
+    r <- letters[c(1, 1)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    expect_error(decrease_key(heap, letters[1]))
+})
+
+test_that("binomial returns correct handles for two keys", {
+    bheap <- binomial_heap("character", "numeric")
+    r <- letters[c(1, 1)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    hand <- handle(bheap, letters[1])
+    expect_equal(length(hand)), 2)
+})
+
+test_that("binomial throws from Rcpp when incorrect decrease vector lengths", {
+    bheap <- binomial_heap("character", "numeric")
+    r <- letters[c(3, 2)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    hand <- handle(bheap, letters[1])
+    expect_error(decrease_key(bheap, from=letters[c(3, 2)], to="a"))
+})
+
+test_that("binomial decrease key works with handles", {
+    bheap <- binomial_heap("character", "numeric")
+    r <- letters[c(3, 3)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    hand <- handle(bheap, letters[3])
+    decrease_key(bheap, from=letters[3], to="a", handle=hand[[1]]$handle)
+    expect_equal(unname(pop(bheap)), m[[1]])
+})
+
+test_that("binomial computes decrease key correctly", {
+    bheap <- binomial_heap("character", "numeric")
+    r <- letters[c(2, 3)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    decrease_key(bheap, letters[3], letters[1])
+    expect_equal(names(pop(bheap)), "a")
+})
+
+test_that("binomial returns correct handles for two keys after decrease", {
+    bheap <- binomial_heap("character", "numeric")
+    r <- letters[c(2, 3)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    decrease_key(bheap, letters[3], letters[1])
+    expect_equal(length(handle(bheap, letters[1]))), 1)
+    expect_equal(length(handle(bheap, letters[2]))), 1)
+    expect_equal(length(handle(bheap, letters[3]))), 1)
 })

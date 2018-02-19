@@ -160,15 +160,7 @@ public:
         std::map< T, std::vector<U> > heads;
         heads.insert(std::pair<T, std::vector<U>>(n.key_, n.value_));
 
-        auto iterpair = key_to_id_.equal_range(n.key_);
-        for (auto it = iterpair.first; it != iterpair.second; ++it)
-        {
-            if (it->second == n.id_)
-            {
-                key_to_id_.erase(it);
-                break;
-            }
-        }
+        drop_from_key_map_(n.key_, n.id_);
 
         return Rcpp::wrap(heads);
     }
@@ -179,7 +171,6 @@ public:
 
         std::map< T, std::vector<U> > heads;
         heads.insert(std::pair<T, std::vector<U>>(n.key_, n.value_));
-
 
         return Rcpp::wrap(heads);
     }

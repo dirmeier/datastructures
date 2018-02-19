@@ -199,6 +199,7 @@ private:
     {
       (*id_to_handles_[id]).key_ = to;
       heap_.decrease(id_to_handles_[id]);
+      heap_.update(id_to_handles_[id]);
     }
 
     Heap<T, U> heap_;

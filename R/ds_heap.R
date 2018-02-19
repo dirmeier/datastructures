@@ -117,13 +117,13 @@ setClass("heap",
     if (is.null(handle))
     {
       handlex <- vector(mode="character", length=length(from))
-      for (i in seq(from))
+      for (i in seq_along(from))
       {
         handle.ids <- obj@.heap$handles(from[i])
         if (length(handle.ids) == 1) { handlex[i] <- names(handle.ids)[1] }
         else if (length(handle.ids) == 0)
         {
-          warning(paste0("Zero handles found for '", from[i], "'."))
+          stop(paste0("Zero handles found for '", from[i], "'."))
         }
         else
         {

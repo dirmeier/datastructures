@@ -107,7 +107,7 @@ test_that("fibo warns for non key element at decrease", {
     r <- letters[c(1, 1)]
     m <- as.list(rnorm(2))
     bheap <- insert(bheap, r, m)
-    expect_warning(decrease_key(heap, letters[3]))
+    expect_error(decrease_key(bheap, letters[3], letters[2]))
 })
 
 
@@ -144,7 +144,7 @@ test_that("fibo decrease key works with handles", {
     bheap <- insert(bheap, r, m)
     hand <- handle(bheap, letters[3])
     decrease_key(bheap, from=letters[3], to="a", handle=hand[[1]]$handle)
-    expect_equal(unname(pop(bheap)), m[[1]])
+    expect_equal(names(pop(bheap)), "a")
 })
 
 test_that("fibo computes decrease key correctly", {

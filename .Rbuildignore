@@ -20,4 +20,4 @@ TODO.md
 ^NEWS.md$
 .codecov.ym
 .yo-rc.json
-
+.clang-format

@@ -90,28 +90,28 @@ You can alternatively insert values like this:
 
 This works for all the described `insert` methods above.
 
-Sometimes, we want to decrease a key and but that rearrange its position in the
-heap. If we have a *unique* key this can be easily done like that:
+Sometimes, we want to decrease a key and rearrange its position in the
+heap. If we have a *unique* key this can be easily done:
 
 ```{r}
   decrease_key(fheap, from=-10, to=-11)
   peek(fheap)
 ```
 
-The function takes vectors, so you can also do it like this:
+The function takes vectors, so you can also pass vectorial `to` and `from` arguments:
 
 ```{r}
   decrease_key(fheap, from=c(-5, -4), to=c(-15, -15))
   peek(fheap)
 ```
 
-However, things get more complicated if we have multiple identical keys like we decreases above. In this case, in order to decrease to correct node, we need to get its `handle` first:
+However, things get more complicated if we have multiple identical keys and want to decrease a specific one. In this case, in order to decrease to correct node, we need to get its `handle` first:
 
 ```{r}
   handle(fheap, -15)
 ```
 
-The `handle` methods returns the `id` of the node and the `value` that is stored
+The `handle` method returns the `id` of the node and the `value` that is stored
 for a given `key` (in this case -15). Thus if we want to decrease a node with ambiguous key, we also need to specify the handle (e.g. the `id`):
 
 ```{r}
@@ -120,7 +120,7 @@ for a given `key` (in this case -15). Thus if we want to decrease a node with am
   peek(fheap)
 ```
 
-The `handle` method always returns a list where every element represents a node in the heap. Every list element is again a list constisting of the node's `handle` and its `id`. So you need to check the node`s value to figure out the
+The `handle` method always returns a list where every element represents a node in the heap. Every list element is again a list consisting of the node's `handle` and its `id`. So you need to check the node`s value to figure out the
 corresponding `id`. (This is the easiest implementation I could think of. Better suggestions are welcome as using this is not straightforward I find)
 
 ## Hashmaps and bimaps

@@ -62,7 +62,7 @@ If you want to add multiple values, you need to use a `vector`ial key and a `mat
 Furthermore, you can use lists as values to insert into a heap:
 
 ```{r}
-  fheap  <- insert(fheap, c(-4, -5), list("a", letters[1:4]))
+  fheap  <- insert(fheap, c(-4, -5, -6), list("a", letters[1:4], "hello"))
   peek(fheap)
 ```
 
@@ -101,22 +101,23 @@ heap. If we have a *unique* key this can be easily done like that:
 The function takes vectors, so you can also do it like this:
 
 ```{r}
-  decrease_key(fheap, from=c(-5, -4), to=-c(-15, -15))
+  decrease_key(fheap, from=c(-5, -4), to=c(-15, -15))
   peek(fheap)
 ```
 
 However, things get more complicated if we have multiple identical keys like we decreases above. In this case, in order to decrease to correct node, we need to get its `handle` first:
 
 ```{r}
-  handle(fh, -15)
+  handle(fheap, -15)
 ```
 
 The `handle` methods returns the `id` of the node and the `value` that is stored
 for a given `key` (in this case -15). Thus if we want to decrease a node with ambiguous key, we also need to specify the handle (e.g. the `id`):
 
 ```{r}
-  hand <- handle(fh, -15)
-  decrease_key(fh, -15, hand[[1]]$handle)
+  hand <- handle(fheap, -15)
+  decrease_key(fheap, -15, -20, hand[[1]]$handle)
+  peek(fheap)
 ```
 
 The `handle` method always returns a list where every element represents a node in the heap. Every list element is again a list constisting of the node's `handle` and its `id`. So you need to check the node`s value to figure out the

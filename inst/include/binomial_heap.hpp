@@ -96,8 +96,9 @@ public:
             for (auto it = iterpair.first; it != iterpair.second; ++it)
             {
                 ul id = it->second;
-                ret.insert(std::pair<ul, std::vector<U>>(
-                  id, (*id_to_handles_[id]).value_));
+                if (id_to_handles.find(id) != id_to_handles.end())
+                    ret.insert(std::pair<ul, std::vector<U>>(
+                        id, (*id_to_handles_[id]).value_));
             }
         }
 

@@ -101,3 +101,68 @@ test_that("fibo heap peek first element multiple elements as list", {
     bheap <- insert(bheap, r, m)
     expect_equal(unname(unlist(peek(bheap))), m[[1]])
 })
+
+test_that("fibo warns for non key element at decrease", {
+    bheap <- fibonacci_heap("character", "numeric")
+    r <- letters[c(1, 1)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    expect_warning(decrease_key(heap, letters[3]))
+})
+
+
+test_that("fibo stops for double key element at decrease", {
+    bheap <- fibonacci_heap("character", "numeric")
+    r <- letters[c(1, 1)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    expect_error(decrease_key(heap, letters[1]))
+})
+
+test_that("fibo returns correct handles for two keys", {
+    bheap <- fibonacci_heap("character", "numeric")
+    r <- letters[c(1, 1)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    hand <- handle(bheap, letters[1])
+    expect_equal(length(hand), 2)
+})
+
+test_that("fibo throws from Rcpp when incorrect decrease vector lengths", {
+    bheap <- fibonacci_heap("character", "numeric")
+    r <- letters[c(3, 2)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    hand <- handle(bheap, letters[1])
+    expect_error(decrease_key(bheap, from=letters[c(3, 2)], to="a"))
+})
+
+test_that("fibo decrease key works with handles", {
+    bheap <- fibonacci_heap("character", "numeric")
+    r <- letters[c(3, 3)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    hand <- handle(bheap, letters[3])
+    decrease_key(bheap, from=letters[3], to="a", handle=hand[[1]]$handle)
+    expect_equal(unname(pop(bheap)), m[[1]])
+})
+
+test_that("fibo computes decrease key correctly", {
+    bheap <- fibonacci_heap("character", "numeric")
+    r <- letters[c(2, 3)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    decrease_key(bheap, letters[3], letters[1])
+    expect_equal(names(pop(bheap)), "a")
+})
+
+test_that("fibo returns correct handles for two keys after decrease", {
+    bheap <- fibonacci_heap("character", "numeric")
+    r <- letters[c(2, 3)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    decrease_key(bheap, letters[3], letters[1])
+    expect_equal(length(handle(bheap, letters[1])), 1)
+    expect_equal(length(handle(bheap, letters[2])), 1)
+    expect_equal(length(handle(bheap, letters[3])), 0)
+})

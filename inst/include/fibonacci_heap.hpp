@@ -161,10 +161,11 @@ public:
 
         auto iterpair = key_to_id_.equal_range(n.key_);
         for (auto it = iterpair.first; it != iterpair.second; ++it)
-        {
+        {            
             if (it->second == n.id_)
             {
                 key_to_id_.erase(it);
+                break;
             }
         }
 

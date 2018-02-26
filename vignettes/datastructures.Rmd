@@ -130,7 +130,7 @@ you would call the `handle` method like this:
   h <- handle(fheap, value="V-10")
   h
   decrease_key(fheap, 10, -100, h[[1]]$handle)
-  peek(h)
+  peek(fheap)
 ```
 
 In all of these scenarios neither the key nor the value need to be unique, because the handle (node id) always is.

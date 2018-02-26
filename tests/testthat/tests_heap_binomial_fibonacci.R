@@ -191,7 +191,7 @@ test_that("heap returns correct handles for two keys",
 
 test_that("heaps throws from Rcpp when incorrect decrease vector lengths",
 {
-  for (s in hs)
+  for (h in hs)
   {
     bheap <- h("character", "numeric")
     r <- letters[c(3, 2)]

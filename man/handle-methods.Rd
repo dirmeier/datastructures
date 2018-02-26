@@ -4,20 +4,28 @@
 \docType{methods}
 \name{handle}
 \alias{handle}
-\alias{handle,binomial_heap,vector-method}
-\alias{handle,fibonacci_heap,vector-method}
+\alias{handle,binomial_heap,vector,missing-method}
+\alias{handle,binomial_heap,missing,vector-method}
+\alias{handle,fibonacci_heap,vector,missing-method}
+\alias{handle,fibonacci_heap,missing,vector-method}
 \title{Get the handles and values for nodes of a specific key in a heap.}
 \usage{
-handle(obj, key)
+handle(obj, key, value)
 
-\S4method{handle}{binomial_heap,vector}(obj, key)
+\S4method{handle}{binomial_heap,vector,missing}(obj, key)
 
-\S4method{handle}{fibonacci_heap,vector}(obj, key)
+\S4method{handle}{binomial_heap,missing,vector}(obj, value)
+
+\S4method{handle}{fibonacci_heap,vector,missing}(obj, key)
+
+\S4method{handle}{fibonacci_heap,missing,vector}(obj, value)
 }
 \arguments{
 \item{obj}{a heap object}
 
 \item{key}{a key in the heap}
+
+\item{value}{a value in the heap}
 }
 \value{
 returns extracted handles and values from \code{obj}

@@ -115,13 +115,48 @@ The `handle` method returns the `id` of the node and the `value` that is stored
 for a given `key` (in this case -15). Thus if we want to decrease a node with ambiguous key, we also need to specify the handle (e.g. the `id`):
 
 ```{r}
-  hand <- handle(fheap, -15)
+  hand <- handle(fheap, -15)  
   decrease_key(fheap, -15, -20, hand[[1]]$handle)
   peek(fheap)
 ```
 
-The `handle` method always returns a list where every element represents a node in the heap. Every list element is again a list consisting of the node's `handle` and its `id`. So you need to check the node`s value to figure out the
-corresponding `id`. (This is the easiest implementation I could think of. Better suggestions are welcome as using this is not straightforward I find)
+The `handle` method always returns a list where every element represents a node in the heap. Every list element is again a list consisting of the node's handle (its id). So you need to check the node's value to figure out the
+corresponding handle. Furthermore, if you want to query by a node's `value`
+you would call the `handle` method like this:
+
+```{r}
+  fheap <- insert(fheap, 10, "V-10")
+  fheap <- insert(fheap, 10, "V-10")
+  h <- handle(fheap, value="V-10")
+  h
+  decrease_key(fheap, 10, -100, h[[1]]$handle)
+  peek(h)
+```
+
+In all of these scenarios neither the key nor the value need to be unique, because the handle (node id) always is.
+
+### Use case
+As a last example, consider this use case:
+
+```{r}
+  library('purrr')
+  bheap <- binomial_heap("character", "integer")
+  bheap <- insert(bheap, letters[c(2:6, 5, 5)], c(2:6, 5L, 7L))
+  bheap <- insert(bheap, "x", 1:3)
+  bheap <- insert(bheap, "z", 1:3)
+  peek(bheap)
+  vector.keys <- handle(bheap, value = 1:3) %>%
+    purrr::map_chr(.f = function(x) x$key)
+  vector.keys
+  decrease_key(bheap, from=vector.keys, to=c("a", "b"))
+  peek(bheap)
+  hand <- handle(bheap, key = "b")
+  hand
+  decrease_key(bheap, from="b", to="a", handle=hand[[2]]$handle)
+  pop(bheap)
+  pop(bheap)
+```
+
 
 ## Hashmaps and bimaps
 

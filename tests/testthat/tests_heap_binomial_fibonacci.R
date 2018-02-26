@@ -192,11 +192,12 @@ test_that("heap returns correct handles for two keys",
 test_that("heaps throws from Rcpp when incorrect decrease vector lengths",
 {
   for (s in hs)
-    bheap <- binomial_heap("character", "numeric")
-    r <- letters[h(3, 2)]
+  {
+    bheap <- h("character", "numeric")
+    r <- letters[c(3, 2)]
     m <- as.list(rnorm(2))
     bheap <- insert(bheap, r, m)
-    hand <- handle(bheap, letters[1])
+    hand <- handle(bheap, letters[3])
     expect_error(decrease_key(bheap, from=letters[c(3, 2)], to="a"))
   }
 })
@@ -259,7 +260,7 @@ test_that("heap returns correct handles for value",
     expect_equal(length(h), 3)
     for (i in seq(h))
     {
-      expect_equal(h[[i]]$key == 1:3)
+      expect_true(h[[i]]$key %in% 1:3)
     }
   }
 })
@@ -286,8 +287,8 @@ test_that("heap decrease key by value works for same values",
     r <- c(1L, 1L, 3L)
     m <- list(1:3, 1:3, 1:6)
     bheap <- insert(bheap, r, m)
-    h <- handle(bheap, value=1:5)
+    h <- handle(bheap, value=1:3)
     decrease_key(bheap, from=h[[1]]$key, to=0L, handle=h[[1]]$handle)
-    expect_equal(length(handle(bheap, 1L)) == 1)
+    expect_equal(length(handle(bheap, 1L)),  1)
   }
 })

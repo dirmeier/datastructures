@@ -1,7 +1,7 @@
 Package: datastructures
 Type: Package
 Title: Implementation of Core Data Structures
-Version: 0.2.2
+Version: 0.2.3
 Date: 2018-01-21
 Authors@R: person("Simon", "Dirmeier",
                   email = "simon.dirmeier@web.de",
@@ -25,7 +25,7 @@ Suggests:
     lintr
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
-SystemRequirements: C++11
+SystemRequirements: C++14
 Imports:
     Rcpp,
     methods,

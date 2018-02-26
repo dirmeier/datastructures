@@ -65,8 +65,7 @@ template <typename T, typename U>
 class fibonacci_heap
 {
 public:
-    fibonacci_heap(): heap_(), key_to_id_(), id_to_handles_(), generator_()
-    {}
+    fibonacci_heap() = default;
 
     void insert(std::vector<T>& t, std::vector< std::vector<U> >& u)
     {
@@ -83,10 +82,11 @@ public:
 
             id_to_handles_.insert(std::pair<ul, typename Heap<T, U>::handle_type>(id_, h));
             key_to_id_.insert(std::pair<T, ul>(t[i], id_));
+            value_to_id_.insert(std::pair<std::vector<U>, ul>(u[i], id_));
         }
     }
 
-    Rcpp::List handles(T from)
+    Rcpp::List handles(T& from)
     {
         std::map<ul, std::vector<U>> ret;
         if (key_to_id_.find(from) != key_to_id_.end())
@@ -104,7 +104,24 @@ public:
         return Rcpp::wrap(ret);
     }
 
-    void decrease_key(std::vector<T> from, std::vector<T> to, std::vector<ul> id)
+    Rcpp::List handles_values(U& from)
+    {
+      std::map<ul, std::vector<T>> ret;
+      if (value_to_id_.find(from) != value_to_id_.end())
+      {
+          auto iterpair = value_to_id_.equal_range(from);
+          for (auto it = iterpair.first; it != iterpair.second; ++it)
+          {
+              ul id = it->second;
+              if (id_to_handles_.find(id) != id_to_handles_.end())
+                  ret.insert(std::pair<ul, T>(id, (*id_to_handles_[id]).key_));
+          }
+      }
+
+      return Rcpp::wrap(ret);
+    }
+
+    void decrease_key(std::vector<T>& from, std::vector<T>& to, std::vector<ul>& id)
     {
         if (from.size() != to.size() || to.size() != id.size())
         {
@@ -161,6 +178,7 @@ public:
         heads.insert(std::pair<T, std::vector<U> >(n.key_, n.value_));
 
         drop_from_key_map_(n.key_, n.id_);
+        drop_from_value_map_(n.value_, n.id_);
 
         return Rcpp::wrap(heads);
     }
@@ -176,14 +194,14 @@ public:
     }
 
 private:
-    void decrease_key_(T to, T from, ul id)
+    void decrease_key_(T& to, T& from, ul& id)
     {
         drop_from_key_map_(from, id);
         decrease_(to, id);
         key_to_id_.insert(std::pair<T, ul>(to, id));
     }
 
-    void drop_from_key_map_(T from, ul id)
+    void drop_from_key_map_(T& from, ul& id)
     {
         auto iterpair = key_to_id_.equal_range(from);
         for (auto it = iterpair.first; it != iterpair.second; ++it)
@@ -196,7 +214,20 @@ private:
         }
     }
 
-    void decrease_(T to, ul id)
+    void drop_from_value_map_(std::vector<U>& from, ul id)
+    {
+        auto iterpair = value_to_id_.equal_range(from);
+        for (auto it = iterpair.first; it != iterpair.second; ++it)
+        {
+            if (it->second == id)
+            {
+                value_to_id_.erase(it);
+                break;
+            }
+        }
+    }
+
+    void decrease_(T& to, ul& id)
     {
       (*id_to_handles_[id]).key_ = to;
       heap_.decrease(id_to_handles_[id]);
@@ -205,6 +236,7 @@ private:
 
     Heap<T, U> heap_;
     std::unordered_multimap<T, ul> key_to_id_;
+    std::map<std::vector<U>, ul> value_to_id_;
     std::unordered_map<ul, typename Heap<T, U>::handle_type> id_to_handles_;
     boost::uuids::random_generator generator_;
 };

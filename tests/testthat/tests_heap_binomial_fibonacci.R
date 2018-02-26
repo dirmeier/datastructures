@@ -18,161 +18,219 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-context("binomial heap")
+context("binomial/fibonacci heap")
+
+hs <- c(binomial_heap, fibonacci_heap)
 
 
-test_that("creates correct class", {
-    bheap <- binomial_heap("numeric", "numeric")
-    r <- stats::rnorm(5)
-    bheap <- insert(bheap, r, r)
-    expect_equal(class(bheap@.heap)[1], "Rcpp_binomial_heap_dd")
-})
-
-
-test_that("binomial heap insert throws when inserting false values", {
-    bheap <- binomial_heap("numeric", "numeric")
+test_that("heap insert throws when inserting false values",
+{
+  for (h in hs)
+  {
+    bheap <- h("numeric", "numeric")
     r <- stats::rnorm(5)
     expect_error(insert(bheap, c("s", "s"), c(4, 5)))
+  }
 })
 
 
-test_that("binomial heap peek shows correct value", {
-    bheap <- binomial_heap("numeric", "numeric")
+test_that("heap peek shows correct value",
+{
+  for (h in hs)
+  {
+    bheap <- h("numeric", "numeric")
     r <- stats::rnorm(5)
     bheap <- insert(bheap, r, r)
     expect_equal(unlist(unname(peek(bheap))), min(r), tolerance=0.01)
+  }
 })
 
 
-test_that("binomial size is correct", {
-    bheap <- binomial_heap("numeric", "numeric")
+test_that("heap size is correct",
+{
+  for (h in hs)
+  {
+    bheap <- h("numeric", "numeric")
     r <- stats::rnorm(5)
     bheap <- insert(bheap, r, r)
     expect_equal(size(bheap), 5)
+  }
 })
 
 
-test_that("binomial heap pop first element multiple elements in matrix", {
-    bheap <- binomial_heap("numeric", "numeric")
+test_that("heap pop first element multiple elements in matrix",
+{
+  for (h in hs)
+  {
+    bheap <- h("numeric", "numeric")
     r <- seq(0, 1, by=.1)
     m <- matrix(rnorm(length(r) * 2), length(r))
     bheap <- insert(bheap, r, m)
     expect_equal(unname(unlist(pop(bheap))), m[1, ])
+  }
 })
 
 
-test_that("binomial heap peek first element multiple elements in matrix", {
-    bheap <- binomial_heap("numeric", "numeric")
+test_that("heap peek first element multiple elements in matrix",
+{
+  for (h in hs)
+  {
+    bheap <- h("numeric", "numeric")
     r <- seq(0, 1, by=.1)
     m <- matrix(rnorm(length(r) * 2), length(r))
     bheap <- insert(bheap, r, m)
     expect_equal(unname(unlist(peek(bheap))), m[1, ])
+  }
 })
 
 
-test_that("binomial heap pop first element multiple elements in list", {
-    bheap <- binomial_heap("character", "numeric")
+test_that("heap pop first element multiple elements in list",
+{
+  for (h in hs)
+  {
+    bheap <- h("character", "numeric")
     r <- letters[1:2]
     m <- list(1, 2)
     bheap <- insert(bheap, r, m)
     expect_equal(unname(unlist(pop(bheap))), m [[1]])
+  }
 })
 
 
-test_that("binomial heap peek first element multiple elements in list", {
-    bheap <- binomial_heap("character", "numeric")
+test_that("heap peek first element multiple elements in list",
+{
+  for (h in hs)
+  {
+    bheap <- h("character", "numeric")
     r <- letters[1:2]
     m <- list(1, 2)
     bheap <- insert(bheap, r, m)
     expect_equal(unname(unlist(peek(bheap))), m[[1]])
+  }
 })
 
 
-test_that("binomial heap peek first element multiple elements vector", {
-    bheap <- binomial_heap("character", "numeric")
+test_that("heap peek first element multiple elements vector",
+{
+  for (h in hs)
+  {
+    bheap <- h("character", "numeric")
     r <- letters[1:2]
     m <- rnorm(2)
     bheap <- insert(bheap, r, m)
     expect_equal(unname(unlist(peek(bheap))), m[1])
+  }
 })
 
 
-test_that("binomial heap peek first element multiple elements vector", {
-    bheap <- binomial_heap("character", "numeric")
+test_that("heap peek first element multiple elements vector",
+{
+  for (h in hs)
+  {
+    bheap <- h("character", "numeric")
     r <- letters[1:2]
     m <- rnorm(2)
     bheap <- insert(bheap, r, m)
     expect_equal(unname(unlist(peek(bheap))), m[1])
+  }
 })
 
 
-test_that("binomial heap peek first element multiple elements as list", {
-    bheap <- binomial_heap("character", "numeric")
+test_that("heap peek first element multiple elements as list",
+{
+  for (h in hs)
+  {
+    bheap <- h("character", "numeric")
     r <- letters[1:2]
     m <- as.list(rnorm(2))
     bheap <- insert(bheap, r, m)
     expect_equal(unname(unlist(peek(bheap))), m[[1]])
+  }
 })
 
 
-
-
-test_that("binomial warns for non key element at decrease", {
-    bheap <- binomial_heap("character", "numeric")
+test_that("heap warns for non key element at decrease",
+{
+  for (h in hs)
+  {
+    bheap <- h("character", "numeric")
     r <- letters[c(1, 1)]
     m <- as.list(rnorm(2))
     bheap <- insert(bheap, r, m)
     expect_error(decrease_key(heap, letters[3], letters[2]))
+  }
 })
 
 
-test_that("binomial stops for double key element at decrease", {
-    bheap <- binomial_heap("character", "numeric")
+test_that("heap stops for double key element at decrease",
+{
+  for (h in hs)
+  {
+    bheap <- h("character", "numeric")
     r <- letters[c(1, 1)]
     m <- as.list(rnorm(2))
     bheap <- insert(bheap, r, m)
     expect_error(decrease_key(bheap, letters[1]))
+  }
 })
 
-test_that("binomial returns correct handles for two keys", {
-    bheap <- binomial_heap("character", "numeric")
-    r <- letters[c(1, 1)]
+test_that("heap returns correct handles for two keys",
+{
+  for (h in hs)
+  {
+    bheap <- h("character", "numeric")
+    r <- letters[c(h, 1)]
     m <- as.list(rnorm(2))
     bheap <- insert(bheap, r, m)
     hand <- handle(bheap, letters[1])
     expect_equal(length(hand), 2)
+  }
 })
 
-test_that("binomial throws from Rcpp when incorrect decrease vector lengths", {
+test_that("heaps throws from Rcpp when incorrect decrease vector lengths",
+{
+  for (s in hs)
     bheap <- binomial_heap("character", "numeric")
-    r <- letters[c(3, 2)]
+    r <- letters[h(3, 2)]
     m <- as.list(rnorm(2))
     bheap <- insert(bheap, r, m)
     hand <- handle(bheap, letters[1])
     expect_error(decrease_key(bheap, from=letters[c(3, 2)], to="a"))
+  }
 })
 
-test_that("binomial decrease key works with handles", {
-    bheap <- binomial_heap("character", "numeric")
+test_that("heap decrease key works with handles",
+{
+  for (h in hs)
+  {
+    bheap <- h("character", "numeric")
     r <- letters[c(3, 3)]
     m <- as.list(rnorm(2))
     bheap <- insert(bheap, r, m)
     hand <- handle(bheap, letters[3])
     decrease_key(bheap, from=letters[3], to="a", handle=hand[[1]]$handle)
     expect_equal(names(pop(bheap)), "a")
+  }
 })
 
-test_that("binomial computes decrease key correctly", {
-    bheap <- binomial_heap("character", "numeric")
+test_that("heap computes decrease key correctly",
+{
+  for (h in hs)
+  {
+    bheap <- h("character", "numeric")
     r <- letters[c(2, 3)]
     m <- as.list(rnorm(2))
     bheap <- insert(bheap, r, m)
     decrease_key(bheap, letters[3], letters[1])
     expect_equal(names(pop(bheap)), "a")
+  }
 })
 
-test_that("binomial returns correct handles for two keys after decrease", {
-    bheap <- binomial_heap("character", "numeric")
+test_that("heap returns correct handles for two keys after decrease",
+{
+  for (h in hs)
+  {
+    bheap <- h("character", "numeric")
     r <- letters[c(2, 3)]
     m <- as.list(rnorm(2))
     bheap <- insert(bheap, r, m)
@@ -180,4 +238,5 @@ test_that("binomial returns correct handles for two keys after decrease", {
     expect_equal(length(handle(bheap, letters[1])), 1)
     expect_equal(length(handle(bheap, letters[2])), 1)
     expect_equal(length(handle(bheap, letters[3])), 0)
+  }
 })

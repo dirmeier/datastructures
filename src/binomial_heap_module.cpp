@@ -20,14 +20,17 @@
  *
  */
 
+
 #include <Rcpp.h>
 #include "binomial_heap.hpp"
+
 
 RCPP_MODULE(binomial_heap_module) {
     Rcpp::class_< binomial_heap_ss >( "binomial_heap_ss" )
         .constructor()
         .method("peek",   &binomial_heap_ss::peek)
         .method("handles",   &binomial_heap_ss::handles)
+        .method("handles_value",   &binomial_heap_ss::handles_value)
         .method("decrease_key",   &binomial_heap_ss::decrease_key)
         .method("pop",    &binomial_heap_ss::pop)
         .method("size",   &binomial_heap_ss::size)
@@ -37,6 +40,7 @@ RCPP_MODULE(binomial_heap_module) {
         .constructor()
         .method("peek",   &binomial_heap_sd::peek)
         .method("handles",   &binomial_heap_sd::handles)
+        .method("handles_value",   &binomial_heap_sd::handles_value)
         .method("decrease_key",   &binomial_heap_sd::decrease_key)
         .method("pop",    &binomial_heap_sd::pop)
         .method("size",   &binomial_heap_sd::size)
@@ -46,16 +50,17 @@ RCPP_MODULE(binomial_heap_module) {
         .constructor()
         .method("peek",   &binomial_heap_si::peek)
         .method("handles",   &binomial_heap_si::handles)
+        .method("handles_value",   &binomial_heap_si::handles_value)
         .method("decrease_key",   &binomial_heap_si::decrease_key)
         .method("pop",    &binomial_heap_si::pop)
         .method("size",   &binomial_heap_si::size)
         .method("insert", &binomial_heap_si::insert)
         .method("clear",  &binomial_heap_si::clear);
-
     Rcpp::class_< binomial_heap_dd >( "binomial_heap_dd" )
         .constructor()
         .method("peek",   &binomial_heap_dd::peek)
         .method("handles",   &binomial_heap_dd::handles)
+        .method("handles_value",   &binomial_heap_dd::handles_value)
         .method("decrease_key",   &binomial_heap_dd::decrease_key)
         .method("pop",    &binomial_heap_dd::pop)
         .method("size",   &binomial_heap_dd::size)
@@ -65,6 +70,7 @@ RCPP_MODULE(binomial_heap_module) {
         .constructor()
         .method("peek",   &binomial_heap_ds::peek)
         .method("handles",   &binomial_heap_ds::handles)
+        .method("handles_value",   &binomial_heap_ds::handles_value)
         .method("decrease_key",   &binomial_heap_ds::decrease_key)
         .method("pop",    &binomial_heap_ds::pop)
         .method("size",   &binomial_heap_ds::size)
@@ -74,6 +80,7 @@ RCPP_MODULE(binomial_heap_module) {
         .constructor()
         .method("peek",   &binomial_heap_di::peek)
         .method("handles",   &binomial_heap_di::handles)
+        .method("handles_value",   &binomial_heap_di::handles_value)
         .method("decrease_key",   &binomial_heap_di::decrease_key)
         .method("pop",    &binomial_heap_di::pop)
         .method("size",   &binomial_heap_di::size)
@@ -83,6 +90,7 @@ RCPP_MODULE(binomial_heap_module) {
         .constructor()
         .method("peek",   &binomial_heap_id::peek)
         .method("handles",   &binomial_heap_id::handles)
+        .method("handles_value",   &binomial_heap_id::handles_value)
         .method("decrease_key",   &binomial_heap_id::decrease_key)
         .method("pop",    &binomial_heap_id::pop)
         .method("size",   &binomial_heap_id::size)
@@ -92,6 +100,7 @@ RCPP_MODULE(binomial_heap_module) {
         .constructor()
         .method("peek",   &binomial_heap_is::peek)
         .method("handles",   &binomial_heap_is::handles)
+        .method("handles_value",   &binomial_heap_is::handles_value)
         .method("decrease_key",   &binomial_heap_is::decrease_key)
         .method("pop",    &binomial_heap_is::pop)
         .method("size",   &binomial_heap_is::size)
@@ -101,6 +110,7 @@ RCPP_MODULE(binomial_heap_module) {
         .constructor()
         .method("peek",   &binomial_heap_ii::peek)
         .method("handles",   &binomial_heap_ii::handles)
+        .method("handles_value",   &binomial_heap_ii::handles_value)
         .method("decrease_key",   &binomial_heap_ii::decrease_key)
         .method("pop",    &binomial_heap_ii::pop)
         .method("size",   &binomial_heap_ii::size)

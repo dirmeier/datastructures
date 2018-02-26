@@ -30,6 +30,7 @@
 #include <string>
 #include <map>
 #include <unordered_map>
+#include <algorithm>
 #include <boost/heap/binomial_heap.hpp>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
@@ -105,9 +106,9 @@ public:
         return Rcpp::wrap(ret);
     }
 
-    Rcpp::List handles_values(U& from)
+    Rcpp::List handles_value(std::vector<U>& from)
     {
-      std::map<ul, std::vector<T>> ret;
+      std::map<ul, T> ret;
       if (value_to_id_.find(from) != value_to_id_.end())
       {
           auto iterpair = value_to_id_.equal_range(from);
@@ -237,7 +238,7 @@ private:
 
     Heap<T, U> heap_;
     std::unordered_multimap<T, ul> key_to_id_;
-    std::map<std::vector<U>, ul> value_to_id_;
+    std::multimap<std::vector<U>, ul> value_to_id_;
     std::unordered_map<ul, typename Heap<T, U>::handle_type> id_to_handles_;
     boost::uuids::random_generator generator_;
 };

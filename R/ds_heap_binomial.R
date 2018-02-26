@@ -192,8 +192,16 @@ setMethod("size", "binomial_heap", .size.heap)
 #' @rdname handle-methods
 setMethod(
     "handle",
-    signature = signature(obj="binomial_heap", key="vector"),
-    function(obj, key) .handle(obj, key)
+    signature = signature(obj="binomial_heap", key="vector", value="missing"),
+    function(obj, key) .handle(obj, key, NULL)
+)
+
+
+#' @rdname handle-methods
+setMethod(
+    "handle",
+    signature = signature(obj="binomial_heap", key="missing", value="vector"),
+    function(obj, value) .handle(obj, NULL, value)
 )
 
 
@@ -209,7 +217,7 @@ setMethod(
 #' @rdname decrease_key-methods
 setMethod(
     "decrease_key",
-    signature = signature(obj="binomial_heap", 
+    signature = signature(obj="binomial_heap",
                           from="vector", to="vector", handle="missing"),
     function(obj, from, to) .decrease_key(obj, from, to, NULL)
 )

@@ -174,18 +174,20 @@ test_that("heap stops for double key element at decrease",
   }
 })
 
+
 test_that("heap returns correct handles for two keys",
 {
   for (h in hs)
   {
     bheap <- h("character", "numeric")
-    r <- letters[c(h, 1)]
+    r <- letters[c(1, 1)]
     m <- as.list(rnorm(2))
     bheap <- insert(bheap, r, m)
     hand <- handle(bheap, letters[1])
     expect_equal(length(hand), 2)
   }
 })
+
 
 test_that("heaps throws from Rcpp when incorrect decrease vector lengths",
 {
@@ -198,6 +200,7 @@ test_that("heaps throws from Rcpp when incorrect decrease vector lengths",
     expect_error(decrease_key(bheap, from=letters[c(3, 2)], to="a"))
   }
 })
+
 
 test_that("heap decrease key works with handles",
 {
@@ -213,6 +216,7 @@ test_that("heap decrease key works with handles",
   }
 })
 
+
 test_that("heap computes decrease key correctly",
 {
   for (h in hs)
@@ -225,6 +229,7 @@ test_that("heap computes decrease key correctly",
     expect_equal(names(pop(bheap)), "a")
   }
 })
+
 
 test_that("heap returns correct handles for two keys after decrease",
 {

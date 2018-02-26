@@ -194,8 +194,16 @@ setMethod("size", "fibonacci_heap", .size.heap)
 #' @rdname handle-methods
 setMethod(
     "handle",
-    signature = signature(obj="fibonacci_heap", key="vector"),
-    function(obj, key) .handle(obj, key)
+    signature = signature(obj="fibonacci_heap", key="vector", value="missing"),
+    function(obj, key) .handle(obj, key, NULL)
+)
+
+
+#' @rdname handle-methods
+setMethod(
+    "handle",
+    signature = signature(obj="fibonacci_heap", key="missing", value="vector"),
+    function(obj, value) .handle(obj, NULL, value)
 )
 
 

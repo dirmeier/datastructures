@@ -106,14 +106,16 @@ setClass("heap",
     if (!is.null(key))
     {
         .check.key.class(obj, key)
-        ret <- obj@.heap$handles(key) %>%
-          purrr::map(names(.), .f = function(x) list(handle=x, value=ret[[x]]))
+        ret <- obj@.heap$handles(key)
+        ret <- purrr::map(names(ret),
+                          .f = function(x) list(handle=x, value=ret[[x]]))
     }
     else if (!is.null(value))
     {
         .check.value.class(obj, value)
-        ret <- obj@.heap$handles(value) %>%
-          purrr::map(names(.), .f = function(x) list(handle=x, key=ret[[x]]))
+        ret <- obj@.heap$handles_value(value)
+        ret <- purrr::map(names(ret),
+                          .f = function(x) list(handle=x, key=ret[[x]]))
     }
 
     ret

@@ -245,3 +245,49 @@ test_that("heap returns correct handles for two keys after decrease",
     expect_equal(length(handle(bheap, letters[3])), 0)
   }
 })
+
+
+test_that("heap returns correct handles for value",
+{
+  for (h in hs)
+  {
+    bheap <- h("integer", "integer")
+    r <- 1:3
+    m <- list(1:3, 1:3, 1:3)
+    bheap <- insert(bheap, r, m)
+    h <- handle(bheap, value=1:3)
+    expect_equal(length(h), 3)
+    for (i in seq(h))
+    {
+      expect_equal(h[[i]]$key == 1:3)
+    }
+  }
+})
+
+test_that("heap decrease key by value works",
+{
+  for (h in hs)
+  {
+    bheap <- h("integer", "integer")
+    r <- 1:3
+    m <- list(1:4, 1:5, 1:6)
+    bheap <- insert(bheap, r, m)
+    h <- handle(bheap, value=1:5)
+    decrease_key(bheap, from=h[[1]]$key, to=0L)
+    expect_equal(unlist(unname(peek(bheap))), 1:5)
+  }
+})
+
+test_that("heap decrease key by value works for same values",
+{
+  for (h in hs)
+  {
+    bheap <- h("integer", "integer")
+    r <- c(1L, 1L, 3L)
+    m <- list(1:3, 1:3, 1:6)
+    bheap <- insert(bheap, r, m)
+    h <- handle(bheap, value=1:5)
+    decrease_key(bheap, from=h[[1]]$key, to=0L, handle=h[[1]]$handle)
+    expect_equal(length(handle(bheap, 1L)) == 1)
+  }
+})

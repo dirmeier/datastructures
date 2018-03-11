@@ -1,7 +1,7 @@
 Package: datastructures
 Type: Package
 Title: Implementation of Core Data Structures
-Version: 0.2.4
+Version: 0.2.5
 Date: 2018-03-10
 Authors@R: person("Simon", "Dirmeier",
                   email = "simon.dirmeier@web.de",

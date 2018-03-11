@@ -165,7 +165,7 @@ setMethod("keys", "bimap", function(obj)
     obj@.map$lefts()
 })
 
-
+#' @noRd
 setMethod("show", "bimap", .show.map)
 
 

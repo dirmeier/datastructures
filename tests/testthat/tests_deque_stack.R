@@ -27,6 +27,11 @@ test_that("creates correct class", {
 })
 
 
+test_that("stack shows", {
+    expect_output(show(stack("integer")))
+})
+
+
 test_that("stack insert throws when inserting false values", {
     s <- stack("numeric")
     expect_error(insert(s, c("s", "s")))

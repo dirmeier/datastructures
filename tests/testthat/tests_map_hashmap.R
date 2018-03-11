@@ -28,6 +28,11 @@ test_that("creates correct class", {
 })
 
 
+test_that("map shows", {
+    expect_output(show(hashmap("numeric", "numeric")))
+})
+
+
 test_that("hashmap insert throws when inserting false values", {
     h <- hashmap("numeric", "numeric")
     h <- insert(h, c(1, 2), c(4, 5))

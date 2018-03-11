@@ -21,3 +21,6 @@ TODO.md
 .codecov.ym
 .yo-rc.json
 .clang-format
+CMakeLists.txt
+cmake-build-debug
+cmake-build-debug/*

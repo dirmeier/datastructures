@@ -21,8 +21,19 @@
 context("heap")
 hs <- c(binomial_heap, fibonacci_heap)
 
-test_that("abstract class cannot get instantiated", {
+
+test_that("abstract class cannot get instantiated",
+{
     expect_error(methods::new("heap"))
+})
+
+
+test_that("heaps show",
+{
+    for (h in hs)
+    {
+        expect_output(show(h("numeric", "numeric")))
+    }
 })
 
 

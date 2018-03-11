@@ -30,6 +30,11 @@ test_that("creates correct class", {
 })
 
 
+test_that("map shows", {
+    expect_output(show(b))
+})
+
+
 test_that("bimap insert throws when inserting false values", {
     expect_error(insert(b, c("s", "s"), c(4, 5)))
 })

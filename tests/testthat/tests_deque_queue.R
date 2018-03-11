@@ -26,6 +26,10 @@ test_that("creates correct class", {
     expect_equal(class(q@.deque)[1], "Rcpp_queue_d")
 })
 
+test_that("queue shows", {
+    expect_output(show(queue("integer")))
+})
+
 
 test_that("queue insert throws when inserting false values", {
     q <- queue("numeric")

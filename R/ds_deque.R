@@ -28,7 +28,6 @@ NULL
 
 #' @title Deque class
 #'
-#' @export
 #' @name deque-class
 #' @rdname deque-class
 #'

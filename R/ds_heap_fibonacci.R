@@ -20,7 +20,7 @@
 
 #' @title Fibonacci heap class
 #'
-#' @export
+#' @exportClass fibonacci_heap
 #' @name fibonacci_heap-class
 #' @rdname fibonacci_heap-class
 #'

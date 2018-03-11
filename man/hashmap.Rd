@@ -18,5 +18,6 @@ returns a new \code{hashmap} object
 \description{
 Instantiates a new \code{\linkS4class{hashmap}} object,
  i.e. an unordered collection of key-value pairs with mapping
- \deqn{f: keys -> values.}
+ \deqn{f: keys -> values}, where only unique key-value pairs
+ can be stored.
 }

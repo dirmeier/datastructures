@@ -27,6 +27,7 @@
 #' @include methods_values.R
 NULL
 
+
 #' @title Abstract heap class
 #'
 #' @name heap-class
@@ -136,40 +137,40 @@ setClass(
 #' @noRd
 .decrease_key <- function(obj, from, to, handle)
 {
-    .check.key.class(obj, from)
-    .check.key.class(obj, to)
-    if (is.null(handle))
+  .check.key.class(obj, from)
+  .check.key.class(obj, to)
+  if (is.null(handle))
+  {
+    handlex <- vector(mode="character", length=length(from))
+    for (i in seq_along(from))
     {
-        handlex <- vector(mode="character", length=length(from))
-        for (i in seq_along(from))
-        {
-            handle.ids <- obj@.heap$handles(from[i])
-            if (length(handle.ids) == 1) { handlex[i] <- names(handle.ids)[1] }
-            else if (length(handle.ids) == 0)
-            {
-                stop(paste0("Zero handles found for '", from[i], "'."))
-            }
-            else
-            {
-                stop(paste0(
-                    "Multiple handles found for '", from[i], "'. ",
-                    "Please specify handles implicitely."))
-            }
-        }
+      handle.ids <- obj@.heap$handles(from[i])
+      if (length(handle.ids) == 1) { handlex[i] <- names(handle.ids)[1] }
+      else if (length(handle.ids) == 0)
+      {
+        stop(paste0("Zero handles found for '", from[i], "'."))
+      }
+      else
+      {
+        stop(paste0(
+            "Multiple handles found for '", from[i], "'. ",
+            "Please specify handles implicitely."))
+      }
     }
-    else
-    {
-        handlex <- handle
-    }
+  }
+  else
+  {
+    handlex <- handle
+  }
 
-    obj@.heap$decrease_key(from, to, handlex)
+  obj@.heap$decrease_key(from, to, handlex)
 }
 
 
 #' @noRd
 .heap_values <- function(obj)
 {
-    obj@.heap$values()
+  obj@.heap$values()
 }
 
 
@@ -203,7 +204,8 @@ setMethod(
 #'  determine the ordering of the heap, while the value is the actual value to
 #'  store.
 #'
-#' @param x  a \code{heap}
+#' @param x  a heap object, such as a \code{\link{fibonacci_heap}} or a
+#'  \code{\link{binomial_heap}}
 #' @param i  a vector of keys
 #' @param value  a vector of values for the keys
 setMethod(
@@ -219,7 +221,8 @@ setMethod(
 #'  determine the ordering of the heap, while the value is the actual value to
 #'  store.
 #'
-#' @param x  a \code{heap}
+#' @param x  a heap object, such as a \code{\link{fibonacci_heap}} or a
+#'  \code{\link{binomial_heap}}
 #' @param i  a vector of keys
 #' @param value  a vector of values for the keys
 setMethod(
@@ -235,7 +238,8 @@ setMethod(
 #'  determine the ordering of the heap, while the value is the actual value to
 #'  store.
 #'
-#' @param x  a \code{heap}
+#' @param x  a heap object, such as a \code{\link{fibonacci_heap}} or a
+#'  \code{\link{binomial_heap}}
 #' @param i  a vector of keys
 #' @param value  a vector of values for the keys
 setMethod(

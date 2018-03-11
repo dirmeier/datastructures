@@ -20,7 +20,7 @@
 
 #' @title Binomial heap class
 #'
-#' @export
+#' @exportClass binomial_heap
 #' @name binomial_heap-class
 #' @rdname binomial_heap-class
 #'

@@ -21,70 +21,70 @@
 #' @include ds_map_unordered.R
 
 
-#' @title Hashmap class
+#' @title Multimap class
 #'
-#' @exportClass hashmap
-#' @name hashmap-class
-#' @rdname hashmap-class
+#' @exportClass multimap
+#' @name multimap-class
+#' @rdname multimap-class
 #'
-#' @description Implementation of a hashmap data structure, i.e. an unordered
+#' @description Implementation of a multimap data structure, i.e. an unordered
 #' collection of key-value pairs:
 #' \deqn{f: keys -> values.}
-#' Hashmaps only to store unique keys-value pairs. For a data structure
-#' where multiple identical keys can be stores see \code{\link{multimap}}.
+#' Multimaps are able to store several identical keys. For a data structure
+#' which unique keys, see \code{\link{hashmap}}.
 #' Inserting and accessing is amortized in \emph{O(1)}.
-#' \code{hashmap} wraps a C++ \code{unordered_map} using Rcpp modules.
+#' \code{hashmap} wraps a C++ \code{unordered_multimap} using Rcpp modules.
 #' Also see \code{\linkS4class{bimap}} for mappings in both ways.
 #'
 #' @slot .map  \code{C++} object representing a mapping
 #' @slot .key.class  the class of the keys
 #' @slot .value.class  the class of the values
 #'
-setClass("hashmap", contains = "unordered_map")
+setClass("multimap", contains = "unordered_map")
 
 
-#' @title Create a new \code{hashmap}
+#' @title Create a new \code{multimap}
 #'
 #' @export
 #' @importFrom methods new
 #'
-#' @description Instantiates a new \code{\linkS4class{hashmap}} object,
+#' @description Instantiates a new \code{\linkS4class{multimap}} object,
 #'  i.e. an unordered collection of key-value pairs with mapping
-#'  \deqn{f: keys -> values}, where only unique key-value pairs
+#'  \deqn{f: keys -> values}, where multiple identical key-value paors
 #'  can be stored.
 #'
 #' @param key.class  the primitive class type of the keys
 #' @param value.class  the primitive class type of the values
 #'
-#' @return returns a new \code{hashmap} object
+#' @return returns a new \code{multimap} object
 #'
-hashmap <- function(
-  key.class = c("character", "numeric", "integer"),
-  value.class = c("character", "numeric", "integer"))
+multimap <- function(
+    key.class = c("character", "numeric", "integer"),
+    value.class = c("character", "numeric", "integer"))
 {
   key.class   <- match.arg(key.class)
   value.class <- match.arg(value.class)
 
   if (key.class == "character")
   {
-    if (value.class == "character")    map <- methods::new(hashmap_ss)
-    else if (value.class == "integer") map <- methods::new(hashmap_si)
-    else                               map <- methods::new(hashmap_sd)
+    if (value.class == "character")    map <- methods::new(multimap_ss)
+    else if (value.class == "integer") map <- methods::new(multimap_si)
+    else                               map <- methods::new(multimap_sd)
   }
   else if (key.class == "numeric")
   {
-    if (value.class == "character")    map <- methods::new(hashmap_ds)
-    else if (value.class == "integer") map <- methods::new(hashmap_di)
-    else                               map <- methods::new(hashmap_dd)
+    if (value.class == "character")    map <- methods::new(multimap_ds)
+    else if (value.class == "integer") map <- methods::new(multimap_di)
+    else                               map <- methods::new(multimap_dd)
   }
   else
   {
-    if (value.class == "character")    map <- methods::new(hashmap_is)
-    else if (value.class == "integer") map <- methods::new(hashmap_ii)
-    else                               map <- methods::new(hashmap_id)
+    if (value.class == "character")    map <- methods::new(multimap_is)
+    else if (value.class == "integer") map <- methods::new(multimap_ii)
+    else                               map <- methods::new(multimap_id)
   }
 
-  methods::new("hashmap",
+  methods::new("multimap",
                .key.class=key.class,
                .value.class=value.class,
                .map=map)

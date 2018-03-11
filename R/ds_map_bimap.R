@@ -21,10 +21,8 @@
 #' @include ds_map.R
 #' @include methods_insert.R
 #' @include methods_get.R
-#' @include methods_head.R
 #' @include methods_keys.R
 #' @include methods_values.R
-#' @include methods_size.R
 NULL
 
 
@@ -157,22 +155,11 @@ setMethod(
 )
 
 
-#' @rdname head-methods
-setMethod("head", "bimap", .head.map)
-
-
 #' @rdname keys-methods
 setMethod("keys", "bimap", function(obj)
 {
     obj@.map$lefts()
 })
-
-#' @noRd
-setMethod("show", "bimap", .show.map)
-
-
-#' @rdname size-methods
-setMethod("size", "bimap", .size.map)
 
 
 #' @rdname values-methods

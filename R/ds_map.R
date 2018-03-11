@@ -18,9 +18,12 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+#' @include methods_size.R
+#' @include methods_head.R
+
+
 #' @title Map class
 #'
-#' @export
 #' @name map-class
 #' @rdname map-class
 #'
@@ -76,3 +79,15 @@ setClass(
 {
   obj@.map$size()
 }
+
+
+#' @noRd
+setMethod("show", "map", .show.map)
+
+
+#' @rdname size-methods
+setMethod("size", "map", .size.map)
+
+
+#' @rdname head-methods
+setMethod("head", "map", .head.map)

@@ -35,6 +35,5 @@ setGeneric(
     function(obj)
     {
         standardGeneric("keys")
-    },
-    package = "datastructures"
+    }
 )

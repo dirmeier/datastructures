@@ -22,6 +22,7 @@
 {
     Rcpp::loadModule("bimap_module", TRUE)
     Rcpp::loadModule("hashmap_module", TRUE)
+    Rcpp::loadModule("multimap_module", TRUE)
 
     Rcpp::loadModule("binomial_heap_module", TRUE)
     Rcpp::loadModule("fibonacci_heap_module", TRUE)

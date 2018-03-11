@@ -23,6 +23,7 @@
 #include <Rcpp.h>
 #include "multimap.hpp"
 
+
 RCPP_MODULE(multimap_module) {
     Rcpp::class_< multimap_ss >( "multimap_ss" )
         .constructor()

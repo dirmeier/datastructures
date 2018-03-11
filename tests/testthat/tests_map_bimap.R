@@ -21,40 +21,70 @@
 context("bimap")
 
 
-b <- bimap("numeric", "numeric")
-b <- insert(b, c(1, 2), c(4, 5))
-
-
 test_that("creates correct class", {
+    b <- bimap("numeric", "numeric")
+    b <- insert(b, c(1, 2), c(4, 5))
     expect_equal("Rcpp_bimap_dd", class(b@.map)[1])
 })
 
 
 test_that("map shows", {
-    expect_output(show(b))
+    expect_output(show(bimap("integer", "numeric")))
 })
 
 
 test_that("bimap insert throws when inserting false values", {
+    b <- bimap("numeric", "numeric")
+    b <- insert(b, c(1, 2), c(4, 5))
     expect_error(insert(b, c("s", "s"), c(4, 5)))
 })
 
 
 test_that("bimap get throws when getting false values", {
+    b <- bimap("integer", "character")
     expect_error(get(b, "s"))
 })
 
 
 test_that("bimap insert/get methods work", {
+    b <- bimap("numeric", "numeric")
+    b <- insert(b, c(1, 2), c(4, 5))
     expect_equal(get(b, 1), 4)
 })
 
 
 test_that("bimap insert/get methods work with which argument", {
+    b <- bimap("numeric", "numeric")
+    b <- insert(b, c(1, 2), c(4, 5))
     expect_equal(get(b, 1, "values"), 4)
 })
 
 
 test_that("bimap insert/get methods work with which argument", {
+    b <- bimap("numeric", "numeric")
+    b <- insert(b, c(1, 2), c(4, 5))
     expect_equal(get(b, 4, "keys"), 1)
+})
+
+
+test_that("bimap head works", {
+    h <- bimap("integer", "character")
+    m <- letters[1:2]
+    r <- 1:2
+    h <- insert(h, r, m)
+    expect_output(show(head(h)))
+})
+
+
+test_that("bimap size works", {
+    h <- bimap("character", "character")
+    h <- insert(h, letters[1:2], letters[1:2])
+    expect_true(size(h) == 2)
+})
+
+
+test_that("bimap retrieves correct values", {
+    h <- bimap("integer", "numeric")
+    h <- insert(h, 1:2, c(4, 5))
+    expect_true(all(sort(values(h)) %in% c(4, 5)))
 })

@@ -8,12 +8,9 @@ linters: list(linelen=line_length_linter(80),
               trailingwhites=trailing_whitespace_linter)
 exclusions: list("tests/testthat.R",
                  "tests/testthat/tests_deque.R",
-                 "tests/testthat/tests_deque_queue.R",
-                 "tests/testthat/tests_deque_stack.R",
                  "tests/testthat/tests_heap.R",
-                 "tests/testthat/tests_heap_binomial.R",
-                 "tests/testthat/tests_heap_fibonacci.R",
                  "tests/testthat/tests_map.R",
                  "tests/testthat/tests_map_bimap.R",
-                 "tests/testthat/tests_map_hashmap.R")
+                 "tests/testthat/tests_map_multimap.R",
+                 "tests/testthat/tests_map_unordered_map.R")
 

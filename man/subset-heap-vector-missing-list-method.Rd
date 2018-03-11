@@ -8,7 +8,8 @@
 \S4method{[}{heap,vector,missing,list}(x, i) <- value
 }
 \arguments{
-\item{x}{a \code{heap}}
+\item{x}{a heap object, such as a \code{\link{fibonacci_heap}} or a
+\code{\link{binomial_heap}}}
 
 \item{i}{a vector of keys}
 

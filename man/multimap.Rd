@@ -19,5 +19,5 @@ returns a new \code{multimap} object
 Instantiates a new \code{\linkS4class{multimap}} object,
  i.e. an unordered collection of key-value pairs with mapping
  \deqn{f: keys -> values}, where multiple identical key-value paors
-  can be stored.
+ can be stored.
 }

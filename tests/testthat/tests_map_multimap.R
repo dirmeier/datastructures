@@ -18,21 +18,23 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @title Get keys from an object
-#'
-#' @description Extracts the keys from a \code{map} object.
-#'
-#' @export
-#' @docType methods
-#' @rdname keys-methods
-#'
-#' @param obj  object to extract keys from
-#'
-#' @return  returns the extracted keys as vector
-#'
-setGeneric(
-  "keys",
-  function(obj) {
-    standardGeneric("keys")
-  }
-)
+context("multimap")
+
+
+test_that("multimap can store same keys", {
+    h <- multimap("character", "integer")
+    h <- insert(h, letters, seq(letters))
+    h <- insert(h, letters, seq(letters))
+    expect_equal(length(get(h, "a")), 2)
+    expect_equal(unlist(get(h, "a")), c(1L, 1L))
+})
+
+test_that("multimap can store same keys", {
+    h <- multimap("character", "integer")
+    h <- insert(h, letters, seq(letters))
+    h <- insert(h, letters, seq(letters))
+    expect_equal(length(get(h, "a")), 2)
+    expect_equal(unlist(get(h, "a")), c(1L, 1L))
+})
+
+

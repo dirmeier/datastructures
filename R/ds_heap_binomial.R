@@ -52,41 +52,42 @@ setClass("binomial_heap", contains = "heap")
 #' @return returns a new \code{binomial_heap} object
 #'
 binomial_heap <- function(
-    key.class = c("character", "numeric", "integer"),
-    value.class = c("character", "numeric", "integer"))
+  key.class = c("character", "numeric", "integer"),
+  value.class = c("character", "numeric", "integer"))
 {
-    key.class   <- match.arg(key.class)
-    value.class <- match.arg(value.class)
+  key.class   <- match.arg(key.class)
+  value.class <- match.arg(value.class)
 
-    if (key.class == "character")
-    {
-        if (value.class == "character")
-            heap <- methods::new(binomial_heap_ss)
-        else if (value.class == "integer")
-            heap <- methods::new(binomial_heap_si)
-        else
-          heap <- methods::new(binomial_heap_sd)
-    }
-    else if (key.class == "numeric")
-    {
-        if (value.class == "character")
-            heap <- methods::new(binomial_heap_ds)
-        else if (value.class == "integer")
-            heap <- methods::new(binomial_heap_di)
-        else heap <- methods::new(binomial_heap_dd)
-    }
+  if (key.class == "character")
+  {
+    if (value.class == "character")
+      heap <- methods::new(binomial_heap_ss)
+    else if (value.class == "integer")
+      heap <- methods::new(binomial_heap_si)
     else
-    {
-        if (value.class == "character")
-            heap <- methods::new(binomial_heap_is)
-        else if (value.class == "integer")
-            heap <- methods::new(binomial_heap_ii)
-        else
-            heap <- methods::new(binomial_heap_id)
-    }
+      heap <- methods::new(binomial_heap_sd)
+  }
+  else if (key.class == "numeric")
+  {
+    if (value.class == "character")
+      heap <- methods::new(binomial_heap_ds)
+    else if (value.class == "integer")
+      heap <- methods::new(binomial_heap_di)
+    else
+      heap <- methods::new(binomial_heap_dd)
+  }
+  else
+  {
+    if (value.class == "character")
+      heap <- methods::new(binomial_heap_is)
+    else if (value.class == "integer")
+      heap <- methods::new(binomial_heap_ii)
+    else
+      heap <- methods::new(binomial_heap_id)
+  }
 
-    methods::new("binomial_heap",
-                .key.class = key.class,
-                .value.class = value.class,
-                .heap = heap)
+  methods::new("binomial_heap",
+               .key.class = key.class,
+               .value.class = value.class,
+               .heap = heap)
 }

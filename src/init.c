@@ -28,6 +28,7 @@
 
 extern SEXP _rcpp_module_boot_bimap_module();
 extern SEXP _rcpp_module_boot_hashmap_module();
+extern SEXP _rcpp_module_boot_multimap_module();
 
 extern SEXP _rcpp_module_boot_binomial_heap_module();
 extern SEXP _rcpp_module_boot_fibonacci_heap_module();
@@ -37,9 +38,11 @@ extern SEXP _rcpp_module_boot_stack_module();
 
 static const R_CallMethodDef CallEntries[] = {
     {"_rcpp_module_boot_hashmap_module",
-     (DL_FUNC) &_rcpp_module_boot_hashmap_module, 0},
-     {"_rcpp_module_boot_bimap_module",
+      (DL_FUNC) &_rcpp_module_boot_hashmap_module, 0},
+    {"_rcpp_module_boot_bimap_module",
       (DL_FUNC) &_rcpp_module_boot_bimap_module, 0},
+    {"_rcpp_module_boot_multimap_module",
+      (DL_FUNC) &_rcpp_module_boot_multimap_module, 0},
 
     {"_rcpp_module_boot_binomial_heap_module",
      (DL_FUNC) &_rcpp_module_boot_binomial_heap_module, 0},

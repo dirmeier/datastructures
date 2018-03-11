@@ -8,10 +8,12 @@
 \S4method{[}{unordered_map,vector,missing,missing}(x, i)
 }
 \arguments{
-\item{x}{a \code{hashmap}}
+\item{x}{an unorderd map object, such as a \code{\link{hashmap}} or
+\code{\link{multimap}}}
 
 \item{i}{a vector of keys}
 }
 \description{
-Access <key, value> pairs of an unordered map using a set of keys.
+Access <key, value> pairs of an unordered map using a
+ set of keys.
 }

@@ -8,7 +8,8 @@
 \S4method{[}{unordered_map,vector,missing,list}(x, i) <- value
 }
 \arguments{
-\item{x}{a \code{map} object}
+\item{x}{x  an unorderd map object, such as a \code{\link{hashmap}} or
+\code{\link{multimap}}}
 
 \item{i}{a vector of keys}
 

@@ -23,7 +23,6 @@
 #ifndef DS_HEAP
 #define DS_HEAP
 
-
 #include <Rcpp.h>
 #include <vector>
 #include <string>
@@ -35,11 +34,9 @@
 #include <boost/uuid/uuid_io.hpp>
 #include <boost/lexical_cast.hpp>
 
-
 using ul = std::string;
 
-
-template <template<typename...> class H, typename T, typename U>
+template<template<typename...> class H, typename T, typename U>
 struct node
 {
     typename H<node<H, T, U>>::handle_type handle_;
@@ -47,7 +44,8 @@ struct node
     std::vector<U> value_;
     ul id_;
 
-    node(T key, std::vector<U> value, ul id): key_(key), value_(value), id_(id)
+    node(T key, std::vector<U> value, ul id): key_(key), value_(value),
+                                              id_(id)
     {}
 
     bool operator<(const node<H, T, U>& rhs) const
@@ -56,14 +54,13 @@ struct node
     }
 };
 
-
-template <template<typename...> class H, typename T, typename U>
+template<template<typename...> class H, typename T, typename U>
 class heap
 {
 public:
     heap() = default;
 
-    void insert(std::vector<T>& t, std::vector< std::vector<U> >& u)
+    void insert(std::vector<T>& t, std::vector<std::vector<U> >& u)
     {
         if (t.size() != u.size())
         {
@@ -73,11 +70,11 @@ public:
         {
             std::string id_ = boost::lexical_cast<ul>(generator_());
             typename H<node<H, T, U>>::handle_type h =
-                heap_.push(node<H, T, U>(t[i], u[i], id_));
+              heap_.push(node<H, T, U>(t[i], u[i], id_));
             (*h).handle_ = h;
 
             id_to_handles_.insert(
-                std::pair<ul, typename H<node<H, T, U>>::handle_type>(id_, h));
+              std::pair<ul, typename H<node<H, T, U>>::handle_type>(id_, h));
             key_to_id_.insert(std::pair<T, ul>(t[i], id_));
         }
     }
@@ -92,8 +89,10 @@ public:
             {
                 ul id = it->second;
                 if (id_to_handles_.find(id) != id_to_handles_.end())
+                {
                     ret.insert(std::pair<ul, std::vector<U>>(
-                            id, (*id_to_handles_[id]).value_));
+                      id, (*id_to_handles_[id]).value_));
+                }
             }
         }
 
@@ -103,21 +102,32 @@ public:
     Rcpp::List handles_value(std::vector<U>& from)
     {
         std::map<ul, T> ret;
-        // if (value_to_id_.find(from) != value_to_id_.end())
-        // {
-        //     auto iterpair = value_to_id_.equal_range(from);
-        //     for (auto it = iterpair.first; it != iterpair.second; ++it)
-        //     {
-        //         ul id = it->second;
-        //         if (id_to_handles_.find(id) != id_to_handles_.end())
-        //             ret.insert(std::pair<ul, T>(id, (*id_to_handles_[id]).key_));
-        //     }
-        // }
+        for (auto it = id_to_handles_.begin();
+             it != id_to_handles_.end(); ++it)
+        {
+            if (from == (*it->second).value_)
+                ret.insert(std::pair<ul, T>(it->first, (*(it->second)).key_));
+        }
 
         return Rcpp::wrap(ret);
     }
 
-    void decrease_key(std::vector<T>& from, std::vector<T>& to, std::vector<ul>& id)
+    std::vector<std::vector<U>> values()
+    {
+        std::vector<std::vector<U>> ret;
+        ret.reserve(id_to_handles_.size());
+        for (auto it = id_to_handles_.begin();
+             it != id_to_handles_.end();
+             ++it)
+        {
+            ret.push_back(*(it->second).value_);
+        }
+
+        return ret;
+    }
+
+    void decrease_key(std::vector<T>& from, std::vector<T>& to,
+                      std::vector<ul>& id)
     {
         if (from.size() != to.size() || to.size() != id.size())
         {
@@ -127,13 +137,14 @@ public:
         {
             if (to[i] >= from[i])
             {
-                Rcpp::stop(std::string("'to' key is not smaller than 'from'"));
+                Rcpp::stop(
+                  std::string("'to' key is not smaller than 'from'"));
             }
             if (key_to_id_.find(from[i]) == key_to_id_.end())
             {
                 Rcpp::stop(std::string("'from' key not found"));
             }
-            if(id_to_handles_.find(id[i]) == id_to_handles_.end())
+            if (id_to_handles_.find(id[i]) == id_to_handles_.end())
             {
                 Rcpp::stop(std::string("'id' key not found."));
             }
@@ -144,7 +155,8 @@ public:
             {
                 if (it->second == id[i]) has_id = true;
             }
-            if (!has_id) Rcpp::stop(std::string("'from' does not fit  value 'id'"));
+            if (!has_id)
+                Rcpp::stop(std::string("'from' does not fit  value 'id'"));
 
             decrease_key_(to[i], from[i], id[i]);
         }
@@ -170,7 +182,7 @@ public:
         node<H, T, U> n = heap_.top();
         heap_.pop();
 
-        std::map< T, std::vector<U> > heads;
+        std::map<T, std::vector<U> > heads;
         heads.insert(std::pair<T, std::vector<U>>(n.key_, n.value_));
 
         drop_from_key_map_(n.key_, n.id_);
@@ -182,7 +194,7 @@ public:
     {
         node<H, T, U> n = heap_.top();
 
-        std::map< T, std::vector<U> > heads;
+        std::map<T, std::vector<U> > heads;
         heads.insert(std::pair<T, std::vector<U>>(n.key_, n.value_));
 
         return Rcpp::wrap(heads);
@@ -215,10 +227,11 @@ private:
         heap_.decrease(id_to_handles_[id]);
         heap_.update(id_to_handles_[id]);
     }
+
     H<node<H, T, U>> heap_;
     std::unordered_multimap<T, ul> key_to_id_;
     std::unordered_map<
-      ul,typename H<node<H, T, U>>::handle_type> id_to_handles_;
+      ul, typename H<node<H, T, U>>::handle_type> id_to_handles_;
     boost::uuids::random_generator generator_;
 };
 

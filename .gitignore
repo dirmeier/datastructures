@@ -1,3 +1,5 @@
+CMakeLists.txt
+cmake-build-debug/
 inst/doc/*
 build/
 src/test

@@ -25,6 +25,7 @@
 #' @include methods_size.R
 #' @include methods_handle.R
 #' @include methods_decrease.R
+#' @include methods_values.R
 NULL
 
 
@@ -221,3 +222,9 @@ setMethod(
                           from="vector", to="vector", handle="missing"),
     function(obj, from, to) .decrease_key(obj, from, to, NULL)
 )
+
+#' @rdname values-methods
+setMethod("values", "binomial_heap", function(obj)
+{
+    .heap_values(obj)
+})

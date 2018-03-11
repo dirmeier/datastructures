@@ -120,7 +120,7 @@ public:
              it != id_to_handles_.end();
              ++it)
         {
-            ret.push_back(*(it->second).value_);
+            ret.push_back((*(it->second)).value_);
         }
 
         return ret;

@@ -122,7 +122,6 @@ setClass("heap",
 }
 
 
-
 #' @noRd
 .decrease_key <- function(obj, from, to, handle)
 {
@@ -153,4 +152,11 @@ setClass("heap",
     }
 
     obj@.heap$decrease_key(from, to, handlex)
+}
+
+
+#' @noRd
+.heap_values <- function(obj)
+{
+  obj@.heap$values()
 }

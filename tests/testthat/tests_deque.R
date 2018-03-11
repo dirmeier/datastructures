@@ -20,6 +20,89 @@
 
 context("deque")
 
+qs <- c(queue, stack)
+
 test_that("abstract class cannot get instantiated", {
     expect_error(methods::new("deque"))
+})
+
+
+test_that("deque shows", {
+    for (s in qs) {
+        expect_output(show(s("integer")))
+    }
+})
+
+
+test_that("queue insert throws when inserting false values", {
+    for (s in qs) {
+        q <- s("numeric")
+        expect_error(insert(q, c("s", "s")))
+    }
+})
+
+
+test_that("queue pops first element as list", {
+    for (s in qs) {
+        q <- s("numeric")
+        r <- as.list(stats::rnorm(5))
+        queue <- insert(q, r)
+        expect_equal(pop(q), r[[1]], tolerance=0.1)
+    }
+})
+
+
+test_that("queue peeks first element as list", {
+    for (s in qs) {
+        q <- s("numeric")
+        r <- as.list(stats::rnorm(5))
+        q <- insert(q, r)
+        expect_equal(peek(q), r[[1]], tolerance=0.1)
+    }
+})
+
+
+test_that("queue peeks first element vectorial", {
+    for (s in qs) {
+        q <- s("numeric")
+        r <- stats::rnorm(5)
+        q <- insert(q, r)
+        expect_equal(peek(q), r, tolerance=0.1)
+    }
+})
+
+test_that("queue pops first element vectorial", {
+    for (s in qs)
+    q <- queue("numeric")
+    r <- stats::rnorm(5)
+    q <- insert(q, r)
+    expect_equal(pop(q), r, tolerance=0.1)
+})
+
+
+test_that("queue peeks first element multiple elements in list", {
+    for (s in qs) {
+    q <- s("numeric")
+    r <- stats::rnorm(5)
+    q <- insert(q, list(r, 1))
+    expect_equal(peek(q), r, tolerance=0.1)
+})
+
+test_that("queue pop first element multiple elements in list", {
+    for (s in qs) {
+        q <- queue("numeric")
+        r <- stats::rnorm(5)
+        q <- insert(q, list(r, 1))
+        expect_equal(pop(q), r, tolerance=0.1)
+    }
+})
+
+
+test_that("queue pop first element multiple elements in matrix", {
+    for (s in qs) {
+        q <- s("numeric")
+        r <- matrix(stats::rnorm(6), 2)
+        q <- insert(q, r)
+        expect_equal(pop(q), r[1, ], tolerance=0.1)
+    }
 })

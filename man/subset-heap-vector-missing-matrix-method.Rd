@@ -15,7 +15,7 @@
 \item{value}{a vector of values for the keys}
 }
 \description{
-Inserts <key, value> pairs to a Fibonacci heap. The keys are
+Inserts <key, value> pairs to a heap. The keys are
  determine the ordering of the heap, while the value is the actual value to
  store.
 }

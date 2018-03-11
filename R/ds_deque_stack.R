@@ -18,14 +18,6 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include ds_deque.R
-#' @include methods_peek.R
-#' @include methods_pop.R
-#' @include methods_size.R
-#' @include methods_insert.R
-NULL
-
-
 #' @title Stack class
 #'
 #' @export
@@ -56,7 +48,8 @@ setClass("stack", contains = "deque")
 #'
 #' @return returns a new \code{stack} object
 #'
-stack <- function(key.class = c("character", "numeric", "integer")) {
+stack <- function(key.class = c("character", "numeric", "integer"))
+{
     key.class <- match.arg(key.class)
     if (key.class == "character") {
         stack <- methods::new(stack_s)
@@ -68,45 +61,3 @@ stack <- function(key.class = c("character", "numeric", "integer")) {
 
     methods::new("stack", .key.class = key.class, .deque = stack)
 }
-
-
-#' @rdname peek-methods
-setMethod("peek", "stack", .peek.deque)
-
-
-#' @rdname pop-methods
-setMethod("pop", "stack", .pop.deque)
-
-
-setMethod("show", "stack", .show.deque)
-
-
-#' @rdname size-methods
-setMethod("size", "stack", .size.deque)
-
-
-#' @rdname insert-methods
-setMethod(
-    "insert",
-    signature = signature(obj = "stack", x = "vector", y = "missing"),
-    function(obj, x) .insert.deque(obj, list(x))
-)
-
-
-#' @rdname insert-methods
-setMethod(
-    "insert",
-    signature = signature(obj = "stack", x = "list", y = "missing"),
-    function(obj, x) .insert.deque(obj, x)
-)
-
-
-#' @rdname insert-methods
-setMethod(
-    "insert",
-    signature = signature(obj = "stack", x = "matrix", y = "missing"),
-    function(obj, x)
-    {
-        .insert.deque(obj, lapply(seq(nrow(x)), function(i) x[i, ]))
-    }
-)

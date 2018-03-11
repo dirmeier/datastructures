@@ -18,6 +18,14 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+#' @include ds_deque.R
+#' @include methods_peek.R
+#' @include methods_pop.R
+#' @include methods_size.R
+#' @include methods_insert.R
+NULL
+
+
 #' @title Deque class
 #'
 #' @export
@@ -83,3 +91,45 @@ setClass("deque",
 
     obj
 }
+
+
+#' @rdname peek-methods
+setMethod("peek", "deque", .peek.deque)
+
+
+#' @rdname pop-methods
+setMethod("pop", "deque", .pop.deque)
+
+
+setMethod("show", "deque", .show.deque)
+
+
+#' @rdname size-methods
+setMethod("size", "deque", .size.deque)
+
+
+#' @rdname insert-methods
+setMethod(
+  "insert",
+  signature = signature(obj = "deque", x = "vector", y = "missing"),
+  function(obj, x) .insert.deque(obj, list(x))
+)
+
+
+#' @rdname insert-methods
+setMethod(
+  "insert",
+  signature = signature(obj = "deque", x = "list", y = "missing"),
+  function(obj, x) .insert.deque(obj, x)
+)
+
+
+#' @rdname insert-methods
+setMethod(
+  "insert",
+  signature = signature(obj = "deque", x = "matrix", y = "missing"),
+  function(obj, x)
+  {
+    .insert.deque(obj, lapply(seq(nrow(x)), function(i) x[i, ]))
+  }
+)

@@ -199,7 +199,7 @@ setMethod(
 
 #' Insert parts to an object
 #'
-#' @description Inserts <key, value> pairs to a Fibonacci heap. The keys are
+#' @description Inserts <key, value> pairs to a heap. The keys are
 #'  determine the ordering of the heap, while the value is the actual value to
 #'  store.
 #'
@@ -215,7 +215,7 @@ setMethod(
 
 #' Insert parts to an object
 #'
-#' @description Inserts <key, value> pairs to a Fibonacci heap. The keys are
+#' @description Inserts <key, value> pairs to a heap. The keys are
 #'  determine the ordering of the heap, while the value is the actual value to
 #'  store.
 #'
@@ -231,7 +231,7 @@ setMethod(
 
 #' Insert parts to an object
 #'
-#' @description Inserts <key, value> pairs to a Fibonacci heap. The keys are
+#' @description Inserts <key, value> pairs to a heap. The keys are
 #'  determine the ordering of the heap, while the value is the actual value to
 #'  store.
 #'

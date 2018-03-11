@@ -56,7 +56,6 @@ RCPP_MODULE(hashmap_module) {
         .method("size",   &hashmap_sd::size)
         .method("insert", &hashmap_sd::insert)
         .method("get",    &hashmap_sd::get);
-
     Rcpp::class_< hashmap_ds >( "hashmap_ds" )
         .constructor()
         .method("keys",   &hashmap_ds::keys)

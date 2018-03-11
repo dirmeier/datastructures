@@ -24,113 +24,38 @@
 #ifndef DS_HASHMAP
 #define DS_HASHMAP
 
-#include <Rcpp.h>
+
 #include <vector>
 #include <string>
-#include <map>
+#include "map.hpp"
 #include <unordered_map>
 
 
-template <typename T, typename U>
-class hashmap
-{
-public:
-    hashmap(): map_()
-    {}
+using hashmap_ss = datastructures::map<
+  std::unordered_map, std::string, std::string>;
+using hashmap_si = datastructures::map<
+  std::unordered_map, std::string, int>;
+using hashmap_sb = datastructures::map<
+  std::unordered_map, std::string, bool>;
+using hashmap_sd = datastructures::map<
+  std::unordered_map, std::string, double>;
 
-    size_t size()
-    {
-        return map_.size();
-    }
+using hashmap_ds = datastructures::map<
+  std::unordered_map, double, std::string>;
+using hashmap_di = datastructures::map<
+  std::unordered_map, double, int>;
+using hashmap_db = datastructures::map<
+  std::unordered_map, double, bool>;
+using hashmap_dd = datastructures::map<
+  std::unordered_map, double, double>;
 
-    void insert(std::vector<T>& t, std::vector< std::vector<U> >& u)
-    {
-        if (t.size() != u.size())
-        {
-            Rcpp::stop("keys.size() != values.size()");
-        }
-        for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
-        {
-            map_.insert(std::pair<T, std::vector<U>>(t[i], u[i]));
-        }
-    }
-
-    std::vector<T> keys()
-    {
-        std::vector<T> keys;
-        keys.reserve(map_.size());
-        for(const auto& pair : map_)
-        {
-            keys.push_back(pair.first);
-        }
-
-        return keys;
-    }
-
-    Rcpp::List values()
-    {
-        std::vector< std::vector<U> > values;
-        values.reserve(map_.size());
-        for(const auto& pair : map_)
-        {
-            values.push_back(pair.second);
-        }
-
-        return Rcpp::wrap(values);
-    }
-
-    Rcpp::List head()
-    {
-        unsigned int i = 0;
-        std::map< T, std::vector<U> > heads;
-        for (const auto& pair : map_)
-        {
-            if (i++ == 5) break;
-            heads.insert(pair);
-        }
-
-        return Rcpp::wrap(heads);
-    }
-
-    Rcpp::List get(std::vector<T>& t)
-    {
-        std::vector< std::vector<U> > values(t.size());
-        for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
-        {
-            T key = t[i];
-            if (map_.find(key) != map_.end())
-            {
-                values[i] =  map_[key];
-            }
-            else
-            {
-                std::stringstream ss;
-                ss << key;
-                Rcpp::stop(std::string("Could not find key: ").append(ss.str()));
-            }
-        }
-
-        return Rcpp::wrap(values);
-    }
-
-
-private:
-    std::unordered_map<T, std::vector<U>> map_;
-};
-
-typedef hashmap<std::string, std::string> hashmap_ss;
-typedef hashmap<std::string, int>         hashmap_si;
-typedef hashmap<std::string, bool>        hashmap_sb;
-typedef hashmap<std::string, double>      hashmap_sd;
-
-typedef hashmap<double, std::string>  hashmap_ds;
-typedef hashmap<double, int>          hashmap_di;
-typedef hashmap<double, bool>         hashmap_db;
-typedef hashmap<double, double>       hashmap_dd;
-
-typedef hashmap<int, std::string>  hashmap_is;
-typedef hashmap<int, int>          hashmap_ii;
-typedef hashmap<int, bool>         hashmap_ib;
-typedef hashmap<int, double>       hashmap_id;
+using hashmap_is = datastructures::map<
+  std::unordered_map, int, std::string>;
+using hashmap_ii = datastructures::map<
+  std::unordered_map, int, int>;
+using hashmap_ib = datastructures::map<
+  std::unordered_map, int, bool>;
+using hashmap_id = datastructures::map<
+  std::unordered_map, int, double>;
 
 #endif

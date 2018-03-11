@@ -24,7 +24,7 @@
 #ifndef DS_FIBONACCIHEAP
 #define DS_FIBONACCIHEAP
 
-#include <Rcpp.h>
+
 #include <boost/heap/fibonacci_heap.hpp>
 #include "heap.hpp"
 

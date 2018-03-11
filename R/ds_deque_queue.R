@@ -18,14 +18,6 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include ds_deque.R
-#' @include methods_peek.R
-#' @include methods_pop.R
-#' @include methods_size.R
-#' @include methods_insert.R
-NULL
-
-
 #' @title Queue class
 #'
 #' @export
@@ -69,42 +61,3 @@ queue <- function(key.class = c("character", "numeric", "integer"))
 
     methods::new("queue", .key.class = key.class, .deque = queue)
 }
-
-
-#' @rdname peek-methods
-setMethod("peek", "queue", .peek.deque)
-
-
-#' @rdname pop-methods
-setMethod("pop", "queue", .pop.deque)
-
-
-setMethod("show", "queue", .show.deque)
-
-
-#' @rdname size-methods
-setMethod("size", "queue", .size.deque)
-
-
-#' @rdname insert-methods
-setMethod(
-    "insert",
-    signature = signature(obj = "queue", x = "vector", y = "missing"),
-    function(obj, x) .insert.deque(obj, list(x))
-)
-
-
-#' @rdname insert-methods
-setMethod(
-    "insert",
-    signature = signature(obj = "queue", x = "list", y = "missing"),
-    function(obj, x) .insert.deque(obj, x)
-)
-
-
-#' @rdname insert-methods
-setMethod(
-    "insert",
-    signature = signature(obj = "queue", x = "matrix", y = "missing"),
-    function(obj, x) .insert.deque(obj, lapply(seq(nrow(x)), function(i) x[i, ]))
-)

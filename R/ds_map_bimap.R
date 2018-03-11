@@ -69,40 +69,40 @@ setClass("bimap", contains = "map")
 bimap <- function(key.class = c("character", "numeric", "integer"),
                   value.class = c("character", "numeric", "integer"))
 {
-    key.class   <- match.arg(key.class)
-    value.class <- match.arg(value.class)
+  key.class   <- match.arg(key.class)
+  value.class <- match.arg(value.class)
 
-    if (key.class == "character") {
-        if (value.class == "character")
-            map <- methods::new(bimap_ss)
-        else if (value.class == "integer")
-            map <- methods::new(bimap_si)
-        else
-         map <- methods::new(bimap_sd)
-    }
-    else if (key.class == "numeric")
-    {
-        if (value.class == "character")
-            map <- methods::new(bimap_ds)
-        else if (value.class == "integer")
-            map <- methods::new(bimap_di)
-        else
-            map <- methods::new(bimap_dd)
-    }
+  if (key.class == "character") {
+    if (value.class == "character")
+        map <- methods::new(bimap_ss)
+    else if (value.class == "integer")
+        map <- methods::new(bimap_si)
     else
-    {
-        if (value.class == "character")
-            map <- methods::new(bimap_is)
-        else if (value.class == "integer")
-            map <- methods::new(bimap_ii)
-        else
-        map <- methods::new(bimap_id)
-    }
+     map <- methods::new(bimap_sd)
+  }
+  else if (key.class == "numeric")
+  {
+    if (value.class == "character")
+        map <- methods::new(bimap_ds)
+    else if (value.class == "integer")
+        map <- methods::new(bimap_di)
+    else
+        map <- methods::new(bimap_dd)
+  }
+  else
+  {
+    if (value.class == "character")
+        map <- methods::new(bimap_is)
+    else if (value.class == "integer")
+        map <- methods::new(bimap_ii)
+    else
+    map <- methods::new(bimap_id)
+  }
 
-    methods::new("bimap",
-                 .key.class = key.class,
-                 .value.class = value.class,
-                 .map = map)
+  methods::new("bimap",
+               .key.class = key.class,
+               .value.class = value.class,
+               .map = map)
 }
 
 
@@ -114,44 +114,46 @@ bimap <- function(key.class = c("character", "numeric", "integer"),
 #' @param i  a vector of keys
 #' @param value  a vector of values for the keys
 setMethod(
-    "[<-",
-    signature = signature(x = "bimap", i = "vector", j = "missing", value = "vector"),
-    function(x, i, value) .insert.bimap(x, i, value)
+  "[<-",
+  signature = signature(
+      x = "bimap", i = "vector", j = "missing", value = "vector"),
+  function(x, i, value) .insert.bimap(x, i, value)
 )
 
 
 #' @rdname insert-methods
 setMethod(
-    "insert",
-    signature = signature(obj = "bimap", x = "vector", y = "vector"),
-    function(obj, x, y) .insert.bimap(obj, x, y)
+  "insert",
+  signature = signature(obj = "bimap", x = "vector", y = "vector"),
+  function(obj, x, y) .insert.bimap(obj, x, y)
 )
 
 
 #' @rdname get-methods
 setMethod(
-    "get",
-    signature = signature(obj = "bimap", x = "vector", which = "character"),
-    function(obj, x, which = c("values", "keys"))
-    {
-        which <- match.arg(which)
-        kc <- ifelse(which == "values", obj@.key.class, obj@.value.class)
-        .check.key.class(obj, x, kc = kc)
+  "get",
+  signature = signature(obj = "bimap", x = "vector", which = "character"),
+  function(obj, x, which = c("values", "keys"))
+  {
+    which <- match.arg(which)
+    kc <- ifelse(which == "values", obj@.key.class, obj@.value.class)
+    .check.key.class(obj, x, kc = kc)
 
-        if (which == "keys")
-            obj@.map$get_left(x) else obj@.map$get_right(x)
-    }
+    if (which == "keys")
+      obj@.map$get_left(x) else obj@.map$get_right(x)
+  }
 )
 
 
 #' @rdname get-methods
 setMethod(
-    "get",
-    signature = signature(obj = "bimap", x = "vector", which = "missing"),
-    function(obj, x) {
-        .check.key.class(obj, x)
-        obj@.map$get_right(x)
-    }
+  "get",
+  signature = signature(obj = "bimap", x = "vector", which = "missing"),
+  function(obj, x)
+  {
+    .check.key.class(obj, x)
+    obj@.map$get_right(x)
+  }
 )
 
 

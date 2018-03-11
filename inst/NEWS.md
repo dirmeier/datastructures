@@ -40,3 +40,7 @@
 * Removes `binomial_heap` and `fibonacci_heap` implementations and replaces with `heap` template class.
 * Adds `value` method for heaps.
 * Replaces hashs for storing `value` in heaps with linear search to make it conformab;e with introduction of data frame and other data structures.
+
+#### v0.2.5
+
+* Adds `multimaps`

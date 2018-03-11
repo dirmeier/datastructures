@@ -37,11 +37,11 @@ NeedsCompilation: yes
 Collate: 
     'checks.R'
     'datastructures-package.R'
-    'ds_deque.R'
     'methods_insert.R'
     'methods_size.R'
     'methods_pop.R'
     'methods_peek.R'
+    'ds_deque.R'
     'ds_deque_queue.R'
     'ds_deque_stack.R'
     'methods_values.R'

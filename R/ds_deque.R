@@ -18,7 +18,6 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include ds_deque.R
 #' @include methods_peek.R
 #' @include methods_pop.R
 #' @include methods_size.R

@@ -16,6 +16,7 @@ vignette: >
 
 ```{r, eval=TRUE, include=FALSE}
   library(datastructures)
+  library(purrr)
 ```
 
 ## Introduction
@@ -88,7 +89,12 @@ You can alternatively insert values like this:
   peek(fheap)
 ```
 
-This works for all the described `insert` methods above.
+This works for all the described `insert` methods above. Even though we usually
+don't need to retrieve all values from a heap, you can do so using the `values` method:
+
+```{r}
+  values(fheap)
+```
 
 Sometimes, we want to decrease a key and rearrange its position in the
 heap. If we have a *unique* key this can be easily done:
@@ -158,19 +164,20 @@ As a last example, consider this use case:
 ```
 
 
-## Hashmaps and bimaps
+## Hashmaps, bimaps and multimaps
 
-Hashmaps and bimaps use hash functions to store key-value pairs. Given a key, the hash function computes a *bucket* where the value is stored, making lookup, insertion and deletion on average possible in $\mathcal{O}(1)$ time. In the worst case these runtimes decrease to $\mathcal{O}(n)$ time, where $n$ is the number of entries in a bucket. The difference between the two classes is that hashmaps compute a mapping from keys to values (the hash function)
+Maps use hash functions to store key-value pairs. Given a key, the hash function computes a *bucket* where the value is stored, making lookup, insertion and deletion on average possible in $\mathcal{O}(1)$ time. In the worst case these runtimes decrease to $\mathcal{O}(n)$ time, where $n$ is the number of entries in a bucket. The difference between the three classes is that hashmaps and multimaps compute a mapping from keys to values (the hash function)
 $$ \, f: \mathcal{K} \rightarrow \mathcal{V} \, $$
 in **'one direction'**, while bimaps also compute a mapping
 $$ \, f: \mathcal{V} \rightarrow \mathcal{K} \, $$
-in the **'other direction'**. So a bimap is essentially a combination of two hashmaps.
+in the **'other direction'**. So a bimap is essentially a combination of two hashmaps. The difference between a hashmap and a multimap is that for hashs only *one* unique key can be stored for a value, while multimaps allow storing the same key several times fur multiple values,
 
-Hashmaps and bimaps can get created like this, this time we use `<character, integer>` pairs:
+Maps can get created like this, this time we use `<character, integer>` pairs:
 
 ```{r}
   hash  <- hashmap("character", "integer")
   bimap <- bimap("character", "integer")
+  mm    <- multimap("character", "integer")
 ```
 
 Insertion to maps works just like before, by calling the `insert` function:
@@ -180,8 +187,11 @@ Insertion to maps works just like before, by calling the `insert` function:
   values <- 1:5
   hash   <- insert(hash, keys[1:4], values[1:4])
   bimap  <- insert(bimap, keys[1:4], values[1:4])
+  mm     <- insert(mm, keys[1:4], values[1:4])
   hash[keys[5]]  <- values[5]
   bimap[keys[5]] <- values[5]
+  mm[keys[5]]    <- values[5]
+  mm[keys[5]]    <- values[1:5]
 ```
 
 Values (and keys in the case of bimaps) can then be accessed like this:
@@ -193,9 +203,12 @@ Values (and keys in the case of bimaps) can then be accessed like this:
   get(bimap, keys[1], "values")
   get(bimap, values[2], "keys")
   get(bimap, keys[1])
+  
+  get(mm, keys[5])
+  mm[keys[5]]
 ```
 
-For hashmaps the subset-operator `[` is also supported for accessing elements. This does not make so much sense for bimaps, because here we have to choose whether we want to access keys or values.  In the example on the top we showed how both is possible by either providing `keys` or `values` as third argument to the `get` function. If you leave it out, then the third argument defaults to `values`.
+For hashmaps\multimaps the subset-operator `[` is also supported for accessing elements. This does not make so much sense for bimaps, because here we have to choose whether we want to access keys or values.  In the example on the top we showed how both is possible by either providing `keys` or `values` as third argument to the `get` function. If you leave it out, then the third argument defaults to `values`.
 
 If you want to directly access `keys` or `values` as vectors or have a look at a few random elements, you would call:
 

@@ -165,6 +165,8 @@ public:
     void clear()
     {
         heap_.clear();
+        key_to_id_.clear();
+        id_to_handles_.clear();
     }
 
     size_t size()
@@ -186,6 +188,7 @@ public:
         heads.insert(std::pair<T, std::vector<U>>(n.key_, n.value_));
 
         drop_from_key_map_(n.key_, n.id_);
+        drop_from_id_map_(n.id_);
 
         return Rcpp::wrap(heads);
     }
@@ -218,6 +221,14 @@ private:
                 key_to_id_.erase(it);
                 break;
             }
+        }
+    }
+
+    void drop_from_id_map_(ul id)
+    {
+        if (id_to_handles_.find(id) != id_to_handles_.end())
+        {
+            id_to_handles_.erase(id);
         }
     }
 

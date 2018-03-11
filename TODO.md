@@ -6,7 +6,11 @@
 * <strike>Stack</strike>
 * <strike>Binomial heap</strike>
 * <strike>Bimap</strike>
+* <strike>Multimap</strike>
 * d-ary heap
+* vectors
+* pairs (and vectors of pairs)
+* linked list, doubly linked listbo
 * ?
 
 ### Author

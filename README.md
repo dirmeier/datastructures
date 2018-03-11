@@ -20,7 +20,7 @@ So far `datastructures` has implementations for:
 
 * Fibonacci and binomial heaps,
 * queues and stacks,
-* hashmaps and bimaps.
+* hashmaps, multimaps and bimaps.
 
 As an introductory example, consider you want to compute shortest paths on a
 graph and decide to use a Fibonacci heap for keeping the distances. A Fibonacci heap is an efficient tree-like data structure
@@ -72,4 +72,4 @@ just open up a new issue. Alternatively it would be great if you provided a PR.
 
 ## Author
 
-* Simon Dirmeier <a href="mailto:simon.dirmeier@gmx.de">simon.dirmeier@gmx.de</a>
+* Simon Dirmeier <a href="mailto:simon.dirmeier@web.de">simon.dirmeier@web.de</a>

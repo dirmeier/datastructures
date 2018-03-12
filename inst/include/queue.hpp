@@ -63,8 +63,8 @@ private:
     std::queue< std::vector<T> > queue_;
 };
 
-typedef queue<std::string> queue_s;
-typedef queue<double>      queue_d;
-typedef queue<int>         queue_i;
+using queue_s = queue<std::string>;
+using queue_d = queue<double>;
+using queue_i = queue<int>;
 
 #endif

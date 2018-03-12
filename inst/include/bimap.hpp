@@ -29,17 +29,17 @@
 #include <map>
 #include <boost/bimap.hpp>
 
-template <typename T, typename U>
+template<typename T, typename U>
 class bimap
 {
-public:
-
-    typedef typename boost::bimap< T, U >::value_type position;
+   public:
+    typedef typename boost::bimap<T, U>::value_type position;
     typedef typename boost::bimap<T, U>::right_map::const_iterator ri;
     typedef typename boost::bimap<T, U>::left_map::const_iterator li;
 
-    bimap(): map_()
-    {}
+    bimap() : map_()
+    {
+    }
 
     size_t size()
     {
@@ -62,10 +62,8 @@ public:
     {
         std::vector<T> lefts;
         lefts.reserve(map_.size());
-        for(li left_iter = map_.left.begin(),
-            iend = map_.left.end();
-            left_iter != iend;
-            ++left_iter)
+        for (li left_iter = map_.left.begin(), iend = map_.left.end();
+             left_iter != iend; ++left_iter)
         {
             lefts.push_back(left_iter->first);
         }
@@ -77,9 +75,8 @@ public:
     {
         std::vector<U> rights;
         rights.reserve(map_.size());
-        for(ri right_iter = map_.right.begin(), iend = map_.right.end();
-            right_iter != iend;
-            ++right_iter)
+        for (ri right_iter = map_.right.begin(), iend = map_.right.end();
+             right_iter != iend; ++right_iter)
         {
             rights.push_back(right_iter->first);
         }
@@ -90,12 +87,12 @@ public:
     Rcpp::List head()
     {
         unsigned int i = 0;
-        std::map< T, U > heads;
-        for (li left_iter = map_.left.begin(),
-             iend = map_.left.end();
+        std::map<T, U> heads;
+        for (li left_iter = map_.left.begin(), iend = map_.left.end();
              left_iter != iend; ++left_iter)
         {
-            if (i++ == 5) break;
+            if (i++ == 5)
+                break;
             heads.insert(std::pair<T, U>(left_iter->first, left_iter->second));
         }
 
@@ -111,13 +108,14 @@ public:
             T key = t[i];
             if (map_.left.find(key) != map_.left.end())
             {
-                values[i] =  map_.left.at(key);
+                values[i] = map_.left.at(key);
             }
             else
             {
                 std::stringstream ss;
                 ss << key;
-                Rcpp::stop(std::string("Could not find key: ").append(ss.str()));
+                Rcpp::stop(
+                  std::string("Could not find key: ").append(ss.str()));
             }
         }
 
@@ -133,37 +131,37 @@ public:
             U key = u[i];
             if (map_.right.find(key) != map_.right.end())
             {
-                values[i] =  map_.right.at(key);
+                values[i] = map_.right.at(key);
             }
             else
             {
                 std::stringstream ss;
                 ss << key;
-                Rcpp::stop(std::string("Could not find key: ").append(ss.str()));
+                Rcpp::stop(
+                  std::string("Could not find key: ").append(ss.str()));
             }
         }
 
         return values;
     }
 
-
-private:
+   private:
     boost::bimap<T, U> map_;
 };
 
-typedef bimap<std::string, std::string> bimap_ss;
-typedef bimap<std::string, int>         bimap_si;
-typedef bimap<std::string, bool>        bimap_sb;
-typedef bimap<std::string, double>      bimap_sd;
+using bimap_ss = bimap<std::string, std::string>;
+using bimap_si = bimap<std::string, int>;
+using bimap_sb = bimap<std::string, bool>;
+using bimap_sd = bimap<std::string, double>;
 
-typedef bimap<double, std::string>  bimap_ds;
-typedef bimap<double, int>          bimap_di;
-typedef bimap<double, bool>         bimap_db;
-typedef bimap<double, double>       bimap_dd;
+using bimap_ds = bimap<double, std::string>;
+using bimap_di = bimap<double, int>;
+using bimap_db = bimap<double, bool>;
+using bimap_dd = bimap<double, double>;
 
-typedef bimap<int, std::string>  bimap_is;
-typedef bimap<int, int>          bimap_ii;
-typedef bimap<int, bool>         bimap_ib;
-typedef bimap<int, double>       bimap_id;
+using bimap_is = bimap<int, std::string>;
+using bimap_ii = bimap<int, int>;
+using bimap_ib = bimap<int, bool>;
+using bimap_id = bimap<int, double>;
 
 #endif

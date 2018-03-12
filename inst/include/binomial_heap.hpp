@@ -20,28 +20,28 @@
  *
  */
 
-
 #ifndef DS_BINOMIALHEAP
 #define DS_BINOMIALHEAP
 
-
-#include <Rcpp.h>
 #include <boost/heap/binomial_heap.hpp>
 #include "heap.hpp"
 
-typedef heap<boost::heap::binomial_heap, std::string, std::string> binomial_heap_ss;
-typedef heap<boost::heap::binomial_heap, std::string, int>         binomial_heap_si;
-typedef heap<boost::heap::binomial_heap, std::string, bool>        binomial_heap_sb;
-typedef heap<boost::heap::binomial_heap, std::string, double>      binomial_heap_sd;
+using binomial_heap_ss =
+    heap<boost::heap::binomial_heap, std::string, std::string>;
+using binomial_heap_si = heap<boost::heap::binomial_heap, std::string, int>;
+using binomial_heap_sb = heap<boost::heap::binomial_heap, std::string, bool>;
+using binomial_heap_sd =
+    heap<boost::heap::binomial_heap, std::string, double>;
 
-typedef heap<boost::heap::binomial_heap, double, std::string>  binomial_heap_ds;
-typedef heap<boost::heap::binomial_heap, double, int>          binomial_heap_di;
-typedef heap<boost::heap::binomial_heap, double, bool>         binomial_heap_db;
-typedef heap<boost::heap::binomial_heap, double, double>       binomial_heap_dd;
+using binomial_heap_ds =
+    heap<boost::heap::binomial_heap, double, std::string>;
+using binomial_heap_di = heap<boost::heap::binomial_heap, double, int>;
+using binomial_heap_db = heap<boost::heap::binomial_heap, double, bool>;
+using binomial_heap_dd = heap<boost::heap::binomial_heap, double, double>;
 
-typedef heap<boost::heap::binomial_heap, int, std::string>  binomial_heap_is;
-typedef heap<boost::heap::binomial_heap, int, int>          binomial_heap_ii;
-typedef heap<boost::heap::binomial_heap, int, bool>         binomial_heap_ib;
-typedef heap<boost::heap::binomial_heap, int, double>       binomial_heap_id;
+using binomial_heap_is = heap<boost::heap::binomial_heap, int, std::string>;
+using binomial_heap_ii = heap<boost::heap::binomial_heap, int, int>;
+using binomial_heap_ib = heap<boost::heap::binomial_heap, int, bool>;
+using binomial_heap_id = heap<boost::heap::binomial_heap, int, double>;
 
 #endif

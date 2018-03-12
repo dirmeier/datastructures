@@ -29,9 +29,7 @@
 #include <map>
 #include <unordered_map>
 #include <algorithm>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
-#include <boost/uuid/uuid_io.hpp>
+#include <uuid/uuid.h>
 #include <boost/lexical_cast.hpp>
 
 using ul = std::string;
@@ -69,7 +67,12 @@ public:
         }
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
         {
-            std::string id_ = boost::lexical_cast<ul>(generator_());
+            uuid_t uuid;
+            char uuid_str[37];
+            uuid_generate(uuid);
+            uuid_unparse_lower(uuid, uuid_str);
+
+            std::string id_ = std::string(uuid_str);
             typename H<node<H, T, U>>::handle_type h =
               heap_.push(node<H, T, U>(t[i], u[i], id_));
             (*h).handle_ = h;
@@ -245,7 +248,7 @@ private:
     std::unordered_multimap<T, ul> key_to_id_;
     std::unordered_map<
       ul, typename H<node<H, T, U>>::handle_type> id_to_handles_;
-    boost::uuids::random_generator generator_;
+
 };
 
 #endif

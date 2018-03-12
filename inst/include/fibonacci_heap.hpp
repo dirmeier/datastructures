@@ -20,27 +20,28 @@
  *
  */
 
-
 #ifndef DS_FIBONACCIHEAP
 #define DS_FIBONACCIHEAP
-
 
 #include <boost/heap/fibonacci_heap.hpp>
 #include "heap.hpp"
 
-typedef heap<boost::heap::fibonacci_heap, std::string, std::string> fibonacci_heap_ss;
-typedef heap<boost::heap::fibonacci_heap, std::string, int>         fibonacci_heap_si;
-typedef heap<boost::heap::fibonacci_heap, std::string, bool>        fibonacci_heap_sb;
-typedef heap<boost::heap::fibonacci_heap, std::string, double>      fibonacci_heap_sd;
+using fibonacci_heap_ss =
+  heap<boost::heap::fibonacci_heap, std::string, std::string>;
+using fibonacci_heap_si = heap<boost::heap::fibonacci_heap, std::string, int>;
+using fibonacci_heap_sb = heap<boost::heap::fibonacci_heap, std::string, bool>;
+using fibonacci_heap_sd =
+  heap<boost::heap::fibonacci_heap, std::string, double>;
 
-typedef heap<boost::heap::fibonacci_heap, double, std::string>  fibonacci_heap_ds;
-typedef heap<boost::heap::fibonacci_heap, double, int>          fibonacci_heap_di;
-typedef heap<boost::heap::fibonacci_heap, double, bool>         fibonacci_heap_db;
-typedef heap<boost::heap::fibonacci_heap, double, double>       fibonacci_heap_dd;
+using fibonacci_heap_ds =
+  heap<boost::heap::fibonacci_heap, double, std::string>;
+using fibonacci_heap_di = heap<boost::heap::fibonacci_heap, double, int>;
+using fibonacci_heap_db = heap<boost::heap::fibonacci_heap, double, bool>;
+using fibonacci_heap_dd = heap<boost::heap::fibonacci_heap, double, double>;
 
-typedef heap<boost::heap::fibonacci_heap, int, std::string>  fibonacci_heap_is;
-typedef heap<boost::heap::fibonacci_heap, int, int>          fibonacci_heap_ii;
-typedef heap<boost::heap::fibonacci_heap, int, bool>         fibonacci_heap_ib;
-typedef heap<boost::heap::fibonacci_heap, int, double>       fibonacci_heap_id;
+using fibonacci_heap_is = heap<boost::heap::fibonacci_heap, int, std::string>;
+using fibonacci_heap_ii = heap<boost::heap::fibonacci_heap, int, int>;
+using fibonacci_heap_ib = heap<boost::heap::fibonacci_heap, int, bool>;
+using fibonacci_heap_id = heap<boost::heap::fibonacci_heap, int, double>;
 
 #endif

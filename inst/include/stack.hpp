@@ -63,8 +63,8 @@ private:
     std::stack< std::vector<T> > stack_;
 };
 
-typedef stack<std::string> stack_s;
-typedef stack<double>      stack_d;
-typedef stack<int>         stack_i;
+using stack_s = stack<std::string>;
+using stack_d = stack<double>;
+using stack_i = stack<int>;
 
 #endif

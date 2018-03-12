@@ -322,3 +322,18 @@ test_that("heap value function works",
       expect_equal(sort(unlist(vals)), sort(m))
   }
 })
+
+test_that("heap uuids are unique",
+{
+  n <- 10000
+  r <- rep(1L, n)
+  m <- rep(rnorm(1), n)
+  for (h in hs)
+  {
+      bheap <- h("integer", "numeric")
+      bheap <- insert(bheap, r, m)
+      vals  <- values(bheap)
+      hand  <- sapply(handle(bheap, 1L), function(.) .$handle)
+      expect_true(length(unique(hand)) == n)
+  }
+})

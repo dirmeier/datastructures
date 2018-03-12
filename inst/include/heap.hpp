@@ -62,6 +62,7 @@ public:
 
     void insert(std::vector<T>& t, std::vector<std::vector<U> >& u)
     {
+        GetRNGstate();
         if (t.size() != u.size())
         {
             Rcpp::stop("keys.size() != values.size()");
@@ -77,6 +78,7 @@ public:
               std::pair<ul, typename H<node<H, T, U>>::handle_type>(id_, h));
             key_to_id_.insert(std::pair<T, ul>(t[i], id_));
         }
+        PutRNGstate();
     }
 
     Rcpp::List handles(T& from)

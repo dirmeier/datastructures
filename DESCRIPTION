@@ -17,7 +17,7 @@ BugReports: https://github.com/dirmeier/datastructures/issues
 License: GPL-3
 Encoding: UTF-8
 Depends:
-    R (>= 3.4),
+    R (>= 3.3),
     Rcpp
 Suggests:
     testthat,

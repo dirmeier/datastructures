@@ -26,11 +26,10 @@
 #include <Rcpp.h>
 #include <vector>
 #include <string>
+#include <sstream>
 #include <map>
 #include <unordered_map>
 #include <algorithm>
-#include <uuid/uuid.h>
-#include <boost/lexical_cast.hpp>
 
 using ul = std::string;
 
@@ -60,28 +59,23 @@ public:
 
     void insert(std::vector<T>& t, std::vector<std::vector<U> >& u)
     {
-        GetRNGstate();
         if (t.size() != u.size())
         {
             Rcpp::stop("keys.size() != values.size()");
         }
         for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
         {
-            uuid_t uuid;
-            char uuid_str[37];
-            uuid_generate(uuid);
-            uuid_unparse_lower(uuid, uuid_str);
-
-            std::string id_ = std::string(uuid_str);
+            std::stringstream ss;
+            ss << "handle-" << unid_++;
+            std::string id = ss.str();
             typename H<node<H, T, U>>::handle_type h =
-              heap_.push(node<H, T, U>(t[i], u[i], id_));
+              heap_.push(node<H, T, U>(t[i], u[i], id));
             (*h).handle_ = h;
 
             id_to_handles_.insert(
-              std::pair<ul, typename H<node<H, T, U>>::handle_type>(id_, h));
-            key_to_id_.insert(std::pair<T, ul>(t[i], id_));
+              std::pair<ul, typename H<node<H, T, U>>::handle_type>(id, h));
+            key_to_id_.insert(std::pair<T, ul>(t[i], id));
         }
-        PutRNGstate();
     }
 
     Rcpp::List handles(T& from)
@@ -248,6 +242,7 @@ private:
     std::unordered_multimap<T, ul> key_to_id_;
     std::unordered_map<
       ul, typename H<node<H, T, U>>::handle_type> id_to_handles_;
+    unsigned long unid_ = 0;
 
 };
 

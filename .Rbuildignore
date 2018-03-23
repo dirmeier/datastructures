@@ -24,3 +24,5 @@ TODO.md
 CMakeLists.txt
 cmake-build-debug
 cmake-build-debug/*
+^docs$
+^pkgdown$

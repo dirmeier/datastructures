@@ -1,0 +1,25 @@
+authors:
+  Simon Dirmeier:
+    href: http://www.simon-dirmeier.net
+
+navbar:
+  title: "datastructures"
+  type: inverse
+  left:
+    - text: "Tutorial"
+      href: articles/datastructures.html
+    - text: "Reference"
+      href: reference/index.html
+    - text: "News"
+      href: news/index.html
+  right:
+    - icon: fa-home fa-2x
+      href: http://simon-dirmeier.net
+    - icon: fa-github fa-2x
+      href: https://github.com/dirmeier/datastructures
+    - icon: fa fa-twitter fa-2x
+      href: http://twitter.com/simon_dirmeier/
+
+template:
+  params:
+    bootswatch: lumen

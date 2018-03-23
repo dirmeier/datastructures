@@ -1,4 +1,4 @@
-# datastructures <img src="https://github.com/dirmeier/datastructures/blob/master/inst/heap/heap.png" align="right" width="160px"/>
+# datastructures <img src="https://cdn.rawgit.com/dirmeier/datastructures/87d7cd08/inst/heap/heap.png" align="right" width="160px"/>
 
 [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![travis](https://travis-ci.org/dirmeier/datastructures.svg?branch=master)](https://travis-ci.org/dirmeier/datastructures)

@@ -178,7 +178,8 @@ setMethod(
   signature = signature(obj = "heap", x = "vector", y = "list"),
   function(obj, x, y)
   {
-      y <- if (is.data.frame(y)) list(y) else y
+      if (length(x) == 1 && is.data.frame(y)) y <- list(y)
+      else if (is.list(y) && length(x) == 1 && length(y) == 1) y <- list(y)
       .insert.heap(obj, x, y)
   }
 )

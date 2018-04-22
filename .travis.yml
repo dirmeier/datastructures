@@ -10,6 +10,9 @@ matrix:
       r: release
     - os: linux
       r: release
+      addons:
+        apt:
+          packages: ['valgrind']
 
 env:
   global:
@@ -32,3 +35,8 @@ after_success:
   - Rscript -e 'covr::codecov()'
   - Rscript -e 'lintr::lint_package()'
   - R CMD BiocCheck $PKG_TARBALL
+  - Rscript -e "devtools::install_github('dirmeier/datastructures')"
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      R -d "valgrind --tool=memcheck --leak-check=full --track-origins=yes" --vanilla < datastructures.Rcheck/datastructures-Ex.R
+    fi

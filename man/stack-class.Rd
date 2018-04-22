@@ -15,7 +15,5 @@ Implementation of a stack data structure, i.e. a list
 
 \describe{
 \item{\code{.deque}}{\code{C++} object representing a deque}
-
-\item{\code{.key.class}}{the class of the keys}
 }}
 

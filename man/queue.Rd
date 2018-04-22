@@ -6,9 +6,6 @@
 \usage{
 queue()
 }
-\arguments{
-\item{key.class}{the primitive class type of the keys}
-}
 \value{
 returns a new \code{queue} object
 }

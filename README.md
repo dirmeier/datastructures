@@ -28,14 +28,30 @@ graph and decide to use a Fibonacci heap for keeping the distances. A Fibonacci 
 that satisfies the *min-heap property*. We can use it to quickly get the node with the shortest distance in *O(log n)* time like this:
 
 ```R
-  fh <- fibonacci_heap("character", "numeric")
+  fh <- fibonacci_heap("numeric")
   node.labels    <- paste0("n", 10:1)
   node.distances <- seq(1, 0, length.out=length(node.labels))
-  fh <- insert(fh, node.labels, node.distances)
+  fh <- insert(fh, node.distances, node.labels)
 
   peek(fh)
-  $n1
-  [1] 0
+  $`0`
+  [1] "n1"
+```
+
+`datastructures` also allows storing of complex R objects, like `data.frames`, `matrices` or `environments`.
+For instance, we could use a hashmap for storing such objects:
+
+```R
+  hm <- hashmap("integer")
+  keys <- 1:2
+  values <- list(
+    enviroment(),
+    data.frame(A=rbeta(3, .5, .5), B=rgamma(3, 1)))
+  hm <- insert(hm, keys, values)
+
+  hm[1L]
+  [[1]]
+  <environment: R_GlobalEnv>
 ```
 
 ## Installation

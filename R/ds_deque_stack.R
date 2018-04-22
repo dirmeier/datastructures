@@ -31,7 +31,6 @@
 #'  the FIFO principle.
 #'
 #' @slot .deque  \code{C++} object representing a deque
-#' @slot .key.class  the class of the keys
 #'
 setClass("stack", contains = "deque")
 

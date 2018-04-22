@@ -33,13 +33,12 @@
 #'
 #' @param obj  a heap object
 #' @param key  a key in the heap
-#' @param value  a value in the heap
 #'
-#' @return  returns extracted handles and values from \code{obj}
+#' @return  returns handles from \code{obj}
 #'
 setGeneric(
     "handle",
-    function(obj, key, value)
+    function(obj, key)
     {
         standardGeneric("handle")
     },

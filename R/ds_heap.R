@@ -102,21 +102,12 @@ setClass(
 
 #' @noRd
 #' @importFrom purrr map
-.handle <- function(obj, key, value)
+.handle <- function(obj, key)
 {
-    if (!is.null(key))
-    {
-        .check.key.class(obj, key)
-        ret <- obj@.heap$handles(key)
-        ret <- purrr::map(
-            names(ret), .f = function(x) list(handle=x, value=ret[[x]]))
-    }
-    else if (!is.null(value))
-    {
-        ret <- obj@.heap$values()
-        ret <- purrr::map(
-            names(ret), .f = function(x) list(handle=x, key=ret[[x]]))
-    }
+    .check.key.class(obj, key)
+    ret <- obj@.heap$handles(key)
+    ret <- purrr::map(
+        names(ret), .f = function(x) list(handle=x, value=ret[[x]]))
 
     ret
 }
@@ -156,9 +147,14 @@ setClass(
 
 
 #' @noRd
+#' @importFrom purrr map
 .heap_values <- function(obj)
 {
-  obj@.heap$values()
+    ret <- obj@.heap$values()
+    names(ret) <- purrr::map_chr(ret, ~.$key)
+    ret <- purrr:::map(ret, ~list(handle=.$handle, value=.$value))
+
+    ret
 }
 
 
@@ -233,16 +229,8 @@ setMethod(
 #' @rdname handle-methods
 setMethod(
   "handle",
-  signature = signature(obj="heap", key="vector", value="missing"),
-  function(obj, key) .handle(obj, key, NULL)
-)
-
-
-#' @rdname handle-methods
-setMethod(
-    "handle",
-    signature = signature(obj="heap", key="missing", value="vector"),
-    function(obj, value) .handle(obj, NULL, value)
+  signature = signature(obj="heap", key="vector"),
+  function(obj, key) .handle(obj, key)
 )
 
 

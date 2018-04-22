@@ -3,25 +3,20 @@
 \docType{methods}
 \name{handle}
 \alias{handle}
-\alias{handle,heap,vector,missing-method}
-\alias{handle,heap,missing,vector-method}
+\alias{handle,heap,vector-method}
 \title{Get the handles and values for nodes of a specific key in a heap.}
 \usage{
-handle(obj, key, value)
+handle(obj, key)
 
-\S4method{handle}{heap,vector,missing}(obj, key)
-
-\S4method{handle}{heap,missing,vector}(obj, value)
+\S4method{handle}{heap,vector}(obj, key)
 }
 \arguments{
 \item{obj}{a heap object}
 
 \item{key}{a key in the heap}
-
-\item{value}{a value in the heap}
 }
 \value{
-returns extracted handles and values from \code{obj}
+returns handles from \code{obj}
 }
 \description{
 Returns a list of handles and values for node elements that have

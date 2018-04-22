@@ -39,22 +39,17 @@ NULL
 setClass(
   "unordered_map",
   contains = c("map", "VIRTUAL"),
-  prototype = prototype(.map = NULL,
-                        .key.class = NA_character_)
+  prototype = prototype(.map = NULL, .key.class = NA_character_)
 )
 
 
 #' @noRd
 .insert.unordered_map <- function(obj, x, y)
 {
-  if (is.matrix(y))
-    y <- lapply(seq(nrow(y)), function(i) y[i, ] )
-  else if (length(x) == 1 && is.vector(y))
-    y <- list(y)
-  else if (length(x) == length(y) && is.vector(y))
-    y <- as.list(y)
+  if (length(x) != length(y))
+    stop("dimensions of keys and values do not match")
 
-  .check.key.value.classes(obj, x, y)
+  .check.key.class(obj, x)
   obj@.map$insert(x, y)
 
   obj
@@ -65,7 +60,13 @@ setClass(
 setMethod(
   "insert",
   signature = signature(obj = "unordered_map", x = "vector", y = "vector"),
-  function(obj, x, y) .insert.unordered_map(obj, x, y)
+  function(obj, x, y)
+  {
+    if (length(x) == 1) y <- list(y)
+    else if (length(x) == length(y) && is.vector(y))
+      y <- as.list(y)
+    .insert.unordered_map(obj, x, y)
+  }
 )
 
 
@@ -73,7 +74,35 @@ setMethod(
 setMethod(
   "insert",
   signature = signature(obj = "unordered_map", x = "vector", y = "list"),
-  function(obj, x, y) .insert.unordered_map(obj, x, y)
+  function(obj, x, y)
+  {
+    y <- if (is.data.frame(y)) list(y) else y
+      .insert.unordered_map(obj, x, y)
+  }
+)
+
+
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "unordered_map", x = "vector", y = "ANY"),
+    function(obj, x, y) .insert.unordered_map(obj, x, list(y))
+)
+
+
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to an unordered_map.
+#'
+#' @param x  x  an unorderd map object, such as a \code{\link{hashmap}} or
+#'  \code{\link{multimap}}
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
+setMethod(
+    "[<-",
+    signature = signature(
+        x="unordered_map", i="vector", j="missing", value="ANY"),
+    function(x, i, value) insert(x, i, value)
 )
 
 
@@ -89,7 +118,7 @@ setMethod(
   "[<-",
   signature = signature(
       x="unordered_map", i="vector", j="missing", value="vector"),
-  function(x, i, value) .insert.unordered_map(x, i, value)
+  function(x, i, value) insert(x, i, value)
 )
 
 
@@ -105,15 +134,14 @@ setMethod(
   "[<-",
   signature = signature(
       x="unordered_map", i="vector", j="missing", value="list"),
-  function(x, i, value) .insert.unordered_map(x, i, value)
+  function(x, i, value) insert(x, i, value)
 )
 
 
 #' @rdname get-methods
 setMethod(
   "get",
-  signature = signature(
-    obj = "unordered_map", x = "vector", which="missing"),
+  signature = signature(obj = "unordered_map", x = "vector", which="missing"),
   function(obj, x)
   {
     .check.key.class(obj, x)

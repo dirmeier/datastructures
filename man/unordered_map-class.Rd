@@ -3,7 +3,15 @@
 \docType{class}
 \name{unordered_map-class}
 \alias{unordered_map-class}
-\title{Map class}
+\title{Abstract unordered map class}
 \description{
 Abstract unordered map class
 }
+\section{Slots}{
+
+\describe{
+\item{\code{.map}}{\code{C++} object representing a mapping}
+
+\item{\code{.key.class}}{the class of the keys}
+}}
+

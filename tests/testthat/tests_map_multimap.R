@@ -22,7 +22,7 @@ context("multimap")
 
 
 test_that("multimap can store same keys", {
-    h <- multimap("character", "integer")
+    h <- multimap("character")
     h <- insert(h, letters, seq(letters))
     h <- insert(h, letters, seq(letters))
     expect_equal(length(get(h, "a")), 2)
@@ -30,11 +30,10 @@ test_that("multimap can store same keys", {
 })
 
 test_that("multimap can store same keys", {
-    h <- multimap("character", "integer")
+    h <- multimap("character")
     h <- insert(h, letters, seq(letters))
     h <- insert(h, letters, seq(letters))
     expect_equal(length(get(h, "a")), 2)
     expect_equal(unlist(get(h, "a")), c(1L, 1L))
 })
-
 

@@ -56,8 +56,7 @@ setClass("hashmap", contains = "unordered_map")
 #'
 #' @return returns a new \code{hashmap} object
 #'
-hashmap <- function(
-  key.class = c("character", "numeric", "integer"))
+hashmap <- function(key.class = c("character", "numeric", "integer"))
 {
   key.class   <- match.arg(key.class)
   map <- switch(

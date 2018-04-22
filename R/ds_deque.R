@@ -65,11 +65,10 @@ setClass(
 #' @noRd
 .show.deque <- function(object)
 {
-    cat(paste0("An object of class ", class(object)[1], "\n\n"))
+    cat(paste0("An object of class ", class(object)[1], "<SEXP>\n\n"))
     li <- peek(object)
     if (is.null(li))  li <- "NULL"
-    cat(paste0("First element -> \n"))
-    print(li)
+    cat(paste0("First element -> ", class(li), "\n"))
 }
 
 
@@ -83,7 +82,6 @@ setClass(
 #' @noRd
 .insert.deque <- function(obj, x)
 {
-    .check.key.class(obj, x)
     obj@.deque$insert(x)
 
     obj
@@ -112,10 +110,13 @@ setMethod(
   function(obj, x) .insert.deque(obj, list(x))
 )
 
-
 #' @rdname insert-methods
 setMethod(
   "insert",
   signature = signature(obj = "deque", x = "list", y = "missing"),
-  function(obj, x) .insert.deque(obj, x)
+  function(obj, x)
+  {
+      x <- if (is.data.frame(x)) list(x) else x
+      .insert.deque(obj, x)
+  }
 )

@@ -4,7 +4,7 @@
 \alias{queue}
 \title{Create a new \code{queue}}
 \usage{
-queue(key.class = c("character", "numeric", "integer"))
+queue()
 }
 \arguments{
 \item{key.class}{the primitive class type of the keys}

@@ -35,10 +35,8 @@
 setClass(
   "map",
   contains = "VIRTUAL",
-  slots = list(.map = "ANY",
-               .key.class = "character"),
-  prototype = prototype(.map = NULL,
-                        .key.class = NA_character_)
+  slots = list(.map = "ANY", .key.class = "character"),
+  prototype = prototype(.map = NULL, .key.class = NA_character_)
 )
 
 
@@ -57,14 +55,14 @@ setClass(
   clazz <- class(object)[1]
   pf <- ifelse(clazz == "bimap", " <--> ", " -> ")
   cat(paste0("An object of class ", clazz, "<",
-             object@.key.class, ",?",
+             object@.key.class, ",T",
              ">\n\n"))
   li <- head(object)
   for (l in names(li))
   {
     e <- li[[l]]
     if (is.null(e)) e <- "NULL"
-    cat(paste0(l, pf, paste(e, collapse = ", "), "\n"))
+    cat(paste0(l, pf, class(e), "\n"))
   }
   if (is.null(li))
     cat(paste0("NULL", pf, "NULL", "\n"))

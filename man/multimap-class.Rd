@@ -20,7 +20,5 @@ Also see \code{\linkS4class{bimap}} for mappings in both ways.
 \item{\code{.map}}{\code{C++} object representing a mapping}
 
 \item{\code{.key.class}}{the class of the keys}
-
-\item{\code{.value.class}}{the class of the values}
 }}
 

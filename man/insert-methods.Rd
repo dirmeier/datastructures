@@ -4,25 +4,22 @@
 \docType{methods}
 \name{insert}
 \alias{insert}
-\alias{insert,deque,vector,missing-method}
+\alias{insert,deque,ANY,missing-method}
 \alias{insert,deque,list,missing-method}
-\alias{insert,deque,matrix,missing-method}
 \alias{insert,heap,vector,vector-method}
 \alias{insert,heap,vector,list-method}
 \alias{insert,heap,vector,matrix-method}
 \alias{insert,bimap,vector,vector-method}
 \alias{insert,unordered_map,vector,vector-method}
 \alias{insert,unordered_map,vector,list-method}
-\alias{insert,unordered_map,vector,matrix-method}
+\alias{insert,unordered_map,vector,ANY-method}
 \title{Add elements to an object}
 \usage{
 insert(obj, x, y)
 
-\S4method{insert}{deque,vector,missing}(obj, x)
+\S4method{insert}{deque,ANY,missing}(obj, x)
 
 \S4method{insert}{deque,list,missing}(obj, x)
-
-\S4method{insert}{deque,matrix,missing}(obj, x)
 
 \S4method{insert}{heap,vector,vector}(obj, x, y)
 
@@ -36,7 +33,7 @@ insert(obj, x, y)
 
 \S4method{insert}{unordered_map,vector,list}(obj, x, y)
 
-\S4method{insert}{unordered_map,vector,matrix}(obj, x, y)
+\S4method{insert}{unordered_map,vector,ANY}(obj, x, y)
 }
 \arguments{
 \item{obj}{object to insert into}

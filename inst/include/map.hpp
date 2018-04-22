@@ -46,6 +46,11 @@ namespace datastructures
 
         void insert(std::vector<T>& t, SEXP u)
         {
+            if(!Rf_isNewList(u))
+            {
+                Rcpp::stop("SEXP needs to be a NewList\n");
+            }
+
             const int sexp_size = static_cast<int>(Rf_length(u));
             if (t.size() != sexp_size)
             {

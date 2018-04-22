@@ -56,8 +56,7 @@ setClass("multimap", contains = "unordered_map")
 #'
 #' @return returns a new \code{multimap} object
 #'
-multimap <- function(
-    key.class = c("character", "numeric", "integer"))
+multimap <- function(key.class = c("character", "numeric", "integer"))
 {
   key.class   <- match.arg(key.class)
   key.class   <- match.arg(key.class)

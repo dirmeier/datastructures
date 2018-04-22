@@ -11,7 +11,5 @@ Abstract deque class
 
 \describe{
 \item{\code{.deque}}{\code{C++} object representing a deque}
-
-\item{\code{.key.class}}{the class of the keys}
 }}
 

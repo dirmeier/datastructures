@@ -4,10 +4,7 @@
 \alias{stack}
 \title{Create a new \code{stack}}
 \usage{
-stack(key.class = c("character", "numeric", "integer", "sexp"))
-}
-\arguments{
-\item{key.class}{the primitive class type of the keys}
+stack()
 }
 \value{
 returns a new \code{stack} object

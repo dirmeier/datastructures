@@ -245,8 +245,7 @@ test_that("heap value function works",
       m <- rnorm(3)
       bheap <- insert(bheap, r, m)
       vals <- values(bheap)
-      expect_equal(unname(sort(unlist(sapply(vals, function(.) .$value)))),
-                   sort(m))
+      expect_equal(unname(sort(unlist(vals))), sort(m))
   }
 })
 

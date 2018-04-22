@@ -150,9 +150,6 @@ setClass(
 .heap_values <- function(obj)
 {
     ret <- obj@.heap$values()
-    names(ret) <- purrr::map_chr(ret, ~.$key)
-    ret <- purrr::map(ret, ~list(handle=.$handle, value=.$value))
-
     ret
 }
 

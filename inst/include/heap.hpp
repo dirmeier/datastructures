@@ -24,8 +24,6 @@
 #define DS_HEAP
 
 #include <Rcpp.h>
-#include <Rinternals.h>
-
 #include <vector>
 #include <string>
 #include <sstream>
@@ -107,38 +105,20 @@ public:
         return Rcpp::wrap(ret);
     }
 
-    SEXP values()
+    Rcpp::List values()
     {
-        SEXP ret = PROTECT(Rf_allocVector(VECSXP, id_to_handles_.size()));
-        SEXP ret_names = PROTECT(Rf_allocVector(STRSXP, id_to_handles_.size()));
-        int prt_cnt = 2;
-
-        int itr = 0;
+        std::multimap<T, SEXP> ret;
         for (auto it = id_to_handles_.begin();
              it != id_to_handles_.end();
              ++it)
         {
-            SEXP el = PROTECT(Rf_allocVector(VECSXP, 3));
-            prt_cnt++;
-            SEXP names = PROTECT(Rf_allocVector(STRSXP, 3));
-            prt_cnt++;
-
-            SET_STRING_ELT(names, 0, Rf_mkChar("handle"));
-            SET_STRING_ELT(names, 1, Rf_mkChar("value"));
-            SET_STRING_ELT(names, 2, Rf_mkChar("key"));
-            Rf_setAttrib(el, R_NamesSymbol,names);
-
-            SET_VECTOR_ELT(el, 0, Rcpp::wrap(it->first));
-            SET_VECTOR_ELT(el, 1, (*(it->second)).value_);
-            SET_VECTOR_ELT(el, 2, Rcpp::wrap((*(it->second)).key_));
-            SET_VECTOR_ELT(ret, itr, el);
-
-            itr++;
+            ret.insert(std::pair<T, SEXP>(
+                (*(it->second)).key_,
+                (*(it->second)).value_)
+            );
         }
-        Rf_setAttrib(ret, R_NamesSymbol, ret_names);
-        UNPROTECT(prt_cnt);
 
-        return ret;
+        return Rcpp::wrap(ret);
     }
 
     void decrease_key(std::vector<T>& from,

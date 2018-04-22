@@ -47,48 +47,21 @@ setClass("fibonacci_heap", contains = "heap")
 #'  i.e. a tree-like data structure satisfying the \emph{min-heap} property.
 #'
 #' @param key.class  the primitive class type of the keys
-#' @param value.class  the primitive class type of the values
 #'
 #' @return returns a new \code{fibonacci_heap} object
 #'
 fibonacci_heap <- function(
-    key.class   = c("character", "numeric", "integer"),
-    value.class = c("character", "numeric", "integer"))
+    key.class   = c("character", "numeric", "integer"))
 {
 
     key.class   <- match.arg(key.class)
-    value.class <- match.arg(value.class)
-
-    if (key.class == "character")
-    {
-        if (value.class == "character")
-            heap <- methods::new(fibonacci_heap_ss)
-        else if (value.class == "integer")
-            heap <- methods::new(fibonacci_heap_si)
-        else
-            heap <- methods::new(fibonacci_heap_sd)
-    }
-    else if (key.class == "numeric")
-    {
-        if (value.class == "character")
-            heap <- methods::new(fibonacci_heap_ds)
-        else if (value.class == "integer")
-            heap <- methods::new(fibonacci_heap_di)
-        else
-            heap <- methods::new(fibonacci_heap_dd)
-    }
-    else
-    {
-        if (value.class == "character")
-            heap <- methods::new(fibonacci_heap_is)
-        else if (value.class == "integer")
-            heap <- methods::new(fibonacci_heap_ii)
-        else
-            heap <- methods::new(fibonacci_heap_id)
-    }
+    heap <- switch(key.class,
+                   "character" = methods::new(fibonacci_heap_s),
+                   "numeric"   = methods::new(fibonacci_heap_d),
+                   "integer"   = methods::new(fibonacci_heap_i),
+                   stop("Error defining key class"))
 
     methods::new("fibonacci_heap",
-                 .key.class=key.class,
-                 .value.class=value.class,
-                 .heap=heap)
+                 .key.class = key.class,
+                 .heap = heap)
 }

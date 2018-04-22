@@ -4,13 +4,10 @@
 \alias{fibonacci_heap}
 \title{Create a new \code{fibonacci_heap}}
 \usage{
-fibonacci_heap(key.class = c("character", "numeric", "integer"),
-  value.class = c("character", "numeric", "integer"))
+fibonacci_heap(key.class = c("character", "numeric", "integer"))
 }
 \arguments{
 \item{key.class}{the primitive class type of the keys}
-
-\item{value.class}{the primitive class type of the values}
 }
 \value{
 returns a new \code{fibonacci_heap} object

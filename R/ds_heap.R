@@ -42,26 +42,18 @@ NULL
 setClass(
   "heap",
   contains = "VIRTUAL",
-  slots = list(.heap = "ANY",
-               .key.class = "character",
-               .value.class = "character"),
+  slots = list(.heap = "ANY", .key.class = "character"),
   prototype = prototype(.heap = NULL,
-                        .key.class = NA_character_,
-                        .value.class = NA_character_)
+                        .key.class = NA_character_)
 )
 
 
 #' @noRd
 .insert.heap <- function(obj, x, y)
 {
-    if (is.matrix(y))
-        y <- lapply(seq(nrow(y)), function(i) y[i, ] )
-    else if (length(x) == 1 && is.vector(y))
-        y <- list(y)
-    else if (length(x) == length(y) && is.vector(y))
-        y <- as.list(y)
-
-    .check.key.value.classes(obj, x, y)
+    if (length(x) != length(y))
+        stop("dimensions of keys and values do not match")
+    .check.key.class(obj, x)
     obj@.heap$insert(x, y)
 
     obj
@@ -92,15 +84,12 @@ setClass(
 .show.heap <- function(object)
 {
     cat(paste0("An object of class ", class(object)[1],
-               "<", object@.key.class, ",",
-               object@.value.class, ">\n\n"))
+               "<", object@.key.class, ", SEXP>\n\n"))
     li       <- peek(object)
     li.names <- names(li)
-    if (is.null(li))
-        li <- "NULL"
-    if (is.null(li.names))
-        li.names <- "NULL"
-    cat(paste0(li.names, " -> ", li, "\n"))
+    if (is.null(li.names)) li.names <- "NULL"
+    else li <- li[[1]]
+    cat(paste0("Peek: ", li.names, " -> ", class(li), ", ...\n"))
 }
 
 
@@ -119,15 +108,14 @@ setClass(
     {
         .check.key.class(obj, key)
         ret <- obj@.heap$handles(key)
-        ret <- purrr::map(names(ret),
-                          .f = function(x) list(handle=x, value=ret[[x]]))
+        ret <- purrr::map(
+            names(ret), .f = function(x) list(handle=x, value=ret[[x]]))
     }
     else if (!is.null(value))
     {
-        .check.value.class(obj, value)
-        ret <- obj@.heap$handles_value(value)
-        ret <- purrr::map(names(ret),
-                          .f = function(x) list(handle=x, key=ret[[x]]))
+        ret <- obj@.heap$values()
+        ret <- purrr::map(
+            names(ret), .f = function(x) list(handle=x, key=ret[[x]]))
     }
 
     ret
@@ -178,7 +166,13 @@ setClass(
 setMethod(
   "insert",
   signature = signature(obj = "heap", x = "vector", y = "vector"),
-  function(obj, x, y) .insert.heap(obj, x, y)
+  function(obj, x, y)
+  {
+      if (length(x) == 1) y <- list(y)
+      else if (length(x) == length(y) && is.vector(y))
+        y <- as.list(y)
+      .insert.heap(obj, x, y)
+  }
 )
 
 
@@ -186,7 +180,11 @@ setMethod(
 setMethod(
   "insert",
   signature = signature(obj = "heap", x = "vector", y = "list"),
-  function(obj, x, y) .insert.heap(obj, x, y)
+  function(obj, x, y)
+  {
+      y <- if (is.data.frame(y)) list(y) else y
+      .insert.heap(obj, x, y)
+  }
 )
 
 
@@ -194,7 +192,7 @@ setMethod(
 setMethod(
   "insert",
   signature = signature(obj = "heap", x = "vector", y = "matrix"),
-  function(obj, x, y) .insert.heap(obj, x, y)
+  function(obj, x, y) insert(obj, x, y)
 )
 
 
@@ -211,7 +209,7 @@ setMethod(
 setMethod(
   "[<-",
   signature = signature(x="heap", i="vector", j="missing", value="vector"),
-  function(x, i, value) .insert.heap(x, i, value)
+  function(x, i, value) insert(x, i, value)
 )
 
 
@@ -228,25 +226,9 @@ setMethod(
 setMethod(
   "[<-",
   signature = signature(x="heap", i="vector", j="missing", value="list"),
-  function(x, i, value) .insert.heap(x, i, value)
+  function(x, i, value) insert(x, i, value)
 )
 
-
-#' Insert parts to an object
-#'
-#' @description Inserts <key, value> pairs to a heap. The keys are
-#'  determine the ordering of the heap, while the value is the actual value to
-#'  store.
-#'
-#' @param x  a heap object, such as a \code{\link{fibonacci_heap}} or a
-#'  \code{\link{binomial_heap}}
-#' @param i  a vector of keys
-#' @param value  a vector of values for the keys
-setMethod(
-  "[<-",
-  signature = signature(x="heap", i="vector", j="missing", value="matrix"),
-  function(x, i, value) .insert.heap(x, i, value)
-)
 
 #' @rdname handle-methods
 setMethod(
@@ -267,8 +249,8 @@ setMethod(
 #' @rdname decrease_key-methods
 setMethod(
   "decrease_key",
-  signature = signature(obj="heap",
-                        from="vector", to="vector", handle="character"),
+  signature = signature(
+      obj="heap", from="vector", to="vector", handle="character"),
   function(obj, from, to, handle) .decrease_key(obj, from, to, handle)
 )
 
@@ -276,8 +258,8 @@ setMethod(
 #' @rdname decrease_key-methods
 setMethod(
   "decrease_key",
-  signature = signature(obj="heap",
-                        from="vector", to="vector", handle="missing"),
+  signature = signature(
+      obj="heap", from="vector", to="vector", handle="missing"),
   function(obj, from, to) .decrease_key(obj, from, to, NULL)
 )
 

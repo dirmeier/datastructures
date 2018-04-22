@@ -26,22 +26,9 @@
 #include <boost/heap/fibonacci_heap.hpp>
 #include "heap.hpp"
 
-using fibonacci_heap_ss =
-  heap<boost::heap::fibonacci_heap, std::string, std::string>;
-using fibonacci_heap_si = heap<boost::heap::fibonacci_heap, std::string, int>;
-using fibonacci_heap_sb = heap<boost::heap::fibonacci_heap, std::string, bool>;
-using fibonacci_heap_sd =
-  heap<boost::heap::fibonacci_heap, std::string, double>;
+using fibonacci_heap_s =heap<boost::heap::fibonacci_heap, std::string>;
+using fibonacci_heap_d = heap<boost::heap::fibonacci_heap, double>;
+using fibonacci_heap_i = heap<boost::heap::fibonacci_heap, int>;
 
-using fibonacci_heap_ds =
-  heap<boost::heap::fibonacci_heap, double, std::string>;
-using fibonacci_heap_di = heap<boost::heap::fibonacci_heap, double, int>;
-using fibonacci_heap_db = heap<boost::heap::fibonacci_heap, double, bool>;
-using fibonacci_heap_dd = heap<boost::heap::fibonacci_heap, double, double>;
-
-using fibonacci_heap_is = heap<boost::heap::fibonacci_heap, int, std::string>;
-using fibonacci_heap_ii = heap<boost::heap::fibonacci_heap, int, int>;
-using fibonacci_heap_ib = heap<boost::heap::fibonacci_heap, int, bool>;
-using fibonacci_heap_id = heap<boost::heap::fibonacci_heap, int, double>;
 
 #endif

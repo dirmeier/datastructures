@@ -68,7 +68,7 @@ setClass(
     cat(paste0("An object of class ", class(object)[1], "<SEXP>\n\n"))
     li <- peek(object)
     if (is.null(li))  li <- "NULL"
-    cat(paste0("First element -> ", class(li), "\n"))
+    cat(paste0("Peek: ", class(li), ", ...\n"))
 }
 
 

@@ -26,22 +26,9 @@
 #include <boost/heap/binomial_heap.hpp>
 #include "heap.hpp"
 
-using binomial_heap_ss =
-    heap<boost::heap::binomial_heap, std::string, std::string>;
-using binomial_heap_si = heap<boost::heap::binomial_heap, std::string, int>;
-using binomial_heap_sb = heap<boost::heap::binomial_heap, std::string, bool>;
-using binomial_heap_sd =
-    heap<boost::heap::binomial_heap, std::string, double>;
+using binomial_heap_s =heap<boost::heap::binomial_heap, std::string>;
+using binomial_heap_d = heap<boost::heap::binomial_heap, double>;
+using binomial_heap_i = heap<boost::heap::binomial_heap, int>;
 
-using binomial_heap_ds =
-    heap<boost::heap::binomial_heap, double, std::string>;
-using binomial_heap_di = heap<boost::heap::binomial_heap, double, int>;
-using binomial_heap_db = heap<boost::heap::binomial_heap, double, bool>;
-using binomial_heap_dd = heap<boost::heap::binomial_heap, double, double>;
-
-using binomial_heap_is = heap<boost::heap::binomial_heap, int, std::string>;
-using binomial_heap_ii = heap<boost::heap::binomial_heap, int, int>;
-using binomial_heap_ib = heap<boost::heap::binomial_heap, int, bool>;
-using binomial_heap_id = heap<boost::heap::binomial_heap, int, double>;
 
 #endif

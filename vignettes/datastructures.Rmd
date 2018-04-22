@@ -282,3 +282,9 @@ The size of a deque can be computed by calling:
 ## Author
 
 * Simon Dirmeier <a href="mailto:simon.dirmeier@web.de">simon.dirmeier@web.de</a>
+
+## Session info
+
+```{r}
+  sessionInfo()
+```

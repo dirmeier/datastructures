@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fibonacci heap class — fibonacci_heap-class • datastructures</title>
+<title>Insert parts to an object — [&lt;-,unordered_map,vector,missing,ANY-method • datastructures</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,14 +27,9 @@
 <script src="../pkgdown.js"></script>
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Fibonacci heap class — fibonacci_heap-class" />
+<meta property="og:title" content="Insert parts to an object — [&lt;-,unordered_map,vector,missing,ANY-method" />
 
-<meta property="og:description" content="Implementation of a Fibonacci heap data structure, i.e. a
- priority datastructure with push in amortized O(1) and
- pop in O(log n). fibonacci_heap wraps a
- boost::fibonacci_heap using Rcpp modules. The heap consists of
- nodes with keys and values where the key determines the priority in the
- heap. Also see the binomial_heap class." />
+<meta property="og:description" content="Inserts &lt;key, value&gt; pairs to an unordered_map." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -112,36 +107,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fibonacci heap class</h1>
-    <small>Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_heap_fibonacci.R'><code>R/ds_heap_fibonacci.R</code></a></small>
+    <h1>Insert parts to an object</h1>
+    <small>Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_map_unordered.R'><code>R/ds_map_unordered.R</code></a></small>
     </div>
 
     
-    <p>Implementation of a Fibonacci heap data structure, i.e. a
- priority datastructure with <code>push</code> in amortized <em>O(1)</em> and
- <code>pop</code> in <em>O(log n)</em>. <code>fibonacci_heap</code> wraps a
- <code>boost::fibonacci_heap</code> using Rcpp modules. The heap consists of
- nodes with keys and values where the key determines the priority in the
- heap. Also see the <code><a href='binomial_heap-class.html'>binomial_heap</a></code> class.</p>
+    <p>Inserts &lt;key, value&gt; pairs to an unordered_map.</p>
     
 
-        
-    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
-
+    <pre class="usage"># S4 method for unordered_map,vector,missing,ANY
+[(x, i) <- value</pre>
     
-    <dl class='dl-horizontal'>
-<dt><code>.heap</code></dt><dd><p><code>C++</code> object representing a heap</p></dd>
-    <dt><code>.key.class</code></dt><dd><p>the class of the keys</p></dd>
-</dl>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>x  an unorderd map object, such as a <code><a href='hashmap.html'>hashmap</a></code> or
+<code><a href='multimap.html'>multimap</a></code></p></td>
+    </tr>
+    <tr>
+      <th>i</th>
+      <td><p>a vector of keys</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>a vector of values for the keys</p></td>
+    </tr>
+    </table>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#slots">Slots</a></li>
-          </ul>
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
 
   </div>
 </div>

@@ -23,7 +23,7 @@ So far `datastructures` has implementations for:
 * queues and stacks,
 * hashmaps, multimaps and bimaps.
 
-As an introductory example, consider you want to compute shortest paths on a
+As an introductory example, imagine that you want to compute shortest paths on a
 graph and decide to use a Fibonacci heap for keeping the distances. A Fibonacci heap is an efficient tree-like data structure
 that satisfies the *min-heap property*. We can use it to quickly get the node with the shortest distance in *O(log n)* time like this:
 
@@ -38,16 +38,16 @@ that satisfies the *min-heap property*. We can use it to quickly get the node wi
   [1] "n1"
 ```
 
-`datastructures` also allows storing of complex R objects, like `data.frames`, `matrices` or `environments`.
+`datastructures` also allows storing non-orimitive objects, like `data.frames`, `matrices` or `environments`.
 For instance, we could use a hashmap for storing such objects:
 
 ```R
   hm <- hashmap("integer")
   keys <- 1:2
   values <- list(
-    enviroment(),
+    environment(),
     data.frame(A=rbeta(3, .5, .5), B=rgamma(3, 1)))
-  hm <- insert(hm, keys, values)
+  hm[keys] <- values
 
   hm[1L]
   [[1]]

@@ -21,6 +21,8 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
@@ -115,9 +117,11 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get elements from an object</h1>
-    <small>Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_get.R'><code>R/methods_get.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_map_bimap.R'><code>R/ds_map_bimap.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_map_unordered.R'><code>R/ds_map_unordered.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_get.R'><code>R/methods_get.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_map_bimap.R'><code>R/ds_map_bimap.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_map_unordered.R'><code>R/ds_map_unordered.R</code></a></small>
+    <div class="hidden name"><code>get-methods.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Extracts a set of &lt;key, value&gt; pairs. For <code>hashmaps</code>
  mappings from
@@ -128,6 +132,7 @@
  mappings exist, such that <code>which</code> can also be <code>keys</code> if the keys
  from the object should be retrieved.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>get</span>(<span class='no'>obj</span>, <span class='no'>x</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"values"</span>, <span class='st'>"keys"</span>))
 

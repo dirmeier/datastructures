@@ -21,6 +21,8 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
@@ -111,15 +113,18 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Decreases the key of a node in a heap</h1>
-    <small>Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_decrease.R'><code>R/methods_decrease.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_heap.R'><code>R/ds_heap.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_decrease.R'><code>R/methods_decrease.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_heap.R'><code>R/ds_heap.R</code></a></small>
+    <div class="hidden name"><code>decrease_key-methods.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Decreases the key of a node in a heap and updates the complete
  heap. The key is decreases <code>from</code> a value <code>to</code> a value by that moving the
  node's position in the heap. If a node cannot uniquely be identified using
  the <code>to</code> key, a <code><a href='handle-methods.html'>handle</a></code> needs to be given in addition.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>decrease_key</span>(<span class='no'>obj</span>, <span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>handle</span>)
 

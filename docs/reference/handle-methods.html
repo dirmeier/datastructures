@@ -21,6 +21,8 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
@@ -113,9 +115,11 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get the handles and values for nodes of a specific key in a heap.</h1>
-    <small>Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_handle.R'><code>R/methods_handle.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_heap.R'><code>R/ds_heap.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_handle.R'><code>R/methods_handle.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_heap.R'><code>R/ds_heap.R</code></a></small>
+    <div class="hidden name"><code>handle-methods.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Returns a list of handles and values for node elements that have
  a specific key. That means for a given key, the reference to the node
@@ -124,6 +128,7 @@
  needed in order to uniquely identify a node if, for example,
  <code>decrease_key</code> on a specific node is going to be called.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>handle</span>(<span class='no'>obj</span>, <span class='no'>key</span>)
 

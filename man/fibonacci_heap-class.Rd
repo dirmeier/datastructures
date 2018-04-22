@@ -18,7 +18,5 @@ Implementation of a Fibonacci heap data structure, i.e. a
 \item{\code{.heap}}{\code{C++} object representing a heap}
 
 \item{\code{.key.class}}{the class of the keys}
-
-\item{\code{.value.class}}{the class of the values}
 }}
 

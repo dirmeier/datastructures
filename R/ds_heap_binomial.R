@@ -33,7 +33,6 @@
 #'
 #' @slot .heap  \code{C++} object representing a heap
 #' @slot .key.class  the class of the keys
-#' @slot .value.class  the class of the values
 #'
 setClass("binomial_heap", contains = "heap")
 

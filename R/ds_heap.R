@@ -37,7 +37,6 @@ NULL
 #'
 #' @slot .heap  \code{C++} object representing a heap
 #' @slot .key.class  the class of the keys
-#' @slot .value.class  the class of the values
 #'
 setClass(
   "heap",
@@ -152,7 +151,7 @@ setClass(
 {
     ret <- obj@.heap$values()
     names(ret) <- purrr::map_chr(ret, ~.$key)
-    ret <- purrr:::map(ret, ~list(handle=.$handle, value=.$value))
+    ret <- purrr::map(ret, ~list(handle=.$handle, value=.$value))
 
     ret
 }
@@ -179,7 +178,10 @@ setMethod(
   function(obj, x, y)
   {
       if (length(x) == 1 && is.data.frame(y)) y <- list(y)
-      else if (is.list(y) && length(x) == 1 && length(y) == 1) y <- list(y)
+      else if (is.list(y) &&
+               length(x) == 1 &&
+               length(y) == 1 &&
+               !is.list(y[[1]])) y <- list(y)
       .insert.heap(obj, x, y)
   }
 )

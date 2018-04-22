@@ -13,7 +13,5 @@ Abstract heap class
 \item{\code{.heap}}{\code{C++} object representing a heap}
 
 \item{\code{.key.class}}{the class of the keys}
-
-\item{\code{.value.class}}{the class of the values}
 }}
 

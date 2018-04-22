@@ -29,7 +29,6 @@
 #include <string>
 
 
-template <typename T>
 class queue
 {
 public:
@@ -41,30 +40,30 @@ public:
         return queue_.size();
     }
 
-    void insert(std::vector< std::vector<T> >& t)
+    void insert(SEXP t)
     {
-        for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
-          queue_.push(t[i]);
+        if(!Rf_isNewList(t))
+            Rcpp::stop("SEXP needs to be a NewList\n");
+        for (int i = 0; i < Rf_length(t); ++i)
+            queue_.push(VECTOR_ELT(t, i));
     }
 
-    std::vector<T> peek()
+    SEXP peek()
     {
         return queue_.front();
     }
 
-    std::vector<T> pop()
+    SEXP pop()
     {
-        std::vector<T> t = peek();
+        SEXP t = peek();
         queue_.pop();
         return t;
     }
 
 private:
-    std::queue< std::vector<T> > queue_;
+    std::queue< SEXP > queue_;
 };
 
-using queue_s = queue<std::string>;
-using queue_d = queue<double>;
-using queue_i = queue<int>;
+using queue_sexp = queue;
 
 #endif

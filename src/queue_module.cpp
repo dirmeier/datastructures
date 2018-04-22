@@ -24,22 +24,10 @@
 #include "queue.hpp"
 
 RCPP_MODULE(queue_module) {
-    Rcpp::class_< queue_d >("queue_d")
+    Rcpp::class_< queue_sexp >( "queue_sexp" )
         .constructor()
-        .method("peek",   &queue_d::peek)
-        .method("pop",    &queue_d::pop)
-        .method("size",   &queue_d::size)
-        .method("insert", &queue_d::insert);
-    Rcpp::class_< queue_s >( "queue_s" )
-        .constructor()
-        .method("peek",   &queue_s::peek)
-        .method("pop",    &queue_s::pop)
-        .method("size",   &queue_s::size)
-        .method("insert", &queue_s::insert);
-    Rcpp::class_< queue_i >( "queue_i" )
-        .constructor()
-        .method("peek",   &queue_i::peek)
-        .method("pop",    &queue_i::pop)
-        .method("size",   &queue_i::size)
-        .method("insert", &queue_i::insert);
+        .method("peek",   &queue_sexp::peek)
+        .method("pop",    &queue_sexp::pop)
+        .method("size",   &queue_sexp::size)
+        .method("insert", &queue_sexp::insert);
 }

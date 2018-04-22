@@ -24,22 +24,10 @@
 #include "stack.hpp"
 
 RCPP_MODULE(stack_module) {
-    Rcpp::class_< stack_d >("stack_d")
-    .constructor()
-    .method("peek",   &stack_d::peek)
-    .method("pop",    &stack_d::pop)
-    .method("size",   &stack_d::size)
-    .method("insert", &stack_d::insert);
-    Rcpp::class_< stack_s >( "stack_s" )
+    Rcpp::class_< stack_sexp >( "stack_sexp" )
         .constructor()
-        .method("peek",   &stack_s::peek)
-        .method("pop",    &stack_s::pop)
-        .method("size",   &stack_s::size)
-        .method("insert", &stack_s::insert);
-    Rcpp::class_< stack_i >( "stack_i" )
-        .constructor()
-        .method("peek",   &stack_i::peek)
-        .method("pop",    &stack_i::pop)
-        .method("size",   &stack_i::size)
-        .method("insert", &stack_i::insert);
+        .method("peek",   &stack_sexp::peek)
+        .method("pop",    &stack_sexp::pop)
+        .method("size",   &stack_sexp::size)
+        .method("insert", &stack_sexp::insert);
 }

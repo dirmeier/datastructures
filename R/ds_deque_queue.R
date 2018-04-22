@@ -31,7 +31,6 @@
 #'  the LIFO principle.
 #'
 #' @slot .deque  \code{C++} object representing a deque
-#' @slot .key.class  the class of the keys
 #'
 setClass("queue", contains = "deque")
 
@@ -48,16 +47,8 @@ setClass("queue", contains = "deque")
 #'
 #' @return returns a new \code{queue} object
 #'
-queue <- function(key.class = c("character", "numeric", "integer"))
+queue <- function()
 {
-    key.class <- match.arg(key.class)
-    if (key.class == "character") {
-        queue <- methods::new(queue_s)
-    } else if (key.class == "numeric") {
-        queue <- methods::new(queue_d)
-    } else {
-        queue <- methods::new(queue_i)
-    }
-
-    methods::new("queue", .key.class = key.class, .deque = queue)
+    queue <- methods::new(queue_sexp)
+    methods::new("queue", .deque = queue)
 }

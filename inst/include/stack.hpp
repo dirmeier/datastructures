@@ -29,7 +29,6 @@
 #include <string>
 
 
-template <typename T>
 class stack
 {
 public:
@@ -41,30 +40,30 @@ public:
         return stack_.size();
     }
 
-    void insert(std::vector< std::vector<T> >& t)
+    void insert(SEXP t)
     {
-        for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
-            stack_.push(t[i]);
+        if(!Rf_isNewList(t))
+            Rcpp::stop("SEXP needs to be a NewList\n");
+        for (int i = 0; i < Rf_length(t); ++i)
+            stack_.push(VECTOR_ELT(t, i));
     }
 
-    std::vector<T> peek()
+    SEXP peek()
     {
         return stack_.top();
     }
 
-    std::vector<T> pop()
+    SEXP pop()
     {
-        std::vector<T> t = peek();
+        SEXP t = peek();
         stack_.pop();
         return t;
     }
 
 private:
-    std::stack< std::vector<T> > stack_;
+    std::stack<SEXP> stack_;
 };
 
-using stack_s = stack<std::string>;
-using stack_d = stack<double>;
-using stack_i = stack<int>;
+using stack_sexp = stack;
 
 #endif

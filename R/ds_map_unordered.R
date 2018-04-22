@@ -26,19 +26,21 @@
 NULL
 
 
-#' @title Map class
+#' @title Abstract unordered map class
 #'
 #' @name unordered_map-class
 #' @rdname unordered_map-class
 #'
 #' @description Abstract unordered map class
 #'
+#' @slot .map  \code{C++} object representing a mapping
+#' @slot .key.class  the class of the keys
+#'
 setClass(
   "unordered_map",
   contains = c("map", "VIRTUAL"),
   prototype = prototype(.map = NULL,
-                        .key.class = NA_character_,
-                        .value.class = NA_character_)
+                        .key.class = NA_character_)
 )
 
 
@@ -75,14 +77,6 @@ setMethod(
 )
 
 
-#' @rdname insert-methods
-setMethod(
-  "insert",
-  signature = signature(obj = "unordered_map", x = "vector", y = "matrix"),
-  function(obj, x, y) .insert.unordered_map(obj, x, y)
-)
-
-
 #' Insert parts to an object
 #'
 #' @description Inserts <key, value> pairs to an unordered_map.
@@ -111,22 +105,6 @@ setMethod(
   "[<-",
   signature = signature(
       x="unordered_map", i="vector", j="missing", value="list"),
-  function(x, i, value) .insert.unordered_map(x, i, value)
-)
-
-
-#' Insert parts to an object
-#'
-#' @description Inserts <key, value> pairs to an unordered map.
-#'
-#' @param x x  an unorderd map object, such as a \code{\link{hashmap}} or
-#'  \code{\link{multimap}}
-#' @param i  a vector of keys
-#' @param value  a vector of values for the keys
-setMethod(
-  "[<-",
-  signature = signature(
-      x="unordered_map", i="vector", j="missing", value="matrix"),
   function(x, i, value) .insert.unordered_map(x, i, value)
 )
 

@@ -31,31 +31,11 @@
 #include <unordered_map>
 
 
-using hashmap_ss = datastructures::map<
-  std::unordered_map, std::string, std::string>;
-using hashmap_si = datastructures::map<
-  std::unordered_map, std::string, int>;
-using hashmap_sb = datastructures::map<
-  std::unordered_map, std::string, bool>;
-using hashmap_sd = datastructures::map<
-  std::unordered_map, std::string, double>;
-
-using hashmap_ds = datastructures::map<
-  std::unordered_map, double, std::string>;
-using hashmap_di = datastructures::map<
-  std::unordered_map, double, int>;
-using hashmap_db = datastructures::map<
-  std::unordered_map, double, bool>;
-using hashmap_dd = datastructures::map<
-  std::unordered_map, double, double>;
-
-using hashmap_is = datastructures::map<
-  std::unordered_map, int, std::string>;
-using hashmap_ii = datastructures::map<
-  std::unordered_map, int, int>;
-using hashmap_ib = datastructures::map<
-  std::unordered_map, int, bool>;
-using hashmap_id = datastructures::map<
-  std::unordered_map, int, double>;
+using hashmap_s = datastructures::map<
+  std::unordered_map, std::string>;
+using hashmap_d = datastructures::map<
+  std::unordered_map, double>;
+using hashmap_i = datastructures::map<
+  std::unordered_map, int>;
 
 #endif

@@ -31,17 +31,14 @@
 #'
 #' @slot .map  \code{C++} object representing a mapping
 #' @slot .key.class  the class of the keys
-#' @slot .value.class  the class of the values
 #'
 setClass(
   "map",
   contains = "VIRTUAL",
   slots = list(.map = "ANY",
-               .key.class = "character",
-               .value.class = "character"),
+               .key.class = "character"),
   prototype = prototype(.map = NULL,
-                        .key.class = NA_character_,
-                        .value.class = NA_character_)
+                        .key.class = NA_character_)
 )
 
 
@@ -60,7 +57,7 @@ setClass(
   clazz <- class(object)[1]
   pf <- ifelse(clazz == "bimap", " <--> ", " -> ")
   cat(paste0("An object of class ", clazz, "<",
-             object@.key.class, ",", object@.value.class,
+             object@.key.class, ",?",
              ">\n\n"))
   li <- head(object)
   for (l in names(li))

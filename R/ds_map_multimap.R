@@ -38,7 +38,6 @@
 #'
 #' @slot .map  \code{C++} object representing a mapping
 #' @slot .key.class  the class of the keys
-#' @slot .value.class  the class of the values
 #'
 setClass("multimap", contains = "unordered_map")
 
@@ -54,38 +53,22 @@ setClass("multimap", contains = "unordered_map")
 #'  can be stored.
 #'
 #' @param key.class  the primitive class type of the keys
-#' @param value.class  the primitive class type of the values
 #'
 #' @return returns a new \code{multimap} object
 #'
 multimap <- function(
-    key.class = c("character", "numeric", "integer"),
-    value.class = c("character", "numeric", "integer"))
+    key.class = c("character", "numeric", "integer"))
 {
   key.class   <- match.arg(key.class)
-  value.class <- match.arg(value.class)
-
-  if (key.class == "character")
-  {
-    if (value.class == "character")    map <- methods::new(multimap_ss)
-    else if (value.class == "integer") map <- methods::new(multimap_si)
-    else                               map <- methods::new(multimap_sd)
-  }
-  else if (key.class == "numeric")
-  {
-    if (value.class == "character")    map <- methods::new(multimap_ds)
-    else if (value.class == "integer") map <- methods::new(multimap_di)
-    else                               map <- methods::new(multimap_dd)
-  }
-  else
-  {
-    if (value.class == "character")    map <- methods::new(multimap_is)
-    else if (value.class == "integer") map <- methods::new(multimap_ii)
-    else                               map <- methods::new(multimap_id)
-  }
+  key.class   <- match.arg(key.class)
+  map <- switch(
+      key.class,
+      "character" = methods::new(multimap_s),
+      "numeric"   = methods::new(multimap_d),
+      "integer"   = methods::new(multimap_i),
+      stop("Error defining key class"))
 
   methods::new("multimap",
                .key.class=key.class,
-               .value.class=value.class,
                .map=map)
 }

@@ -30,9 +30,10 @@
 #include <string>
 #include <unordered_map>
 
+
 namespace datastructures
 {
-    template<template<typename...> class H, typename T, typename U>
+    template<template<typename...> class H, typename T>
     class map
     {
     public:
@@ -43,15 +44,16 @@ namespace datastructures
             return map_.size();
         }
 
-        void insert(std::vector<T>& t, std::vector<std::vector<U> >& u)
+        void insert(std::vector<T>& t, SEXP u)
         {
-            if (t.size() != u.size())
+            const int sexp_size = static_cast<int>(Rf_length(u));
+            if (t.size() != sexp_size)
             {
                 Rcpp::stop("keys.size() != values.size()");
             }
             for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
             {
-                map_.insert(std::pair<T, std::vector<U>>(t[i], u[i]));
+                map_.insert(std::pair<T, SEXP>(t[i], VECTOR_ELT(u, i)));
             }
         }
 
@@ -69,7 +71,7 @@ namespace datastructures
 
         Rcpp::List values()
         {
-            std::vector<std::vector<U>> values;
+            std::vector< SEXP > values;
             values.reserve(map_.size());
             for (const auto& pair : map_)
             {
@@ -82,7 +84,7 @@ namespace datastructures
         Rcpp::List head()
         {
             unsigned int i = 0;
-            std::map<T, std::vector<U>> heads;
+            std::map<T, SEXP> heads;
             for (const auto& pair : map_)
             {
                 if (i++ == 5) break;
@@ -94,7 +96,7 @@ namespace datastructures
 
         Rcpp::List get(std::vector<T>& t)
         {
-            std::vector<std::vector<U> > values;
+            std::vector< SEXP > values;
             for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
             {
                 T key = t[i];
@@ -108,8 +110,7 @@ namespace datastructures
                 {
                     std::stringstream ss;
                     ss << key;
-                    Rcpp::stop(
-                      std::string("Could not find key: ").append(ss.str()));
+                    Rcpp::stop(std::string("Could not find key: ").append(ss.str()));
                 }
             }
 
@@ -117,7 +118,7 @@ namespace datastructures
         }
 
     private:
-        H<T, std::vector<U>> map_;
+        H<T, SEXP> map_;
     };
 }
 #endif

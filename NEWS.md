@@ -1,3 +1,7 @@
+## Version 0.2.6
+  - Allows to use arbitray data objects for classes
+  - Adds lifecycle badge
+
 ## Version 0.2.5
   - Adds `multimap`
 

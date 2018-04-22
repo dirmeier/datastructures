@@ -45,7 +45,12 @@ NULL
 #' @slot .key.class  the class of the keys
 #' @slot .value.class  the class of the values
 #'
-setClass("bimap", contains = "map")
+setClass(
+    "bimap",
+    contains = "map",
+    slots = list(.value.class = "character"),
+    prototype = prototype(.value.class = NA_character_)
+)
 
 
 #' @title Create a new \code{bimap}
@@ -78,8 +83,7 @@ bimap <- function(key.class = c("character", "numeric", "integer"),
     else
      map <- methods::new(bimap_sd)
   }
-  else if (key.class == "numeric")
-  {
+  else if (key.class == "numeric") {
     if (value.class == "character")
         map <- methods::new(bimap_ds)
     else if (value.class == "integer")
@@ -87,8 +91,7 @@ bimap <- function(key.class = c("character", "numeric", "integer"),
     else
         map <- methods::new(bimap_dd)
   }
-  else
-  {
+  else {
     if (value.class == "character")
         map <- methods::new(bimap_is)
     else if (value.class == "integer")

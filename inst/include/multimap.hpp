@@ -31,31 +31,11 @@
 #include <unordered_map>
 
 
-using multimap_ss = datastructures::map<
-  std::unordered_multimap, std::string, std::string>;
-using multimap_si = datastructures::map<
-  std::unordered_multimap, std::string, int>;
-using multimap_sb = datastructures::map<
-  std::unordered_multimap, std::string, bool>;
-using multimap_sd = datastructures::map<
-  std::unordered_multimap, std::string, double>;
-
-using multimap_ds = datastructures::map<
-  std::unordered_multimap, double, std::string>;
-using multimap_di = datastructures::map<
-  std::unordered_multimap, double, int>;
-using multimap_db = datastructures::map<
-  std::unordered_multimap, double, bool>;
-using multimap_dd = datastructures::map<
-  std::unordered_multimap, double, double>;
-
-using multimap_is = datastructures::map<
-  std::unordered_multimap, int, std::string>;
-using multimap_ii = datastructures::map<
-  std::unordered_multimap, int, int>;
-using multimap_ib = datastructures::map<
-  std::unordered_multimap, int, bool>;
-using multimap_id = datastructures::map<
-  std::unordered_multimap, int, double>;
+using multimap_d = datastructures::map<
+  std::unordered_multimap, double>;
+using multimap_i = datastructures::map<
+  std::unordered_multimap, int>;
+using multimap_s = datastructures::map<
+    std::unordered_multimap, std::string>;
 
 #endif

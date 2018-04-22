@@ -38,7 +38,6 @@
 #'
 #' @slot .map  \code{C++} object representing a mapping
 #' @slot .key.class  the class of the keys
-#' @slot .value.class  the class of the values
 #'
 setClass("hashmap", contains = "unordered_map")
 
@@ -54,38 +53,21 @@ setClass("hashmap", contains = "unordered_map")
 #'  can be stored.
 #'
 #' @param key.class  the primitive class type of the keys
-#' @param value.class  the primitive class type of the values
 #'
 #' @return returns a new \code{hashmap} object
 #'
 hashmap <- function(
-  key.class = c("character", "numeric", "integer"),
-  value.class = c("character", "numeric", "integer"))
+  key.class = c("character", "numeric", "integer"))
 {
   key.class   <- match.arg(key.class)
-  value.class <- match.arg(value.class)
-
-  if (key.class == "character")
-  {
-    if (value.class == "character")    map <- methods::new(hashmap_ss)
-    else if (value.class == "integer") map <- methods::new(hashmap_si)
-    else                               map <- methods::new(hashmap_sd)
-  }
-  else if (key.class == "numeric")
-  {
-    if (value.class == "character")    map <- methods::new(hashmap_ds)
-    else if (value.class == "integer") map <- methods::new(hashmap_di)
-    else                               map <- methods::new(hashmap_dd)
-  }
-  else
-  {
-    if (value.class == "character")    map <- methods::new(hashmap_is)
-    else if (value.class == "integer") map <- methods::new(hashmap_ii)
-    else                               map <- methods::new(hashmap_id)
-  }
+  map <- switch(
+      key.class,
+      "character" = methods::new(hashmap_s),
+      "numeric"   = methods::new(hashmap_d),
+      "integer"   = methods::new(hashmap_i),
+      stop("Error defining key class"))
 
   methods::new("hashmap",
                .key.class=key.class,
-               .value.class=value.class,
                .map=map)
 }

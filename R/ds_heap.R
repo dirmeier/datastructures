@@ -123,21 +123,17 @@ setClass(
     for (i in seq_along(from))
     {
       handle.ids <- obj@.heap$handles(from[i])
-      if (length(handle.ids) == 1) { handlex[i] <- names(handle.ids)[1] }
-      else if (length(handle.ids) == 0)
-      {
-        stop(paste0("Zero handles found for '", from[i], "'."))
-      }
-      else
-      {
+      if (length(handle.ids) == 1) {
+        handlex[i] <- names(handle.ids)[1]
+      } else if (length(handle.ids) == 0) {
+        stop(paste0("no handles found for '", from[i], "'."))
+      } else {
         stop(paste0(
             "Multiple handles found for '", from[i], "'. ",
             "Please specify handles implicitely."))
       }
     }
-  }
-  else
-  {
+  } else {
     handlex <- handle
   }
 

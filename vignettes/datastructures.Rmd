@@ -17,6 +17,7 @@ vignette: >
 ```{r, eval=TRUE, include=FALSE}
   library(datastructures)
   library(purrr)
+  fheap <- fibonacci_heap("numeric")
 ```
 
 ## Introduction
@@ -111,7 +112,7 @@ heap. If we have a *unique* key this can be easily done:
 The function takes vectors, so you can also pass vectorial `to` and `from` arguments:
 
 ```{r}
-  decrease_key(fheap, from=c(-4, -5), to=c(-15, -15))
+  decrease_key(fheap, from=c(-4, -5), to=c(-15, -13))
   peek(fheap)
 ```
 
@@ -120,6 +121,7 @@ to decrease a specific one. In this case, in order to decrease to correct node,
 we need to get its `handle` first:
 
 ```{r}
+  handle(fheap, -4)
   handle(fheap, -15)
 ```
 

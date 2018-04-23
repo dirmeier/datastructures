@@ -56,6 +56,13 @@ class heap
 public:
     heap() = default;
 
+
+    ~heap()
+    {
+        // TODO
+        // R_releaseObjects
+    }
+
     void insert(std::vector<T>& t, SEXP u)
     {
         if(!Rf_isNewList(u))
@@ -75,8 +82,11 @@ public:
             ss << "handle-" << unid_++;
             std::string id = ss.str();
 
+            SEXP s = Rf_duplicate(VECTOR_ELT(u, i));
+            R_PreserveObject(s);
+
             typename H<node<H, T>>::handle_type h =
-                heap_.push(node<H, T>(t[i], VECTOR_ELT(u, i), id));
+                heap_.push(node<H, T>(t[i], s, id));
             (*h).handle_ = h;
 
             id_to_handles_.insert(
@@ -88,6 +98,7 @@ public:
     Rcpp::List handles(T& from)
     {
         std::map<ul, SEXP> ret;
+        int prt = 0;
         if (key_to_id_.find(from) != key_to_id_.end())
         {
             auto iterpair = key_to_id_.equal_range(from);
@@ -96,11 +107,13 @@ public:
                 ul id = it->second;
                 if (id_to_handles_.find(id) != id_to_handles_.end())
                 {
-                    ret.insert(std::pair<ul, SEXP>(
-                            id, (*id_to_handles_[id]).value_));
+                    SEXP s = PROTECT((*id_to_handles_[id]).value_);
+                    prt++;
+                    ret.insert(std::pair<ul, SEXP>(id, s));
                 }
             }
         }
+        UNPROTECT(prt);
 
         return Rcpp::wrap(ret);
     }
@@ -108,22 +121,23 @@ public:
     Rcpp::List values()
     {
         std::multimap<T, SEXP> ret;
+        int prt = 0;
         for (auto it = id_to_handles_.begin();
              it != id_to_handles_.end();
              ++it)
         {
-            ret.insert(std::pair<T, SEXP>(
-                (*(it->second)).key_,
-                (*(it->second)).value_)
-            );
+            SEXP s = PROTECT((*(it->second)).value_);
+            prt++;
+            ret.insert(std::pair<T, SEXP>((*(it->second)).key_, s));
         }
+        UNPROTECT(prt);
 
         return Rcpp::wrap(ret);
     }
 
-    void decrease_key(std::vector<T>& from,
-                      std::vector<T>& to,
-                      std::vector<ul>& id)
+    void decrease_key(std::vector<T> from,
+                      std::vector<T> to,
+                      std::vector<ul> id)
     {
         if (from.size() != to.size() || to.size() != id.size())
         {
@@ -134,8 +148,7 @@ public:
         {
             if (to[i] >= from[i])
             {
-                Rcpp::stop(
-                  std::string("'to' key is not smaller than 'from'"));
+                Rcpp::stop(std::string("'to' key is not smaller than 'from'"));
             }
             if (key_to_id_.find(from[i]) == key_to_id_.end())
             {
@@ -153,7 +166,7 @@ public:
                 if (it->second == id[i]) has_id = true;
             }
             if (!has_id)
-                Rcpp::stop(std::string("'from' does not fit  value 'id'"));
+                Rcpp::stop(std::string("'from' does not fit value 'id'"));
 
             decrease_key_(to[i], from[i], id[i]);
         }
@@ -165,6 +178,8 @@ public:
         key_to_id_.clear();
         id_to_handles_.clear();
         unid_ = 0;
+        // TODO
+        // R_releaseObjects
     }
 
     size_t size()
@@ -183,10 +198,12 @@ public:
         heap_.pop();
 
         std::map<T, SEXP > heads;
-        heads.insert(std::pair<T, SEXP>(n.key_, n.value_));
+        SEXP s = PROTECT(n.value_);
+        heads.insert(std::pair<T, SEXP>(n.key_, s));
 
         drop_from_key_map_(n.key_, n.id_);
         drop_from_id_map_(n.id_);
+        UNPROTECT(1);
 
         return Rcpp::wrap(heads);
     }
@@ -195,20 +212,22 @@ public:
     {
         node<H, T> n = heap_.top();
         std::map<T, SEXP > heads;
-        heads.insert(std::pair<T, SEXP>(n.key_, n.value_));
+        SEXP s = PROTECT(n.value_);
+        heads.insert(std::pair<T, SEXP>(n.key_, s));
+        UNPROTECT(1);
 
         return Rcpp::wrap(heads);
     }
 
 private:
-    void decrease_key_(T& to, T& from, ul id)
+    void decrease_key_(T to, T from, ul id)
     {
         drop_from_key_map_(from, id);
         decrease_(to, id);
         key_to_id_.insert(std::pair<T, ul>(to, id));
     }
 
-    void drop_from_key_map_(T& from, ul id)
+    void drop_from_key_map_(T from, ul id)
     {
         auto iterpair = key_to_id_.equal_range(from);
         for (auto it = iterpair.first; it != iterpair.second; ++it)
@@ -229,13 +248,14 @@ private:
         }
     }
 
-    void decrease_(T& to, ul id)
+    void decrease_(T to, ul id)
     {
         (*id_to_handles_[id]).key_ = to;
         heap_.decrease(id_to_handles_[id]);
         heap_.update(id_to_handles_[id]);
     }
 
+    SEXP obj_;
     H<node<H, T>> heap_;
     std::unordered_multimap<T, ul> key_to_id_;
     std::unordered_map<

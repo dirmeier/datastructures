@@ -163,6 +163,19 @@ setMethod(
   }
 )
 
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "heap", x = "vector", y = "matrix"),
+    function(obj, x, y)
+    {
+        if (length(x) == 1) y <- list(y)
+        else stop("length(x) != 0")
+        .insert.heap(obj, x, y)
+    }
+)
+
+
 
 #' @rdname insert-methods
 setMethod(
@@ -177,14 +190,6 @@ setMethod(
                !is.list(y[[1]])) y <- list(y)
       .insert.heap(obj, x, y)
   }
-)
-
-
-#' @rdname insert-methods
-setMethod(
-  "insert",
-  signature = signature(obj = "heap", x = "vector", y = "matrix"),
-  function(obj, x, y) insert(obj, x, y)
 )
 
 
@@ -220,6 +225,24 @@ setMethod(
   signature = signature(x="heap", i="vector", j="missing", value="list"),
   function(x, i, value) insert(x, i, value)
 )
+
+
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to a heap. The keys are
+#'  determine the ordering of the heap, while the value is the actual value to
+#'  store.
+#'
+#' @param x  a heap object, such as a \code{\link{fibonacci_heap}} or a
+#'  \code{\link{binomial_heap}}
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
+setMethod(
+    "[<-",
+    signature = signature(x="heap", i="vector", j="missing", value="matrix"),
+    function(x, i, value) insert(x, i, value)
+)
+
 
 
 #' @rdname handle-methods

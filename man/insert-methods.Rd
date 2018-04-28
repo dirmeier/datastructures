@@ -7,8 +7,8 @@
 \alias{insert,deque,ANY,missing-method}
 \alias{insert,deque,list,missing-method}
 \alias{insert,heap,vector,vector-method}
-\alias{insert,heap,vector,list-method}
 \alias{insert,heap,vector,matrix-method}
+\alias{insert,heap,vector,list-method}
 \alias{insert,bimap,vector,vector-method}
 \alias{insert,unordered_map,vector,vector-method}
 \alias{insert,unordered_map,vector,list-method}
@@ -23,9 +23,9 @@ insert(obj, x, y)
 
 \S4method{insert}{heap,vector,vector}(obj, x, y)
 
-\S4method{insert}{heap,vector,list}(obj, x, y)
-
 \S4method{insert}{heap,vector,matrix}(obj, x, y)
+
+\S4method{insert}{heap,vector,list}(obj, x, y)
 
 \S4method{insert}{bimap,vector,vector}(obj, x, y)
 

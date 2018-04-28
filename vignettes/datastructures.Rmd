@@ -144,6 +144,19 @@ Finally, you can get all data from a heap, by calling the `value` function:
   val[[1]]
 ```
 
+Sometimes the `values` function can be useful to retrieve specific handles. For instance, in some scenarios you don't
+know the `key` or `handle`, but only the `value` of a node, and you want to do a `decrease-key` operation.
+Suppose you want to decrease the key of a node with value `V-1`, then you would to need to do the following:
+
+```{r}
+  library('purrr')
+  hands <- values(fheap) %>%
+      purrr::keep(~.x$value == "V-1") %>%
+      purrr::map_chr(~.x$handle)
+  hands
+  decrease_key(fheap, )
+```
+
 In all of these scenarios neither the key nor the value need to be unique, because the handle (node id) always is.
 
 ### Use case

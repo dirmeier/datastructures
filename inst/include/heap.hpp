@@ -60,7 +60,7 @@ public:
     ~heap()
     {
         // TODO
-        // R_releaseObjects
+        // R_releaseObjects ?
     }
 
     void insert(std::vector<T>& t, SEXP u)
@@ -126,9 +126,21 @@ public:
              it != id_to_handles_.end();
              ++it)
         {
+            SEXP el = PROTECT(Rf_allocVector(VECSXP, 3));
+            SEXP names = PROTECT(Rf_allocVector(STRSXP, 3));
             SEXP s = PROTECT((*(it->second)).value_);
-            prt++;
-            ret.insert(std::pair<T, SEXP>((*(it->second)).key_, s));
+            prt += 3;
+
+            SET_STRING_ELT(names, 0, Rf_mkChar("handle"));
+            SET_STRING_ELT(names, 1, Rf_mkChar("key"));
+            SET_STRING_ELT(names, 2, Rf_mkChar("value"));
+            Rf_setAttrib(el, R_NamesSymbol, names);
+            SET_VECTOR_ELT(el, 0, Rcpp::wrap(it->first));
+            SET_VECTOR_ELT(el, 1, Rcpp::wrap((*(it->second)).key_));
+            SET_VECTOR_ELT(el, 2, s);
+
+            ret.insert(std::pair<T, SEXP>((*(it->second)).key_, el));
+
         }
         UNPROTECT(prt);
 
@@ -204,7 +216,7 @@ public:
         drop_from_key_map_(n.key_, n.id_);
         drop_from_id_map_(n.id_);
         UNPROTECT(1);
-
+        R_ReleaseObject(s);
         return Rcpp::wrap(heads);
     }
 

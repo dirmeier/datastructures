@@ -236,7 +236,7 @@ test_that("heap returns correct handles for two keys after decrease",
 })
 
 
-test_that("heap value function works",
+test_that("heap value function works for values",
 {
   for (h in hs)
   {
@@ -245,7 +245,34 @@ test_that("heap value function works",
       m <- rnorm(3)
       bheap <- insert(bheap, r, m)
       vals <- values(bheap)
-      expect_equal(unname(sort(unlist(vals))), sort(m))
+      expect_equal(unname(sort(sapply(vals, function(.) .$value))), sort(m))
+  }
+})
+
+
+test_that("heap value function works for keys",
+{
+  for (h in hs)
+  {
+      bheap <- h("integer")
+      r <- c(1L, 1L, 3L)
+      m <- rnorm(3)
+      bheap <- insert(bheap, r, m)
+      vals <- values(bheap)
+      expect_equal(unname(sort(sapply(vals, function(.) .$key))), sort(r))
+  }
+})
+
+test_that("heap value function works for keys",
+{
+  for (h in hs)
+  {
+      bheap <- h("integer")
+      r <- c(1L, 1L, 3L)
+      m <- rnorm(3)
+      bheap <- insert(bheap, r, m)
+      vals <- values(bheap)
+      expect_equal(unname(sort(sapply(vals, function(.) .$handle))), paste0("handle-", 0:2))
   }
 })
 

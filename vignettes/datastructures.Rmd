@@ -17,6 +17,7 @@ vignette: >
 ```{r, eval=TRUE, include=FALSE}
   library(datastructures)
   library(purrr)
+  library(magrittr)
   fheap <- fibonacci_heap("numeric")
 ```
 
@@ -151,11 +152,14 @@ Suppose you want to decrease the key of a node with value `V-1`, then you would 
 ```{r}
   library('purrr')
   hands <- values(fheap) %>%
-      purrr::keep(~.x$value == "V-1") %>%
-      purrr::map_chr(~.x$handle)
+      purrr::keep(function(x) all(x[["value"]] == "V1"))
   hands
-  decrease_key(fheap, )
+  decrease_key(fheap, from=hands[[1]]$key, to=-1000, hands[[1]]$handle)
+  peek(fheap)
 ```
+
+The comparison in `keep` has to be done by the user, because it is not an easy thing to do generically.
+Thus, it is recommended to come up with a better way to find the respective handles.
 
 In all of these scenarios neither the key nor the value need to be unique, because the handle (node id) always is.
 

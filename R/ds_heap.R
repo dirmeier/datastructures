@@ -101,12 +101,18 @@ setClass(
 
 #' @noRd
 #' @importFrom purrr map
-.handle <- function(obj, key)
+.handle <- function(obj, key, value)
 {
-    .check.key.class(obj, key)
-    ret <- obj@.heap$handles(key)
-    ret <- purrr::map(
-        names(ret), .f = function(x) list(handle=x, value=ret[[x]]))
+    if (!is.null(key)) {
+        .check.key.class(obj, key)
+        ret <- obj@.heap$handles(key)
+        ret <- purrr::map(
+            names(ret), .f = function(x) list(handle=x, value=ret[[x]]))
+    } else if(!is.null(value)) {
+        ret <- obj@.heap$handle_values(value)
+        ret <- purrr::map(names(ret),
+                          .f = function(x) list(handle=x, key=ret[[x]]))
+    }
 
     ret
 }
@@ -244,14 +250,49 @@ setMethod(
 )
 
 
-
 #' @rdname handle-methods
 setMethod(
   "handle",
-  signature = signature(obj="heap", key="vector"),
-  function(obj, key) .handle(obj, key)
+  signature = signature(obj="heap", key="vector", value="missing"),
+  function(obj, key) .handle(obj, key, NULL)
 )
 
+
+#' @rdname handle-methods
+setMethod(
+    "handle",
+    signature = signature(obj="heap", key="missing", value="list"),
+    function(obj, value)
+    {
+        if (is.data.frame(value)) value <- list(value)
+        else if (is.list(value) &&
+                 length(value) == 1 &&
+                 !is.list(value[[1]])) value <- list(value)
+        .handle(obj, NULL, value)
+    }
+)
+
+
+#' @rdname handle-methods
+setMethod(
+    "handle",
+    signature = signature(obj="heap", key="missing", value="vector"),
+    function(obj, value)
+    {
+        .handle(obj, NULL, list(value))
+    }
+)
+
+
+#' @rdname handle-methods
+setMethod(
+    "handle",
+    signature = signature(obj="heap", key="missing", value="matrix"),
+    function(obj, value)
+    {
+        .handle(obj, NULL, list(value))
+    }
+)
 
 #' @rdname decrease_key-methods
 setMethod(

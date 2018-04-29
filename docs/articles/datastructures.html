@@ -101,7 +101,11 @@
 <p>You can create a heap like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  fheap &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fibonacci_heap.html">fibonacci_heap</a></span>(<span class="st">"numeric"</span>)
   bheap &lt;-<span class="st"> </span><span class="kw"><a href="../reference/binomial_heap.html">binomial_heap</a></span>(<span class="st">"numeric"</span>)</code></pre></div>
-<p>This gives us heaps with <code>numeric</code> keys. You can pick from either <code>integer</code>, <code>numeric</code> or <code>character</code> keys. The values an be arbitray, meaning, that you can add <code>data.frames</code>, <code>vectors</code> or any object you like. So if we insert several key-value pairs, the pair with the <em>minimum</em> key would have the highest <em>priority</em>. Let’s insert some values and have a look:</p>
+<p>This gives us heaps with <code>numeric</code> keys. You can pick from either <code>integer</code>, <code>numeric</code> or <code>character</code> keys.</p>
+<div id="inserting-nodes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#inserting-nodes" class="anchor"></a>Inserting nodes</h3>
+<p>The values an be arbitray, meaning, that you can add <code>data.frames</code>, <code>vectors</code> or any object you like. So if we insert several key-value pairs, the pair with the <em>minimum</em> key would have the highest <em>priority</em>. Let’s insert some values and have a look:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  keys   &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by=</span>.<span class="dv">2</span>))
   values &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"V"</span>, keys)
   fheap  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/insert-methods.html">insert</a></span>(fheap, keys, values)
@@ -120,13 +124,17 @@
   <span class="kw"><a href="../reference/peek-methods.html">peek</a></span>(fheap)</code></pre></div>
 <pre><code>## $`-3`
 ##            A B
-## 1  1.0709646 1
-## 2 -0.5964189 2
-## 3  0.8259510 3
-## 4 -0.6285203 4
-## 5  1.6271689 5</code></pre>
+## 1  0.3859730 1
+## 2  1.1512960 2
+## 3 -0.2909263 3
+## 4  1.0332256 4
+## 5  1.0096626 5</code></pre>
 <p><strong>NOTE</strong>: for efficienty it is recommended to insert all values at the same time, if you can do this. This should be way faster. If we insert multiple objects, we need to wrap it around a list.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  fheap  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/insert-methods.html">insert</a></span>(fheap, <span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">6</span>), <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">a=</span><span class="dv">2</span>), letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="st">"hallo"</span>))</code></pre></div>
+</div>
+<div id="peek-and-pop" class="section level3">
+<h3 class="hasAnchor">
+<a href="#peek-and-pop" class="anchor"></a>Peek and pop</h3>
 <p>Since Fibonacci and binomial heaps use the minimum heap property the first element in the heap should be <code>-6 -&gt; "hello</code>, because -6 has the lowest value.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/peek-methods.html">peek</a></span>(fheap)</code></pre></div>
 <pre><code>## $`-6`
@@ -145,6 +153,10 @@
 <pre><code>## $`-10`
 ## [1] "V-1"</code></pre>
 <p>This works for all the described <code>insert</code> methods above.</p>
+</div>
+<div id="decreasing-the-key-of-a-node" class="section level3">
+<h3 class="hasAnchor">
+<a href="#decreasing-the-key-of-a-node" class="anchor"></a>Decreasing the key of a node</h3>
 <p>Sometimes, we want to decrease a key and rearrange its position in the heap. If we have a <em>unique</em> key this can be easily done:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/decrease_key-methods.html">decrease_key</a></span>(fheap, <span class="dt">from=</span><span class="op">-</span><span class="dv">10</span>, <span class="dt">to=</span><span class="op">-</span><span class="dv">11</span>)
   <span class="kw"><a href="../reference/peek-methods.html">peek</a></span>(fheap)</code></pre></div>
@@ -156,9 +168,11 @@
 <pre><code>## $`-15`
 ## $`-15`$a
 ## [1] 2</code></pre>
+</div>
+<div id="getting-node-ids" class="section level3">
+<h3 class="hasAnchor">
+<a href="#getting-node-ids" class="anchor"></a>Getting node ids</h3>
 <p>However, things get more complicated if we have multiple identical keys and want to decrease a specific one. In this case, in order to decrease to correct node, we need to get its <code>handle</code> first:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/handle-methods.html">handle</a></span>(fheap, <span class="op">-</span><span class="dv">4</span>)</code></pre></div>
-<pre><code>## list()</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/handle-methods.html">handle</a></span>(fheap, <span class="op">-</span><span class="dv">15</span>)</code></pre></div>
 <pre><code>## [[1]]
 ## [[1]]$handle
@@ -174,39 +188,73 @@
 <pre><code>## $`-20`
 ## $`-20`$a
 ## [1] 2</code></pre>
-<p>The <code>handle</code> method always returns a list where every element represents a node in the heap.</p>
-<p>Finally, you can get all data from a heap, by calling the <code>value</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  val &lt;-<span class="st"> </span><span class="kw"><a href="../reference/values-methods.html">values</a></span>(fheap)
-  val[[<span class="dv">1</span>]]</code></pre></div>
-<pre><code>## $handle
-## [1] "handle-9"
+<p>The <code>handle</code> method always returns a list where every element represents a node in the heap. The <code>handle</code> function is vectorized, so you can supply are vector of keys and will receive the handles that fit thse:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="kw"><a href="../reference/handle-methods.html">handle</a></span>(fheap, <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>))</code></pre></div>
+<pre><code>## [[1]]
+## [[1]]$handle
+## [1] "handle-8"
 ## 
-## $key
-## [1] -20
-## 
-## $value
-## $value$a
-## [1] 2</code></pre>
-<p>Sometimes the <code>values</code> function can be useful to retrieve specific handles. For instance, in some scenarios you don’t know the <code>key</code> or <code>handle</code>, but only the <code>value</code> of a node, and you want to do a <code>decrease-key</code> operation. Suppose you want to decrease the key of a node with value <code>V-1</code>, then you would to need to do the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">library</span>(<span class="st">'purrr'</span>)
-  hands &lt;-<span class="st"> </span><span class="kw"><a href="../reference/values-methods.html">values</a></span>(fheap) <span class="op">%&gt;%</span>
-<span class="st">      </span>purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/keep">keep</a></span>(<span class="cf">function</span>(x) <span class="kw">all</span>(x[[<span class="st">"value"</span>]] <span class="op">==</span><span class="st"> "V1"</span>))
-  hands</code></pre></div>
-<pre><code>## $`1`
-## $`1`$handle
-## [1] "handle-2"
-## 
-## $`1`$key
-## [1] 1
-## 
-## $`1`$value
-## [1] "V1"</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/decrease_key-methods.html">decrease_key</a></span>(fheap, <span class="dt">from=</span>hands[[<span class="dv">1</span>]]<span class="op">$</span>key, <span class="dt">to=</span><span class="op">-</span><span class="dv">1000</span>, hands[[<span class="dv">1</span>]]<span class="op">$</span>handle)
+## [[1]]$value
+##            A B
+## 1  0.3859730 1
+## 2  1.1512960 2
+## 3 -0.2909263 3
+## 4  1.0332256 4
+## 5  1.0096626 5</code></pre>
+<p>Sometimes you don’t know the <code>key</code> or <code>handle</code>, but only the <code>value</code> of a node, and you want to do a <code>decrease-key</code> operation. Suppose you want to decrease the key of a node with value <code>V-1</code>, then you would to need to call <code>handle</code> with a value argument and a missing <code>key</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  hands &lt;-<span class="st"> </span><span class="kw"><a href="../reference/handle-methods.html">handle</a></span>(fheap, <span class="dt">value=</span><span class="st">"V1"</span>)
+  <span class="kw"><a href="../reference/decrease_key-methods.html">decrease_key</a></span>(fheap, <span class="dt">from=</span>hands[[<span class="dv">1</span>]]<span class="op">$</span>key, <span class="dt">to=</span><span class="op">-</span><span class="dv">1000</span>, hands[[<span class="dv">1</span>]]<span class="op">$</span>handle)
   <span class="kw"><a href="../reference/peek-methods.html">peek</a></span>(fheap)</code></pre></div>
 <pre><code>## $`-1000`
 ## [1] "V1"</code></pre>
-<p>The comparison in <code>keep</code> has to be done by the user, because it is not an easy thing to do generically. Thus, it is recommended to come up with a better way to find the respective handles.</p>
+<p><strong>NOTE</strong>: Getting the handles from a value is a costly operation, because we need to compare all entries of the heap with the supplied argument value. If your supplied argument is, for instance, a large dataframe this will quickly become slow. So it is recommended to use this function cautiously.</p>
+<p>The handle function for values can take multiple elements, too. However, here we need to supply a <code>list</code> and not a vector (for obvious reasons).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  hands &lt;-<span class="st"> </span><span class="kw"><a href="../reference/handle-methods.html">handle</a></span>(fheap, <span class="dt">value=</span><span class="kw">list</span>(<span class="st">"V1"</span>, <span class="kw">list</span>(<span class="dt">a=</span><span class="dv">2</span>)))
+  hands</code></pre></div>
+<pre><code>## [[1]]
+## [[1]]$handle
+## [1] "handle-0"
+## 
+## [[1]]$key
+## [1] -1000
+## 
+## 
+## [[2]]
+## [[2]]$handle
+## [1] "handle-9"
+## 
+## [[2]]$key
+## [1] -20</code></pre>
+</div>
+<div id="retrieving-values-from-a-heap" class="section level3">
+<h3 class="hasAnchor">
+<a href="#retrieving-values-from-a-heap" class="anchor"></a>Retrieving values from a heap</h3>
+<p>Finally, you can get all data from a heap, by calling the <code>value</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  val &lt;-<span class="st"> </span><span class="kw"><a href="../reference/values-methods.html">values</a></span>(fheap)
+  val[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre></div>
+<pre><code>## $`-1000`
+## $`-1000`$handle
+## [1] "handle-0"
+## 
+## $`-1000`$key
+## [1] -1000
+## 
+## $`-1000`$value
+## [1] "V1"
+## 
+## 
+## $`-20`
+## $`-20`$handle
+## [1] "handle-9"
+## 
+## $`-20`$key
+## [1] -20
+## 
+## $`-20`$value
+## $`-20`$value$a
+## [1] 2</code></pre>
 <p>In all of these scenarios neither the key nor the value need to be unique, because the handle (node id) always is.</p>
+</div>
 <div id="use-case" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-case" class="anchor"></a>Use case</h3>
@@ -296,15 +344,14 @@
 ## 
 ## [[2]]
 ##            a X2 X3
-## 1 -0.4326986  2  3
-## 2  0.5744640  2  3
-## 3 -0.2465190  2  3
-## 4  2.2970781  2  3
-## 5 -0.9311550  2  3</code></pre>
+## 1 -0.1122166  2  3
+## 2  0.6747951  2  3
+## 3 -1.3368652  2  3
+## 4  0.2031330  2  3
+## 5 -0.4976453  2  3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  mm[keys[<span class="dv">5</span>]]</code></pre></div>
 <pre><code>## [[1]]
-##  [1]  1  1  2  2  3  3  4  4  5  5  6  6  7  7  8  8  9  9 10 10 11 11 12
-## [24] 12 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20</code></pre>
+##  [1] 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1</code></pre>
 <p>For hashmaps and multimaps the subset-operator <code>[</code> is also supported for accessing elements. This does not make so much sense for bimaps, because here we have to choose whether we want to access keys or values. In the example on the top we showed how both is possible by either providing <code>keys</code> or <code>values</code> as third argument to the <code>get</code> function. If you leave it out, then the third argument defaults to <code>values</code>.</p>
 <p>If you want to directly access <code>keys</code> or <code>values</code> as vectors or have a look at a few random elements, you would call:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/keys-methods.html">keys</a></span>(bimap)</code></pre></div>
@@ -320,10 +367,10 @@
 ## [1] 1
 ## 
 ## [[4]]
-## [1] TRUE
+## [1] 0
 ## 
 ## [[5]]
-## [1] TRUE</code></pre>
+## [1] -1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/head-methods.html">head</a></span>(bimap)</code></pre></div>
 <pre><code>## $V1
 ## [1] 1
@@ -367,7 +414,7 @@
 ## 2 2 2
 ## 3 3 1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/pop-methods.html">pop</a></span>(st)</code></pre></div>
-<pre><code>## [1] -0.2666368</code></pre>
+<pre><code>## [1] 0.5367648</code></pre>
 <p>For a <code>queue</code> <code>pop</code> and <code>peek</code> return the <em>first</em> element that got inserted, while a stack returns the <em>last</em> element that was inserted.</p>
 <p>The size of a deque can be computed by calling:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/size-methods.html">size</a></span>(qu)</code></pre></div>
@@ -400,19 +447,18 @@
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] magrittr_1.5         purrr_0.2.4          datastructures_0.2.6
-## [4] Rcpp_0.12.16        
+## [1] purrr_0.2.4          datastructures_0.2.6 Rcpp_0.12.16        
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] rstudioapi_0.7     knitr_1.20         xml2_1.2.0        
-##  [4] roxygen2_6.0.1     MASS_7.3-49        R6_2.2.2          
-##  [7] rlang_0.2.0.9001   stringr_1.3.0      tools_3.4.4       
-## [10] htmltools_0.3.6    commonmark_1.4     yaml_2.1.18       
-## [13] rprojroot_1.3-2    digest_0.6.15      assertthat_0.2.0  
-## [16] pkgdown_0.1.0.9000 crayon_1.3.4       codetools_0.2-15  
-## [19] fs_1.2.2           memoise_1.1.0      evaluate_0.10.1   
-## [22] rmarkdown_1.9      stringi_1.1.7      compiler_3.4.4    
-## [25] desc_1.1.1         backports_1.1.2</code></pre>
+##  [4] magrittr_1.5       roxygen2_6.0.1     MASS_7.3-49       
+##  [7] R6_2.2.2           rlang_0.2.0.9001   stringr_1.3.0     
+## [10] tools_3.4.4        htmltools_0.3.6    commonmark_1.4    
+## [13] yaml_2.1.18        rprojroot_1.3-2    digest_0.6.15     
+## [16] assertthat_0.2.0   pkgdown_0.1.0.9000 crayon_1.3.4      
+## [19] codetools_0.2-15   fs_1.2.2           memoise_1.1.0     
+## [22] evaluate_0.10.1    rmarkdown_1.9      stringi_1.1.7     
+## [25] compiler_3.4.4     desc_1.1.1         backports_1.1.2</code></pre>
 </div>
   </div>
 

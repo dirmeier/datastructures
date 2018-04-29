@@ -169,13 +169,28 @@ test_that("heap returns correct handles for two keys",
   {
       bheap <- h("character")
       r <- letters[c(1, 1)]
-      m <- as.list(rnorm(2))
+      m <- list(1, 1)
       bheap <- insert(bheap, r, m)
       hand <- handle(bheap, letters[1])
       expect_equal(length(hand), 2)
+      expect_true(hand[[1]]$value == 1)
+      expect_true(hand[[2]]$value == 1)
   }
 })
 
+
+test_that("heap returns correct handles for vectorial input",
+{
+  for (h in hs)
+  {
+      bheap <- h("character")
+      r <- letters[c(1, 2)]
+      m <- as.list(rnorm(2))
+      bheap <- insert(bheap, r, m)
+      hand <- handle(bheap, letters)
+      expect_equal(length(hand), 2)
+  }
+})
 
 test_that("heaps throws from Rcpp when incorrect decrease vector lengths",
 {
@@ -337,3 +352,71 @@ test_that("heap checks out list situations",
       expect_true(res[[1]]$a == 2)
   }
 })
+
+
+test_that("heap handle_values works with data.frame",
+{
+  for (h in hs)
+  {
+    bheap <- h("integer")
+    bheap <- insert(bheap, 1L, data.frame(A=1))
+    vals <- handle(bheap, value=data.frame(A=1))
+    expect_equal(vals[[1]]$key,  1L)
+    expect_equal(vals[[1]]$handle,  "handle-0")
+    expect_equal(length(vals), 1)
+  }
+})
+
+
+test_that("heap handle_values works with list",
+{
+  for (h in hs)
+  {
+      bheap <- h("integer")
+      bheap <- insert(bheap, 1L, list(A=1))
+      vals <- handle(bheap, value=list(A=1))
+      expect_equal(vals[[1]]$key,  1L)
+      expect_equal(vals[[1]]$handle,  "handle-0")
+      expect_equal(length(vals), 1)
+  }
+})
+
+
+test_that("heap handle_values works with list of lists",
+{
+  for (h in hs)
+  {
+      bheap <- h("integer")
+      bheap <- insert(bheap, c(1L, 1L, 2L), list(list(A=1), list(A=1), diag(5)))
+      vals <- handle(bheap, value=list(A=1))
+      expect_equal(vals[[1]]$key,  1L)
+      expect_equal(length(vals), 2)
+  }
+})
+
+
+test_that("heap handle_values works with vector",
+{
+  for (h in hs)
+  {
+      bheap <- h("integer")
+      m <- rnorm(5)
+      bheap <- insert(bheap, 1L, m)
+      vals <- handle(bheap, value=m)
+      expect_equal(vals[[1]]$key,  1L)
+      expect_equal(length(vals), 1)
+  }
+})
+
+test_that("heap handle_values works with matrix",
+{
+  for (h in hs)
+  {
+      bheap <- h("integer")
+      bheap <- insert(bheap, 1L, matrix(1, 5, 5))
+      vals <- handle(bheap, value=matrix(1, 5, 5))
+      expect_equal(vals[[1]]$key,  1L)
+      expect_equal(length(vals), 1)
+  }
+})
+

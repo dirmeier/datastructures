@@ -18,6 +18,7 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+
 #' @title Get the handles and values for nodes of a specific key in a heap.
 #'
 #' @description Returns a list of handles and values for node elements that have
@@ -33,12 +34,13 @@
 #'
 #' @param obj  a heap object
 #' @param key  a key in the heap
+#' @param value  a value in the heap
 #'
-#' @return  returns handles from \code{obj}
+#' @return  returns extracted handles and values from \code{obj}
 #'
 setGeneric(
     "handle",
-    function(obj, key)
+    function(obj, key, value)
     {
         standardGeneric("handle")
     },

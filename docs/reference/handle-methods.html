@@ -130,10 +130,19 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>handle</span>(<span class='no'>obj</span>, <span class='no'>key</span>)
+    <pre class="usage"><span class='fu'>handle</span>(<span class='no'>obj</span>, <span class='no'>key</span>, <span class='no'>value</span>)
 
-<span class='co'># S4 method for heap,vector</span>
-<span class='fu'>handle</span>(<span class='no'>obj</span>, <span class='no'>key</span>)</pre>
+<span class='co'># S4 method for heap,vector,missing</span>
+<span class='fu'>handle</span>(<span class='no'>obj</span>, <span class='no'>key</span>)
+
+<span class='co'># S4 method for heap,missing,list</span>
+<span class='fu'>handle</span>(<span class='no'>obj</span>, <span class='no'>value</span>)
+
+<span class='co'># S4 method for heap,missing,vector</span>
+<span class='fu'>handle</span>(<span class='no'>obj</span>, <span class='no'>value</span>)
+
+<span class='co'># S4 method for heap,missing,matrix</span>
+<span class='fu'>handle</span>(<span class='no'>obj</span>, <span class='no'>value</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,11 +155,15 @@
       <th>key</th>
       <td><p>a key in the heap</p></td>
     </tr>
+    <tr>
+      <th>value</th>
+      <td><p>a value in the heap</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>returns handles from <code>obj</code></p>
+    <p>returns extracted handles and values from <code>obj</code></p>
     
 
   </div>

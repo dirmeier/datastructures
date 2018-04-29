@@ -38,6 +38,9 @@ You can create a heap like this:
 ```
 
 This gives us heaps with `numeric` keys. You can pick from either `integer`, `numeric` or `character` keys.
+
+### Inserting nodes
+
 The values an be arbitray, meaning, that you can add `data.frames`, `vectors` or any object you like.
 So if we insert several key-value pairs, the pair with the *minimum* key would have the highest *priority*.
 Let's insert some values and have a look:
@@ -76,6 +79,8 @@ If we insert multiple objects, we need to wrap it around a list.
   fheap  <- insert(fheap, c(-4, -5, -6), list(list(a=2), letters[1:4], "hallo"))
 ```
 
+### Peek and pop
+
 Since Fibonacci and binomial heaps use the minimum heap property the first
 element in the heap should be `-6 -> "hello`, because -6 has the lowest value.
 
@@ -101,6 +106,9 @@ You can alternatively insert values like this:
 
 This works for all the described `insert` methods above. 
 
+### Decreasing the key of a node
+
+
 Sometimes, we want to decrease a key and rearrange its position in the
 heap. If we have a *unique* key this can be easily done:
 
@@ -116,12 +124,13 @@ The function takes vectors, so you can also pass vectorial `to` and `from` argum
   peek(fheap)
 ```
 
+### Getting node ids
+
 However, things get more complicated if we have multiple identical keys and want 
 to decrease a specific one. In this case, in order to decrease to correct node,
 we need to get its `handle` first:
 
 ```{r}
-  handle(fheap, -4)
   handle(fheap, -15)
 ```
 
@@ -136,29 +145,39 @@ ambiguous key, we also need to specify the handle (e.g. the `id`):
 ```
 
 The `handle` method always returns a list where every element represents a node in the heap. 
+The `handle` function is vectorized, so you can supply are vector of keys and will receive the handles that fit thse:
+
+```{r}
+ handle(fheap, c(-3))
+```
+
+Sometimes you don't know the `key` or `handle`, but only the `value` of a node, and you want to do a `decrease-key` operation.
+Suppose you want to decrease the key of a node with value `V-1`, then you would to need to call `handle` with a value argument and a missing `key`:
+
+```{r}
+  hands <- handle(fheap, value="V1")
+  decrease_key(fheap, from=hands[[1]]$key, to=-1000, hands[[1]]$handle)
+  peek(fheap)
+```
+
+**NOTE**: Getting the handles from a value is a costly operation, because we need to compare all entries of the heap with the supplied argument value.
+If your supplied argument is, for instance, a large dataframe this will quickly become slow. So it is recommended to use this function cautiously.
+
+The handle function for values can take multiple elements, too. However, here we need to supply a `list` and not a vector (for obvious reasons).
+
+```{r}
+  hands <- handle(fheap, value=list("V1", list(a=2)))
+  hands
+```
+
+### Retrieving values from a heap
 
 Finally, you can get all data from a heap, by calling the `value` function:
 
 ```{r}
   val <- values(fheap)
-  val[[1]]
+  val[1:2]
 ```
-
-Sometimes the `values` function can be useful to retrieve specific handles. For instance, in some scenarios you don't
-know the `key` or `handle`, but only the `value` of a node, and you want to do a `decrease-key` operation.
-Suppose you want to decrease the key of a node with value `V-1`, then you would to need to do the following:
-
-```{r}
-  library('purrr')
-  hands <- values(fheap) %>%
-      purrr::keep(function(x) all(x[["value"]] == "V1"))
-  hands
-  decrease_key(fheap, from=hands[[1]]$key, to=-1000, hands[[1]]$handle)
-  peek(fheap)
-```
-
-The comparison in `keep` has to be done by the user, because it is not an easy thing to do generically.
-Thus, it is recommended to come up with a better way to find the respective handles.
 
 In all of these scenarios neither the key nor the value need to be unique, because the handle (node id) always is.
 

@@ -95,22 +95,55 @@ public:
         }
     }
 
-    Rcpp::List handles(T& from)
+    Rcpp::List handles(std::vector<T>& keys)
     {
         std::map<ul, SEXP> ret;
         int prt = 0;
-        if (key_to_id_.find(from) != key_to_id_.end())
+        for (typename std::vector<T>::size_type i = 0; i < keys.size(); ++i)
         {
-            auto iterpair = key_to_id_.equal_range(from);
-            for (auto it = iterpair.first; it != iterpair.second; ++it)
+            T key = keys[i];
+            if (key_to_id_.find(key) != key_to_id_.end())
             {
-                ul id = it->second;
-                if (id_to_handles_.find(id) != id_to_handles_.end())
+                auto iterpair = key_to_id_.equal_range(key);
+                for (auto it = iterpair.first; it != iterpair.second; ++it)
                 {
-                    SEXP s = PROTECT((*id_to_handles_[id]).value_);
-                    prt++;
-                    ret.insert(std::pair<ul, SEXP>(id, s));
+                    ul id = it->second;
+                    if (id_to_handles_.find(id) != id_to_handles_.end())
+                    {
+                        SEXP s = PROTECT((*id_to_handles_[id]).value_);
+                        prt++;
+                        ret.insert(std::pair<ul, SEXP>(id, s));
+                    }
                 }
+            }
+        }
+        UNPROTECT(prt);
+
+        return Rcpp::wrap(ret);
+    }
+
+
+    Rcpp::List handles_value(SEXP& values)
+    {
+        if(!Rf_isNewList(values))
+        {
+            Rcpp::stop("SEXP needs to be a NewList\n");
+        }
+        const int sexp_size = static_cast<int>(Rf_length(values));
+
+        std::map<ul, T> ret;
+        int prt = 0;
+        for (int i = 0; i < sexp_size; ++i)
+        {
+            SEXP value = PROTECT(VECTOR_ELT(values, i));
+            prt++;
+            for (auto it = id_to_handles_.begin();
+                 it != id_to_handles_.end(); ++it)
+            {
+                SEXP s = PROTECT((*it->second).value_);
+                prt++;
+                if (R_compute_identical(value, s, 0))
+                    ret.insert(std::pair<ul, T>(it->first, (*(it->second)).key_));
             }
         }
         UNPROTECT(prt);

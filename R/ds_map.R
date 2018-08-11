@@ -75,6 +75,15 @@ setClass(
   obj@.map$size()
 }
 
+#' @noRd
+.clear.map <- function(obj)
+{
+    obj@.map$clear()
+}
+
+
+#' @noRd
+setMethod("clear", "map", .clear.map)
 
 #' @noRd
 setMethod("show", "map", .show.map)

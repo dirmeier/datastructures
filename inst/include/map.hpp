@@ -68,10 +68,8 @@ namespace datastructures
         void clear()
         {
             for (auto it = map_.begin(); it != map_.end(); ++it)
-            {
                 R_ReleaseObject(it->second);
-                map_.erase(it);
-            }
+            map_.clear();
         }
 
         void remove_with_value(std::vector<T>& t, SEXP u)
@@ -96,11 +94,14 @@ namespace datastructures
             for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
             {
                 auto iter = map_.equal_range(t[i]);
+                Rcpp::Rcout << "Removing\n";
                 for (auto it = iter.first; it != iter.second; ++it)
                 {
+                    Rcpp::Rcout << "Removing x\n";
                     R_ReleaseObject(it->second);
-                    map_.erase(it);
                 }
+                Rcpp::Rcout << "Removing y\n";
+                map_.erase(t[i]);
             }
         }
 

@@ -81,6 +81,7 @@ setClass(
 .clear.map <- function(obj)
 {
     obj@.map$clear()
+    obj
 }
 
 

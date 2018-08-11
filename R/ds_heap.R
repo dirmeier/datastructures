@@ -199,6 +199,17 @@ setMethod(
 )
 
 
+#' @rdname insert-methods
+setMethod(
+    "insert",
+    signature = signature(obj = "heap", x = "vector", y = "ANY"),
+    function(obj, x, y)
+    {
+        .insert.heap(obj, x, list(y))
+    }
+)
+
+
 #' Insert parts to an object
 #'
 #' @description Inserts <key, value> pairs to a heap. The keys are

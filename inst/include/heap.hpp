@@ -111,7 +111,7 @@ public:
                     if (id_to_handles_.find(id) != id_to_handles_.end())
                     {
                         SEXP s = PROTECT((*id_to_handles_[id]).value_);
-                        prt++;
+                        ++prt;
                         ret.insert(std::pair<ul, SEXP>(id, s));
                     }
                 }
@@ -136,12 +136,12 @@ public:
         for (int i = 0; i < sexp_size; ++i)
         {
             SEXP value = PROTECT(VECTOR_ELT(values, i));
-            prt++;
+            ++prt;
             for (auto it = id_to_handles_.begin();
                  it != id_to_handles_.end(); ++it)
             {
                 SEXP s = PROTECT((*it->second).value_);
-                prt++;
+                ++prt;
                 if (R_compute_identical(value, s, 0))
                     ret.insert(std::pair<ul, T>(it->first, (*(it->second)).key_));
             }

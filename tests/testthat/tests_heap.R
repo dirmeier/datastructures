@@ -338,6 +338,7 @@ test_that("heap checks out list situations",
       bheap <- insert(bheap, 3L,  list(list(1)))
       bheap <- insert(bheap, 4L,  list(data.frame(A=1)))
       bheap <- insert(bheap, 6:7, list(1, list(a=2)))
+      bheap <- insert(bheap, 8L, list(1, list(a=2)))
       res <- pop(bheap)
       expect_true(res[[1]]$A == 1)
       res <- pop(bheap)
@@ -348,6 +349,8 @@ test_that("heap checks out list situations",
       expect_true(res[[1]]$A == 1)
       res <- pop(bheap)
       expect_true(res[[1]] == 1)
+      res <- pop(bheap)
+      expect_true(res[[1]]$a == 2)
       res <- pop(bheap)
       expect_true(res[[1]]$a == 2)
   }

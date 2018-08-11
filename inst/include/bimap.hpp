@@ -33,9 +33,9 @@ template<typename T, typename U>
 class bimap
 {
    public:
-    typedef typename boost::bimap<T, U>::value_type position;
-    typedef typename boost::bimap<T, U>::right_map::const_iterator ri;
-    typedef typename boost::bimap<T, U>::left_map::const_iterator li;
+    using position = typename boost::bimap<T, U>::value_type;
+    using ri = typename boost::bimap<T, U>::right_map::const_iterator;
+    using li = typename boost::bimap<T, U>::left_map::const_iterator;
 
     bimap() : map_()
     {
@@ -112,7 +112,7 @@ class bimap
             }
             else
             {
-                std::stringstream ss;
+                std::ostringstream ss;
                 ss << key;
                 Rcpp::stop(
                   std::string("Could not find key: ").append(ss.str()));
@@ -135,7 +135,7 @@ class bimap
             }
             else
             {
-                std::stringstream ss;
+                std::ostringstream ss;
                 ss << key;
                 Rcpp::stop(
                   std::string("Could not find key: ").append(ss.str()));

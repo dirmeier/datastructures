@@ -50,6 +50,8 @@ Collate:
     'ds_heap.R'
     'ds_heap_binomial.R'
     'ds_heap_fibonacci.R'
+    'methods_clear.R'
+    'methods_remove.R'
     'methods_head.R'
     'ds_map.R'
     'methods_keys.R'

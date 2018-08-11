@@ -20,7 +20,8 @@
 
 #' @include methods_size.R
 #' @include methods_head.R
-
+#' @include methods_remove.R
+#' @include methods_clear.R
 
 #' @title Map class
 #'
@@ -75,6 +76,7 @@ setClass(
   obj@.map$size()
 }
 
+
 #' @noRd
 .clear.map <- function(obj)
 {
@@ -83,6 +85,67 @@ setClass(
 
 
 #' @noRd
+.remove.map <- function(obj, key, value=NULL)
+{
+    .check.key.class(obj, key)
+    if (is.null(value)) {
+        obj@.map$remove(key)
+    } else {
+        if (length(key) != length(value))
+            stop("dimensions of keys and values do not match")
+        obj@.map$remove(key, value)
+    }
+
+    obj
+}
+
+
+#' @rdname remove-methods
+setMethod(
+    "remove",
+    signature = signature(obj = "map", key = "vector", value = "vector"),
+    function(obj, key, value)
+    {
+        if (length(key) == 1) value <- list(value)
+        else if (length(key) == length(value) && is.vector(value))
+            value <- as.list(value)
+        .remove.map(obj, key, value)
+    }
+)
+
+
+#' @rdname remove-methods
+setMethod(
+    "remove",
+    signature = signature(obj = "map", key = "vector", value = "list"),
+    function(obj, key, value)
+    {
+        value <- if (is.data.frame(value)) list(value) else value
+        .remove.map(obj, key, value)
+    }
+)
+
+
+#' @rdname remove-methods
+setMethod(
+    "remove",
+    signature = signature(obj = "map", key = "vector", value = "ANY"),
+    function(obj, key, value)
+    {
+        .remove.map(obj, key, list(value))
+    }
+)
+
+
+#' @rdname remove-methods
+setMethod(
+    "remove",
+    signature = signature(obj = "map", key = "vector", value = "missing"),
+    function(obj, key) .remove.map(obj, key, NULL)
+)
+
+
+#' @rdname size-methods
 setMethod("clear", "map", .clear.map)
 
 #' @noRd

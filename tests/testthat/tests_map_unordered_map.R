@@ -132,3 +132,14 @@ test_that("unordered map size works", {
         expect_equal(size(h), 2)
     }
 })
+
+test_that("unordered map removes correctly", {
+    for (cm in maps)
+    {
+        h <- cm("integer")
+        m <- as.list(letters[1:2])
+        r <- c(1, 2)
+        h <- insert(h, r, m)
+        expect_equal(size(h), 2)
+    }
+})

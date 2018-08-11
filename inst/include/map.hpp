@@ -70,7 +70,7 @@ namespace datastructures
             for (auto it = map_.begin(); it != map_.end(); ++it)
             {
                 R_ReleaseObject(it->second);
-                key_to_id_.erase(it);
+                map_.erase(it);
             }
         }
 
@@ -95,12 +95,11 @@ namespace datastructures
         {
             for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
             {
-                if (map_.find(t[i]) != map_.end())
+                auto iter = map_.equal_range(t[i]);
+                for (auto it = iter.first; it != iter.second; ++it)
                 {
-                    SEXP s = map_[ t[i] ];
-                    R_ReleaseObject(s);
-                    map_.erase(t[i]);
-                    break;
+                    R_ReleaseObject(it->second);
+                    map_.erase(it);
                 }
             }
         }
@@ -132,7 +131,7 @@ namespace datastructures
             {
                 SEXP s = PROTECT(pair.second);
                 values.push_back(s);
-                prt++;
+                ++prt;
             }
             UNPROTECT(prt);
 
@@ -166,7 +165,7 @@ namespace datastructures
                     for (auto it = range.first; it != range.second; ++it)
                     {
                         SEXP s = PROTECT(it->second);
-                        prt++;
+                        ++prt;
                         values.push_back(s);
                     }
                 }

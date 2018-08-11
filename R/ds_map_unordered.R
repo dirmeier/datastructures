@@ -58,27 +58,31 @@ setClass(
 
 #' @rdname insert-methods
 setMethod(
-  "insert",
-  signature = signature(obj = "unordered_map", x = "vector", y = "vector"),
-  function(obj, x, y)
-  {
-    if (length(x) == 1) y <- list(y)
-    else if (length(x) == length(y) && is.vector(y))
-      y <- as.list(y)
-    .insert.unordered_map(obj, x, y)
-  }
+    "insert",
+    signature = signature(obj = "unordered_map", x = "vector", y = "vector"),
+    function(obj, x, y)
+    {
+        if (length(x) == 1) y <- list(y)
+        else if (length(x) == length(y) && is.vector(y))
+            y <- as.list(y)
+        .insert.unordered_map(obj, x, y)
+    }
 )
 
 
 #' @rdname insert-methods
 setMethod(
-  "insert",
-  signature = signature(obj = "unordered_map", x = "vector", y = "list"),
-  function(obj, x, y)
-  {
-    y <- if (is.data.frame(y)) list(y) else y
-      .insert.unordered_map(obj, x, y)
-  }
+    "insert",
+    signature = signature(obj = "unordered_map", x = "vector", y = "list"),
+    function(obj, x, y)
+    {
+        if (length(x) == 1 && is.data.frame(y)) y <- list(y)
+        else if (is.list(y) &&
+                 length(x) == 1 &&
+                 length(y) == 1 &&
+                 !is.list(y[[1]])) y <- list(y)
+        .insert.unordered_map(obj, x, y)
+    }
 )
 
 

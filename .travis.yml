@@ -4,8 +4,6 @@ cache: packages
 
 matrix:
   include:
-    - os: linux
-      r: devel
     - os: osx
       r: release
     - os: linux

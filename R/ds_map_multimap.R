@@ -19,7 +19,7 @@
 
 
 #' @include ds_map_unordered.R
-
+#' @include methods_remove.R
 
 #' @title Multimap class
 #'
@@ -71,3 +71,52 @@ multimap <- function(key.class = c("character", "numeric", "integer"))
                .key.class=key.class,
                .map=map)
 }
+
+
+#' @noRd
+.remove.multimap <- function(obj, key, value)
+{
+    .check.key.class(obj, key)
+    if (length(key) != length(value))
+        stop("dimensions of keys and values do not match")
+    obj@.map$remove_with_value(key, value)
+
+    obj
+}
+
+
+#' @rdname remove-methods
+setMethod(
+    "remove",
+    signature = signature(obj = "multimap", key = "vector", value = "vector"),
+    function(obj, key, value)
+    {
+        if (length(key) == 1) value <- list(value)
+        else if (length(key) == length(value) && is.vector(value))
+            value <- as.list(value)
+        .remove.multimap(obj, key, value)
+    }
+)
+
+
+#' @rdname remove-methods
+setMethod(
+    "remove",
+    signature = signature(obj = "multimap", key = "vector", value = "list"),
+    function(obj, key, value)
+    {
+        value <- if (is.data.frame(value)) list(value) else value
+        .remove.multimap(obj, key, value)
+    }
+)
+
+
+#' @rdname remove-methods
+setMethod(
+    "remove",
+    signature = signature(obj = "multimap", key = "vector", value = "ANY"),
+    function(obj, key, value)
+    {
+        .remove.multimap(obj, key, list(value))
+    }
+)

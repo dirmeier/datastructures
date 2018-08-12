@@ -23,6 +23,7 @@
 #' @include methods_get.R
 #' @include methods_keys.R
 #' @include methods_values.R
+#' @include methods_remove.R
 NULL
 
 
@@ -107,6 +108,26 @@ bimap <- function(key.class = c("character", "numeric", "integer"),
 }
 
 
+#' @noRd
+.insert.bimap <- function(obj, x, y)
+{
+    .check.key.value.classes(obj, x, y)
+    obj@.map$insert(x, y)
+
+    obj
+}
+
+
+#' @noRd
+.remove.bimap.values <- function(obj, value)
+{
+    .check.value.class(obj, value)
+    obj@.map$remove_value(value)
+
+    obj
+}
+
+
 #' Insert parts to an object
 #'
 #' @description Inserts <key, value> pairs to a bimap.
@@ -172,11 +193,9 @@ setMethod("values", "bimap", function(obj)
 })
 
 
-#' @noRd
-.insert.bimap <- function(obj, x, y)
-{
-    .check.key.value.classes(obj, x, y)
-    obj@.map$insert(x, y)
-
-    obj
-}
+#' @rdname remove-methods
+setMethod(
+    "remove",
+    signature = signature(obj = "bimap", key = "missing", value = "vector"),
+    function(obj, value) .remove.bimap.values(obj, value)
+)

@@ -58,6 +58,27 @@ class bimap
         }
     }
 
+    void clear()
+    {
+        map_.clear();
+    }
+
+    void remove(std::vector<T>& t)
+    {
+        for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
+        {
+            map_.left.erase(t[i]);
+        }
+    }
+
+    void remove_value(std::vector<U>& u)
+    {
+        for (typename std::vector<U>::size_type i = 0; i < u.size(); ++i)
+        {
+            map_.right.erase(u[i]);
+        }
+    }
+
     std::vector<T> lefts()
     {
         std::vector<T> lefts;

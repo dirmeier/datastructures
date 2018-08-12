@@ -48,7 +48,8 @@ namespace datastructures
         {
             if(!Rf_isNewList(u))
             {
-                Rcpp::stop("SEXP needs to be a NewList\n");
+                Rcpp::stop(
+                    "SEXP needs to be a NewList\n");
             }
 
             const int sexp_size = static_cast<int>(Rf_length(u));
@@ -94,13 +95,10 @@ namespace datastructures
             for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
             {
                 auto iter = map_.equal_range(t[i]);
-                Rcpp::Rcout << "Removing\n";
                 for (auto it = iter.first; it != iter.second; ++it)
                 {
-                    Rcpp::Rcout << "Removing x\n";
                     R_ReleaseObject(it->second);
                 }
-                Rcpp::Rcout << "Removing y\n";
                 map_.erase(t[i]);
             }
         }
@@ -175,7 +173,8 @@ namespace datastructures
                     std::stringstream ss;
                     ss << key;
                     UNPROTECT(prt);
-                    Rcpp::stop(std::string("Could not find key: ").append(ss.str()));
+                    Rcpp::stop(
+                        std::string("Could not find key: ").append(ss.str()));
                 }
             }
             UNPROTECT(prt);

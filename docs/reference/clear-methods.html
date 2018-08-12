@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Decreases the key of a node in a heap — decrease_key • datastructures</title>
+<title>Remove all elements from a datastructure — clear • datastructures</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,12 +30,10 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Decreases the key of a node in a heap — decrease_key" />
+<meta property="og:title" content="Remove all elements from a datastructure — clear" />
 
-<meta property="og:description" content="Decreases the key of a node in a heap and updates the complete
- heap. The key is decreases from a value to a value by that moving the
- node's position in the heap. If a node cannot uniquely be identified using
- the to key, a handle needs to be given in addition." />
+<meta property="og:description" content="Removes every element that is stored in a data structure and
+ resets everything." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,52 +109,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Decreases the key of a node in a heap</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_decrease.R'><code>R/methods_decrease.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_heap.R'><code>R/ds_heap.R</code></a></small>
-    <div class="hidden name"><code>decrease_key-methods.Rd</code></div>
+    <h1>Remove all elements from a datastructure</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_clear.R'><code>R/methods_clear.R</code></a></small>
+    <div class="hidden name"><code>clear-methods.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Decreases the key of a node in a heap and updates the complete
- heap. The key is decreases <code>from</code> a value <code>to</code> a value by that moving the
- node's position in the heap. If a node cannot uniquely be identified using
- the <code>to</code> key, a <code><a href='handle-methods.html'>handle</a></code> needs to be given in addition.</p>
+    <p>Removes every element that is stored in a data structure and
+ resets everything.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>decrease_key</span>(<span class='no'>obj</span>, <span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>handle</span>)
-
-<span class='co'># S4 method for heap,vector,vector,character</span>
-<span class='fu'>decrease_key</span>(<span class='no'>obj</span>, <span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>handle</span>)
-
-<span class='co'># S4 method for heap,vector,vector,missing</span>
-<span class='fu'>decrease_key</span>(<span class='no'>obj</span>, <span class='no'>from</span>, <span class='no'>to</span>)</pre>
+    <pre class="usage"><span class='fu'>clear</span>(<span class='no'>obj</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>obj</th>
-      <td><p>a heap object</p></td>
-    </tr>
-    <tr>
-      <th>from</th>
-      <td><p>a key in the heap for which the node should be decreased</p></td>
-    </tr>
-    <tr>
-      <th>to</th>
-      <td><p>the new value of the heap</p></td>
-    </tr>
-    <tr>
-      <th>handle</th>
-      <td><p>the handle of the specific node that is decreases</p></td>
+      <td><p>the object to clear</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>returns extracted handles and values from <code>obj</code></p>
     
 
   </div>
@@ -164,9 +138,7 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

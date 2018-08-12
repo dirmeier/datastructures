@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">datastructures</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.6</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.7</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <h1>Datastructures tutorial</h1>
                         <h4 class="author">Simon Dirmeier</h4>
             
-            <h4 class="date">2018-04-29</h4>
+            <h4 class="date">2018-08-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dirmeier/datastructures/blob/master/vignettes/datastructures.Rmd"><code>vignettes/datastructures.Rmd</code></a></small>
       <div class="hidden name"><code>datastructures.Rmd</code></div>
@@ -123,12 +123,12 @@
                    
   <span class="kw"><a href="../reference/peek-methods.html">peek</a></span>(fheap)</code></pre></div>
 <pre><code>## $`-3`
-##            A B
-## 1  0.3859730 1
-## 2  1.1512960 2
-## 3 -0.2909263 3
-## 4  1.0332256 4
-## 5  1.0096626 5</code></pre>
+##             A B
+## 1 -0.69398075 1
+## 2 -0.86935937 2
+## 3  0.62906914 3
+## 4  0.25589835 4
+## 5  0.05901935 5</code></pre>
 <p><strong>NOTE</strong>: for efficienty it is recommended to insert all values at the same time, if you can do this. This should be way faster. If we insert multiple objects, we need to wrap it around a list.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  fheap  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/insert-methods.html">insert</a></span>(fheap, <span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">6</span>), <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">a=</span><span class="dv">2</span>), letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="st">"hallo"</span>))</code></pre></div>
 </div>
@@ -195,12 +195,12 @@
 ## [1] "handle-8"
 ## 
 ## [[1]]$value
-##            A B
-## 1  0.3859730 1
-## 2  1.1512960 2
-## 3 -0.2909263 3
-## 4  1.0332256 4
-## 5  1.0096626 5</code></pre>
+##             A B
+## 1 -0.69398075 1
+## 2 -0.86935937 2
+## 3  0.62906914 3
+## 4  0.25589835 4
+## 5  0.05901935 5</code></pre>
 <p>Sometimes you don’t know the <code>key</code> or <code>handle</code>, but only the <code>value</code> of a node, and you want to do a <code>decrease-key</code> operation. Suppose you want to decrease the key of a node with value <code>V-1</code>, then you would to need to call <code>handle</code> with a value argument and a missing <code>key</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  hands &lt;-<span class="st"> </span><span class="kw"><a href="../reference/handle-methods.html">handle</a></span>(fheap, <span class="dt">value=</span><span class="st">"V1"</span>)
   <span class="kw"><a href="../reference/decrease_key-methods.html">decrease_key</a></span>(fheap, <span class="dt">from=</span>hands[[<span class="dv">1</span>]]<span class="op">$</span>key, <span class="dt">to=</span><span class="op">-</span><span class="dv">1000</span>, hands[[<span class="dv">1</span>]]<span class="op">$</span>handle)
@@ -213,7 +213,7 @@
   hands</code></pre></div>
 <pre><code>## [[1]]
 ## [[1]]$handle
-## [1] "handle-0"
+## [1] "handle-4"
 ## 
 ## [[1]]$key
 ## [1] -1000
@@ -234,7 +234,7 @@
   val[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre></div>
 <pre><code>## $`-1000`
 ## $`-1000`$handle
-## [1] "handle-0"
+## [1] "handle-4"
 ## 
 ## $`-1000`$key
 ## [1] -1000
@@ -339,16 +339,16 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/get-methods.html">get</a></span>(mm, keys[<span class="dv">2</span>])</code></pre></div>
 <pre><code>## [[1]]
 ## [[1]]$a
-## [1] TRUE
+## [1] 1
 ## 
 ## 
 ## [[2]]
 ##            a X2 X3
-## 1 -0.1122166  2  3
-## 2  0.6747951  2  3
-## 3 -1.3368652  2  3
-## 4  0.2031330  2  3
-## 5 -0.4976453  2  3</code></pre>
+## 1  1.4238209  2  3
+## 2  0.7775789  2  3
+## 3  0.5641997  2  3
+## 4 -0.3315296  2  3
+## 5 -0.4407130  2  3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  mm[keys[<span class="dv">5</span>]]</code></pre></div>
 <pre><code>## [[1]]
 ##  [1] 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1</code></pre>
@@ -361,16 +361,16 @@
 ## [1] 5
 ## 
 ## [[2]]
-## [1] 1
+## [1] 4
 ## 
 ## [[3]]
-## [1] 1
+## [1] 2
 ## 
 ## [[4]]
-## [1] 0
+## [1] 3
 ## 
 ## [[5]]
-## [1] -1</code></pre>
+## [1] 1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/head-methods.html">head</a></span>(bimap)</code></pre></div>
 <pre><code>## $V1
 ## [1] 1
@@ -386,6 +386,65 @@
 ## 
 ## $V5
 ## [1] 5</code></pre>
+<p>Removing entries in all of the three map classes works like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  hash &lt;-<span class="st"> </span><span class="kw"><a href="../reference/remove-methods.html">remove</a></span>(hash, keys[<span class="dv">1</span>])
+  hash</code></pre></div>
+<pre><code>## An object of class hashmap&lt;character,T&gt;
+## 
+## V2 -&gt; integer
+## V3 -&gt; integer
+## V4 -&gt; integer
+## V5 -&gt; integer</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  mm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/remove-methods.html">remove</a></span>(mm, keys[<span class="dv">2</span>])</code></pre></div>
+<pre><code>## Note: method with signature 'map#vector#missing' chosen for function 'remove',
+##  target signature 'multimap#character#missing'.
+##  "multimap#vector#ANY" would also be valid</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  mm</code></pre></div>
+<pre><code>## An object of class multimap&lt;character,T&gt;
+## 
+## V5 -&gt; numeric</code></pre>
+<p>As you can see for multimaps, all key-value pairs get removed, when the function is called as above. If you are interested in only one specific key-value pair, you additionally need to supply the respective value:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  mm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/insert-methods.html">insert</a></span>(mm, keys[<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)], <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span>), <span class="kw">data.frame</span>(<span class="dt">a=</span><span class="kw">rnorm</span>(<span class="dv">5</span>), <span class="dv">2</span>, <span class="dv">3</span>)))
+  mm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/remove-methods.html">remove</a></span>(mm, keys[<span class="dv">2</span>], <span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span>))</code></pre></div>
+<pre><code>## V2
+## Removing</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  mm[ keys[<span class="dv">2</span>] ]</code></pre></div>
+<pre><code>## [[1]]
+##             a X2 X3
+## 1 -0.50373986  2  3
+## 2  1.76666217  2  3
+## 3 -0.22827616  2  3
+## 4 -0.05026521  2  3
+## 5 -0.05850503  2  3</code></pre>
+<p>For bimaps we can also remove from the other side, i.e. when we provide a value:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  bimap &lt;-<span class="st"> </span><span class="kw"><a href="../reference/remove-methods.html">remove</a></span>(bimap, <span class="dt">value=</span>values[<span class="dv">1</span>])
+  bimap</code></pre></div>
+<pre><code>## An object of class bimap&lt;character,T&gt;
+## 
+## V2 &lt;--&gt; integer
+## V3 &lt;--&gt; integer
+## V4 &lt;--&gt; integer
+## V5 &lt;--&gt; integer</code></pre>
+<p>For multimaps, where we allow having the same key several times, removing an entry as above removes <em>all</em> the key-value pairs with the</p>
+<p>The three different map types support to easily clear the entire data structure using:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/clear-methods.html">clear</a></span>(bimap)</code></pre></div>
+<pre><code>## An object of class bimap&lt;character,T&gt;
+## 
+## NULL &lt;--&gt; NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/size-methods.html">size</a></span>(bimap)</code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/clear-methods.html">clear</a></span>(hash)</code></pre></div>
+<pre><code>## An object of class hashmap&lt;character,T&gt;
+## 
+## NULL -&gt; NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/size-methods.html">size</a></span>(hash)</code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/clear-methods.html">clear</a></span>(mm)</code></pre></div>
+<pre><code>## An object of class multimap&lt;character,T&gt;
+## 
+## NULL -&gt; NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/size-methods.html">size</a></span>(mm)</code></pre></div>
+<pre><code>## [1] 0</code></pre>
 </div>
 <div id="queues-and-stacks" class="section level2">
 <h2 class="hasAnchor">
@@ -414,7 +473,7 @@
 ## 2 2 2
 ## 3 3 1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/pop-methods.html">pop</a></span>(st)</code></pre></div>
-<pre><code>## [1] 0.5367648</code></pre>
+<pre><code>## [1] -0.101933</code></pre>
 <p>For a <code>queue</code> <code>pop</code> and <code>peek</code> return the <em>first</em> element that got inserted, while a stack returns the <em>last</em> element that was inserted.</p>
 <p>The size of a deque can be computed by calling:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/size-methods.html">size</a></span>(qu)</code></pre></div>
@@ -432,13 +491,13 @@
 <h2 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">sessionInfo</span>()</code></pre></div>
-<pre><code>## R version 3.4.4 (2018-03-15)
+<pre><code>## R version 3.5.0 (2018-04-23)
 ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
-## Running under: macOS High Sierra 10.13.3
+## Running under: macOS High Sierra 10.13.5
 ## 
 ## Matrix products: default
-## BLAS: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRblas.0.dylib
-## LAPACK: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRlapack.dylib
+## BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
 ## 
 ## locale:
 ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -447,18 +506,16 @@
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] purrr_0.2.4          datastructures_0.2.6 Rcpp_0.12.16        
+## [1] purrr_0.2.5          datastructures_0.2.6 Rcpp_0.12.18        
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] rstudioapi_0.7     knitr_1.20         xml2_1.2.0        
-##  [4] magrittr_1.5       roxygen2_6.0.1     MASS_7.3-49       
-##  [7] R6_2.2.2           rlang_0.2.0.9001   stringr_1.3.0     
-## [10] tools_3.4.4        htmltools_0.3.6    commonmark_1.4    
-## [13] yaml_2.1.18        rprojroot_1.3-2    digest_0.6.15     
-## [16] assertthat_0.2.0   pkgdown_0.1.0.9000 crayon_1.3.4      
-## [19] codetools_0.2-15   fs_1.2.2           memoise_1.1.0     
-## [22] evaluate_0.10.1    rmarkdown_1.9      stringi_1.1.7     
-## [25] compiler_3.4.4     desc_1.1.1         backports_1.1.2</code></pre>
+##  [1] rstudioapi_0.7   knitr_1.20       xml2_1.2.0       magrittr_1.5    
+##  [5] roxygen2_6.0.1   MASS_7.3-50      R6_2.2.2         rlang_0.2.1.9000
+##  [9] stringr_1.3.1    tools_3.5.0      htmltools_0.3.6  commonmark_1.5  
+## [13] yaml_2.1.19      rprojroot_1.3-2  digest_0.6.15    assertthat_0.2.0
+## [17] pkgdown_1.0.0    crayon_1.3.4     codetools_0.2-15 fs_1.2.2        
+## [21] memoise_1.1.0    evaluate_0.10.1  rmarkdown_1.9    stringi_1.2.3   
+## [25] compiler_3.5.0   desc_1.1.1       backports_1.1.2</code></pre>
 </div>
   </div>
 

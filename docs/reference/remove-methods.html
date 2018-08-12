@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Decreases the key of a node in a heap — decrease_key • datastructures</title>
+<title>Remove an entry from a map — remove • datastructures</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,12 +30,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Decreases the key of a node in a heap — decrease_key" />
+<meta property="og:title" content="Remove an entry from a map — remove" />
 
-<meta property="og:description" content="Decreases the key of a node in a heap and updates the complete
- heap. The key is decreases from a value to a value by that moving the
- node's position in the heap. If a node cannot uniquely be identified using
- the to key, a handle needs to be given in addition." />
+<meta property="og:description" content="Remove a vector of key-value pair from a map object." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,52 +108,55 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Decreases the key of a node in a heap</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_decrease.R'><code>R/methods_decrease.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_heap.R'><code>R/ds_heap.R</code></a></small>
-    <div class="hidden name"><code>decrease_key-methods.Rd</code></div>
+    <h1>Remove an entry from a map</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_remove.R'><code>R/methods_remove.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_map.R'><code>R/ds_map.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_map_bimap.R'><code>R/ds_map_bimap.R</code></a>, and 2 more</small>
+    <div class="hidden name"><code>remove-methods.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Decreases the key of a node in a heap and updates the complete
- heap. The key is decreases <code>from</code> a value <code>to</code> a value by that moving the
- node's position in the heap. If a node cannot uniquely be identified using
- the <code>to</code> key, a <code><a href='handle-methods.html'>handle</a></code> needs to be given in addition.</p>
+    <p>Remove a vector of key-value pair from a map object.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>decrease_key</span>(<span class='no'>obj</span>, <span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>handle</span>)
+    <pre class="usage"><span class='fu'>remove</span>(<span class='no'>obj</span>, <span class='no'>key</span>, <span class='no'>value</span>)
 
-<span class='co'># S4 method for heap,vector,vector,character</span>
-<span class='fu'>decrease_key</span>(<span class='no'>obj</span>, <span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>handle</span>)
+<span class='co'># S4 method for map,vector,missing</span>
+<span class='fu'>remove</span>(<span class='no'>obj</span>, <span class='no'>key</span>)
 
-<span class='co'># S4 method for heap,vector,vector,missing</span>
-<span class='fu'>decrease_key</span>(<span class='no'>obj</span>, <span class='no'>from</span>, <span class='no'>to</span>)</pre>
+<span class='co'># S4 method for bimap,missing,vector</span>
+<span class='fu'>remove</span>(<span class='no'>obj</span>, <span class='no'>value</span>)
+
+<span class='co'># S4 method for multimap,vector,vector</span>
+<span class='fu'>remove</span>(<span class='no'>obj</span>, <span class='no'>key</span>, <span class='no'>value</span>)
+
+<span class='co'># S4 method for multimap,vector,list</span>
+<span class='fu'>remove</span>(<span class='no'>obj</span>, <span class='no'>key</span>, <span class='no'>value</span>)
+
+<span class='co'># S4 method for multimap,vector,ANY</span>
+<span class='fu'>remove</span>(<span class='no'>obj</span>, <span class='no'>key</span>, <span class='no'>value</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>obj</th>
-      <td><p>a heap object</p></td>
+      <td><p>the object to pop an element from</p></td>
     </tr>
     <tr>
-      <th>from</th>
-      <td><p>a key in the heap for which the node should be decreased</p></td>
+      <th>key</th>
+      <td><p>a vector of keys that should be removed</p></td>
     </tr>
     <tr>
-      <th>to</th>
-      <td><p>the new value of the heap</p></td>
-    </tr>
-    <tr>
-      <th>handle</th>
-      <td><p>the handle of the specific node that is decreases</p></td>
+      <th>value</th>
+      <td><p>optionally a list of values needs to be supplied for some data
+structures such as multimaps if entries should be removed.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>returns extracted handles and values from <code>obj</code></p>
+    <p>returns <code>obj</code> with removed values</p>
     
 
   </div>

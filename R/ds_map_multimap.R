@@ -105,7 +105,7 @@ setMethod(
     signature = signature(obj = "multimap", key = "vector", value = "list"),
     function(obj, key, value)
     {
-        value <- if (is.data.frame(value)) list(value) else value
+        if (length(key) == 1) value <- list(value)
         .remove.multimap(obj, key, value)
     }
 )

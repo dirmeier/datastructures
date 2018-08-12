@@ -112,6 +112,7 @@ bimap <- function(key.class = c("character", "numeric", "integer"),
 .insert.bimap <- function(obj, x, y)
 {
     .check.key.value.classes(obj, x, y)
+    remove(obj, x)
     obj@.map$insert(x, y)
 
     obj

@@ -116,7 +116,7 @@ setMethod(
   signature = signature(obj = "deque", x = "list", y = "missing"),
   function(obj, x)
   {
-      x <- if (is.data.frame(x)) list(x) else x
+      x <- if (is.data.frame(x) || length(x) == 1) list(x) else x
       .insert.deque(obj, x)
   }
 )

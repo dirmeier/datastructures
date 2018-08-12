@@ -346,11 +346,9 @@ test_that("heap checks out list situations",
       res <- pop(bheap)
       expect_true(res[[1]][[1]] == 1)
       res <- pop(bheap)
-      expect_true(res[[1]]$A == 1)
+      expect_true(res[[1]][[1]]$A == 1)
       res <- pop(bheap)
       expect_true(res[[1]] == 1)
-      res <- pop(bheap)
-      expect_true(res[[1]]$a == 2)
       res <- pop(bheap)
       expect_true(res[[1]]$a == 2)
   }

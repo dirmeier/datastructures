@@ -53,6 +53,7 @@ public:
         return stack_.top();
     }
 
+
     SEXP pop()
     {
         SEXP t = peek();

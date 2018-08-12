@@ -88,3 +88,21 @@ test_that("bimap retrieves correct values", {
     h <- insert(h, 1:2, c(4, 5))
     expect_true(all(sort(values(h)) %in% c(4, 5)))
 })
+
+
+test_that("bimap replace works", {
+    b <- bimap("integer", "numeric")
+    b <- insert(b, 1:2, c(4, 2))
+    expect_equal(get(b, 1L), 4)
+    expect_equal(get(b, 2L, "values"), 2)
+    b <- insert(b, 1:2, c(1, 2))
+    expect_equal(get(b, 1L), 1)
+    expect_equal(get(b, 2L), 2)
+})
+
+test_that("remove values work", {
+    b <- bimap("integer", "numeric")
+    b <- insert(b, 1:2, c(4, 2))
+    b <- remove(b, value=4)
+    expect_error(get(g, 1L))
+})

@@ -37,3 +37,19 @@ test_that("multimap can store same keys", {
     expect_equal(unlist(get(h, "a")), c(1L, 1L))
 })
 
+test_that("multimap remove works", {
+    h <- multimap()
+    h <- insert(h, letters, letters)
+    h <- remove(h, letters[1])
+    expect_true(size(h) == 25)
+    expect_error(h[letters[1]])
+})
+
+test_that("multimap does not overwrite", {
+    h <- multimap()
+    h <- insert(h, letters[1], "a")
+    h <- insert(h, letters[1], "b")
+    h <- insert(h, letters[1], "a")
+    expect_equal(size(h), 3)
+    expect_equal(length(h[letters[1]]), 3)
+})

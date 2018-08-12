@@ -158,15 +158,15 @@ setClass(
 
 #' @rdname insert-methods
 setMethod(
-  "insert",
-  signature = signature(obj = "heap", x = "vector", y = "vector"),
-  function(obj, x, y)
-  {
-      if (length(x) == 1) y <- list(y)
-      else if (length(x) == length(y) && is.vector(y))
-        y <- as.list(y)
-      .insert.heap(obj, x, y)
-  }
+    "insert",
+    signature = signature(obj = "heap", x = "vector", y = "vector"),
+    function(obj, x, y)
+    {
+        if (length(x) == 1) y <- list(y)
+        else if (length(x) == length(y) && is.vector(y))
+            y <- as.list(y)
+        .insert.heap(obj, x, y)
+    }
 )
 
 #' @rdname insert-methods
@@ -189,11 +189,7 @@ setMethod(
   signature = signature(obj = "heap", x = "vector", y = "list"),
   function(obj, x, y)
   {
-      if (length(x) == 1 && is.data.frame(y)) y <- list(y)
-      else if (is.list(y) &&
-               length(x) == 1 &&
-               length(y) == 1 &&
-               !is.list(y[[1]])) y <- list(y)
+      if (length(x) == 1) y <- list(y)
       .insert.heap(obj, x, y)
   }
 )
@@ -205,7 +201,9 @@ setMethod(
     signature = signature(obj = "heap", x = "vector", y = "ANY"),
     function(obj, x, y)
     {
-        .insert.heap(obj, x, list(y))
+        if (length(x) == 1) y <- list(y)
+        else stop("length(x) != 1", call. = FALSE)
+        .insert.heap(obj, x, y)
     }
 )
 

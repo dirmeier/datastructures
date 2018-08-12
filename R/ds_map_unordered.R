@@ -78,11 +78,7 @@ setMethod(
     signature = signature(obj = "unordered_map", x = "vector", y = "list"),
     function(obj, x, y)
     {
-        if (length(x) == 1 && is.data.frame(y)) y <- list(y)
-        else if (is.list(y) &&
-                 length(x) == 1 &&
-                 length(y) == 1 &&
-                 !is.list(y[[1]])) y <- list(y)
+        if (length(x) == 1) y <- list(y)
         .insert.unordered_map(obj, x, y)
     }
 )

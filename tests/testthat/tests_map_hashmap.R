@@ -18,33 +18,14 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-context("map")
+context("hashmap")
 
 
-maps <- c(multimap, bimap, hashmap)
-
-test_that("abstract class cannot get instantiated", {
-    expect_error(methods::new("map"))
-})
-
-test_that("maps clear correctly", {
-    for (m in maps) {
-        h <- m("character")
-        h <- insert(h, letters[1], letters[1])
-        h <- insert(h, letters[2], letters[2])
-        h <- insert(h, letters[3], letters[3])
-        h <- clear(h)
-        expect_equal(size(h), 0)
-    }
-})
-
-test_that("maps removes", {
-    for (m in maps) {
-        h <- m("character")
-        h <- insert(h, letters[1], letters[1])
-        h <- insert(h, letters[2], letters[2])
-        h <- insert(h, letters[3], letters[3])
-        h <- remove(h, letters[1])
-        expect_error(h[letters[1]])
-    }
+test_that("hashmap replace works", {
+    h <- hashmap("integer")
+    h <- insert(h, 1L, 3)
+    expect_equal(h[1L][[1]], 3)
+    h <- insert(h, 2L, list(a=1))
+    h <- insert(h, 1L, 2)
+    expect_equal(h[1L][[1]], 2)
 })

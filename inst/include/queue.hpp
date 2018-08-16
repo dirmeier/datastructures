@@ -50,7 +50,7 @@ public:
 
     void clear()
     {
-        queue_ = {};
+        std::queue<Rcpp::RObject>().swap(queue_);
     }
 
     Rcpp::RObject peek()

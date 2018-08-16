@@ -52,7 +52,7 @@ namespace datastructures
                     "Rcpp::RObject needs to be a NewList\n");
             }
 
-            const int sexp_size = static_cast<int>(Rf_length(u));
+            const unsigned int sexp_size = static_cast<unsigned int>(Rf_length(u));
             if (t.size() != sexp_size)
             {
                 Rcpp::stop("keys.size() != values.size()");

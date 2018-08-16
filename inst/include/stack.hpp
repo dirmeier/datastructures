@@ -55,7 +55,7 @@ public:
 
     void clear()
     {
-        stack_ = {};
+        std::stack<Rcpp::RObject>().swap(stack_);
     }
 
     Rcpp::RObject pop()

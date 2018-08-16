@@ -63,7 +63,7 @@ public:
             Rcpp::stop("Rcpp::RObject needs to be a NewList\n");
         }
 
-        const int size = static_cast<int>(Rf_length(u));
+        const unsigned int size = static_cast<unsigned int>(Rf_length(u));
         if (t.size() != size)
         {
             Rcpp::stop("keys.size() != values.size()");
@@ -121,7 +121,7 @@ public:
         {
             Rcpp::stop("Rcpp::RObject needs to be a NewList\n");
         }
-        const int size = static_cast<int>(Rf_length(values));
+        const unsigned int size = static_cast<unsigned int>(Rf_length(values));
 
         std::map<ul, T> ret;
         int prt = 0;

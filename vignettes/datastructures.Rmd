@@ -8,6 +8,7 @@ output:
         toc_depth: 2
         toc_float: true
         theme: lumen
+        highlight: pygments
 vignette: >
   %\VignetteIndexEntry{Datastructures tutorial}
   %\VignetteEngine{knitr::rmarkdown}
@@ -108,7 +109,6 @@ This works for all the described `insert` methods above.
 
 ### Decreasing the key of a node
 
-
 Sometimes, we want to decrease a key and rearrange its position in the
 heap. If we have a *unique* key this can be easily done:
 
@@ -181,7 +181,18 @@ Finally, you can get all data from a heap, by calling the `value` function:
 
 In all of these scenarios neither the key nor the value need to be unique, because the handle (node id) always is.
 
+### Clearing the heap
+
+You can remove all entries from a heap by calling:
+
+```{r}
+  fheap <- clear(fheap)
+  fheap
+```
+
+
 ### Use case
+
 As a last example, consider this use case whre we use a `character` heap.
 
 ```{r}
@@ -305,6 +316,7 @@ The three different map types support to easily clear the entire data structure 
   clear(mm)
   size(mm)
 ```
+
 ## Queues and stacks
 
 Queues and stackes are two list datastructures using the `STL`'s `std::deque` 
@@ -352,6 +364,14 @@ The size of a deque can be computed by calling:
 ```{r}
   size(qu)
 ```
+
+Stacks and queues can be emptied like this:
+
+```{r}
+  qu <- clear(qu)
+  qu
+```
+
 
 ## Author
 

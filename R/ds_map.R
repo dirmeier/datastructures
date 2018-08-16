@@ -103,8 +103,9 @@ setMethod(
 )
 
 
-#' @rdname size-methods
+#' @rdname clear-methods
 setMethod("clear", "map", .clear.map)
+
 
 #' @noRd
 setMethod("show", "map", .show.map)

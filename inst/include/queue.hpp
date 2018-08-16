@@ -40,28 +40,33 @@ public:
         return queue_.size();
     }
 
-    void insert(SEXP t)
+    void insert(Rcpp::RObject t)
     {
         if(!Rf_isNewList(t))
-            Rcpp::stop("SEXP needs to be a NewList\n");
+            Rcpp::stop("Rcpp::RObject needs to be a NewList\n");
         for (int i = 0; i < Rf_length(t); ++i)
             queue_.push(VECTOR_ELT(t, i));
     }
 
-    SEXP peek()
+    void clear()
+    {
+        queue_ = {};
+    }
+
+    Rcpp::RObject peek()
     {
         return queue_.front();
     }
 
-    SEXP pop()
+    Rcpp::RObject pop()
     {
-        SEXP t = peek();
+        Rcpp::RObject t = peek();
         queue_.pop();
         return t;
     }
 
 private:
-    std::queue< SEXP > queue_;
+    std::queue< Rcpp::RObject > queue_;
 };
 
 using queue_sexp = queue;

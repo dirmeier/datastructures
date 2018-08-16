@@ -25,6 +25,7 @@
 #' @include methods_handle.R
 #' @include methods_decrease.R
 #' @include methods_values.R
+#' @include methods_clear.R
 NULL
 
 
@@ -100,6 +101,14 @@ setClass(
 
 
 #' @noRd
+.clear.heap <- function(obj)
+{
+    obj@.heap$clear()
+    obj
+}
+
+
+#' @noRd
 #' @importFrom purrr map
 .handle <- function(obj, key, value)
 {
@@ -169,6 +178,7 @@ setMethod(
     }
 )
 
+
 #' @rdname insert-methods
 setMethod(
     "insert",
@@ -180,7 +190,6 @@ setMethod(
         .insert.heap(obj, x, y)
     }
 )
-
 
 
 #' @rdname insert-methods
@@ -328,6 +337,7 @@ setMethod("peek", "heap", .peek.heap)
 #' @rdname pop-methods
 setMethod("pop", "heap", .pop.heap)
 
+
 #' @noRd
 setMethod("show", "heap", .show.heap)
 
@@ -338,3 +348,7 @@ setMethod("size", "heap", .size.heap)
 
 #' @rdname values-methods
 setMethod("values", "heap", .heap_values)
+
+
+#' @rdname clear-methods
+setMethod("clear", "heap", .clear.heap)

@@ -409,15 +409,28 @@ test_that("heap handle_values works with vector",
   }
 })
 
+
 test_that("heap handle_values works with matrix",
 {
   for (h in hs)
   {
       bheap <- h("integer")
       bheap <- insert(bheap, 1L, matrix(1, 5, 5))
-      vals <- handle(bheap, value=matrix(1, 5, 5))
+      vals  <- handle(bheap, value=matrix(1, 5, 5))
       expect_equal(vals[[1]]$key,  1L)
       expect_equal(length(vals), 1)
   }
 })
 
+
+test_that("heap clears correctly",
+{
+  for (h in hs)
+  {
+      bheap <- h("integer")
+      bheap <- insert(bheap, seq(10), rnorm(10))
+      expect_equal(size(bheap), 10)
+      bheap <- clear(bheap)
+      expect_equal(size(bheap), 0)
+  }
+})

@@ -27,6 +27,7 @@ RCPP_MODULE(stack_module) {
     Rcpp::class_< stack_sexp >( "stack_sexp" )
         .constructor()
         .method("peek",   &stack_sexp::peek)
+        .method("clear",  &stack_sexp::clear)
         .method("pop",    &stack_sexp::pop)
         .method("size",   &stack_sexp::size)
         .method("insert", &stack_sexp::insert);

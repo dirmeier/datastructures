@@ -27,6 +27,7 @@ RCPP_MODULE(queue_module) {
     Rcpp::class_< queue_sexp >( "queue_sexp" )
         .constructor()
         .method("peek",   &queue_sexp::peek)
+        .method("clear",   &queue_sexp::clear)
         .method("pop",    &queue_sexp::pop)
         .method("size",   &queue_sexp::size)
         .method("insert", &queue_sexp::insert);

@@ -38,10 +38,10 @@ struct node
 {
     typename H<node<H, T>>::handle_type handle_;
     T key_;
-    SEXP value_;
+    Rcpp::RObject value_;
     ul id_;
 
-    node(T key, SEXP value, ul id): key_(key), value_(value), id_(id)
+    node(T key, Rcpp::RObject value, ul id): key_(key), value_(value), id_(id)
     {}
 
     bool operator<(const node<H, T>& rhs) const
@@ -56,22 +56,15 @@ class heap
 public:
     heap() = default;
 
-
-    ~heap()
-    {
-        // TODO
-        // R_releaseObjects ?
-    }
-
-    void insert(std::vector<T>& t, SEXP u)
+    void insert(std::vector<T>& t, Rcpp::RObject u)
     {
         if(!Rf_isNewList(u))
         {
-            Rcpp::stop("SEXP needs to be a NewList\n");
+            Rcpp::stop("Rcpp::RObject needs to be a NewList\n");
         }
 
-        const int sexp_size = static_cast<int>(Rf_length(u));
-        if (t.size() != sexp_size)
+        const int size = static_cast<int>(Rf_length(u));
+        if (t.size() != size)
         {
             Rcpp::stop("keys.size() != values.size()");
         }
@@ -82,8 +75,7 @@ public:
             ss << "handle-" << unid_++;
             std::string id = ss.str();
 
-            SEXP s = Rf_duplicate(VECTOR_ELT(u, i));
-            R_PreserveObject(s);
+            Rcpp::RObject s = Rf_duplicate(VECTOR_ELT(u, i));
 
             typename H<node<H, T>>::handle_type h =
                 heap_.push(node<H, T>(t[i], s, id));
@@ -97,7 +89,7 @@ public:
 
     Rcpp::List handles(std::vector<T>& keys)
     {
-        std::map<ul, SEXP> ret;
+        std::map<ul, Rcpp::RObject> ret;
         int prt = 0;
         for (typename std::vector<T>::size_type i = 0; i < keys.size(); ++i)
         {
@@ -110,9 +102,9 @@ public:
                     ul id = it->second;
                     if (id_to_handles_.find(id) != id_to_handles_.end())
                     {
-                        SEXP s = PROTECT((*id_to_handles_[id]).value_);
+                        Rcpp::RObject s = PROTECT((*id_to_handles_[id]).value_);
                         ++prt;
-                        ret.insert(std::pair<ul, SEXP>(id, s));
+                        ret.insert(std::pair<ul, Rcpp::RObject>(id, s));
                     }
                 }
             }
@@ -123,24 +115,24 @@ public:
     }
 
 
-    Rcpp::List handles_value(SEXP& values)
+    Rcpp::List handles_value(Rcpp::RObject values)
     {
         if(!Rf_isNewList(values))
         {
-            Rcpp::stop("SEXP needs to be a NewList\n");
+            Rcpp::stop("Rcpp::RObject needs to be a NewList\n");
         }
-        const int sexp_size = static_cast<int>(Rf_length(values));
+        const int size = static_cast<int>(Rf_length(values));
 
         std::map<ul, T> ret;
         int prt = 0;
-        for (int i = 0; i < sexp_size; ++i)
+        for (int i = 0; i < size; ++i)
         {
-            SEXP value = PROTECT(VECTOR_ELT(values, i));
+            Rcpp::RObject value = PROTECT(VECTOR_ELT(values, i));
             ++prt;
             for (auto it = id_to_handles_.begin();
                  it != id_to_handles_.end(); ++it)
             {
-                SEXP s = PROTECT((*it->second).value_);
+                Rcpp::RObject s = PROTECT((*it->second).value_);
                 ++prt;
                 if (R_compute_identical(value, s, 0))
                     ret.insert(std::pair<ul, T>(it->first, (*(it->second)).key_));
@@ -153,15 +145,15 @@ public:
 
     Rcpp::List values()
     {
-        std::multimap<T, SEXP> ret;
+        std::multimap<T, Rcpp::RObject> ret;
         int prt = 0;
         for (auto it = id_to_handles_.begin();
              it != id_to_handles_.end();
              ++it)
         {
-            SEXP el = PROTECT(Rf_allocVector(VECSXP, 3));
-            SEXP names = PROTECT(Rf_allocVector(STRSXP, 3));
-            SEXP s = PROTECT((*(it->second)).value_);
+            Rcpp::RObject el = PROTECT(Rf_allocVector(VECSXP, 3));
+            Rcpp::RObject names = PROTECT(Rf_allocVector(STRSXP, 3));
+            Rcpp::RObject s = PROTECT((*(it->second)).value_);
             prt += 3;
 
             SET_STRING_ELT(names, 0, Rf_mkChar("handle"));
@@ -172,7 +164,7 @@ public:
             SET_VECTOR_ELT(el, 1, Rcpp::wrap((*(it->second)).key_));
             SET_VECTOR_ELT(el, 2, s);
 
-            ret.insert(std::pair<T, SEXP>((*(it->second)).key_, el));
+            ret.insert(std::pair<T, Rcpp::RObject>((*(it->second)).key_, el));
 
         }
         UNPROTECT(prt);
@@ -223,8 +215,6 @@ public:
         key_to_id_.clear();
         id_to_handles_.clear();
         unid_ = 0;
-        // TODO
-        // R_releaseObjects
     }
 
     size_t size()
@@ -242,23 +232,22 @@ public:
         node<H, T> n = heap_.top();
         heap_.pop();
 
-        std::map<T, SEXP > heads;
-        SEXP s = PROTECT(n.value_);
-        heads.insert(std::pair<T, SEXP>(n.key_, s));
+        std::map<T, Rcpp::RObject > heads;
+        Rcpp::RObject s = PROTECT(n.value_);
+        heads.insert(std::pair<T, Rcpp::RObject>(n.key_, s));
 
         drop_from_key_map_(n.key_, n.id_);
         drop_from_id_map_(n.id_);
         UNPROTECT(1);
-        R_ReleaseObject(s);
         return Rcpp::wrap(heads);
     }
 
     Rcpp::List peek()
     {
         node<H, T> n = heap_.top();
-        std::map<T, SEXP > heads;
-        SEXP s = PROTECT(n.value_);
-        heads.insert(std::pair<T, SEXP>(n.key_, s));
+        std::map<T, Rcpp::RObject > heads;
+        Rcpp::RObject s = PROTECT(n.value_);
+        heads.insert(std::pair<T, Rcpp::RObject>(n.key_, s));
         UNPROTECT(1);
 
         return Rcpp::wrap(heads);
@@ -300,7 +289,7 @@ private:
         heap_.update(id_to_handles_[id]);
     }
 
-    SEXP obj_;
+    Rcpp::RObject obj_;
     H<node<H, T>> heap_;
     std::unordered_multimap<T, ul> key_to_id_;
     std::unordered_map<

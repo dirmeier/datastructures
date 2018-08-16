@@ -80,7 +80,7 @@
       <h1>Datastructures tutorial</h1>
                         <h4 class="author">Simon Dirmeier</h4>
             
-            <h4 class="date">2018-08-12</h4>
+            <h4 class="date">2018-08-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dirmeier/datastructures/blob/master/vignettes/datastructures.Rmd"><code>vignettes/datastructures.Rmd</code></a></small>
       <div class="hidden name"><code>datastructures.Rmd</code></div>
@@ -123,12 +123,12 @@
                    
   <span class="kw"><a href="../reference/peek-methods.html">peek</a></span>(fheap)</code></pre></div>
 <pre><code>## $`-3`
-##             A B
-## 1 -0.69398075 1
-## 2 -0.86935937 2
-## 3  0.62906914 3
-## 4  0.25589835 4
-## 5  0.05901935 5</code></pre>
+##            A B
+## 1 -1.5612516 1
+## 2 -0.5485837 2
+## 3 -1.0175338 3
+## 4  0.7959611 4
+## 5 -0.1773881 5</code></pre>
 <p><strong>NOTE</strong>: for efficienty it is recommended to insert all values at the same time, if you can do this. This should be way faster. If we insert multiple objects, we need to wrap it around a list.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  fheap  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/insert-methods.html">insert</a></span>(fheap, <span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">6</span>), <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">a=</span><span class="dv">2</span>), letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="st">"hallo"</span>))</code></pre></div>
 </div>
@@ -195,12 +195,12 @@
 ## [1] "handle-8"
 ## 
 ## [[1]]$value
-##             A B
-## 1 -0.69398075 1
-## 2 -0.86935937 2
-## 3  0.62906914 3
-## 4  0.25589835 4
-## 5  0.05901935 5</code></pre>
+##            A B
+## 1 -1.5612516 1
+## 2 -0.5485837 2
+## 3 -1.0175338 3
+## 4  0.7959611 4
+## 5 -0.1773881 5</code></pre>
 <p>Sometimes you don’t know the <code>key</code> or <code>handle</code>, but only the <code>value</code> of a node, and you want to do a <code>decrease-key</code> operation. Suppose you want to decrease the key of a node with value <code>V-1</code>, then you would to need to call <code>handle</code> with a value argument and a missing <code>key</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  hands &lt;-<span class="st"> </span><span class="kw"><a href="../reference/handle-methods.html">handle</a></span>(fheap, <span class="dt">value=</span><span class="st">"V1"</span>)
   <span class="kw"><a href="../reference/decrease_key-methods.html">decrease_key</a></span>(fheap, <span class="dt">from=</span>hands[[<span class="dv">1</span>]]<span class="op">$</span>key, <span class="dt">to=</span><span class="op">-</span><span class="dv">1000</span>, hands[[<span class="dv">1</span>]]<span class="op">$</span>handle)
@@ -213,7 +213,7 @@
   hands</code></pre></div>
 <pre><code>## [[1]]
 ## [[1]]$handle
-## [1] "handle-4"
+## [1] "handle-0"
 ## 
 ## [[1]]$key
 ## [1] -1000
@@ -234,7 +234,7 @@
   val[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre></div>
 <pre><code>## $`-1000`
 ## $`-1000`$handle
-## [1] "handle-4"
+## [1] "handle-0"
 ## 
 ## $`-1000`$key
 ## [1] -1000
@@ -254,6 +254,16 @@
 ## $`-20`$value$a
 ## [1] 2</code></pre>
 <p>In all of these scenarios neither the key nor the value need to be unique, because the handle (node id) always is.</p>
+</div>
+<div id="clearing-the-heap" class="section level3">
+<h3 class="hasAnchor">
+<a href="#clearing-the-heap" class="anchor"></a>Clearing the heap</h3>
+<p>You can remove all entries from a heap by calling:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  fheap &lt;-<span class="st"> </span><span class="kw"><a href="../reference/clear-methods.html">clear</a></span>(fheap)
+  fheap</code></pre></div>
+<pre><code>## An object of class fibonacci_heap&lt;numeric, SEXP&gt;
+## 
+## Peek: NULL -&gt; NULL, ...</code></pre>
 </div>
 <div id="use-case" class="section level3">
 <h3 class="hasAnchor">
@@ -343,12 +353,12 @@
 ## 
 ## 
 ## [[2]]
-##            a X2 X3
-## 1  1.4238209  2  3
-## 2  0.7775789  2  3
-## 3  0.5641997  2  3
-## 4 -0.3315296  2  3
-## 5 -0.4407130  2  3</code></pre>
+##             a X2 X3
+## 1 -0.57507479  2  3
+## 2  0.06571337  2  3
+## 3  0.66082456  2  3
+## 4 -1.39231091  2  3
+## 5 -0.45680990  2  3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  mm[keys[<span class="dv">5</span>]]</code></pre></div>
 <pre><code>## [[1]]
 ##  [1] 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1</code></pre>
@@ -405,17 +415,15 @@
 ## V5 -&gt; numeric</code></pre>
 <p>As you can see for multimaps, all key-value pairs get removed, when the function is called as above. If you are interested in only one specific key-value pair, you additionally need to supply the respective value:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  mm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/insert-methods.html">insert</a></span>(mm, keys[<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)], <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span>), <span class="kw">data.frame</span>(<span class="dt">a=</span><span class="kw">rnorm</span>(<span class="dv">5</span>), <span class="dv">2</span>, <span class="dv">3</span>)))
-  mm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/remove-methods.html">remove</a></span>(mm, keys[<span class="dv">2</span>], <span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span>))</code></pre></div>
-<pre><code>## V2
-## Removing</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  mm[ keys[<span class="dv">2</span>] ]</code></pre></div>
+  mm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/remove-methods.html">remove</a></span>(mm, keys[<span class="dv">2</span>], <span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span>))
+  mm[ keys[<span class="dv">2</span>] ]</code></pre></div>
 <pre><code>## [[1]]
-##             a X2 X3
-## 1 -0.50373986  2  3
-## 2  1.76666217  2  3
-## 3 -0.22827616  2  3
-## 4 -0.05026521  2  3
-## 5 -0.05850503  2  3</code></pre>
+##            a X2 X3
+## 1  0.2075326  2  3
+## 2 -1.3107847  2  3
+## 3  0.9649938  2  3
+## 4 -1.4321128  2  3
+## 5 -0.7176781  2  3</code></pre>
 <p>For bimaps we can also remove from the other side, i.e. when we provide a value:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  bimap &lt;-<span class="st"> </span><span class="kw"><a href="../reference/remove-methods.html">remove</a></span>(bimap, <span class="dt">value=</span>values[<span class="dv">1</span>])
   bimap</code></pre></div>
@@ -473,11 +481,17 @@
 ## 2 2 2
 ## 3 3 1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/pop-methods.html">pop</a></span>(st)</code></pre></div>
-<pre><code>## [1] -0.101933</code></pre>
+<pre><code>## [1] 1.120997</code></pre>
 <p>For a <code>queue</code> <code>pop</code> and <code>peek</code> return the <em>first</em> element that got inserted, while a stack returns the <em>last</em> element that was inserted.</p>
 <p>The size of a deque can be computed by calling:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/size-methods.html">size</a></span>(qu)</code></pre></div>
 <pre><code>## [1] 4</code></pre>
+<p>Stacks and queues can be emptied like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  qu &lt;-<span class="st"> </span><span class="kw"><a href="../reference/clear-methods.html">clear</a></span>(qu)
+  qu</code></pre></div>
+<pre><code>## An object of class queue&lt;SEXP&gt;
+## 
+## Peek: NULL, ...</code></pre>
 </div>
 <div id="author" class="section level2">
 <h2 class="hasAnchor">
@@ -506,7 +520,7 @@
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] purrr_0.2.5          datastructures_0.2.6 Rcpp_0.12.18        
+## [1] purrr_0.2.5          datastructures_0.2.7 Rcpp_0.12.18        
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] rstudioapi_0.7   knitr_1.20       xml2_1.2.0       magrittr_1.5    

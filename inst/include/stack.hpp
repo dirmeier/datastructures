@@ -40,29 +40,33 @@ public:
         return stack_.size();
     }
 
-    void insert(SEXP t)
+    void insert(Rcpp::RObject t)
     {
         if(!Rf_isNewList(t))
-            Rcpp::stop("SEXP needs to be a NewList\n");
+            Rcpp::stop("Rcpp::Robject needs to be a NewList\n");
         for (int i = 0; i < Rf_length(t); ++i)
             stack_.push(VECTOR_ELT(t, i));
     }
 
-    SEXP peek()
+    Rcpp::RObject peek()
     {
         return stack_.top();
     }
 
-
-    SEXP pop()
+    void clear()
     {
-        SEXP t = peek();
+        stack_ = {};
+    }
+
+    Rcpp::RObject pop()
+    {
+        Rcpp::RObject t = peek();
         stack_.pop();
         return t;
     }
 
 private:
-    std::stack<SEXP> stack_;
+    std::stack< Rcpp::RObject > stack_;
 };
 
 using stack_sexp = stack;

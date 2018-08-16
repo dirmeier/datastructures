@@ -44,12 +44,12 @@ namespace datastructures
             return map_.size();
         }
 
-        void insert(std::vector<T>& t, SEXP u)
+        void insert(std::vector<T>& t, Rcpp::RObject u)
         {
             if(!Rf_isNewList(u))
             {
                 Rcpp::stop(
-                    "SEXP needs to be a NewList\n");
+                    "Rcpp::RObject needs to be a NewList\n");
             }
 
             const int sexp_size = static_cast<int>(Rf_length(u));
@@ -59,10 +59,8 @@ namespace datastructures
             }
             for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
             {
-                SEXP s = Rf_duplicate(VECTOR_ELT(u, i));
-                R_PreserveObject(s);
-
-                map_.insert(std::pair<T, SEXP>(t[i], s));
+                Rcpp::RObject s = Rf_duplicate(VECTOR_ELT(u, i));
+                map_.insert(std::pair<T, Rcpp::RObject>(t[i], s));
             }
         }
 
@@ -73,7 +71,7 @@ namespace datastructures
             map_.clear();
         }
 
-        void remove_with_value(std::vector<T>& t, SEXP u)
+        void remove_with_value(std::vector<T>& t, Rcpp::RObject u)
         {
             for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
             {
@@ -82,7 +80,6 @@ namespace datastructures
                 {
                     if (R_compute_identical(VECTOR_ELT(u, i), it->second, 0))
                     {
-                        R_ReleaseObject(VECTOR_ELT(u, i));
                         map_.erase(it);
                         break;
                     }
@@ -93,14 +90,7 @@ namespace datastructures
         void remove(std::vector<T>& t)
         {
             for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
-            {
-                auto iter = map_.equal_range(t[i]);
-                for (auto it = iter.first; it != iter.second; ++it)
-                {
-                    R_ReleaseObject(it->second);
-                }
                 map_.erase(t[i]);
-            }
         }
 
         bool is_empty()
@@ -122,13 +112,13 @@ namespace datastructures
 
         Rcpp::List values()
         {
-            std::vector< SEXP > values;
+            std::vector< Rcpp::RObject > values;
             values.reserve(map_.size());
 
             int prt = 0;
             for (const auto& pair : map_)
             {
-                SEXP s = PROTECT(pair.second);
+                Rcpp::RObject s = PROTECT(pair.second);
                 values.push_back(s);
                 ++prt;
             }
@@ -140,7 +130,7 @@ namespace datastructures
         Rcpp::List head()
         {
             unsigned int i = 0;
-            std::map<T, SEXP> heads;
+            std::map<T, Rcpp::RObject> heads;
             for (const auto& pair : map_)
             {
                 if (i++ == 5) break;
@@ -152,7 +142,7 @@ namespace datastructures
 
         Rcpp::List get(std::vector<T>& t)
         {
-            std::vector< SEXP > values;
+            std::vector< Rcpp::RObject > values;
             int prt = 0;
 
             for (typename std::vector<T>::size_type i = 0; i < t.size(); ++i)
@@ -163,14 +153,14 @@ namespace datastructures
                     auto range = map_.equal_range(key);
                     for (auto it = range.first; it != range.second; ++it)
                     {
-                        SEXP s = PROTECT(it->second);
+                        Rcpp::RObject s = PROTECT(it->second);
                         ++prt;
                         values.push_back(s);
                     }
                 }
                 else
                 {
-                    std::stringstream ss;
+                    std::ostringstream ss;
                     ss << key;
                     UNPROTECT(prt);
                     Rcpp::stop(
@@ -183,7 +173,7 @@ namespace datastructures
         }
 
     private:
-        H<T, SEXP> map_;
+        H<T, Rcpp::RObject> map_;
     };
 }
 #endif

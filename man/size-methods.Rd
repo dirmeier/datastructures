@@ -6,7 +6,6 @@
 \alias{size}
 \alias{size,deque-method}
 \alias{size,heap-method}
-\alias{clear,map-method}
 \alias{size,map-method}
 \title{Get the size of an object}
 \usage{
@@ -15,8 +14,6 @@ size(obj)
 \S4method{size}{deque}(obj)
 
 \S4method{size}{heap}(obj)
-
-\S4method{clear}{map}(obj)
 
 \S4method{size}{map}(obj)
 }

@@ -55,7 +55,6 @@ setClass("hashmap", contains = "unordered_map")
 #' @param key.class  the primitive class type of the keys
 #'
 #' @return returns a new \code{hashmap} object
-#'
 hashmap <- function(key.class = c("character", "numeric", "integer"))
 {
   key.class   <- match.arg(key.class)

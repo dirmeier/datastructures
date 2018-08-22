@@ -4,7 +4,7 @@
 \alias{stack}
 \title{Create a new \code{stack}}
 \usage{
-stack()
+stack(...)
 }
 \value{
 returns a new \code{stack} object

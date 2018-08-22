@@ -25,22 +25,22 @@ test_that("multimap can store same keys", {
     h <- multimap("character")
     h <- insert(h, letters, seq(letters))
     h <- insert(h, letters, seq(letters))
-    expect_equal(length(get(h, "a")), 2)
-    expect_equal(unlist(get(h, "a")), c(1L, 1L))
+    expect_equal(length(at(h, "a")), 2)
+    expect_equal(unlist(at(h, "a")), c(1L, 1L))
 })
 
 test_that("multimap can store same keys", {
     h <- multimap("character")
     h <- insert(h, letters, seq(letters))
     h <- insert(h, letters, seq(letters))
-    expect_equal(length(get(h, "a")), 2)
-    expect_equal(unlist(get(h, "a")), c(1L, 1L))
+    expect_equal(length(at(h, "a")), 2)
+    expect_equal(unlist(at(h, "a")), c(1L, 1L))
 })
 
-test_that("multimap remove works", {
+test_that("multimap erase works", {
     h <- multimap()
     h <- insert(h, letters, letters)
-    h <- remove(h, letters[1])
+    h <- erase(h, letters[1])
     expect_true(size(h) == 25)
     expect_error(h[letters[1]])
 })

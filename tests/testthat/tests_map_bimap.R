@@ -42,28 +42,28 @@ test_that("bimap insert throws when inserting false values", {
 
 test_that("bimap get throws when getting false values", {
     b <- bimap("integer", "character")
-    expect_error(get(b, "s"))
+    expect_error(at(b, "s"))
 })
 
 
 test_that("bimap insert/get methods work", {
     b <- bimap("numeric", "numeric")
     b <- insert(b, c(1, 2), c(4, 5))
-    expect_equal(get(b, 1), 4)
+    expect_equal(at(b, 1), 4)
 })
 
 
 test_that("bimap insert/get methods work with which argument", {
     b <- bimap("numeric", "numeric")
     b <- insert(b, c(1, 2), c(4, 5))
-    expect_equal(get(b, 1, "values"), 4)
+    expect_equal(at(b, 1, "values"), 4)
 })
 
 
 test_that("bimap insert/get methods work with which argument", {
     b <- bimap("numeric", "numeric")
     b <- insert(b, c(1, 2), c(4, 5))
-    expect_equal(get(b, 4, "keys"), 1)
+    expect_equal(at(b, 4, "keys"), 1)
 })
 
 
@@ -93,16 +93,16 @@ test_that("bimap retrieves correct values", {
 test_that("bimap replace works", {
     b <- bimap("integer", "numeric")
     b <- insert(b, 1:2, c(4, 2))
-    expect_equal(get(b, 1L), 4)
-    expect_equal(get(b, 2L, "values"), 2)
+    expect_equal(at(b, 1L), 4)
+    expect_equal(at(b, 2L, "values"), 2)
     b <- insert(b, 1:2, c(1, 2))
-    expect_equal(get(b, 1L), 1)
-    expect_equal(get(b, 2L), 2)
+    expect_equal(at(b, 1L), 1)
+    expect_equal(at(b, 2L), 2)
 })
 
-test_that("remove values work", {
+test_that("erase values work", {
     b <- bimap("integer", "numeric")
     b <- insert(b, 1:2, c(4, 2))
-    b <- remove(b, value=4)
-    expect_error(get(g, 1L))
+    b <- erase(b, value=4)
+    expect_error(at(g, 1L))
 })

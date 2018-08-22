@@ -55,7 +55,7 @@ test_that("unordered map get throws when getting false values", {
     {
         h <- m("numeric")
         h <- insert(h, c(1, 2), c(4, 5))
-        expect_error(get(h, "s"))
+        expect_error(at(h, "s"))
     }
 })
 
@@ -65,7 +65,7 @@ test_that("unordered map insert/get methods work", {
     {
         h <- m("numeric")
         h <- insert(h, c(1, 2), c(4, 5))
-        expect_equal(get(h, 1)[[1]], 4)
+        expect_equal(at(h, 1)[[1]], 4)
     }
 })
 
@@ -77,7 +77,7 @@ test_that("unordered map insert list works", {
         m <- as.list(letters[1:2])
         r <- c(1, 2)
         h <- insert(h, r, m)
-        expect_equal(get(h, 2)[[1]], m[[2]])
+        expect_equal(at(h, 2)[[1]], m[[2]])
     }
 })
 
@@ -89,7 +89,7 @@ test_that("unordered map insert vector works", {
         m <- letters[1:2]
         r <- c(1, 2)
         h <- insert(h, r, m)
-        expect_equal(get(h, 2)[[1]], m[2])
+        expect_equal(at(h, 2)[[1]], m[2])
     }
 })
 
@@ -102,10 +102,10 @@ test_that("unordered map can insert multiple values", {
         h[letters[2:3]] <- rnorm(2)
         h <- insert(h, c("hallo", "hello"), list(a="A", b=list(a=3)))
 
-        expect_true(is.data.frame(get(h, "a")[[1]]))
-        expect_true(is.numeric(get(h, "b")[[1]]))
-        expect_true(get(h, "hallo")[[1]] == "A")
-        expect_true(is.list(get(h, "hello")[[1]]))
+        expect_true(is.data.frame(at(h, "a")[[1]]))
+        expect_true(is.numeric(at(h, "b")[[1]]))
+        expect_true(at(h, "hallo")[[1]] == "A")
+        expect_true(is.list(at(h, "hello")[[1]]))
     }
 })
 
@@ -134,13 +134,13 @@ test_that("unordered map size works", {
 })
 
 
-test_that("unordered map removes", {
+test_that("unordered map erases", {
     for (m in maps) {
         h <- m("integer")
         h <- insert(h, 1L, environment())
         h <- insert(h, 2L, list(a=1))
         h <- insert(h, 3L, 2)
-        h <- remove(h, 1L)
+        h <- erase(h, 1L)
         expect_error(h[letters[1]])
     }
 })

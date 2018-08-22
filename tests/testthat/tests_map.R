@@ -44,7 +44,7 @@ test_that("maps removes", {
         h <- insert(h, letters[1], letters[1])
         h <- insert(h, letters[2], letters[2])
         h <- insert(h, letters[3], letters[3])
-        h <- remove(h, letters[1])
+        h <- erase(h, letters[1])
         expect_error(h[letters[1]])
     }
 })

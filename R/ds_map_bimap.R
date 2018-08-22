@@ -20,10 +20,10 @@
 
 #' @include ds_map.R
 #' @include methods_insert.R
-#' @include methods_get.R
+#' @include methods_at.R
 #' @include methods_keys.R
 #' @include methods_values.R
-#' @include methods_remove.R
+#' @include methods_erase.R
 NULL
 
 
@@ -112,7 +112,7 @@ bimap <- function(key.class = c("character", "numeric", "integer"),
 .insert.bimap <- function(obj, x, y)
 {
     .check.key.value.classes(obj, x, y)
-    remove(obj, x)
+    erase(obj, x)
     obj@.map$insert(x, y)
 
     obj
@@ -120,7 +120,7 @@ bimap <- function(key.class = c("character", "numeric", "integer"),
 
 
 #' @noRd
-.remove.bimap.values <- function(obj, value)
+.erase.bimap.values <- function(obj, value)
 {
     .check.value.class(obj, value)
     obj@.map$remove_value(value)
@@ -152,9 +152,9 @@ setMethod(
 )
 
 
-#' @rdname get-methods
+#' @rdname at-methods
 setMethod(
-  "get",
+  "at",
   signature = signature(obj = "bimap", x = "vector", which = "character"),
   function(obj, x, which = c("values", "keys"))
   {
@@ -168,9 +168,9 @@ setMethod(
 )
 
 
-#' @rdname get-methods
+#' @rdname at-methods
 setMethod(
-  "get",
+  "at",
   signature = signature(obj = "bimap", x = "vector", which = "missing"),
   function(obj, x)
   {
@@ -194,9 +194,9 @@ setMethod("values", "bimap", function(obj)
 })
 
 
-#' @rdname remove-methods
+#' @rdname erase-methods
 setMethod(
-    "remove",
+    "erase",
     signature = signature(obj = "bimap", key = "missing", value = "vector"),
-    function(obj, value) .remove.bimap.values(obj, value)
+    function(obj, value) .erase.bimap.values(obj, value)
 )

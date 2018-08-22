@@ -20,7 +20,7 @@
 
 #' @include ds_map.R
 #' @include methods_insert.R
-#' @include methods_get.R
+#' @include methods_at.R
 #' @include methods_keys.R
 #' @include methods_values.R
 NULL
@@ -51,7 +51,7 @@ setClass(
     stop("dimensions of keys and values do not match", call.=FALSE)
 
   .check.key.class(obj, x)
-  if (methods::is(obj, "hashmap")) remove(obj, x)
+  if (methods::is(obj, "hashmap")) erase(obj, x)
   obj@.map$insert(x, y)
 
   obj
@@ -140,9 +140,9 @@ setMethod(
 )
 
 
-#' @rdname get-methods
+#' @rdname at-methods
 setMethod(
-  "get",
+  "at",
   signature = signature(obj = "unordered_map", x = "vector", which="missing"),
   function(obj, x)
   {
@@ -164,7 +164,7 @@ setMethod(
   "[",
   signature = signature(
       x="unordered_map", i="vector", j="missing", drop="missing"),
-  function(x, i) get(x, i)
+  function(x, i) at(x, i)
 )
 
 

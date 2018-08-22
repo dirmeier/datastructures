@@ -255,14 +255,14 @@ As explained for hashmap and multimap we can use all kinds of `values`, for bima
 Values (and keys in the case of bimaps) can then be accessed like this:
 
 ```{r}
-  get(hash, keys[1])
+  at(hash, keys[1])
   hash[keys[1]]
 
-  get(bimap, keys[1], "values")
-  get(bimap, values[2], "keys")
-  get(bimap, keys[1])
+  at(bimap, keys[1], "values")
+  at(bimap, values[2], "keys")
+  at(bimap, keys[1])
   
-  get(mm, keys[2])
+  at(mm, keys[2])
   mm[keys[5]]
 ```
 
@@ -282,9 +282,9 @@ If you want to directly access `keys` or `values` as vectors or have a look at a
 Removing entries in all of the three map classes works like this:
 
 ```{r}
-  hash <- remove(hash, keys[1])
+  hash <- erase(hash, keys[1])
   hash
-  mm <- remove(mm, keys[2])
+  mm <- erase(mm, keys[2])
   mm
 ```
 
@@ -293,14 +293,14 @@ If you are interested in only one specific  key-value pair, you additionally nee
 
 ```{r}
   mm <- insert(mm, keys[c(2, 2)], list(list(a=1), data.frame(a=rnorm(5), 2, 3)))
-  mm <- remove(mm, keys[2], list(a=1))
+  mm <- erase(mm, keys[2], list(a=1))
   mm[ keys[2] ]
 ```
 
 For bimaps we can also remove from the other side, i.e. when we provide a value:
 
 ```{r}
-  bimap <- remove(bimap, value=values[1])
+  bimap <- erase(bimap, value=values[1])
   bimap
 ```
 

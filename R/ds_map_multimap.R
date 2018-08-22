@@ -19,7 +19,8 @@
 
 
 #' @include ds_map_unordered.R
-#' @include methods_remove.R
+#' @include methods_erase.R
+
 
 #' @title Multimap class
 #'
@@ -74,7 +75,7 @@ multimap <- function(key.class = c("character", "numeric", "integer"))
 
 
 #' @noRd
-.remove.multimap <- function(obj, key, value)
+.erase.multimap <- function(obj, key, value)
 {
     .check.key.class(obj, key)
     if (length(key) != length(value))
@@ -85,38 +86,38 @@ multimap <- function(key.class = c("character", "numeric", "integer"))
 }
 
 
-#' @rdname remove-methods
+#' @rdname erase-methods
 setMethod(
-    "remove",
+    "erase",
     signature = signature(obj = "multimap", key = "vector", value = "vector"),
     function(obj, key, value)
     {
         if (length(key) == 1) value <- list(value)
         else if (length(key) == length(value) && is.vector(value))
             value <- as.list(value)
-        .remove.multimap(obj, key, value)
+        .erase.multimap(obj, key, value)
     }
 )
 
 
-#' @rdname remove-methods
+#' @rdname erase-methods
 setMethod(
-    "remove",
+    "erase",
     signature = signature(obj = "multimap", key = "vector", value = "list"),
     function(obj, key, value)
     {
         if (length(key) == 1) value <- list(value)
-        .remove.multimap(obj, key, value)
+        .erase.multimap(obj, key, value)
     }
 )
 
 
-#' @rdname remove-methods
+#' @rdname erase-methods
 setMethod(
-    "remove",
+    "erase",
     signature = signature(obj = "multimap", key = "vector", value = "ANY"),
     function(obj, key, value)
     {
-        .remove.multimap(obj, key, list(value))
+        .erase.multimap(obj, key, list(value))
     }
 )

@@ -22,3 +22,8 @@ Also see \code{\linkS4class{bimap}} for mappings in both ways.
 \item{\code{.key.class}}{the class of the keys}
 }}
 
+\examples{
+ # creates a hashmap<character, SEXP>
+ h <- hashmap()
+
+}

@@ -45,8 +45,11 @@ setClass("stack", contains = "deque")
 #'
 #' @return returns a new \code{stack} object
 #'
-stack <- function()
+stack <- function(...)
 {
+    l <- list(...)
+    if (length(l))
+        return(utils::stack(...))
     stack <- methods::new(stack_sexp)
     methods::new("stack", .deque = stack)
 }

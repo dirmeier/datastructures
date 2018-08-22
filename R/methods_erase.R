@@ -18,33 +18,26 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @title Get elements from an object
+#' @title Erase an entry from a map
 #'
-#' @description Extracts a set of <key, value> pairs. For \code{hashmaps}
-#'  mappings from
-#'  \deqn{f: keys -> values,}
-#'  exist so argument \code{which} is per default \code{values} (since these
-#'  are going to be retrieved). For \code{bimaps} also
-#'  \deqn{f: values -> keys,}
-#'  mappings exist, such that \code{which} can also be \code{keys} if the keys
-#'  from the object should be retrieved.
+#' @description Erase a vector of key-value pair from a map object.
 #'
 #' @export
 #' @docType methods
-#' @rdname get-methods
+#' @rdname erase-methods
 #'
-#' @param obj  object to extract values from
-#' @param x  the set of keys to match the values
-#' @param which  choose either \code{values} if the values should get returned
-#'  or \code{keys} if the keys should get returned
-#'
-#' @return  returns extracted keys or values from \code{obj}
+#' @param obj  the object to pop an element from
+#' @param key  a vector of keys that should be removed
+#' @param value optionally a list of values needs to be supplied for some data
+#'  structures such as multimaps if entries should be removed.
+
+#' @return  returns \code{obj} with removed values
 #'
 setGeneric(
-    "get",
-    function(obj, x, which=c("values", "keys"))
+    "erase",
+    function(obj, key, value)
     {
-        standardGeneric("get")
+        standardGeneric("erase")
     },
     package = "datastructures"
 )

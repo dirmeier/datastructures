@@ -39,6 +39,10 @@
 #' @slot .map  \code{C++} object representing a mapping
 #' @slot .key.class  the class of the keys
 #'
+#' @examples
+#'  # creates a hashmap<character, SEXP>
+#'  h <- hashmap()
+#'
 setClass("hashmap", contains = "unordered_map")
 
 

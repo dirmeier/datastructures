@@ -80,7 +80,7 @@
       <h1>Datastructures tutorial</h1>
                         <h4 class="author">Simon Dirmeier</h4>
             
-            <h4 class="date">2018-08-22</h4>
+            <h4 class="date">2018-08-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dirmeier/datastructures/blob/master/vignettes/datastructures.Rmd"><code>vignettes/datastructures.Rmd</code></a></small>
       <div class="hidden name"><code>datastructures.Rmd</code></div>
@@ -124,11 +124,11 @@
   <span class="kw"><a href="../reference/peek-methods.html">peek</a></span>(fheap)</code></pre></div>
 <pre><code>## $`-3`
 ##            A B
-## 1 -1.7525960 1
-## 2  0.8383236 2
-## 3  1.5921086 3
-## 4 -0.1919179 4
-## 5  0.9872281 5</code></pre>
+## 1 -0.1767313 1
+## 2  1.1016302 2
+## 3  1.9610384 3
+## 4 -1.3000863 4
+## 5  0.7179847 5</code></pre>
 <p><strong>NOTE</strong>: for efficienty it is recommended to insert all values at the same time, if you can do this. This should be way faster. If we insert multiple objects, we need to wrap it around a list.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  fheap  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/insert-methods.html">insert</a></span>(fheap, <span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">6</span>), <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">a=</span><span class="dv">2</span>), letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="st">"hallo"</span>))</code></pre></div>
 </div>
@@ -205,11 +205,11 @@
 ## 
 ## [[1]]$value
 ##            A B
-## 1 -1.7525960 1
-## 2  0.8383236 2
-## 3  1.5921086 3
-## 4 -0.1919179 4
-## 5  0.9872281 5</code></pre>
+## 1 -0.1767313 1
+## 2  1.1016302 2
+## 3  1.9610384 3
+## 4 -1.3000863 4
+## 5  0.7179847 5</code></pre>
 <p>Sometimes you don’t know the <code>key</code> or <code>handle</code>, but only the <code>value</code> of a node, and you want to do a <code>decrease-key</code> operation. Suppose you want to decrease the key of a node with value <code>V-1</code>, then you would to need to call <code>handle</code> with a value argument and a missing <code>key</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  hands &lt;-<span class="st"> </span><span class="kw"><a href="../reference/handle-methods.html">handle</a></span>(fheap, <span class="dt">value=</span><span class="st">"V1"</span>)
   <span class="kw"><a href="../reference/decrease_key-methods.html">decrease_key</a></span>(fheap, <span class="dt">from=</span>hands[[<span class="dv">1</span>]]<span class="op">$</span>key, <span class="dt">to=</span><span class="op">-</span><span class="dv">1000</span>, hands[[<span class="dv">1</span>]]<span class="op">$</span>handle)</code></pre></div>
@@ -225,7 +225,7 @@
   hands</code></pre></div>
 <pre><code>## [[1]]
 ## [[1]]$handle
-## [1] "handle-0"
+## [1] "handle-2"
 ## 
 ## [[1]]$key
 ## [1] -1000
@@ -246,7 +246,7 @@
   val[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre></div>
 <pre><code>## $`-1000`
 ## $`-1000`$handle
-## [1] "handle-0"
+## [1] "handle-2"
 ## 
 ## $`-1000`$key
 ## [1] -1000
@@ -372,11 +372,11 @@
 ## 
 ## [[2]]
 ##            a X2 X3
-## 1 -0.5026886  2  3
-## 2  0.1534096  2  3
-## 3  1.6726781  2  3
-## 4  0.7203231  2  3
-## 5  0.2108976  2  3</code></pre>
+## 1 -0.4013296  2  3
+## 2  0.7812975  2  3
+## 3 -0.5863392  2  3
+## 4 -0.0489881  2  3
+## 5  0.2356251  2  3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  mm[keys[<span class="dv">5</span>]]</code></pre></div>
 <pre><code>## [[1]]
 ##  [1] 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1</code></pre>
@@ -399,7 +399,7 @@
 ## 
 ## [[5]]
 ## [1] 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/head-methods.html">head</a></span>(bimap)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/peek-methods.html">peek</a></span>(bimap)</code></pre></div>
 <pre><code>## $V1
 ## [1] 1
 ## 
@@ -436,12 +436,12 @@
   mm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/erase-methods.html">erase</a></span>(mm, keys[<span class="dv">2</span>], <span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span>))
   mm[ keys[<span class="dv">2</span>] ]</code></pre></div>
 <pre><code>## [[1]]
-##            a X2 X3
-## 1 -0.2059215  2  3
-## 2 -0.2840170  2  3
-## 3 -0.7241098  2  3
-## 4 -0.2493989  2  3
-## 5  0.9785825  2  3</code></pre>
+##             a X2 X3
+## 1  0.76712892  2  3
+## 2  0.45172896  2  3
+## 3  0.94298882  2  3
+## 4 -0.05496394  2  3
+## 5 -2.44384098  2  3</code></pre>
 <p>For bimaps we can also remove from the other side, i.e. when we provide a value:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  bimap &lt;-<span class="st"> </span><span class="kw"><a href="../reference/erase-methods.html">erase</a></span>(bimap, <span class="dt">value=</span>values[<span class="dv">1</span>])
   bimap</code></pre></div>
@@ -499,7 +499,7 @@
 ## 2 2 2
 ## 3 3 1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/pop-methods.html">pop</a></span>(st)</code></pre></div>
-<pre><code>## [1] -0.6554903</code></pre>
+<pre><code>## [1] -0.4465095</code></pre>
 <p>For a <code>queue</code> <code>pop</code> and <code>peek</code> return the <em>first</em> element that got inserted, while a stack returns the <em>last</em> element that was inserted.</p>
 <p>The size of a deque can be computed by calling:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw"><a href="../reference/size-methods.html">size</a></span>(qu)</code></pre></div>

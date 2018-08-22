@@ -34,6 +34,8 @@
 #' @slot .heap  \code{C++} object representing a heap
 #' @slot .key.class  the class of the keys
 #'
+#' @seealso  \code{\link{binomial_heap}} for creating a new \code{binomial_heap} object
+#'
 setClass("binomial_heap", contains = "heap")
 
 
@@ -50,7 +52,6 @@ setClass("binomial_heap", contains = "heap")
 #' @return returns a new \code{binomial_heap} object
 #'
 #' @examples
-#'
 #'  # creates a binomial_heap<character, SEXP>
 #'  b_heap <- binomial_heap()
 #'

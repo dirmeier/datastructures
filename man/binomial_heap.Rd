@@ -17,7 +17,6 @@ Instantiates a new \code{\linkS4class{binomial_heap}} object,
  i.e. a tree-like data structure satisfying the \emph{min-heap} property.
 }
 \examples{
-
  # creates a binomial_heap<character, SEXP>
  b_heap <- binomial_heap()
 

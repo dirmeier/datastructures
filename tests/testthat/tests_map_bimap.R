@@ -67,12 +67,12 @@ test_that("bimap insert/get methods work with which argument", {
 })
 
 
-test_that("bimap head works", {
+test_that("bimap peek works", {
     h <- bimap("integer", "character")
     m <- letters[1:2]
     r <- 1:2
     h <- insert(h, r, m)
-    expect_output(show(head(h)))
+    expect_output(show(peek(h)))
 })
 
 

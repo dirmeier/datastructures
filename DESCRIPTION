@@ -51,7 +51,6 @@ Collate:
     'ds_heap_binomial.R'
     'ds_heap_fibonacci.R'
     'methods_erase.R'
-    'methods_head.R'
     'ds_map.R'
     'methods_keys.R'
     'methods_at.R'

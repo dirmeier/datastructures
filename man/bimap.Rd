@@ -23,7 +23,6 @@ Instantiates a new \code{\linkS4class{bimap}} object,
  \deqn{f: values -> keys.}
 }
 \examples{
-
  # create a bimap with character <-> character bi-mapping
  b <- bimap()
 

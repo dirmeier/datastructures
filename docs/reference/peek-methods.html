@@ -111,7 +111,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Have a look at the first element from an object without removing it</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_peek.R'><code>R/methods_peek.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_deque.R'><code>R/ds_deque.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_heap.R'><code>R/ds_heap.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_peek.R'><code>R/methods_peek.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_deque.R'><code>R/ds_deque.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_heap.R'><code>R/ds_heap.R</code></a>, and 2 more</small>
     <div class="hidden name"><code>peek-methods.Rd</code></div>
     </div>
 
@@ -129,6 +129,9 @@
 <span class='fu'>peek</span>(<span class='no'>obj</span>)
 
 <span class='co'># S4 method for heap</span>
+<span class='fu'>peek</span>(<span class='no'>obj</span>)
+
+<span class='co'># S4 method for map</span>
 <span class='fu'>peek</span>(<span class='no'>obj</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -150,12 +153,48 @@
  <span class='co'># peeks into a queue</span>
  <span class='no'>q</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='queue.html'>queue</a></span>()
  <span class='no'>q</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='insert-methods.html'>insert</a></span>(<span class='no'>q</span>, <span class='fu'>list</span>(<span class='fu'>environment</span>(), <span class='fu'>data.frame</span>(<span class='kw'>a</span><span class='kw'>=</span><span class='fl'>1</span>)))
- <span class='fu'>peek</span>(<span class='no'>q</span>)</div><div class='output co'>#&gt; &lt;environment: 0x1212d7628&gt;</div><div class='input'>
+ <span class='fu'>peek</span>(<span class='no'>q</span>)</div><div class='output co'>#&gt; &lt;environment: 0x113d86670&gt;</div><div class='input'>
  <span class='co'># peeks into a fibonacci heap</span>
  <span class='no'>b_heap</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='binomial_heap.html'>binomial_heap</a></span>()
  <span class='no'>b_heap</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='insert-methods.html'>insert</a></span>(<span class='no'>b_heap</span>, <span class='no'>letters</span>[<span class='fu'>seq</span>(<span class='fl'>3</span>)], <span class='fu'>list</span>(<span class='fl'>1</span>, <span class='fu'>diag</span>(<span class='fl'>3</span>), <span class='fu'>rnorm</span>(<span class='fl'>2</span>)))
  <span class='fu'>peek</span>(<span class='no'>b_heap</span>)</div><div class='output co'>#&gt; $a
 #&gt; [1] 1
+#&gt; </div><div class='input'>
+ <span class='co'># peeks into a \code{hashmap}</span>
+ <span class='no'>h_map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='hashmap.html'>hashmap</a></span>()
+ <span class='no'>h_map</span>[<span class='no'>letters</span>] <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fu'>length</span>(<span class='no'>letters</span>))
+ <span class='fu'>peek</span>(<span class='no'>h_map</span>)</div><div class='output co'>#&gt; $i
+#&gt; [1] 0.5562243
+#&gt; 
+#&gt; $w
+#&gt; [1] 0.9463479
+#&gt; 
+#&gt; $x
+#&gt; [1] 1.316826
+#&gt; 
+#&gt; $y
+#&gt; [1] -0.29664
+#&gt; 
+#&gt; $z
+#&gt; [1] -0.3872136
+#&gt; </div><div class='input'>
+ <span class='co'># peeks into a \code{bimap}</span>
+ <span class='no'>b_map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bimap.html'>bimap</a></span>(<span class='st'>"integer"</span>, <span class='st'>"integer"</span>)
+ <span class='no'>b_map</span>[<span class='fu'>seq</span>(<span class='fl'>10</span>)] <span class='kw'>&lt;-</span> <span class='fu'>seq</span>(<span class='fl'>10</span>, <span class='fl'>1</span>)
+ <span class='fu'>peek</span>(<span class='no'>b_map</span>)</div><div class='output co'>#&gt; $`1`
+#&gt; [1] 10
+#&gt; 
+#&gt; $`2`
+#&gt; [1] 9
+#&gt; 
+#&gt; $`3`
+#&gt; [1] 8
+#&gt; 
+#&gt; $`4`
+#&gt; [1] 7
+#&gt; 
+#&gt; $`5`
+#&gt; [1] 6
 #&gt; </div><div class='input'>
 </div></pre>
   </div>

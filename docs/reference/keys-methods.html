@@ -146,7 +146,7 @@
  <span class='co'># returns the keys of a hashmap</span>
  <span class='no'>h_map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='hashmap.html'>hashmap</a></span>(<span class='st'>"numeric"</span>)
  <span class='no'>h_map</span>[<span class='fu'>rnorm</span>(<span class='fl'>3</span>)] <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>)
- <span class='fu'>keys</span>(<span class='no'>h_map</span>)</div><div class='output co'>#&gt; [1] -0.6832669 -1.2461920 -1.4256595</div><div class='input'>
+ <span class='fu'>keys</span>(<span class='no'>h_map</span>)</div><div class='output co'>#&gt; [1] 0.1943924 1.4505432 0.4212304</div><div class='input'>
  <span class='co'># returns the keys of a multimap</span>
  <span class='no'>m_map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='multimap.html'>multimap</a></span>(<span class='st'>"numeric"</span>)
  <span class='no'>m_map</span>[<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>)] <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='fu'>rnorm</span>(<span class='fl'>1</span>), <span class='fu'>rgamma</span>(<span class='fl'>1</span>, <span class='fl'>1</span>), <span class='fu'>rexp</span>(<span class='fl'>1</span>))

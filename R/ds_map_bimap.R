@@ -46,6 +46,7 @@ NULL
 #' @slot .key.class  the class of the keys
 #' @slot .value.class  the class of the values
 #'
+#' @seealso  \code{\link{bimap}} for creating a new \code{bimap} object
 #'
 setClass(
     "bimap",
@@ -72,7 +73,6 @@ setClass(
 #' @return returns a new \code{bimap} object
 #'
 #' @examples
-#'
 #'  # create a bimap with character <-> character bi-mapping
 #'  b <- bimap()
 #'

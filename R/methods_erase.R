@@ -35,7 +35,7 @@
 #' @return  returns \code{obj} with removed values
 #' @examples
 #'
-#'  # erases keys from a \code{hashmap} or \code{bimap}
+#'  # erases keys from a hashmap or bimap
 #'  h_map <- hashmap()
 #'  h_map[letters] <- rnorm(length(letters))
 #'  h_map <- erase(h_map, "a")

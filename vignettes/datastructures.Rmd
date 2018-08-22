@@ -276,7 +276,7 @@ If you want to directly access `keys` or `values` as vectors or have a look at a
 ```{r}
   keys(bimap)
   values(hash)
-  head(bimap)
+  peek(bimap)
 ```
 
 Removing entries in all of the three map classes works like this:

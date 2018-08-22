@@ -18,7 +18,7 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @include methods_head.R
+#' @include methods_peek.R
 #' @include methods_size.R
 #' @include methods_erase.R
 #' @include methods_clear.R
@@ -59,7 +59,7 @@ setClass(
   cat(paste0("An object of class ", clazz, "<",
              object@.key.class, ",T",
              ">\n\n"))
-  li <- head(object)
+  li <- peek(object)
   for (l in names(li))
   {
     e <- li[[l]]
@@ -112,9 +112,9 @@ setMethod("clear", "map", .clear.map)
 setMethod("show", "map", .show.map)
 
 
-#' @noRd
-#' @export
-head.map <- function(x, ...) { .head.map(x) }
+#' @rdname peek-methods
+setMethod("peek", "map", .head.map)
+
 
 #' @rdname size-methods
 setMethod("size", "map", .size.map)

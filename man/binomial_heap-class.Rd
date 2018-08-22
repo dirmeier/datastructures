@@ -20,3 +20,6 @@ Implementation of a binomial heap data structure, i.e. a
 \item{\code{.key.class}}{the class of the keys}
 }}
 
+\seealso{
+\code{\link{binomial_heap}} for creating a new \code{binomial_heap} object
+}

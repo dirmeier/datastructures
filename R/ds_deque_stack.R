@@ -32,6 +32,8 @@
 #'
 #' @slot .deque  \code{C++} object representing a deque
 #'
+#' @seealso  \code{\link{stack}} for creating a new \code{stack} object.
+#'
 setClass("stack", contains = "deque")
 
 
@@ -49,7 +51,6 @@ setClass("stack", contains = "deque")
 #' @return returns a new \code{stack} object
 #'
 #' @examples
-#'
 #'  # creates a new stack<SEXP>
 #'  s <- stack()
 #'

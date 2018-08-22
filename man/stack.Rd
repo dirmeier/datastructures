@@ -18,7 +18,6 @@ Instantiates a new \code{\linkS4class{stack}} object,
  i.e. a list implementation with LIFO principle.
 }
 \examples{
-
  # creates a new stack<SEXP>
  s <- stack()
 

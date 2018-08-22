@@ -19,7 +19,6 @@ Instantiates a new \code{\linkS4class{multimap}} object,
  can be stored.
 }
 \examples{
-
  # creates a new multimap<character, SEXP>
  m <- multimap()
 

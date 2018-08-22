@@ -39,6 +39,8 @@
 #' @slot .map  \code{C++} object representing a mapping
 #' @slot .key.class  the class of the keys
 #'
+#' @seealso  \code{\link{hashmap}} for creating a new \code{hashmap} object
+#'
 setClass("hashmap", contains = "unordered_map")
 
 

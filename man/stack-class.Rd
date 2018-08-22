@@ -17,3 +17,6 @@ Implementation of a stack data structure, i.e. a list
 \item{\code{.deque}}{\code{C++} object representing a deque}
 }}
 
+\seealso{
+\code{\link{stack}} for creating a new \code{stack} object.
+}

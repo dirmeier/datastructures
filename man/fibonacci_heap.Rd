@@ -17,7 +17,6 @@ Instantiates a new \code{\linkS4class{fibonacci_heap}} object,
  i.e. a tree-like data structure satisfying the \emph{min-heap} property.
 }
 \examples{
-
  # creates a fibonacci_heap<character, SEXP>
  f_heap <- fibonacci_heap()
 

@@ -40,6 +40,8 @@
 #' @slot .map  \code{C++} object representing a mapping
 #' @slot .key.class  the class of the keys
 #'
+#' @seealso  \code{\link{multimap}} for creating a new \code{multimap} object
+#'
 setClass("multimap", contains = "unordered_map")
 
 
@@ -58,7 +60,6 @@ setClass("multimap", contains = "unordered_map")
 #' @return returns a new \code{multimap} object
 #'
 #' @examples
-#'
 #'  # creates a new multimap<character, SEXP>
 #'  m <- multimap()
 #'

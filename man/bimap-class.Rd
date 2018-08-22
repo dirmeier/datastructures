@@ -24,3 +24,6 @@ Inserting and accessing is amortized in \emph{O(1)}.
 \item{\code{.value.class}}{the class of the values}
 }}
 
+\seealso{
+\code{\link{bimap}} for creating a new \code{bimap} object
+}

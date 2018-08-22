@@ -20,3 +20,6 @@ Implementation of a Fibonacci heap data structure, i.e. a
 \item{\code{.key.class}}{the class of the keys}
 }}
 
+\seealso{
+\code{\link{fibonacci_heap}} for creating a new \code{fibonacci_heap} object
+}

@@ -22,3 +22,6 @@ Also see \code{\linkS4class{bimap}} for mappings in both ways.
 \item{\code{.key.class}}{the class of the keys}
 }}
 
+\seealso{
+\code{\link{multimap}} for creating a new \code{multimap} object
+}

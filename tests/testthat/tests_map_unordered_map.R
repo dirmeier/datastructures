@@ -110,14 +110,14 @@ test_that("unordered map can insert multiple values", {
 })
 
 
-test_that("unordered map head works", {
+test_that("unordered map peek works", {
     for (cm in maps)
     {
         h <- cm("numeric")
         m <- as.list(letters[1:2])
         r <- c(1, 2)
         h <- insert(h, r, m)
-        expect_output(show(head(h)))
+        expect_output(show(peek(h)))
     }
 })
 

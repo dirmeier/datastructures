@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Have a look at the first element from an object without removing it — peek • datastructures</title>
+<title>Erase an entry from a map — erase • datastructures</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Have a look at the first element from an object without removing it — peek" />
+<meta property="og:title" content="Erase an entry from a map — erase" />
 
-<meta property="og:description" content="Peeks into an object, i.e. takes the first element and returns
- it without removing it from the object. The data structure that has a peek
- method usually uses some sort of priority of its elements." />
+<meta property="og:description" content="Erase a vector of key-value pair from a map object." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,54 +108,72 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Have a look at the first element from an object without removing it</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_peek.R'><code>R/methods_peek.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_deque.R'><code>R/ds_deque.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_heap.R'><code>R/ds_heap.R</code></a></small>
-    <div class="hidden name"><code>peek-methods.Rd</code></div>
+    <h1>Erase an entry from a map</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_erase.R'><code>R/methods_erase.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_map.R'><code>R/ds_map.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_map_bimap.R'><code>R/ds_map_bimap.R</code></a>, and 2 more</small>
+    <div class="hidden name"><code>erase-methods.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Peeks into an object, i.e. takes the first element and returns
- it without removing it from the object. The data structure that has a peek
- method usually uses some sort of priority of its elements.</p>
+    <p>Erase a vector of key-value pair from a <code>map</code> object.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>peek</span>(<span class='no'>obj</span>)
+    <pre class="usage"><span class='fu'>erase</span>(<span class='no'>obj</span>, <span class='no'>key</span>, <span class='no'>value</span>)
 
-<span class='co'># S4 method for deque</span>
-<span class='fu'>peek</span>(<span class='no'>obj</span>)
+<span class='co'># S4 method for map,vector,missing</span>
+<span class='fu'>erase</span>(<span class='no'>obj</span>, <span class='no'>key</span>)
 
-<span class='co'># S4 method for heap</span>
-<span class='fu'>peek</span>(<span class='no'>obj</span>)</pre>
+<span class='co'># S4 method for bimap,missing,vector</span>
+<span class='fu'>erase</span>(<span class='no'>obj</span>, <span class='no'>value</span>)
+
+<span class='co'># S4 method for multimap,vector,vector</span>
+<span class='fu'>erase</span>(<span class='no'>obj</span>, <span class='no'>key</span>, <span class='no'>value</span>)
+
+<span class='co'># S4 method for multimap,vector,list</span>
+<span class='fu'>erase</span>(<span class='no'>obj</span>, <span class='no'>key</span>, <span class='no'>value</span>)
+
+<span class='co'># S4 method for multimap,vector,ANY</span>
+<span class='fu'>erase</span>(<span class='no'>obj</span>, <span class='no'>key</span>, <span class='no'>value</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>obj</th>
-      <td><p>the object to peek</p></td>
+      <td><p>the object to pop an element from</p></td>
+    </tr>
+    <tr>
+      <th>key</th>
+      <td><p>a vector of keys that should be removed</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>optionally a list of values needs to be supplied for some data
+structures such as <code>multimap</code>s if a single key-value pair should removed. If
+not provided removes all key-value pairs with a specific key.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>returns the first element from <code>obj</code> as list</p>
+    <p>returns <code>obj</code> with removed values</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
- <span class='co'># peeks into a queue</span>
- <span class='no'>q</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='queue.html'>queue</a></span>()
- <span class='no'>q</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='insert-methods.html'>insert</a></span>(<span class='no'>q</span>, <span class='fu'>list</span>(<span class='fu'>environment</span>(), <span class='fu'>data.frame</span>(<span class='kw'>a</span><span class='kw'>=</span><span class='fl'>1</span>)))
- <span class='fu'>peek</span>(<span class='no'>q</span>)</div><div class='output co'>#&gt; &lt;environment: 0x1212d7628&gt;</div><div class='input'>
- <span class='co'># peeks into a fibonacci heap</span>
- <span class='no'>b_heap</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='binomial_heap.html'>binomial_heap</a></span>()
- <span class='no'>b_heap</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='insert-methods.html'>insert</a></span>(<span class='no'>b_heap</span>, <span class='no'>letters</span>[<span class='fu'>seq</span>(<span class='fl'>3</span>)], <span class='fu'>list</span>(<span class='fl'>1</span>, <span class='fu'>diag</span>(<span class='fl'>3</span>), <span class='fu'>rnorm</span>(<span class='fl'>2</span>)))
- <span class='fu'>peek</span>(<span class='no'>b_heap</span>)</div><div class='output co'>#&gt; $a
-#&gt; [1] 1
-#&gt; </div><div class='input'>
-</div></pre>
+ <span class='co'># erases keys from a \code{hashmap} or \code{bimap}</span>
+ <span class='no'>h_map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='hashmap.html'>hashmap</a></span>()
+ <span class='no'>h_map</span>[<span class='no'>letters</span>] <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fu'>length</span>(<span class='no'>letters</span>))
+ <span class='no'>h_map</span> <span class='kw'>&lt;-</span> <span class='fu'>erase</span>(<span class='no'>h_map</span>, <span class='st'>"a"</span>)
+ <span class='no'>h_map</span> <span class='kw'>&lt;-</span> <span class='fu'>erase</span>(<span class='no'>h_map</span>, <span class='no'>letters</span>[<span class='fl'>2</span>:<span class='fl'>5</span>])
+
+ <span class='co'># erases keys from a multimap</span>
+ <span class='no'>m_map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='multimap.html'>multimap</a></span>()
+ <span class='no'>m_map</span>[<span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>)] <span class='kw'>&lt;-</span> <span class='fu'>rep</span>(<span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>3</span>)
+ <span class='no'>m_map</span> <span class='kw'>&lt;-</span> <span class='fu'>erase</span>(<span class='no'>m_map</span>, <span class='st'>"a"</span>)</div><div class='output co'>#&gt; <span class='message'>Note: method with signature ‘map#vector#missing’ chosen for function ‘erase’,</span>
+#&gt; <span class='message'> target signature ‘multimap#character#missing’.</span>
+#&gt; <span class='message'> "multimap#vector#ANY" would also be valid</span></div><div class='input'> <span class='no'>m_map</span> <span class='kw'>&lt;-</span> <span class='fu'>erase</span>(<span class='no'>m_map</span>, <span class='st'>"b"</span>, <span class='fl'>1</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

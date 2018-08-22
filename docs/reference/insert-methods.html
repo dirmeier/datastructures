@@ -34,7 +34,9 @@
 
 <meta property="og:description" content="Adds keys or &lt;key, value&gt; pairs to an object and returns the
  object. Depending on the datastructure used, either only keys are required
- or pairs of &lt;keys, values&gt;." />
+ or pairs of &lt;keys, values&gt;. Insertion of elements with vectors, i.e. giving
+ multiple arguments at the same time is faster than inserting elements
+ iteratively." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -62,7 +64,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">datastructures</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.7</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.8</span>
       </span>
     </div>
 
@@ -119,7 +121,9 @@
     
     <p>Adds keys or &lt;key, value&gt; pairs to an object and returns the
  object. Depending on the datastructure used, either only keys are required
- or pairs of &lt;keys, values&gt;.</p>
+ or pairs of &lt;keys, values&gt;. Insertion of elements with vectors, i.e. giving
+ multiple arguments at the same time is faster than inserting elements
+ iteratively.</p>
     
     </div>
 
@@ -177,6 +181,24 @@
     <p>returns <code>obj</code> with inserted values</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+ <span class='co'># inserts values into a multimap</span>
+ <span class='no'>m_map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='multimap.html'>multimap</a></span>()
+ <span class='no'>m_map</span> <span class='kw'>&lt;-</span> <span class='fu'>insert</span>(<span class='no'>m_map</span>, <span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>), <span class='fl'>1</span>:<span class='fl'>2</span>)
+ <span class='no'>m_map</span> <span class='kw'>&lt;-</span> <span class='fu'>insert</span>(<span class='no'>m_map</span>, <span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>), <span class='fu'>list</span>(<span class='fl'>1</span>, <span class='fu'>list</span>(<span class='kw'>a</span><span class='kw'>=</span><span class='fl'>1</span>)))
+ <span class='no'>m_map</span>[<span class='st'>"a"</span>] <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fu'>length</span>(<span class='no'>letters</span>))
+ <span class='no'>m_map</span>[<span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>)] <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='fl'>1</span>, <span class='fu'>data.frame</span>(<span class='kw'>a</span><span class='kw'>=</span><span class='fl'>2</span>), <span class='fu'>environment</span>())
+
+ <span class='co'># inserts values into a fibonacci_heap</span>
+ <span class='no'>f_heap</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fibonacci_heap.html'>fibonacci_heap</a></span>(<span class='st'>"integer"</span>)
+ <span class='no'>f_heap</span> <span class='kw'>&lt;-</span> <span class='fu'>insert</span>(<span class='no'>f_heap</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>:<span class='fl'>2</span>)
+ <span class='no'>f_heap</span>[<span class='fl'>3</span>:<span class='fl'>4</span>] <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='fl'>1</span>, <span class='fu'>list</span>(<span class='kw'>a</span><span class='kw'>=</span><span class='fl'>1</span>))
+ <span class='no'>f_heap</span> <span class='kw'>&lt;-</span> <span class='fu'>insert</span>(<span class='no'>f_heap</span>, <span class='fl'>5</span>:<span class='fl'>6</span>, <span class='fu'>list</span>(<span class='fu'>data.frame</span>(<span class='kw'>a</span><span class='kw'>=</span><span class='fu'>rnorm</span>(<span class='fl'>3</span>)), <span class='fu'>diag</span>(<span class='fl'>2</span>)))
+
+ <span class='co'># inserts elements into a queue or stack</span>
+ <span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span>()
+ <span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'>insert</span>(<span class='no'>s</span>, <span class='fu'>list</span>(<span class='fl'>1</span>, <span class='fu'>vector</span>(), <span class='fu'>list</span>(<span class='fl'>3</span>), <span class='fu'>data.frame</span>(<span class='fu'>rnorm</span>(<span class='fl'>3</span>))))</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -184,7 +206,9 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

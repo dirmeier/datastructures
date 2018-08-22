@@ -32,7 +32,8 @@
   
 <meta property="og:title" content="Get values from an object — values" />
 
-<meta property="og:description" content="Extracts the values from a map object." />
+<meta property="og:description" content="Extracts the values from a data structure such as a map
+ or heap object." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -60,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">datastructures</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.7</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.8</span>
       </span>
     </div>
 
@@ -115,7 +116,8 @@
 
     <div class="ref-description">
     
-    <p>Extracts the values from a <code>map</code> object.</p>
+    <p>Extracts the values from a data structure such as a <code>map</code>
+ or <code>heap</code> object.</p>
     
     </div>
 
@@ -141,9 +143,62 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>returns the extracted values as vector</p>
+    <p>returns the extracted values as a <code>list</code> or, when primitive, as
+ a <code>vector</code>. In case of a <code>heap</code> also returns <code>key</code> and <code>handle</code>
+ of the heap node.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+ <span class='co'># shows the values of a hashmap</span>
+ <span class='no'>h_map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='hashmap.html'>hashmap</a></span>(<span class='st'>"integer"</span>)
+ <span class='no'>h_map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='insert-methods.html'>insert</a></span>(<span class='no'>h_map</span>, <span class='fu'>seq</span>(<span class='fl'>2</span>), <span class='fu'>list</span>(<span class='fu'>data.frame</span>(<span class='kw'>a</span><span class='kw'>=</span><span class='fl'>1</span>), <span class='fl'>3</span>))
+ <span class='fu'>values</span>(<span class='no'>h_map</span>)</div><div class='output co'>#&gt; [[1]]
+#&gt; [1] 3
+#&gt; 
+#&gt; [[2]]
+#&gt;   a
+#&gt; 1 1
+#&gt; </div><div class='input'>
+ <span class='co'># shows the values of a multimap</span>
+ <span class='no'>m_map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='multimap.html'>multimap</a></span>(<span class='st'>"integer"</span>)
+ <span class='no'>m_map</span>[<span class='fu'>seq</span>(<span class='fl'>2</span>)] <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='fu'>diag</span>(<span class='fl'>2</span>), <span class='fu'>rnorm</span>(<span class='fl'>3</span>))
+ <span class='fu'>values</span>(<span class='no'>m_map</span>)</div><div class='output co'>#&gt; [[1]]
+#&gt; [1] -0.7792854  1.5394494  0.7000553
+#&gt; 
+#&gt; [[2]]
+#&gt;      [,1] [,2]
+#&gt; [1,]    1    0
+#&gt; [2,]    0    1
+#&gt; </div><div class='input'>
+ <span class='co'># shows the values of a heap</span>
+ <span class='no'>f_heap</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fibonacci_heap.html'>fibonacci_heap</a></span>(<span class='st'>"integer"</span>)
+ <span class='no'>f_heap</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='insert-methods.html'>insert</a></span>(<span class='no'>f_heap</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'>list</span>(<span class='fu'>diag</span>(<span class='fl'>2</span>), <span class='fu'>rnorm</span>(<span class='fl'>3</span>)))
+ <span class='fu'>values</span>(<span class='no'>f_heap</span>)</div><div class='output co'>#&gt; $`1`
+#&gt; $`1`$handle
+#&gt; [1] "handle-0"
+#&gt; 
+#&gt; $`1`$key
+#&gt; [1] 1
+#&gt; 
+#&gt; $`1`$value
+#&gt;      [,1] [,2]
+#&gt; [1,]    1    0
+#&gt; [2,]    0    1
+#&gt; 
+#&gt; 
+#&gt; $`2`
+#&gt; $`2`$handle
+#&gt; [1] "handle-1"
+#&gt; 
+#&gt; $`2`$key
+#&gt; [1] 2
+#&gt; 
+#&gt; $`2`$value
+#&gt; [1]  0.1175926 -0.2836227  0.4979088
+#&gt; 
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -151,7 +206,9 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the first elements from an object — head • datastructures</title>
+<title>Have a look at the head of an object — head • datastructures</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Get the first elements from an object — head" />
+<meta property="og:title" content="Have a look at the head of an object — head" />
 
-<meta property="og:description" content="Extracts the first couple of entries from an object." />
+<meta property="og:description" content="Shows the first few elements of a data structure." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">datastructures</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.7</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.8</span>
       </span>
     </div>
 
@@ -108,36 +108,76 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the first elements from an object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_head.R'><code>R/methods_head.R</code></a>, <a href='https://github.com/dirmeier/datastructures/blob/master/R/ds_map.R'><code>R/ds_map.R</code></a></small>
+    <h1>Have a look at the head of an object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dirmeier/datastructures/blob/master/R/methods_head.R'><code>R/methods_head.R</code></a></small>
     <div class="hidden name"><code>head-methods.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extracts the first couple of entries from an object.</p>
+    <p>Shows the first few elements of a data structure.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>head</span>(<span class='no'>obj</span>)
-
-<span class='co'># S4 method for map</span>
-<span class='fu'>head</span>(<span class='no'>obj</span>)</pre>
+    <pre class="usage"><span class='fu'>head</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>obj</th>
-      <td><p>the object to get the head from</p></td>
+      <th>x</th>
+      <td><p>the object to peek</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>other arguments that are only required for <code><a href='http://www.rdocumentation.org/packages/utils/topics/head'>utils::head</a></code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>returns a list of elements from <code>obj</code></p>
+    <p>returns the head of an object</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+ <span class='co'># shows the head of a hashmap</span>
+ <span class='no'>h_map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='hashmap.html'>hashmap</a></span>()
+ <span class='no'>h_map</span>[<span class='no'>letters</span>] <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fu'>length</span>(<span class='no'>letters</span>))
+ <span class='fu'>head</span>(<span class='no'>h_map</span>)</div><div class='output co'>#&gt; $i
+#&gt; [1] -0.5532382
+#&gt; 
+#&gt; $w
+#&gt; [1] 1.1465
+#&gt; 
+#&gt; $x
+#&gt; [1] 1.217272
+#&gt; 
+#&gt; $y
+#&gt; [1] 0.0004800131
+#&gt; 
+#&gt; $z
+#&gt; [1] 0.7551251
+#&gt; </div><div class='input'>
+ <span class='co'># shows the head of a bimap</span>
+ <span class='no'>b_map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bimap.html'>bimap</a></span>(<span class='st'>"integer"</span>, <span class='st'>"integer"</span>)
+ <span class='no'>b_map</span>[<span class='fu'>seq</span>(<span class='fl'>10</span>)] <span class='kw'>&lt;-</span> <span class='fu'>seq</span>(<span class='fl'>10</span>, <span class='fl'>1</span>)
+ <span class='fu'>head</span>(<span class='no'>b_map</span>)</div><div class='output co'>#&gt; $`1`
+#&gt; [1] 10
+#&gt; 
+#&gt; $`2`
+#&gt; [1] 9
+#&gt; 
+#&gt; $`3`
+#&gt; [1] 8
+#&gt; 
+#&gt; $`4`
+#&gt; [1] 7
+#&gt; 
+#&gt; $`5`
+#&gt; [1] 6
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -145,7 +185,9 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

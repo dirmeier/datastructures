@@ -46,6 +46,7 @@ NULL
 #' @slot .key.class  the class of the keys
 #' @slot .value.class  the class of the values
 #'
+#'
 setClass(
     "bimap",
     contains = "map",
@@ -69,6 +70,17 @@ setClass(
 #' @param value.class  the primitive class type of the values
 #'
 #' @return returns a new \code{bimap} object
+#'
+#' @examples
+#'
+#'  # create a bimap with character <-> character bi-mapping
+#'  b <- bimap()
+#'
+#'  # create a bimap with character <-> integer bi-mapping
+#'  b <- bimap("character", "integer")
+#'
+#'  # create a bimap with integer <-> integer bi-mapping
+#'  b <- bimap("integer", "numeric")
 #'
 bimap <- function(key.class = c("character", "numeric", "integer"),
                   value.class = c("character", "numeric", "integer"))

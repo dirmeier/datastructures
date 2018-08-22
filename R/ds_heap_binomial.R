@@ -49,6 +49,17 @@ setClass("binomial_heap", contains = "heap")
 #'
 #' @return returns a new \code{binomial_heap} object
 #'
+#' @examples
+#'
+#'  # creates a binomial_heap<character, SEXP>
+#'  b_heap <- binomial_heap()
+#'
+#'  # creates a binomial_heap<numeric, SEXP>
+#'  b_heap <- binomial_heap("numeric")
+#'
+#'  # creates a binomial_heap<character, SEXP>
+#'  b_heap <- binomial_heap("character")
+#'
 binomial_heap <- function(
   key.class = c("character", "numeric", "integer"))
 {

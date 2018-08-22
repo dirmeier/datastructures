@@ -43,13 +43,22 @@ setClass("stack", contains = "deque")
 #' @description Instantiates a new \code{\linkS4class{stack}} object,
 #'  i.e. a list implementation with LIFO principle.
 #'
+#' @param ... parameters that are only needed if \code{utils::stack} should be
+#'  called
+#'
 #' @return returns a new \code{stack} object
+#'
+#' @examples
+#'
+#'  # creates a new stack<SEXP>
+#'  s <- stack()
 #'
 stack <- function(...)
 {
     l <- list(...)
     if (length(l))
         return(utils::stack(...))
+
     stack <- methods::new(stack_sexp)
     methods::new("stack", .deque = stack)
 }

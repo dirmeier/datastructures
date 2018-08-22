@@ -57,6 +57,17 @@ setClass("multimap", contains = "unordered_map")
 #'
 #' @return returns a new \code{multimap} object
 #'
+#' @examples
+#'
+#'  # creates a new multimap<character, SEXP>
+#'  m <- multimap()
+#'
+#'  # creates a new multimap<numeric, SEXP>
+#'  m <- multimap("numeric")
+#'
+#'  # creates a new multimap<character, SEXP>
+#'  m <- multimap("integer")
+#'
 multimap <- function(key.class = c("character", "numeric", "integer"))
 {
   key.class   <- match.arg(key.class)

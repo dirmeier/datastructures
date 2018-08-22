@@ -32,9 +32,23 @@
 #' @param obj  a heap object
 #' @param from  a key in the heap for which the node should be decreased
 #' @param to  the new value of the heap
-#' @param handle  the handle of the specific node that is decreases
+#' @param handle  the handle of the specific node that is decreased
 #'
 #' @return  returns extracted handles and values from \code{obj}
+#'
+#' @examples
+#'
+#'  # decreases the key of a heap
+#'  f_heap <- fibonacci_heap("integer")
+#'  f_heap <- insert(f_heap, 1:5, letters[1:5])
+#'  peek(f_heap)
+#'
+#'  decrease_key(f_heap, 5L, -1L)
+#'  peek(f_heap)
+#'
+#'  hand <- handle(f_heap, value=letters[3])
+#'  decrease_key(f_heap, hand[[1]]$key, -2L)
+#'  peek(f_heap)
 #'
 setGeneric(
     "decrease_key",

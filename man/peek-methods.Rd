@@ -21,5 +21,19 @@ returns the first element from \code{obj} as list
 }
 \description{
 Peeks into an object, i.e. takes the first element and returns
- it without removing it from the object.
+ it without removing it from the object. The data structure that has a peek
+ method usually uses some sort of priority of its elements.
+}
+\examples{
+
+ # peeks into a queue
+ q <- queue()
+ q <- insert(q, list(environment(), data.frame(a=1)))
+ peek(q)
+
+ # peeks into a fibonacci heap
+ b_heap <- binomial_heap()
+ b_heap <- insert(b_heap, letters[seq(3)], list(1, diag(3), rnorm(2)))
+ peek(b_heap)
+
 }

@@ -37,3 +37,13 @@ Returns a list of handles and values for node elements that have
  needed in order to uniquely identify a node if, for example,
  \code{decrease_key} on a specific node is going to be called.
 }
+\examples{
+ # returns the handle of a heap
+ f_heap <- fibonacci_heap("integer")
+ f_heap <- insert(f_heap, 1:5, letters[1:5])
+
+ handle(f_heap, key=3L)
+
+ handle(f_heap, value=letters[3])
+
+}

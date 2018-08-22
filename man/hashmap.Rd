@@ -18,3 +18,14 @@ Instantiates a new \code{\linkS4class{hashmap}} object,
  \deqn{f: keys -> values}, where only unique key-value pairs
  can be stored.
 }
+\examples{
+ # creates a hashmap<character, SEXP>
+ h <- hashmap()
+
+ # creates a hashmap<integer, SEXP>
+ h <- hashmap("integer")
+
+ # creates a hashmap<numeric, SEXP>
+ h <- hashmap("numeric")
+
+}

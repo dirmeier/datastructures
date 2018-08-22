@@ -20,7 +20,7 @@ decrease_key(obj, from, to, handle)
 
 \item{to}{the new value of the heap}
 
-\item{handle}{the handle of the specific node that is decreases}
+\item{handle}{the handle of the specific node that is decreased}
 }
 \value{
 returns extracted handles and values from \code{obj}
@@ -30,4 +30,19 @@ Decreases the key of a node in a heap and updates the complete
  heap. The key is decreases \code{from} a value \code{to} a value by that moving the
  node's position in the heap. If a node cannot uniquely be identified using
  the \code{to} key, a \code{\link{handle}} needs to be given in addition.
+}
+\examples{
+
+ # decreases the key of a heap
+ f_heap <- fibonacci_heap("integer")
+ f_heap <- insert(f_heap, 1:5, letters[1:5])
+ peek(f_heap)
+
+ decrease_key(f_heap, 5L, -1L)
+ peek(f_heap)
+
+ hand <- handle(f_heap, value=letters[3])
+ decrease_key(f_heap, hand[[1]]$key, -2L)
+ peek(f_heap)
+
 }

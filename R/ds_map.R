@@ -18,6 +18,7 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
+#' @include methods_head.R
 #' @include methods_size.R
 #' @include methods_erase.R
 #' @include methods_clear.R
@@ -111,10 +112,10 @@ setMethod("clear", "map", .clear.map)
 setMethod("show", "map", .show.map)
 
 
+#' @noRd
+#' @export
+head.map <- function(x, ...) { .head.map(x) }
+
 #' @rdname size-methods
 setMethod("size", "map", .size.map)
 
-
-#' @export
-#' @method head map
-head.map <- function(x, ...) .head.map(x)

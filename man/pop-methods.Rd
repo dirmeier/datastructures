@@ -20,5 +20,24 @@ pop(obj)
 returns the first element from \code{obj} as list
 }
 \description{
-Remove and return the first element from an object.
+Remove and return the first element from a data structure that
+ has a priority, such as a \code{heap} or \code{deque}.
+}
+\examples{
+
+ # pops from a queue
+ q <- queue()
+ q <- insert(q, list(environment(), data.frame(a=1)))
+ pop(q)
+
+ # pops from a stack
+ s <- stack()
+ s <- insert(s, list(environment(), data.frame(a=1)))
+ pop(s)
+
+ # pops from a fibonacci heap
+ b_heap <- binomial_heap()
+ b_heap <- insert(b_heap, letters[seq(3)], list(1, diag(3), rnorm(2)))
+ pop(b_heap)
+
 }

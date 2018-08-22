@@ -49,6 +49,17 @@ setClass("fibonacci_heap", contains = "heap")
 #'
 #' @return returns a new \code{fibonacci_heap} object
 #'
+#' @examples
+#'
+#'  # creates a fibonacci_heap<character, SEXP>
+#'  f_heap <- fibonacci_heap()
+#'
+#'  # creates a fibonacci_heap<numeric, SEXP>
+#'  f_heap <- fibonacci_heap("numeric")
+#'
+#'  # creates a fibonacci_heap<character, SEXP>
+#'  f_heap <- fibonacci_heap("character")
+#'
 fibonacci_heap <- function(
     key.class   = c("character", "numeric", "integer"))
 {

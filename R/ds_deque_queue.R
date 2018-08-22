@@ -45,6 +45,10 @@ setClass("queue", contains = "deque")
 #'
 #' @return returns a new \code{queue} object
 #'
+#' @examples
+#'
+#'  # returns a new queue<SEXP>
+#'  q <- queue()
 queue <- function()
 {
     queue <- methods::new(queue_sexp)

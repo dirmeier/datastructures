@@ -145,7 +145,7 @@ setClass(
       } else {
         stop(paste0(
             "Multiple handles found for '", from[i], "'. ",
-            "Please specify handles implicitely."))
+            "Please specify handles implicitely."), call.=FALSE)
       }
     }
   } else {
@@ -153,6 +153,8 @@ setClass(
   }
 
   obj@.heap$decrease_key(from, to, handlex)
+
+  obj
 }
 
 

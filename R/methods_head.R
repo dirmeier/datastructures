@@ -18,41 +18,31 @@
 # along with datastructures. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' @title Get the size of an object
+#' @title Have a look at the head of an object
 #'
-#' @description Computes the size of an object, i.e. the number of keys or
-#'  <key, value> pairs depending on the object.
+#' @description Shows the first few elements of a data structure.
 #'
 #' @export
 #' @docType methods
-#' @rdname size-methods
+#' @rdname head-methods
 #'
-#' @param obj  the object to get the size from
+#' @param x  the object to peek
+#' @param ... other arguments that are only required for \code{utils::head}
 #'
-#' @return  returns the size of \code{obj}
+#' @return  returns the head of an object
 #'
 #' @examples
 #'
-#'  # get the size of a hashmap
+#'  # shows the head of a hashmap
 #'  h_map <- hashmap()
 #'  h_map[letters] <- rnorm(length(letters))
-#'  size(h_map)
+#'  head(h_map)
 #'
-#'  # get the size of a fibonacci heap
-#'  f_heap <- fibonacci_heap()
-#'  f_heap <- insert(f_heap, letters[seq(3)], list(1, diag(3), rnorm(2)))
-#'  size(f_heap)
+#'  # shows the head of a bimap
+#'  b_map <- bimap("integer", "integer")
+#'  b_map[seq(10)] <- seq(10, 1)
+#'  head(b_map)
 #'
-#'  # get the size of a stack
-#'  s <- stack()
-#'  s <- insert(s, list(1))
-#'  size(s)
-#'
-setGeneric(
-    "size",
-    function(obj)
-    {
-        standardGeneric("size")
-    },
-    package = "datastructures"
-)
+head <- function(x, ...) {
+    UseMethod("head")
+}

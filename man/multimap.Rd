@@ -18,3 +18,15 @@ Instantiates a new \code{\linkS4class{multimap}} object,
  \deqn{f: keys -> values}, where multiple identical key-value paors
  can be stored.
 }
+\examples{
+
+ # creates a new multimap<character, SEXP>
+ m <- multimap()
+
+ # creates a new multimap<numeric, SEXP>
+ m <- multimap("numeric")
+
+ # creates a new multimap<character, SEXP>
+ m <- multimap("integer")
+
+}

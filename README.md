@@ -8,6 +8,8 @@
 [![CRAN](http://www.r-pkg.org/badges/version/datastructures?color=brightgreen)](https://cran.r-project.org/package=datastructures)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/datastructures?color=brightgreen)](https://cran.r-project.org/package=datastructures)
 
+[![DOI](http://joss.theoj.org/papers/10.21105/joss.00910/status.svg)](https://doi.org/10.21105/joss.00910)
+
 Implementation of core data structures for R.
 
 ## Introduction

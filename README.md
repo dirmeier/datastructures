@@ -1,14 +1,15 @@
 # datastructures <img src="https://cdn.rawgit.com/dirmeier/datastructures/87d7cd08/inst/heap/heap.png" align="right" width="160px"/>
 
+
 [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Project Life](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Project Life](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![travis](https://travis-ci.org/dirmeier/datastructures.svg?branch=master)](https://travis-ci.org/dirmeier/datastructures)
 [![appveyor](https://ci.appveyor.com/api/projects/status/1li41de0xhov5gc3?svg=true)](https://ci.appveyor.com/project/dirmeier/datastructures)
 [![codecov](https://codecov.io/gh/dirmeier/datastructures/branch/master/graph/badge.svg)](https://codecov.io/gh/dirmeier/datastructures)
 [![CRAN](http://www.r-pkg.org/badges/version/datastructures?color=brightgreen)](https://cran.r-project.org/package=datastructures)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/datastructures?color=brightgreen)](https://cran.r-project.org/package=datastructures)
-
-[![DOI](http://joss.theoj.org/papers/10.21105/joss.00910/status.svg)](https://doi.org/10.21105/joss.00910)
+[![joss](http://joss.theoj.org/papers/10.21105/joss.00910/status.svg)](https://doi.org/10.21105/joss.00910)
+[![zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.1404281.svg)](https://doi.org/10.5281/zenodo.1404281)
 
 Implementation of core data structures for R.
 
@@ -83,6 +84,12 @@ versions:
 Load the library using `library(datastructures)`. We provide a vignette for
 the package that can be called using: `vignette("datastructures")`. If there
 are any questions let met know.
+
+## Citation
+
+If you want to cite `datastructures`, please use the following entry:
+
+> Dirmeier, Simon (2018). `datastructures`: An R package for organisation and storage of data. Journal of Open Source Software, 3(28), 910, https://doi.org/10.21105/joss.00910
 
 ## Feature requests and contributing
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 echo "Cleaning up..."
 rm -rf \

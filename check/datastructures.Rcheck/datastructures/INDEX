@@ -1,0 +1,49 @@
+[,unordered_map,vector,missing,missing-method
+                        Extract elements from an object
+[<-,bimap,vector,missing,vector-method
+                        Insert parts to an object
+[<-,heap,vector,missing,list-method
+                        Insert parts to an object
+[<-,heap,vector,missing,matrix-method
+                        Insert parts to an object
+[<-,heap,vector,missing,vector-method
+                        Insert parts to an object
+[<-,unordered_map,vector,missing,ANY-method
+                        Insert parts to an object
+[<-,unordered_map,vector,missing,list-method
+                        Insert parts to an object
+[<-,unordered_map,vector,missing,vector-method
+                        Insert parts to an object
+at                      Access elements from an object
+bimap                   Create a new 'bimap'
+bimap-class             Bimap class
+binomial_heap           Create a new 'binomial_heap'
+binomial_heap-class     Binomial heap class
+clear                   Remove all elements from a datastructure
+datastructures-package
+                        datastructures
+decrease_key            Decreases the key of a node in a heap
+deque-class             Deque class
+erase                   Erase an entry from a map
+fibonacci_heap          Create a new 'fibonacci_heap'
+fibonacci_heap-class    Fibonacci heap class
+handle                  Get the handles and values for nodes of a
+                        specific key in a heap.
+hashmap                 Create a new 'hashmap'
+hashmap-class           Hashmap class
+heap-class              Abstract heap class
+insert                  Add elements to an object
+keys                    Get keys from an object
+map-class               Map class
+multimap                Create a new 'multimap'
+multimap-class          Multimap class
+peek                    Have a look at the first element from an object
+                        without removing it
+pop                     Pop a single element from an object
+queue                   Create a new 'queue'
+queue-class             Queue class
+size                    Get the size of an object
+stack                   Create a new 'stack'
+stack-class             Stack class
+unordered_map-class     Abstract unordered map class
+values                  Get values from an object

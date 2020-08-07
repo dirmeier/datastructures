@@ -12,7 +12,7 @@
 ^LICENSE$
 ^.lintr$
 ^.travis.yml$
-^codecov.yml$
+^.codecov.yml$
 ^appveyor\.yml$
 ^README\.md$
 benchmark

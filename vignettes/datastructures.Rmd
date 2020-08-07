@@ -1,7 +1,5 @@
 ---
 title: "Datastructures tutorial"
-author: "Simon Dirmeier"
-date: "`r Sys.Date()`"
 output:
     rmarkdown::html_document:
         toc: true
@@ -371,11 +369,6 @@ Stacks and queues can be emptied like this:
   qu <- clear(qu)
   qu
 ```
-
-
-## Author
-
-* Simon Dirmeier <a href="mailto:simon.dirmeier@web.de">simon.dirmeier@web.de</a>
 
 ## Session info
 

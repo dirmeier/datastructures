@@ -6,8 +6,10 @@ navbar:
   title: "datastructures"
   type: inverse
   left:
-    - text: "Tutorial"
-      href: articles/datastructures.html
+    - text: "Vignettes"
+      menu:
+        - text: "Tutorial"
+          href: articles/datastructures.html
     - text: "Reference"
       href: reference/index.html
     - text: "News"

@@ -1,0 +1,37 @@
+Package: datastructures
+Type: Package
+Title: Implementation of Core Data Structures
+Version: 0.2.9
+Authors@R: person("Simon", "Dirmeier",
+                  email = "simon.dirmeier@web.de",
+                  role = c("aut", "cre"))
+Maintainer: Simon Dirmeier <simon.dirmeier@web.de>
+Description: Implementation of advanced data structures such as hashmaps,
+    heaps, or queues. Advanced data structures are essential
+    in many computer science and statistics problems, for example graph
+    algorithms or string analysis. The package uses 'Boost' and 'STL' data
+    types and extends these to R with 'Rcpp' modules.
+URL: https://github.com/dirmeier/datastructures
+BugReports: https://github.com/dirmeier/datastructures/issues
+License: GPL-3
+Encoding: UTF-8
+Depends: R (>= 3.3), Rcpp
+Suggests: testthat, knitr, rmarkdown, lintr
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
+SystemRequirements: C++11
+Imports: methods, purrr
+LinkingTo: Rcpp, BH
+NeedsCompilation: yes
+Collate: 'checks.R' 'datastructures-package.R' 'methods_clear.R'
+        'methods_insert.R' 'methods_size.R' 'methods_pop.R'
+        'methods_peek.R' 'ds_deque.R' 'ds_deque_queue.R'
+        'ds_deque_stack.R' 'methods_values.R' 'methods_decrease.R'
+        'methods_handle.R' 'ds_heap.R' 'ds_heap_binomial.R'
+        'ds_heap_fibonacci.R' 'methods_erase.R' 'ds_map.R'
+        'methods_keys.R' 'methods_at.R' 'ds_map_bimap.R'
+        'ds_map_unordered.R' 'ds_map_hashmap.R' 'ds_map_multimap.R'
+        'zzz.R'
+Packaged: 2020-08-07 15:47:09 UTC; simon
+Author: Simon Dirmeier [aut, cre]
+Built: R 4.0.2; x86_64-pc-linux-gnu; 2020-08-07 15:47:11 UTC; unix

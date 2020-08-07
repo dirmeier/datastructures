@@ -1,9 +1,0 @@
-{
-  "generator-r-bones": {
-    "user": "Simon Dirmeier",
-    "email": "mail@simon-dirmeier.net",
-    "projectID": "datastructures",
-    "desc": "Implementation of core datastructures for R.",
-    "githubuser": "dirmeier"
-  }
-}

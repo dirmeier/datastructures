@@ -39,19 +39,17 @@
 #' @return  returns extracted handles and values from \code{obj}
 #'
 #' @examples
-#'  # returns the handle of a heap
-#'  f_heap <- fibonacci_heap("integer")
-#'  f_heap <- insert(f_heap, 1:5, letters[1:5])
+#' # returns the handle of a heap
+#' f_heap <- fibonacci_heap("integer")
+#' f_heap <- insert(f_heap, 1:5, letters[1:5])
 #'
-#'  handle(f_heap, key=3L)
+#' handle(f_heap, key = 3L)
 #'
-#'  handle(f_heap, value=letters[3])
-#'
+#' handle(f_heap, value = letters[3])
 setGeneric(
-    "handle",
-    function(obj, key, value)
-    {
-        standardGeneric("handle")
-    },
-    package = "datastructures"
+  "handle",
+  function(obj, key, value) {
+    standardGeneric("handle")
+  },
+  package = "datastructures"
 )

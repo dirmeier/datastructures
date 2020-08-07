@@ -60,76 +60,75 @@ setClass("multimap", contains = "unordered_map")
 #' @return returns a new \code{multimap} object
 #'
 #' @examples
-#'  # creates a new multimap<character, SEXP>
-#'  m <- multimap()
+#' # creates a new multimap<character, SEXP>
+#' m <- multimap()
 #'
-#'  # creates a new multimap<numeric, SEXP>
-#'  m <- multimap("numeric")
+#' # creates a new multimap<numeric, SEXP>
+#' m <- multimap("numeric")
 #'
-#'  # creates a new multimap<character, SEXP>
-#'  m <- multimap("integer")
-#'
-multimap <- function(key.class = c("character", "numeric", "integer"))
-{
-  key.class   <- match.arg(key.class)
-  key.class   <- match.arg(key.class)
+#' # creates a new multimap<character, SEXP>
+#' m <- multimap("integer")
+multimap <- function(key.class = c("character", "numeric", "integer")) {
+  key.class <- match.arg(key.class)
+  key.class <- match.arg(key.class)
   map <- switch(
-      key.class,
-      "character" = methods::new(multimap_s),
-      "numeric"   = methods::new(multimap_d),
-      "integer"   = methods::new(multimap_i),
-      stop("Error defining key class"))
+    key.class,
+    "character" = methods::new(multimap_s),
+    "numeric"   = methods::new(multimap_d),
+    "integer"   = methods::new(multimap_i),
+    stop("Error defining key class")
+  )
 
   methods::new("multimap",
-               .key.class=key.class,
-               .map=map)
+    .key.class = key.class,
+    .map = map
+  )
 }
 
 
 #' @noRd
-.erase.multimap <- function(obj, key, value)
-{
-    .check.key.class(obj, key)
-    if (length(key) != length(value))
-        stop("dimensions of keys and values do not match")
-    obj@.map$remove_with_value(key, value)
+.erase.multimap <- function(obj, key, value) {
+  .check.key.class(obj, key)
+  if (length(key) != length(value)) {
+    stop("dimensions of keys and values do not match")
+  }
+  obj@.map$remove_with_value(key, value)
 
-    obj
+  obj
 }
 
 
 #' @rdname erase-methods
 setMethod(
-    "erase",
-    signature = signature(obj = "multimap", key = "vector", value = "vector"),
-    function(obj, key, value)
-    {
-        if (length(key) == 1) value <- list(value)
-        else if (length(key) == length(value) && is.vector(value))
-            value <- as.list(value)
-        .erase.multimap(obj, key, value)
+  "erase",
+  signature = signature(obj = "multimap", key = "vector", value = "vector"),
+  function(obj, key, value) {
+    if (length(key) == 1) {
+      value <- list(value)
+    } else if (length(key) == length(value) && is.vector(value)) {
+      value <- as.list(value)
     }
+    .erase.multimap(obj, key, value)
+  }
 )
 
 
 #' @rdname erase-methods
 setMethod(
-    "erase",
-    signature = signature(obj = "multimap", key = "vector", value = "list"),
-    function(obj, key, value)
-    {
-        if (length(key) == 1) value <- list(value)
-        .erase.multimap(obj, key, value)
-    }
+  "erase",
+  signature = signature(obj = "multimap", key = "vector", value = "list"),
+  function(obj, key, value) {
+    if (length(key) == 1) value <- list(value)
+    .erase.multimap(obj, key, value)
+  }
 )
 
 
 #' @rdname erase-methods
 setMethod(
-    "erase",
-    signature = signature(obj = "multimap", key = "vector", value = "ANY"),
-    function(obj, key, value)
-    {
-        .erase.multimap(obj, key, list(value))
-    }
+  "erase",
+  signature = signature(obj = "multimap", key = "vector", value = "ANY"),
+  function(obj, key, value) {
+    .erase.multimap(obj, key, list(value))
+  }
 )

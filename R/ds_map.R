@@ -43,22 +43,24 @@ setClass(
 
 
 #' @noRd
-.head.map <- function(obj)
-{
-  if (obj@.map$size())
+.head.map <- function(obj) {
+  if (obj@.map$size()) {
     obj@.map$head()
-  else NULL
+  } else {
+    NULL
+  }
 }
 
 
 #' @noRd
-.show.map <- function(object)
- {
+.show.map <- function(object) {
   clazz <- class(object)[1]
   pf <- ifelse(clazz == "bimap", " <--> ", " -> ")
-  cat(paste0("An object of class ", clazz, "<",
-             object@.key.class, ",T",
-             ">\n\n"))
+  cat(paste0(
+    "An object of class ", clazz, "<",
+    object@.key.class, ",T",
+    ">\n\n"
+  ))
   li <- peek(object)
   for (l in names(li))
   {
@@ -66,41 +68,39 @@ setClass(
     if (is.null(e)) e <- "NULL"
     cat(paste0(l, pf, class(e), "\n"))
   }
-  if (is.null(li))
+  if (is.null(li)) {
     cat(paste0("NULL", pf, "NULL", "\n"))
+  }
 }
 
 
 #' @noRd
-.size.map <- function(obj)
-{
+.size.map <- function(obj) {
   obj@.map$size()
 }
 
 
 #' @noRd
-.clear.map <- function(obj)
-{
-    obj@.map$clear()
-    obj
+.clear.map <- function(obj) {
+  obj@.map$clear()
+  obj
 }
 
 
 #' @noRd
-.erase.map <- function(obj, key)
-{
-    .check.key.class(obj, key)
-    obj@.map$remove(key)
+.erase.map <- function(obj, key) {
+  .check.key.class(obj, key)
+  obj@.map$remove(key)
 
-    obj
+  obj
 }
 
 
 #' @rdname erase-methods
 setMethod(
-    "erase",
-    signature = signature(obj = "map", key = "vector", value = "missing"),
-    function(obj, key) .erase.map(obj, key)
+  "erase",
+  signature = signature(obj = "map", key = "vector", value = "missing"),
+  function(obj, key) .erase.map(obj, key)
 )
 
 
@@ -118,4 +118,3 @@ setMethod("peek", "map", .head.map)
 
 #' @rdname size-methods
 setMethod("size", "map", .size.map)
-

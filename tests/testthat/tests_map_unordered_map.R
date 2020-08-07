@@ -25,124 +25,122 @@ maps <- c(hashmap, multimap)
 
 
 test_that("map shows", {
-    expect_output(show(hashmap("numeric")))
-    expect_output(show(multimap("character")))
+  expect_output(show(hashmap("numeric")))
+  expect_output(show(multimap("character")))
 })
 
 
 test_that("unordered map insert throws when inserting false values", {
-    for (cm in maps)
-    {
-        h <- cm("numeric")
-        h <- insert(h, c(1, 2), c(4, 5))
-        expect_error(insert(h, c("s", "s"), c(4, 5)))
-    }
+  for (cm in maps)
+  {
+    h <- cm("numeric")
+    h <- insert(h, c(1, 2), c(4, 5))
+    expect_error(insert(h, c("s", "s"), c(4, 5)))
+  }
 })
 
 
 test_that("unordered map retrieves correct values", {
-    for (cm in maps)
-    {
-        h <- cm("numeric")
-        h <- insert(h, c(1, 2), c(4, 5))
-        expect_true(all(sort(unlist(values(h))) %in% c(4, 5)))
-    }
+  for (cm in maps)
+  {
+    h <- cm("numeric")
+    h <- insert(h, c(1, 2), c(4, 5))
+    expect_true(all(sort(unlist(values(h))) %in% c(4, 5)))
+  }
 })
 
 
 test_that("unordered map get throws when getting false values", {
-    for (m in maps)
-    {
-        h <- m("numeric")
-        h <- insert(h, c(1, 2), c(4, 5))
-        expect_error(at(h, "s"))
-    }
+  for (m in maps)
+  {
+    h <- m("numeric")
+    h <- insert(h, c(1, 2), c(4, 5))
+    expect_error(at(h, "s"))
+  }
 })
 
 
 test_that("unordered map insert/get methods work", {
-    for (m in maps)
-    {
-        h <- m("numeric")
-        h <- insert(h, c(1, 2), c(4, 5))
-        expect_equal(at(h, 1)[[1]], 4)
-    }
+  for (m in maps)
+  {
+    h <- m("numeric")
+    h <- insert(h, c(1, 2), c(4, 5))
+    expect_equal(at(h, 1)[[1]], 4)
+  }
 })
 
 
 test_that("unordered map insert list works", {
-    for (cm in maps)
-    {
-        h <- cm("numeric")
-        m <- as.list(letters[1:2])
-        r <- c(1, 2)
-        h <- insert(h, r, m)
-        expect_equal(at(h, 2)[[1]], m[[2]])
-    }
+  for (cm in maps)
+  {
+    h <- cm("numeric")
+    m <- as.list(letters[1:2])
+    r <- c(1, 2)
+    h <- insert(h, r, m)
+    expect_equal(at(h, 2)[[1]], m[[2]])
+  }
 })
 
 
 test_that("unordered map insert vector works", {
-    for (cm in maps)
-    {
-        h <- cm("numeric")
-        m <- letters[1:2]
-        r <- c(1, 2)
-        h <- insert(h, r, m)
-        expect_equal(at(h, 2)[[1]], m[2])
-    }
+  for (cm in maps)
+  {
+    h <- cm("numeric")
+    m <- letters[1:2]
+    r <- c(1, 2)
+    h <- insert(h, r, m)
+    expect_equal(at(h, 2)[[1]], m[2])
+  }
 })
 
 test_that("unordered map can insert multiple values", {
-    for (cm in maps)
-    {
-        h <- cm("character")
+  for (cm in maps)
+  {
+    h <- cm("character")
 
-        h <- insert(h, "a", data.frame(A=rnorm(10)))
-        h[letters[2:3]] <- rnorm(2)
-        h <- insert(h, c("hallo", "hello"), list(a="A", b=list(a=3)))
+    h <- insert(h, "a", data.frame(A = rnorm(10)))
+    h[letters[2:3]] <- rnorm(2)
+    h <- insert(h, c("hallo", "hello"), list(a = "A", b = list(a = 3)))
 
-        expect_true(is.data.frame(at(h, "a")[[1]]))
-        expect_true(is.numeric(at(h, "b")[[1]]))
-        expect_true(at(h, "hallo")[[1]] == "A")
-        expect_true(is.list(at(h, "hello")[[1]]))
-    }
+    expect_true(is.data.frame(at(h, "a")[[1]]))
+    expect_true(is.numeric(at(h, "b")[[1]]))
+    expect_true(at(h, "hallo")[[1]] == "A")
+    expect_true(is.list(at(h, "hello")[[1]]))
+  }
 })
 
 
 test_that("unordered map peek works", {
-    for (cm in maps)
-    {
-        h <- cm("numeric")
-        m <- as.list(letters[1:2])
-        r <- c(1, 2)
-        h <- insert(h, r, m)
-        expect_output(show(peek(h)))
-    }
+  for (cm in maps)
+  {
+    h <- cm("numeric")
+    m <- as.list(letters[1:2])
+    r <- c(1, 2)
+    h <- insert(h, r, m)
+    expect_output(show(peek(h)))
+  }
 })
 
 
 test_that("unordered map size works", {
-    for (cm in maps)
-    {
-        h <- cm("numeric")
-        m <- as.list(letters[1:2])
-        r <- c(1, 2)
-        h <- insert(h, r, m)
-        expect_equal(size(h), 2)
-    }
+  for (cm in maps)
+  {
+    h <- cm("numeric")
+    m <- as.list(letters[1:2])
+    r <- c(1, 2)
+    h <- insert(h, r, m)
+    expect_equal(size(h), 2)
+  }
 })
 
 
 test_that("unordered map erases", {
-    for (m in maps) {
-        h <- m("integer")
-        h <- insert(h, 1L, environment())
-        h <- insert(h, 2L, list(a=1))
-        h <- insert(h, 3L, 2)
-        h <- erase(h, 1L)
-        expect_error(h[letters[1]])
-    }
+  for (m in maps) {
+    h <- m("integer")
+    h <- insert(h, 1L, environment())
+    h <- insert(h, 2L, list(a = 1))
+    h <- insert(h, 3L, 2)
+    h <- erase(h, 1L)
+    expect_error(h[letters[1]])
+  }
 })
-
-

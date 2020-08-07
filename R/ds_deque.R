@@ -36,60 +36,56 @@ NULL
 #' @slot .deque  \code{C++} object representing a deque
 #'
 setClass(
-    "deque",
-    contains = "VIRTUAL",
-    slots = list(.deque = "ANY"),
-    prototype = prototype(.deque = NULL)
+  "deque",
+  contains = "VIRTUAL",
+  slots = list(.deque = "ANY"),
+  prototype = prototype(.deque = NULL)
 )
 
 
-.clear.deque <- function(obj)
-{
-    obj@.deque$clear()
-    obj
+.clear.deque <- function(obj) {
+  obj@.deque$clear()
+  obj
 }
 
 #' @noRd
-.peek.deque <- function(obj)
-{
-    if (obj@.deque$size())
-        obj@.deque$peek()
-    else
-      NULL
-}
-
-
-#' @noRd
-.pop.deque <- function(obj)
-{
-    if (obj@.deque$size())
-        obj@.deque$pop()
-    else
-      NULL
+.peek.deque <- function(obj) {
+  if (obj@.deque$size()) {
+    obj@.deque$peek()
+  } else {
+    NULL
+  }
 }
 
 
 #' @noRd
-.show.deque <- function(object)
-{
-    cat(paste0("An object of class ", class(object)[1], "<SEXP>\n\n"))
-    li <- peek(object)
-    cat(paste0("Peek: ", class(li), ", ...\n"))
+.pop.deque <- function(obj) {
+  if (obj@.deque$size()) {
+    obj@.deque$pop()
+  } else {
+    NULL
+  }
 }
 
 
 #' @noRd
-.size.deque <- function(obj)
-{
-    obj@.deque$size()
+.show.deque <- function(object) {
+  cat(paste0("An object of class ", class(object)[1], "<SEXP>\n\n"))
+  li <- peek(object)
+  cat(paste0("Peek: ", class(li), ", ...\n"))
 }
 
 
 #' @noRd
-.insert.deque <- function(obj, x)
-{
-    obj@.deque$insert(x)
-    obj
+.size.deque <- function(obj) {
+  obj@.deque$size()
+}
+
+
+#' @noRd
+.insert.deque <- function(obj, x) {
+  obj@.deque$insert(x)
+  obj
 }
 
 
@@ -120,10 +116,9 @@ setMethod(
 setMethod(
   "insert",
   signature = signature(obj = "deque", x = "list", y = "missing"),
-  function(obj, x)
-  {
-      x <- if (is.data.frame(x) || length(x) == 1) list(x) else x
-      .insert.deque(obj, x)
+  function(obj, x) {
+    x <- if (is.data.frame(x) || length(x) == 1) list(x) else x
+    .insert.deque(obj, x)
   }
 )
 

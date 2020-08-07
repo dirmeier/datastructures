@@ -25,18 +25,17 @@ ds <- c(queue, stack)
 
 
 test_that("abstract class cannot get instantiated", {
-    expect_error(methods::new("deque"))
+  expect_error(methods::new("deque"))
 })
 
 
-test_that("deque clears correctly",
-{
+test_that("deque clears correctly", {
   for (d in ds)
   {
-      deq <- d()
-      deq <- insert(deq, rnorm(10))
-      expect_equal(size(deq), 1)
-      deq <- clear(deq)
-      expect_equal(size(deq), 0)
+    deq <- d()
+    deq <- insert(deq, rnorm(10))
+    expect_equal(size(deq), 1)
+    deq <- clear(deq)
+    expect_equal(size(deq), 0)
   }
 })

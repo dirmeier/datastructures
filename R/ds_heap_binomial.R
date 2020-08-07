@@ -52,26 +52,26 @@ setClass("binomial_heap", contains = "heap")
 #' @return returns a new \code{binomial_heap} object
 #'
 #' @examples
-#'  # creates a binomial_heap<character, SEXP>
-#'  b_heap <- binomial_heap()
+#' # creates a binomial_heap<character, SEXP>
+#' b_heap <- binomial_heap()
 #'
-#'  # creates a binomial_heap<numeric, SEXP>
-#'  b_heap <- binomial_heap("numeric")
+#' # creates a binomial_heap<numeric, SEXP>
+#' b_heap <- binomial_heap("numeric")
 #'
-#'  # creates a binomial_heap<character, SEXP>
-#'  b_heap <- binomial_heap("character")
-#'
+#' # creates a binomial_heap<character, SEXP>
+#' b_heap <- binomial_heap("character")
 binomial_heap <- function(
-  key.class = c("character", "numeric", "integer"))
-{
-  key.class   <- match.arg(key.class)
+                          key.class = c("character", "numeric", "integer")) {
+  key.class <- match.arg(key.class)
   heap <- switch(key.class,
-                 "character" = methods::new(binomial_heap_s),
-                 "numeric"   = methods::new(binomial_heap_d),
-                 "integer"   = methods::new(binomial_heap_i),
-                 stop("Error defining key class"))
+    "character" = methods::new(binomial_heap_s),
+    "numeric"   = methods::new(binomial_heap_d),
+    "integer"   = methods::new(binomial_heap_i),
+    stop("Error defining key class")
+  )
 
   methods::new("binomial_heap",
-               .key.class = key.class,
-               .heap = heap)
+    .key.class = key.class,
+    .heap = heap
+  )
 }

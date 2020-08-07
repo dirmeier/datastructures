@@ -22,10 +22,10 @@ context("hashmap")
 
 
 test_that("hashmap replace works", {
-    h <- hashmap("integer")
-    h <- insert(h, 1L, 3)
-    expect_equal(h[1L][[1]], 3)
-    h <- insert(h, 2L, list(a=1))
-    h <- insert(h, 1L, 2)
-    expect_equal(h[1L][[1]], 2)
+  h <- hashmap("integer")
+  h <- insert(h, 1L, 3)
+  expect_equal(h[1L][[1]], 3)
+  h <- insert(h, 2L, list(a = 1))
+  h <- insert(h, 1L, 2)
+  expect_equal(h[1L][[1]], 2)
 })

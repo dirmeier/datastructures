@@ -24,27 +24,27 @@ context("map")
 maps <- c(multimap, bimap, hashmap)
 
 test_that("abstract class cannot get instantiated", {
-    expect_error(methods::new("map"))
+  expect_error(methods::new("map"))
 })
 
 test_that("maps clear correctly", {
-    for (m in maps) {
-        h <- m("character")
-        h <- insert(h, letters[1], letters[1])
-        h <- insert(h, letters[2], letters[2])
-        h <- insert(h, letters[3], letters[3])
-        h <- clear(h)
-        expect_equal(size(h), 0)
-    }
+  for (m in maps) {
+    h <- m("character")
+    h <- insert(h, letters[1], letters[1])
+    h <- insert(h, letters[2], letters[2])
+    h <- insert(h, letters[3], letters[3])
+    h <- clear(h)
+    expect_equal(size(h), 0)
+  }
 })
 
 test_that("maps removes", {
-    for (m in maps) {
-        h <- m("character")
-        h <- insert(h, letters[1], letters[1])
-        h <- insert(h, letters[2], letters[2])
-        h <- insert(h, letters[3], letters[3])
-        h <- erase(h, letters[1])
-        expect_error(h[letters[1]])
-    }
+  for (m in maps) {
+    h <- m("character")
+    h <- insert(h, letters[1], letters[1])
+    h <- insert(h, letters[2], letters[2])
+    h <- insert(h, letters[3], letters[3])
+    h <- erase(h, letters[1])
+    expect_error(h[letters[1]])
+  }
 })

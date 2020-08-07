@@ -35,26 +35,24 @@
 #'
 #' @examples
 #'
-#'  # shows the values of a hashmap
-#'  h_map <- hashmap("integer")
-#'  h_map <- insert(h_map, seq(2), list(data.frame(a=1), 3))
-#'  values(h_map)
+#' # shows the values of a hashmap
+#' h_map <- hashmap("integer")
+#' h_map <- insert(h_map, seq(2), list(data.frame(a = 1), 3))
+#' values(h_map)
 #'
-#'  # shows the values of a multimap
-#'  m_map <- multimap("integer")
-#'  m_map[seq(2)] <- list(diag(2), rnorm(3))
-#'  values(m_map)
+#' # shows the values of a multimap
+#' m_map <- multimap("integer")
+#' m_map[seq(2)] <- list(diag(2), rnorm(3))
+#' values(m_map)
 #'
-#'  # shows the values of a heap
-#'  f_heap <- fibonacci_heap("integer")
-#'  f_heap <- insert(f_heap, 1:2, list(diag(2), rnorm(3)))
-#'  values(f_heap)
-#'
+#' # shows the values of a heap
+#' f_heap <- fibonacci_heap("integer")
+#' f_heap <- insert(f_heap, 1:2, list(diag(2), rnorm(3)))
+#' values(f_heap)
 setGeneric(
-    "values",
-    function(obj)
-    {
-        standardGeneric("values")
-    },
-    package = "datastructures"
+  "values",
+  function(obj) {
+    standardGeneric("values")
+  },
+  package = "datastructures"
 )

@@ -21,6 +21,7 @@ Depends:
 Suggests:
     testthat,
     knitr,
+    styler,
     rmarkdown,
     lintr
 VignetteBuilder: knitr

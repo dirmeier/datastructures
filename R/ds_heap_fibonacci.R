@@ -52,27 +52,26 @@ setClass("fibonacci_heap", contains = "heap")
 #' @return returns a new \code{fibonacci_heap} object
 #'
 #' @examples
-#'  # creates a fibonacci_heap<character, SEXP>
-#'  f_heap <- fibonacci_heap()
+#' # creates a fibonacci_heap<character, SEXP>
+#' f_heap <- fibonacci_heap()
 #'
-#'  # creates a fibonacci_heap<numeric, SEXP>
-#'  f_heap <- fibonacci_heap("numeric")
+#' # creates a fibonacci_heap<numeric, SEXP>
+#' f_heap <- fibonacci_heap("numeric")
 #'
-#'  # creates a fibonacci_heap<character, SEXP>
-#'  f_heap <- fibonacci_heap("character")
-#'
+#' # creates a fibonacci_heap<character, SEXP>
+#' f_heap <- fibonacci_heap("character")
 fibonacci_heap <- function(
-    key.class   = c("character", "numeric", "integer"))
-{
+                           key.class = c("character", "numeric", "integer")) {
+  key.class <- match.arg(key.class)
+  heap <- switch(key.class,
+    "character" = methods::new(fibonacci_heap_s),
+    "numeric"   = methods::new(fibonacci_heap_d),
+    "integer"   = methods::new(fibonacci_heap_i),
+    stop("Error defining key class")
+  )
 
-    key.class   <- match.arg(key.class)
-    heap <- switch(key.class,
-                   "character" = methods::new(fibonacci_heap_s),
-                   "numeric"   = methods::new(fibonacci_heap_d),
-                   "integer"   = methods::new(fibonacci_heap_i),
-                   stop("Error defining key class"))
-
-    methods::new("fibonacci_heap",
-                 .key.class = key.class,
-                 .heap = heap)
+  methods::new("fibonacci_heap",
+    .key.class = key.class,
+    .heap = heap
+  )
 }

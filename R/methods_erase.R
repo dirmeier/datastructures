@@ -35,23 +35,21 @@
 #' @return  returns \code{obj} with removed values
 #' @examples
 #'
-#'  # erases keys from a hashmap or bimap
-#'  h_map <- hashmap()
-#'  h_map[letters] <- rnorm(length(letters))
-#'  h_map <- erase(h_map, "a")
-#'  h_map <- erase(h_map, letters[2:5])
+#' # erases keys from a hashmap or bimap
+#' h_map <- hashmap()
+#' h_map[letters] <- rnorm(length(letters))
+#' h_map <- erase(h_map, "a")
+#' h_map <- erase(h_map, letters[2:5])
 #'
-#'  # erases keys from a multimap
-#'  m_map <- multimap()
-#'  m_map[c("a", "a", "a", "b", "b", "c")] <- rep(1:2, 3)
-#'  m_map <- erase(m_map, "a")
-#'  m_map <- erase(m_map, "b", 1)
-#'
+#' # erases keys from a multimap
+#' m_map <- multimap()
+#' m_map[c("a", "a", "a", "b", "b", "c")] <- rep(1:2, 3)
+#' m_map <- erase(m_map, "a")
+#' m_map <- erase(m_map, "b", 1)
 setGeneric(
-    "erase",
-    function(obj, key, value)
-    {
-        standardGeneric("erase")
-    },
-    package = "datastructures"
+  "erase",
+  function(obj, key, value) {
+    standardGeneric("erase")
+  },
+  package = "datastructures"
 )

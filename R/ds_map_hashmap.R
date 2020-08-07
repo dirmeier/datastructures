@@ -59,26 +59,26 @@ setClass("hashmap", contains = "unordered_map")
 #' @return returns a new \code{hashmap} object
 #'
 #' @examples
-#'  # creates a hashmap<character, SEXP>
-#'  h <- hashmap()
+#' # creates a hashmap<character, SEXP>
+#' h <- hashmap()
 #'
-#'  # creates a hashmap<integer, SEXP>
-#'  h <- hashmap("integer")
+#' # creates a hashmap<integer, SEXP>
+#' h <- hashmap("integer")
 #'
-#'  # creates a hashmap<numeric, SEXP>
-#'  h <- hashmap("numeric")
-#'
-hashmap <- function(key.class = c("character", "numeric", "integer"))
-{
-  key.class   <- match.arg(key.class)
+#' # creates a hashmap<numeric, SEXP>
+#' h <- hashmap("numeric")
+hashmap <- function(key.class = c("character", "numeric", "integer")) {
+  key.class <- match.arg(key.class)
   map <- switch(
-      key.class,
-      "character" = methods::new(hashmap_s),
-      "numeric"   = methods::new(hashmap_d),
-      "integer"   = methods::new(hashmap_i),
-      stop("Error defining key class"))
+    key.class,
+    "character" = methods::new(hashmap_s),
+    "numeric"   = methods::new(hashmap_d),
+    "integer"   = methods::new(hashmap_i),
+    stop("Error defining key class")
+  )
 
   methods::new("hashmap",
-               .key.class=key.class,
-               .map=map)
+    .key.class = key.class,
+    .map = map
+  )
 }

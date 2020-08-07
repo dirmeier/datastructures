@@ -22,415 +22,385 @@ context("heap")
 hs <- c(binomial_heap, fibonacci_heap)
 
 
-test_that("abstract class cannot get instantiated",
-{
-    expect_error(methods::new("heap"))
+test_that("abstract class cannot get instantiated", {
+  expect_error(methods::new("heap"))
 })
 
 
-test_that("heaps show",
-{
-    for (h in hs)
-    {
-        expect_output(show(h("numeric")))
-    }
-})
-
-
-test_that("heap insert throws when inserting false values",
-{
+test_that("heaps show", {
   for (h in hs)
   {
-      bheap <- h("numeric")
-      r <- stats::rnorm(5)
-      expect_error(insert(bheap, c("s", "s"), c(4, 5)))
+    expect_output(show(h("numeric")))
   }
 })
 
 
-test_that("heap peek shows correct value",
-{
+test_that("heap insert throws when inserting false values", {
   for (h in hs)
   {
-      bheap <- h("numeric")
-      r <- stats::rnorm(5)
-      bheap <- insert(bheap, r, r)
-      expect_equal(unlist(unname(peek(bheap))), min(r), tolerance=0.01)
+    bheap <- h("numeric")
+    r <- stats::rnorm(5)
+    expect_error(insert(bheap, c("s", "s"), c(4, 5)))
   }
 })
 
 
-test_that("heap size is correct",
-{
+test_that("heap peek shows correct value", {
   for (h in hs)
   {
-      bheap <- h("numeric")
-      r <- stats::rnorm(5)
-      bheap <- insert(bheap, r, r)
-      expect_equal(size(bheap), 5)
+    bheap <- h("numeric")
+    r <- stats::rnorm(5)
+    bheap <- insert(bheap, r, r)
+    expect_equal(unlist(unname(peek(bheap))), min(r), tolerance = 0.01)
   }
 })
 
 
-test_that("heap pop first element multiple elements in list",
-{
+test_that("heap size is correct", {
   for (h in hs)
   {
-      bheap <- h("character")
-      r <- letters[1:2]
-      m <- list(1, 2)
-      bheap <- insert(bheap, r, m)
-      expect_equal(unname(unlist(pop(bheap))), m [[1]])
+    bheap <- h("numeric")
+    r <- stats::rnorm(5)
+    bheap <- insert(bheap, r, r)
+    expect_equal(size(bheap), 5)
   }
 })
 
 
-test_that("heap peek first element multiple elements in list",
-{
+test_that("heap pop first element multiple elements in list", {
   for (h in hs)
   {
-      bheap <- h("character")
-      r <- letters[1:2]
-      m <- list(1, 2)
-      bheap <- insert(bheap, r, m)
-      expect_equal(unname(unlist(peek(bheap))), m[[1]])
+    bheap <- h("character")
+    r <- letters[1:2]
+    m <- list(1, 2)
+    bheap <- insert(bheap, r, m)
+    expect_equal(unname(unlist(pop(bheap))), m [[1]])
   }
 })
 
 
-test_that("heap peek first element multiple elements vector",
-{
+test_that("heap peek first element multiple elements in list", {
   for (h in hs)
   {
-      bheap <- h("character")
-      r <- letters[1:2]
-      m <- rnorm(2)
-      bheap <- insert(bheap, r, m)
-      expect_equal(unname(unlist(peek(bheap))), m[1])
+    bheap <- h("character")
+    r <- letters[1:2]
+    m <- list(1, 2)
+    bheap <- insert(bheap, r, m)
+    expect_equal(unname(unlist(peek(bheap))), m[[1]])
   }
 })
 
 
-test_that("heap peek first element multiple elements vector",
-{
+test_that("heap peek first element multiple elements vector", {
   for (h in hs)
   {
-      bheap <- h("character")
-      r <- letters[1:2]
-      m <- rnorm(2)
-      bheap <- insert(bheap, r, m)
-      expect_equal(unname(unlist(peek(bheap))), m[1])
+    bheap <- h("character")
+    r <- letters[1:2]
+    m <- rnorm(2)
+    bheap <- insert(bheap, r, m)
+    expect_equal(unname(unlist(peek(bheap))), m[1])
   }
 })
 
 
-test_that("heap peek first element multiple elements as list",
-{
+test_that("heap peek first element multiple elements vector", {
   for (h in hs)
   {
-      bheap <- h("character")
-      r <- letters[1:2]
-      m <- as.list(rnorm(2))
-      bheap <- insert(bheap, r, m)
-      expect_equal(unname(unlist(peek(bheap))), m[[1]])
+    bheap <- h("character")
+    r <- letters[1:2]
+    m <- rnorm(2)
+    bheap <- insert(bheap, r, m)
+    expect_equal(unname(unlist(peek(bheap))), m[1])
   }
 })
 
 
-test_that("heap warns for non key element at decrease",
-{
+test_that("heap peek first element multiple elements as list", {
   for (h in hs)
   {
-      bheap <- h("character")
-      r <- letters[c(1, 1)]
-      m <- as.list(rnorm(2))
-      bheap <- insert(bheap, r, m)
-      expect_error(decrease_key(heap, letters[3], letters[2]))
+    bheap <- h("character")
+    r <- letters[1:2]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    expect_equal(unname(unlist(peek(bheap))), m[[1]])
   }
 })
 
 
-test_that("heap stops for double key element at decrease",
-{
+test_that("heap warns for non key element at decrease", {
   for (h in hs)
   {
-      bheap <- h("character")
-      r <- letters[c(1, 1)]
-      m <- as.list(rnorm(2))
-      bheap <- insert(bheap, r, m)
-      expect_error(decrease_key(bheap, letters[1]))
+    bheap <- h("character")
+    r <- letters[c(1, 1)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    expect_error(decrease_key(heap, letters[3], letters[2]))
   }
 })
 
 
-test_that("heap returns correct handles for two keys",
-{
+test_that("heap stops for double key element at decrease", {
   for (h in hs)
   {
-      bheap <- h("character")
-      r <- letters[c(1, 1)]
-      m <- list(1, 1)
-      bheap <- insert(bheap, r, m)
-      hand <- handle(bheap, letters[1])
-      expect_equal(length(hand), 2)
-      expect_true(hand[[1]]$value == 1)
-      expect_true(hand[[2]]$value == 1)
+    bheap <- h("character")
+    r <- letters[c(1, 1)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    expect_error(decrease_key(bheap, letters[1]))
   }
 })
 
 
-test_that("heap returns correct handles for vectorial input",
-{
+test_that("heap returns correct handles for two keys", {
   for (h in hs)
   {
-      bheap <- h("character")
-      r <- letters[c(1, 2)]
-      m <- as.list(rnorm(2))
-      bheap <- insert(bheap, r, m)
-      hand <- handle(bheap, letters)
-      expect_equal(length(hand), 2)
-  }
-})
-
-test_that("heaps throws from Rcpp when incorrect decrease vector lengths",
-{
-  for (h in hs)
-  {
-      bheap <- h("character")
-      r <- letters[c(3, 2)]
-      m <- as.list(rnorm(2))
-      bheap <- insert(bheap, r, m)
-      hand <- handle(bheap, letters[3])
-      expect_error(decrease_key(bheap, from=letters[c(3, 2)], to="a"))
+    bheap <- h("character")
+    r <- letters[c(1, 1)]
+    m <- list(1, 1)
+    bheap <- insert(bheap, r, m)
+    hand <- handle(bheap, letters[1])
+    expect_equal(length(hand), 2)
+    expect_true(hand[[1]]$value == 1)
+    expect_true(hand[[2]]$value == 1)
   }
 })
 
 
-test_that("heap decrease key works with handles",
-{
+test_that("heap returns correct handles for vectorial input", {
   for (h in hs)
   {
-      bheap <- h("character")
-      r <- letters[c(3, 3)]
-      m <- as.list(rnorm(2))
-      bheap <- insert(bheap, r, m)
-      hand <- handle(bheap, letters[3])
-      decrease_key(bheap, from=letters[3], to="a", handle=hand[[1]]$handle)
-      expect_equal(names(pop(bheap)), "a")
+    bheap <- h("character")
+    r <- letters[c(1, 2)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    hand <- handle(bheap, letters)
+    expect_equal(length(hand), 2)
+  }
+})
+
+test_that("heaps throws from Rcpp when incorrect decrease vector lengths", {
+  for (h in hs)
+  {
+    bheap <- h("character")
+    r <- letters[c(3, 2)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    hand <- handle(bheap, letters[3])
+    expect_error(decrease_key(bheap, from = letters[c(3, 2)], to = "a"))
   }
 })
 
 
-test_that("heap computes decrease key correctly",
-{
+test_that("heap decrease key works with handles", {
   for (h in hs)
   {
-      bheap <- h("character")
-      r <- letters[c(2, 3)]
-      m <- as.list(rnorm(2))
-      bheap <- insert(bheap, r, m)
-      decrease_key(bheap, letters[3], letters[1])
-      expect_equal(names(pop(bheap)), "a")
+    bheap <- h("character")
+    r <- letters[c(3, 3)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    hand <- handle(bheap, letters[3])
+    decrease_key(bheap, from = letters[3], to = "a", handle = hand[[1]]$handle)
+    expect_equal(names(pop(bheap)), "a")
   }
 })
 
 
-test_that("heap returns correct handles for two keys after decrease",
-{
+test_that("heap computes decrease key correctly", {
   for (h in hs)
   {
-      bheap <- h("character")
-      r <- letters[c(2, 3)]
-      m <- as.list(rnorm(2))
-      bheap <- insert(bheap, r, m)
-      decrease_key(bheap, letters[3], letters[1])
-      expect_equal(length(handle(bheap, letters[1])), 1)
-      expect_equal(length(handle(bheap, letters[2])), 1)
-      expect_equal(length(handle(bheap, letters[3])), 0)
+    bheap <- h("character")
+    r <- letters[c(2, 3)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    decrease_key(bheap, letters[3], letters[1])
+    expect_equal(names(pop(bheap)), "a")
   }
 })
 
 
-test_that("heap value function works for values",
-{
+test_that("heap returns correct handles for two keys after decrease", {
   for (h in hs)
   {
-      bheap <- h("integer")
-      r <- c(1L, 1L, 3L)
-      m <- rnorm(3)
-      bheap <- insert(bheap, r, m)
-      vals <- values(bheap)
-      expect_equal(unname(sort(sapply(vals, function(.) .$value))), sort(m))
+    bheap <- h("character")
+    r <- letters[c(2, 3)]
+    m <- as.list(rnorm(2))
+    bheap <- insert(bheap, r, m)
+    decrease_key(bheap, letters[3], letters[1])
+    expect_equal(length(handle(bheap, letters[1])), 1)
+    expect_equal(length(handle(bheap, letters[2])), 1)
+    expect_equal(length(handle(bheap, letters[3])), 0)
   }
 })
 
 
-test_that("heap value function works for keys",
-{
+test_that("heap value function works for values", {
   for (h in hs)
   {
-      bheap <- h("integer")
-      r <- c(1L, 1L, 3L)
-      m <- rnorm(3)
-      bheap <- insert(bheap, r, m)
-      vals <- values(bheap)
-      expect_equal(unname(sort(sapply(vals, function(.) .$key))), sort(r))
-  }
-})
-
-test_that("heap value function works for keys",
-{
-  for (h in hs)
-  {
-      bheap <- h("integer")
-      r <- c(1L, 1L, 3L)
-      m <- rnorm(3)
-      bheap <- insert(bheap, r, m)
-      vals <- values(bheap)
-      expect_equal(unname(sort(sapply(vals, function(.) .$handle))), paste0("handle-", 0:2))
+    bheap <- h("integer")
+    r <- c(1L, 1L, 3L)
+    m <- rnorm(3)
+    bheap <- insert(bheap, r, m)
+    vals <- values(bheap)
+    expect_equal(unname(sort(sapply(vals, function(.) .$value))), sort(m))
   }
 })
 
 
-test_that("heap uuids are unique",
-{
+test_that("heap value function works for keys", {
+  for (h in hs)
+  {
+    bheap <- h("integer")
+    r <- c(1L, 1L, 3L)
+    m <- rnorm(3)
+    bheap <- insert(bheap, r, m)
+    vals <- values(bheap)
+    expect_equal(unname(sort(sapply(vals, function(.) .$key))), sort(r))
+  }
+})
+
+test_that("heap value function works for keys", {
+  for (h in hs)
+  {
+    bheap <- h("integer")
+    r <- c(1L, 1L, 3L)
+    m <- rnorm(3)
+    bheap <- insert(bheap, r, m)
+    vals <- values(bheap)
+    expect_equal(unname(sort(sapply(vals, function(.) .$handle))), paste0("handle-", 0:2))
+  }
+})
+
+
+test_that("heap uuids are unique", {
   n <- 10000
   r <- rep(1L, n)
   m <- rep(rnorm(1), n)
   for (h in hs)
   {
-      bheap <- h("integer")
-      bheap <- insert(bheap, r, m)
-      vals  <- values(bheap)
-      hand  <- sapply(handle(bheap, 1L), function(.) .$handle)
-      expect_true(length(unique(hand)) == n)
+    bheap <- h("integer")
+    bheap <- insert(bheap, r, m)
+    vals <- values(bheap)
+    hand <- sapply(handle(bheap, 1L), function(.) .$handle)
+    expect_true(length(unique(hand)) == n)
   }
 })
 
 
-test_that("multiple different objects can be added to heap",
-{
-  for (h in hs)
-  {
-      bheap <- h("integer")
-      bheap <- insert(bheap, 1L, "data.frame")
-      bheap <- insert(bheap, 2L, data.frame(A=1))
-      bheap <- insert(bheap, 6:7, list(1, list(a=2)))
-      res <- pop(bheap)
-      expect_true(res[[1]] == "data.frame")
-      res <- pop(bheap)
-      expect_true(res[[1]]$A == 1)
-      res <- pop(bheap)
-      expect_true(res[[1]] == 1)
-      res <- pop(bheap)
-      expect_true(is.list(res[[1]]))
-  }
-})
-
-
-test_that("heap checks out list situations",
-{
-  for (h in hs)
-  {
-      bheap <- h("integer")
-      bheap <- insert(bheap, 1L, data.frame(A=1))
-      bheap <- insert(bheap, 2L,  list(1))
-      bheap <- insert(bheap, 3L,  list(list(1)))
-      bheap <- insert(bheap, 4L,  list(data.frame(A=1)))
-      bheap <- insert(bheap, 6:7, list(1, list(a=2)))
-      bheap <- insert(bheap, 8L, list(1, list(a=2)))
-      res <- pop(bheap)
-      expect_true(res[[1]]$A == 1)
-      res <- pop(bheap)
-      expect_true(res[[1]][[1]] == 1)
-      res <- pop(bheap)
-      expect_true(res[[1]][[1]] == 1)
-      res <- pop(bheap)
-      expect_true(res[[1]][[1]]$A == 1)
-      res <- pop(bheap)
-      expect_true(res[[1]] == 1)
-      res <- pop(bheap)
-      expect_true(res[[1]]$a == 2)
-  }
-})
-
-
-test_that("heap handle_values works with data.frame",
-{
+test_that("multiple different objects can be added to heap", {
   for (h in hs)
   {
     bheap <- h("integer")
-    bheap <- insert(bheap, 1L, data.frame(A=1))
-    vals <- handle(bheap, value=data.frame(A=1))
-    expect_equal(vals[[1]]$key,  1L)
-    expect_equal(vals[[1]]$handle,  "handle-0")
+    bheap <- insert(bheap, 1L, "data.frame")
+    bheap <- insert(bheap, 2L, data.frame(A = 1))
+    bheap <- insert(bheap, 6:7, list(1, list(a = 2)))
+    res <- pop(bheap)
+    expect_true(res[[1]] == "data.frame")
+    res <- pop(bheap)
+    expect_true(res[[1]]$A == 1)
+    res <- pop(bheap)
+    expect_true(res[[1]] == 1)
+    res <- pop(bheap)
+    expect_true(is.list(res[[1]]))
+  }
+})
+
+
+test_that("heap checks out list situations", {
+  for (h in hs)
+  {
+    bheap <- h("integer")
+    bheap <- insert(bheap, 1L, data.frame(A = 1))
+    bheap <- insert(bheap, 2L, list(1))
+    bheap <- insert(bheap, 3L, list(list(1)))
+    bheap <- insert(bheap, 4L, list(data.frame(A = 1)))
+    bheap <- insert(bheap, 6:7, list(1, list(a = 2)))
+    bheap <- insert(bheap, 8L, list(1, list(a = 2)))
+    res <- pop(bheap)
+    expect_true(res[[1]]$A == 1)
+    res <- pop(bheap)
+    expect_true(res[[1]][[1]] == 1)
+    res <- pop(bheap)
+    expect_true(res[[1]][[1]] == 1)
+    res <- pop(bheap)
+    expect_true(res[[1]][[1]]$A == 1)
+    res <- pop(bheap)
+    expect_true(res[[1]] == 1)
+    res <- pop(bheap)
+    expect_true(res[[1]]$a == 2)
+  }
+})
+
+
+test_that("heap handle_values works with data.frame", {
+  for (h in hs)
+  {
+    bheap <- h("integer")
+    bheap <- insert(bheap, 1L, data.frame(A = 1))
+    vals <- handle(bheap, value = data.frame(A = 1))
+    expect_equal(vals[[1]]$key, 1L)
+    expect_equal(vals[[1]]$handle, "handle-0")
     expect_equal(length(vals), 1)
   }
 })
 
 
-test_that("heap handle_values works with list",
-{
+test_that("heap handle_values works with list", {
   for (h in hs)
   {
-      bheap <- h("integer")
-      bheap <- insert(bheap, 1L, list(A=1))
-      vals <- handle(bheap, value=list(A=1))
-      expect_equal(vals[[1]]$key,  1L)
-      expect_equal(vals[[1]]$handle,  "handle-0")
-      expect_equal(length(vals), 1)
+    bheap <- h("integer")
+    bheap <- insert(bheap, 1L, list(A = 1))
+    vals <- handle(bheap, value = list(A = 1))
+    expect_equal(vals[[1]]$key, 1L)
+    expect_equal(vals[[1]]$handle, "handle-0")
+    expect_equal(length(vals), 1)
   }
 })
 
 
-test_that("heap handle_values works with list of lists",
-{
+test_that("heap handle_values works with list of lists", {
   for (h in hs)
   {
-      bheap <- h("integer")
-      bheap <- insert(bheap, c(1L, 1L, 2L), list(list(A=1), list(A=1), diag(5)))
-      vals <- handle(bheap, value=list(A=1))
-      expect_equal(vals[[1]]$key,  1L)
-      expect_equal(length(vals), 2)
+    bheap <- h("integer")
+    bheap <- insert(bheap, c(1L, 1L, 2L), list(list(A = 1), list(A = 1), diag(5)))
+    vals <- handle(bheap, value = list(A = 1))
+    expect_equal(vals[[1]]$key, 1L)
+    expect_equal(length(vals), 2)
   }
 })
 
 
-test_that("heap handle_values works with vector",
-{
+test_that("heap handle_values works with vector", {
   for (h in hs)
   {
-      bheap <- h("integer")
-      m <- rnorm(5)
-      bheap <- insert(bheap, 1L, m)
-      vals <- handle(bheap, value=m)
-      expect_equal(vals[[1]]$key,  1L)
-      expect_equal(length(vals), 1)
+    bheap <- h("integer")
+    m <- rnorm(5)
+    bheap <- insert(bheap, 1L, m)
+    vals <- handle(bheap, value = m)
+    expect_equal(vals[[1]]$key, 1L)
+    expect_equal(length(vals), 1)
   }
 })
 
 
-test_that("heap handle_values works with matrix",
-{
+test_that("heap handle_values works with matrix", {
   for (h in hs)
   {
-      bheap <- h("integer")
-      bheap <- insert(bheap, 1L, matrix(1, 5, 5))
-      vals  <- handle(bheap, value=matrix(1, 5, 5))
-      expect_equal(vals[[1]]$key,  1L)
-      expect_equal(length(vals), 1)
+    bheap <- h("integer")
+    bheap <- insert(bheap, 1L, matrix(1, 5, 5))
+    vals <- handle(bheap, value = matrix(1, 5, 5))
+    expect_equal(vals[[1]]$key, 1L)
+    expect_equal(length(vals), 1)
   }
 })
 
 
-test_that("heap clears correctly",
-{
+test_that("heap clears correctly", {
   for (h in hs)
   {
-      bheap <- h("integer")
-      bheap <- insert(bheap, seq(10), rnorm(10))
-      expect_equal(size(bheap), 10)
-      bheap <- clear(bheap)
-      expect_equal(size(bheap), 0)
+    bheap <- h("integer")
+    bheap <- insert(bheap, seq(10), rnorm(10))
+    expect_equal(size(bheap), 10)
+    bheap <- clear(bheap)
+    expect_equal(size(bheap), 0)
   }
 })

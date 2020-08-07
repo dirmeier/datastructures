@@ -1,4 +1,6 @@
 CMakeLists.txt
+check
+check.*
 cmake-build-debug/*
 cmake-build-debug
 inst/doc/*

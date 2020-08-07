@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo "Cleaning up..."
-rm -rf \
-  src/datastructures.so \
-  src/*.o \
-  src/*.a

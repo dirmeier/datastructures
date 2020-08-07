@@ -22,60 +22,60 @@ context("queue")
 
 
 test_that("queue pops first element as list", {
-    q <- queue()
-    r <- as.list(stats::rnorm(5))
-    queue <- insert(q, r)
-    expect_equal(pop(q), r[[1]], tolerance=0.1)
+  q <- queue()
+  r <- as.list(stats::rnorm(5))
+  queue <- insert(q, r)
+  expect_equal(pop(q), r[[1]], tolerance = 0.1)
 })
 
 
 test_that("queue peeks first element as list", {
-    q <- queue()
-    r <- as.list(stats::rnorm(5))
-    q <- insert(q, r)
-    expect_equal(peek(q), r[[1]], tolerance=0.1)
+  q <- queue()
+  r <- as.list(stats::rnorm(5))
+  q <- insert(q, r)
+  expect_equal(peek(q), r[[1]], tolerance = 0.1)
 })
 
 
 test_that("queue peeks first element vectorial", {
-    q <- queue()
-    r <- stats::rnorm(5)
-    q <- insert(q, r)
-    expect_equal(peek(q), r, tolerance=0.1)
+  q <- queue()
+  r <- stats::rnorm(5)
+  q <- insert(q, r)
+  expect_equal(peek(q), r, tolerance = 0.1)
 })
 
 
 test_that("queue pops first element vectorial", {
-    q <- queue()
-    r <- stats::rnorm(5)
-    q <- insert(q, r)
-    expect_equal(pop(q), r, tolerance=0.1)
+  q <- queue()
+  r <- stats::rnorm(5)
+  q <- insert(q, r)
+  expect_equal(pop(q), r, tolerance = 0.1)
 })
 
 
 test_that("queue peeks first element multiple elements in list", {
-    q <- queue()
-    r <- stats::rnorm(5)
-    q <- insert(q, list(r, 1))
-    expect_equal(peek(q), r, tolerance=0.1)
+  q <- queue()
+  r <- stats::rnorm(5)
+  q <- insert(q, list(r, 1))
+  expect_equal(peek(q), r, tolerance = 0.1)
 })
 
 
 test_that("queue pop first element multiple elements in list", {
-    q <- queue()
-    r <- stats::rnorm(5)
-    q <- insert(q, list(r, 1))
-    expect_equal(pop(q), r, tolerance=0.1)
+  q <- queue()
+  r <- stats::rnorm(5)
+  q <- insert(q, list(r, 1))
+  expect_equal(pop(q), r, tolerance = 0.1)
 })
 
 
 test_that("queue can handle different values", {
-    q <- queue()
-    q <- insert(q, list(2, 1))
-    q <- insert(q, data.frame(A=1))
-    q <- insert(q, rnorm(10))
-    expect_equal(pop(q), 2)
-    expect_equal(pop(q), 1)
-    expect_true(is.data.frame(pop(q)))
-    expect_equal(length(pop(q)), 10)
+  q <- queue()
+  q <- insert(q, list(2, 1))
+  q <- insert(q, data.frame(A = 1))
+  q <- insert(q, rnorm(10))
+  expect_equal(pop(q), 2)
+  expect_equal(pop(q), 1)
+  expect_true(is.data.frame(pop(q)))
+  expect_equal(length(pop(q)), 10)
 })

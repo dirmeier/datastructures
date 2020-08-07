@@ -45,10 +45,10 @@ setClass(
 
 #' @noRd
 #' @importFrom methods is
-.insert.unordered_map <- function(obj, x, y)
-{
-  if (length(x) != length(y))
-    stop("dimensions of keys and values do not match", call.=FALSE)
+.insert.unordered_map <- function(obj, x, y) {
+  if (length(x) != length(y)) {
+    stop("dimensions of keys and values do not match", call. = FALSE)
+  }
 
   .check.key.class(obj, x)
   if (methods::is(obj, "hashmap")) erase(obj, x)
@@ -60,51 +60,35 @@ setClass(
 
 #' @rdname insert-methods
 setMethod(
-    "insert",
-    signature = signature(obj = "unordered_map", x = "vector", y = "vector"),
-    function(obj, x, y)
-    {
-        if (length(x) == 1) y <- list(y)
-        else if (length(x) == length(y) && is.vector(y))
-            y <- as.list(y)
-        .insert.unordered_map(obj, x, y)
+  "insert",
+  signature = signature(obj = "unordered_map", x = "vector", y = "vector"),
+  function(obj, x, y) {
+    if (length(x) == 1) {
+      y <- list(y)
+    } else if (length(x) == length(y) && is.vector(y)) {
+      y <- as.list(y)
     }
+    .insert.unordered_map(obj, x, y)
+  }
 )
 
 
 #' @rdname insert-methods
 setMethod(
-    "insert",
-    signature = signature(obj = "unordered_map", x = "vector", y = "list"),
-    function(obj, x, y)
-    {
-        if (length(x) == 1) y <- list(y)
-        .insert.unordered_map(obj, x, y)
-    }
+  "insert",
+  signature = signature(obj = "unordered_map", x = "vector", y = "list"),
+  function(obj, x, y) {
+    if (length(x) == 1) y <- list(y)
+    .insert.unordered_map(obj, x, y)
+  }
 )
 
 
 #' @rdname insert-methods
 setMethod(
-    "insert",
-    signature = signature(obj = "unordered_map", x = "vector", y = "ANY"),
-    function(obj, x, y) .insert.unordered_map(obj, x, list(y))
-)
-
-
-#' Insert parts to an object
-#'
-#' @description Inserts <key, value> pairs to an unordered_map.
-#'
-#' @param x  x  an unorderd map object, such as a \code{\link{hashmap}} or
-#'  \code{\link{multimap}}
-#' @param i  a vector of keys
-#' @param value  a vector of values for the keys
-setMethod(
-    "[<-",
-    signature = signature(
-        x="unordered_map", i="vector", j="missing", value="ANY"),
-    function(x, i, value) insert(x, i, value)
+  "insert",
+  signature = signature(obj = "unordered_map", x = "vector", y = "ANY"),
+  function(obj, x, y) .insert.unordered_map(obj, x, list(y))
 )
 
 
@@ -119,7 +103,8 @@ setMethod(
 setMethod(
   "[<-",
   signature = signature(
-      x="unordered_map", i="vector", j="missing", value="vector"),
+    x = "unordered_map", i = "vector", j = "missing", value = "ANY"
+  ),
   function(x, i, value) insert(x, i, value)
 )
 
@@ -135,7 +120,25 @@ setMethod(
 setMethod(
   "[<-",
   signature = signature(
-      x="unordered_map", i="vector", j="missing", value="list"),
+    x = "unordered_map", i = "vector", j = "missing", value = "vector"
+  ),
+  function(x, i, value) insert(x, i, value)
+)
+
+
+#' Insert parts to an object
+#'
+#' @description Inserts <key, value> pairs to an unordered_map.
+#'
+#' @param x  x  an unorderd map object, such as a \code{\link{hashmap}} or
+#'  \code{\link{multimap}}
+#' @param i  a vector of keys
+#' @param value  a vector of values for the keys
+setMethod(
+  "[<-",
+  signature = signature(
+    x = "unordered_map", i = "vector", j = "missing", value = "list"
+  ),
   function(x, i, value) insert(x, i, value)
 )
 
@@ -143,9 +146,8 @@ setMethod(
 #' @rdname at-methods
 setMethod(
   "at",
-  signature = signature(obj = "unordered_map", x = "vector", which="missing"),
-  function(obj, x)
-  {
+  signature = signature(obj = "unordered_map", x = "vector", which = "missing"),
+  function(obj, x) {
     .check.key.class(obj, x)
     obj@.map$get(x)
   }
@@ -163,7 +165,8 @@ setMethod(
 setMethod(
   "[",
   signature = signature(
-      x="unordered_map", i="vector", j="missing", drop="missing"),
+    x = "unordered_map", i = "vector", j = "missing", drop = "missing"
+  ),
   function(x, i) at(x, i)
 )
 
@@ -173,4 +176,4 @@ setMethod("keys", "unordered_map", function(obj) obj@.map$keys())
 
 
 #' @rdname values-methods
-setMethod("values", "unordered_map",function(obj) obj@.map$values())
+setMethod("values", "unordered_map", function(obj) obj@.map$values())

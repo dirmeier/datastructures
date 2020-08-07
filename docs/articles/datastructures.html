@@ -134,11 +134,11 @@
   <span class="fu">peek</span>(<span class="no">fheap</span>)</pre></body></html></div>
 <pre><code>## $`-3`
 ##            A B
-## 1 -0.9040291 1
-## 2 -0.8694192 2
-## 3  0.2234865 3
-## 4 -1.9984095 4
-## 5  0.2736118 5</code></pre>
+## 1 -1.7522420 1
+## 2 -0.4448897 2
+## 3 -1.5316760 3
+## 4 -0.2565086 4
+## 5 -0.7080480 5</code></pre>
 <p><strong>NOTE</strong>: for efficienty it is recommended to insert all values at the same time, if you can do this. This should be way faster. If we insert multiple objects, we need to wrap it around a list.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r">  <span class="no">fheap</span>  <span class="kw">&lt;-</span> <span class="fu">insert</span>(<span class="no">fheap</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(-<span class="fl">4</span>, -<span class="fl">5</span>, -<span class="fl">6</span>), <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">a</span><span class="kw">=</span><span class="fl">2</span>), <span class="no">letters</span>[<span class="fl">1</span>:<span class="fl">4</span>], <span class="st">"hallo"</span>))</pre></body></html></div>
 </div>
@@ -215,11 +215,11 @@
 ## 
 ## [[1]]$value
 ##            A B
-## 1 -0.9040291 1
-## 2 -0.8694192 2
-## 3  0.2234865 3
-## 4 -1.9984095 4
-## 5  0.2736118 5</code></pre>
+## 1 -1.7522420 1
+## 2 -0.4448897 2
+## 3 -1.5316760 3
+## 4 -0.2565086 4
+## 5 -0.7080480 5</code></pre>
 <p>Sometimes you don’t know the <code>key</code> or <code>handle</code>, but only the <code>value</code> of a node, and you want to do a <code>decrease-key</code> operation. Suppose you want to decrease the key of a node with value <code>V-1</code>, then you would to need to call <code>handle</code> with a value argument and a missing <code>key</code>:</p>
 <div class="sourceCode" id="cb35"><html><body><pre class="r">  <span class="no">hands</span> <span class="kw">&lt;-</span> <span class="fu">handle</span>(<span class="no">fheap</span>, <span class="kw">value</span><span class="kw">=</span><span class="st">"V1"</span>)
   <span class="fu">decrease_key</span>(<span class="no">fheap</span>, <span class="kw">from</span><span class="kw">=</span><span class="no">hands</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">key</span>, <span class="kw">to</span><span class="kw">=</span>-<span class="fl">1000</span>, <span class="no">hands</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">handle</span>)</pre></body></html></div>
@@ -376,12 +376,12 @@
 <pre><code>## [1] 1</code></pre>
 <div class="sourceCode" id="cb73"><html><body><pre class="r">  <span class="fu">at</span>(<span class="no">mm</span>, <span class="no">keys</span>[<span class="fl">2</span>])</pre></body></html></div>
 <pre><code>## [[1]]
-##             a X2 X3
-## 1 -0.52774339  2  3
-## 2 -0.04673228  2  3
-## 3 -0.91519379  2  3
-## 4  1.29576342  2  3
-## 5 -0.28963244  2  3
+##            a X2 X3
+## 1  0.1351150  2  3
+## 2  0.4606338  2  3
+## 3 -0.4498902  2  3
+## 4  0.1067527  2  3
+## 5 -0.1667827  2  3
 ## 
 ## [[2]]
 ## [[2]]$a
@@ -445,12 +445,12 @@
   <span class="no">mm</span> <span class="kw">&lt;-</span> <span class="fu">erase</span>(<span class="no">mm</span>, <span class="no">keys</span>[<span class="fl">2</span>], <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">a</span><span class="kw">=</span><span class="fl">1</span>))
   <span class="no">mm</span>[ <span class="no">keys</span>[<span class="fl">2</span>] ]</pre></body></html></div>
 <pre><code>## [[1]]
-##            a X2 X3
-## 1  1.1781109  2  3
-## 2 -0.5769598  2  3
-## 3  0.0064752  2  3
-## 4  0.2622929  2  3
-## 5  1.8507428  2  3</code></pre>
+##             a X2 X3
+## 1 -0.43713121  2  3
+## 2  0.59779861  2  3
+## 3  0.07946596  2  3
+## 4 -0.05497089  2  3
+## 5 -1.85216964  2  3</code></pre>
 <p>For bimaps we can also remove from the other side, i.e. when we provide a value:</p>
 <div class="sourceCode" id="cb91"><html><body><pre class="r">  <span class="no">bimap</span> <span class="kw">&lt;-</span> <span class="fu">erase</span>(<span class="no">bimap</span>, <span class="kw">value</span><span class="kw">=</span><span class="no">values</span>[<span class="fl">1</span>])
   <span class="no">bimap</span></pre></body></html></div>
@@ -508,7 +508,7 @@
 ## 2 2 2
 ## 3 3 1</code></pre>
 <div class="sourceCode" id="cb113"><html><body><pre class="r">  <span class="fu">pop</span>(<span class="no">st</span>)</pre></body></html></div>
-<pre><code>## [1] -1.445166</code></pre>
+<pre><code>## [1] -0.6635281</code></pre>
 <p>For a <code>queue</code> <code>pop</code> and <code>peek</code> return the <em>first</em> element that got inserted, while a stack returns the <em>last</em> element that was inserted.</p>
 <p>The size of a deque can be computed by calling:</p>
 <div class="sourceCode" id="cb115"><html><body><pre class="r">  <span class="fu">size</span>(<span class="no">qu</span>)</pre></body></html></div>

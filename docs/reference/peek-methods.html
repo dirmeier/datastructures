@@ -173,7 +173,7 @@
  <span class='co'># peeks into a queue</span>
  <span class='no'>q</span> <span class='kw'>&lt;-</span> <span class='fu'>queue</span>()
  <span class='no'>q</span> <span class='kw'>&lt;-</span> <span class='fu'>insert</span>(<span class='no'>q</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/environment.html'>environment</a></span>(), <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>a</span><span class='kw'>=</span><span class='fl'>1</span>)))
- <span class='fu'>peek</span>(<span class='no'>q</span>)</div><div class='output co'>#&gt; &lt;environment: 0x56135bad0fc0&gt;</div><div class='input'>
+ <span class='fu'>peek</span>(<span class='no'>q</span>)</div><div class='output co'>#&gt; &lt;environment: 0x558eb1a904a8&gt;</div><div class='input'>
  <span class='co'># peeks into a fibonacci heap</span>
  <span class='no'>b_heap</span> <span class='kw'>&lt;-</span> <span class='fu'>binomial_heap</span>()
  <span class='no'>b_heap</span> <span class='kw'>&lt;-</span> <span class='fu'>insert</span>(<span class='no'>b_heap</span>, <span class='no'>letters</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>3</span>)], <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>2</span>)))

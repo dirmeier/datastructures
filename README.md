@@ -36,7 +36,7 @@ that satisfies the *min-heap property*. We can use it to quickly get the node wi
   [1] "n1"
 ```
 
-`datastructures` also allows storing non-orimitive objects, like `data.frames`, `matrices` or `environments`.
+`datastructures` also allows storing non-primitive objects, like `data.frames`, `matrices` or `environments`.
 For instance, we could use a hashmap for storing such objects:
 
 ```R

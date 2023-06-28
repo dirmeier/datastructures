@@ -1,11 +1,10 @@
 linters: list(linelen=line_length_linter(80),
-              abspathlintr=absolute_paths_linter,
-              assignlintr=assignment_linter,
-              notab=no_tab_linter,
-              camellinter=camel_case_linter,
-              snakelinter=snake_case_linter,
-              closedcurly=closed_curly_linter,
-              trailingwhites=trailing_whitespace_linter)
+              abspathlintr=absolute_path_linter(),
+              assignlintr=assignment_linter(),
+              notab=no_tab_linter(),
+              namelinter=object_name_linter(styles = c("snake_case", "camelCase", "symbols")),
+              brace=brace_linter(),
+              trailingwhites=trailing_whitespace_linter())
 exclusions: list("tests/testthat.R",
                  "tests/testthat/tests_deque.R",
                  "tests/testthat/tests_heap.R",
